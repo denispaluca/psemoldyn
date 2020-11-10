@@ -3,3 +3,29 @@
 //
 
 #include "ParticleContainer.h"
+#include "FileReader.h"
+
+ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
+  this->particles = particles;
+}
+
+ParticleContainer::ParticleContainer(char *filename) {
+  FileReader fileReader;
+  fileReader.readFile(particles, filename);
+}
+
+void ParticleContainer::push(Particle &particle) {
+  particles.emplace_back(particle);
+}
+
+void ParticleContainer::iterate(void (*f)(Particle &)) {
+  for(auto &particle : particles){
+    (*f)(particle);
+  }
+}
+
+void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {
+  for(std::vector<Particle>::iterator i = particles.begin(); i != particles.end(); ++i)
+    for(std::vector<Particle>::iterator j = i + 1; j != particles.end(); ++j)
+      (*f)(*i,*j);
+}

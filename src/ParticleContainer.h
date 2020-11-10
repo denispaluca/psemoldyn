@@ -6,16 +6,16 @@
 #define PSEMOLDYN_GROUPB_PARTICLECONTAINER_H
 
 #include "Particle.h"
-#include <list>
+#include <vector>
 class ParticleContainer {
 private:
     /**
      * List of particles
      */
-    std::list<Particle> particles;
+    std::vector<Particle> particles;
 public:
-    ParticleContainer(std::list<Particle>);
-    ParticleContainer(const char* filename);
+    ParticleContainer(std::vector<Particle>);
+    ParticleContainer(char* filename);
     /**
      * push particle at the end of the list
      * @param particle

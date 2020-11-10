@@ -32,7 +32,7 @@ constexpr double start_time = 0;
 constexpr double end_time = 1000;
 constexpr double delta_t = 0.014;
 
-std::list<Particle> particles;
+std::vector<Particle> particles;
 
 int main(int argc, char *argsv[]) {
 
@@ -72,8 +72,8 @@ int main(int argc, char *argsv[]) {
 }
 
 void calculateF() {
-  std::list<Particle>::iterator iterator;
-  iterator = particles.begin();
+//  std::list<Particle>::iterator iterator;
+//  iterator = particles.begin();
 
   for (auto &p1 : particles) {
     for (auto &p2 : particles) {
