@@ -5,6 +5,10 @@
 #include "ParticleContainer.h"
 #include "FileReader.h"
 
+ParticleContainer::ParticleContainer() {
+  particles = std::vector<Particle>();
+}
+
 ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
   this->particles = particles;
 }
@@ -14,14 +18,17 @@ ParticleContainer::ParticleContainer(char *filename) {
   fileReader.readFile(particles, filename);
 }
 
+std::vector<Particle> ParticleContainer::getParticles() {
+  return particles;
+}
+
 void ParticleContainer::push(Particle &particle) {
   particles.emplace_back(particle);
 }
 
 void ParticleContainer::iterate(void (*f)(Particle &)) {
-  for(auto &particle : particles){
+  for(auto &particle : particles)
     (*f)(particle);
-  }
 }
 
 void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {

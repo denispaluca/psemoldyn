@@ -4,8 +4,7 @@
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
-#include <list>
-
+#include "ParticleContainer.h"
 /**** forward declaration of the calculation functions ****/
 
 /**
@@ -32,7 +31,16 @@ constexpr double start_time = 0;
 constexpr double end_time = 1000;
 constexpr double delta_t = 0.014;
 
-std::vector<Particle> particles;
+ParticleContainer container;
+
+void printParticle(Particle &p){
+  std::cout<<p.getX()<<" "<<p.getF()<<" "<<p.getV()<< " "<<p.getM()<<"\n";
+}
+
+void printPair(Particle &p1, Particle &p2){
+  printParticle(p1);
+  printParticle(p2);
+}
 
 int main(int argc, char *argsv[]) {
 
@@ -42,8 +50,10 @@ int main(int argc, char *argsv[]) {
     std::cout << "./molsym filename" << std::endl;
   }
 
-  FileReader fileReader;
-  fileReader.readFile(particles, argsv[1]);
+  container = ParticleContainer(argsv[1]);
+
+  container.iterate(printParticle);
+  container.iteratePairs(printPair);
 
   double current_time = start_time;
 
@@ -75,21 +85,21 @@ void calculateF() {
 //  std::list<Particle>::iterator iterator;
 //  iterator = particles.begin();
 
-  for (auto &p1 : particles) {
-    for (auto &p2 : particles) {
+  for (auto &p1 : container.getParticles()) {
+    for (auto &p2 : container.getParticles()) {
       // @TODO: insert calculation of force here!
     }
   }
 }
 
 void calculateX() {
-  for (auto &p : particles) {
+  for (auto &p : container.getParticles()) {
       // @TODO: insert calculation of force here!
   }
 }
 
 void calculateV() {
-  for (auto &p : particles) {
+  for (auto &p : container.getParticles()) {
     // @TODO: insert calculation of force here!
   }
 }
@@ -99,5 +109,5 @@ void plotParticles(int iteration) {
   std::string out_name("MD_vtk");
 
   outputWriter::XYZWriter writer;
-  writer.plotParticles(particles, out_name, iteration);
+  writer.plotParticles(container.getParticles(), out_name, iteration);
 }

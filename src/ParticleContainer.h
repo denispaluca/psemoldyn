@@ -14,8 +14,24 @@ private:
      */
     std::vector<Particle> particles;
 public:
+    /**
+     * Empty init container
+     */
+    ParticleContainer();
+    /**
+     * Init container with vector of particles
+     */
     ParticleContainer(std::vector<Particle>);
+    /**
+     * Init container with filename of file to be parsed
+     * @param filename
+     */
     ParticleContainer(char* filename);
+    /**
+     * Returns vector of particles in container
+     * @return
+     */
+    std::vector<Particle> getParticles();
     /**
      * push particle at the end of the list
      * @param particle
