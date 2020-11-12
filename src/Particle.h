@@ -42,6 +42,16 @@ private:
    * molecules belonging to different bodies, matters, and so on)
    */
   int type;
+  
+    /**
+   * Safe dt/2m
+   */
+  double dt_2m;
+
+  /**
+   * Safe (delta t)^2/2m
+   */
+  double dtsq_2m;
 
 public:
   Particle(int type = 0);
