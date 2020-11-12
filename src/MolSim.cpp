@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <list>
+#include <outputWriter/VTKWriter.h>
 
 /**** forward declaration of the calculation functions ****/
 
@@ -96,8 +97,22 @@ void calculateV() {
 
 void plotParticles(int iteration) {
 
-  std::string out_name("MD_vtk");
+    /* output in xyz format */
 
-  outputWriter::XYZWriter writer;
-  writer.plotParticles(particles, out_name, iteration);
+    std::string out_name_xyz("MD_xyz");
+    outputWriter::XYZWriter writer;
+    writer.plotParticles(particles, out_name_xyz, iteration);
+
+    /* VTK output */
+
+    std::string out_name_vtk("MD_vtk");
+    outputWriter::VTKWriter vtkWriter;
+
+    vtkWriter.initializeOutput(particles.size());
+
+    for(auto &p : particles) {
+        vtkWriter.plotParticle(p);
+    }
+
+    vtkWriter.writeFile(out_name_vtk, iteration);
 }
