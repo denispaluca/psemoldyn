@@ -11,15 +11,6 @@
 #include <sstream>
 #include "utils/ArrayUtils.h"
 
-Particle::Particle(int type_arg) {
-  type = type_arg;
-  std::cout << "Particle generated!" << std::endl;
-  f = {0., 0., 0.};
-  old_f = {0., 0., 0.};
-  dt_2m = 0.014 / (2*m);
-  dtsq_2m = 0.014*0.014 / (2*m);
-}
-
 Particle::Particle(const Particle &other) {
   x = other.x;
   v = other.v;
