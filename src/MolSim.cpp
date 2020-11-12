@@ -29,6 +29,11 @@ void calculateV();
  */
 void plotParticles(int iteration);
 
+/**
+ * Calculate (||x_i - x_j||_2)^3
+ */
+double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj);
+
 constexpr double start_time = 0;
 constexpr double end_time = 2;
 constexpr double delta_t = 0.014;
@@ -74,7 +79,7 @@ int main(int argc, char *argsv[]) {
 
 void calculateF() {
   std::list<Particle>::iterator iterator;
-  std::array<double, 3> p1_x, p2_x, p1_f, p12_f, p12_x;
+  std::array<double, 3> p1_x, p2_x, p1_f;
   double p1_m, p2_m, vf;
   int i;
 
@@ -133,4 +138,12 @@ void plotParticles(int iteration) {
     }
 
     vtkWriter.writeFile(out_name_vtk, iteration);
+}
+
+double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj) {
+    double result = 0;
+    for (int i = 0; i<3; i++){
+        result += pow((xi[i]-xj[i]), 2);
+    }
+    return pow(sqrt(result), 3);
 }
