@@ -71,6 +71,22 @@ public:
   bool operator==(Particle &other);
 
   std::string toString();
+  
+    /**
+   * Set force and save previous f old_f
+   * @param fn
+   */
+  void setF(std::array<double, 3> fn);
+
+  /**
+   * Calculate speed from t -> t+1
+   */
+  void calculateV();
+
+  /**
+   * Calculate Position from t -> t+1
+   */
+  void calculateX();
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);
