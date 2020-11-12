@@ -54,6 +54,23 @@ double Particle::getM() { return m; }
 
 int Particle::getType() { return type; }
 
+void Particle::setF(std::array<double, 3> fn) {
+    old_f = f;
+    f = fn;
+}
+
+void Particle::calculateV() {
+    for (int i = 0; i<3; i++) {
+        v[i] = v[i] + (dt_2m * (old_f[i] + f[i]));
+    }
+}
+
+void Particle::calculateX() {
+    for (int i = 0; i<3; i++) {
+        x[i] = x[i] + 0.014 * v[i] + dtsq_2m * f[i]; //TODO delta_t
+    }
+}
+
 std::string Particle::toString() {
   std::stringstream stream;
   stream << "Particle: X:" << x << " v: " << v << " f: " << f

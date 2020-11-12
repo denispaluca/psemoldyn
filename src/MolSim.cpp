@@ -30,7 +30,7 @@ void calculateV();
 void plotParticles(int iteration);
 
 constexpr double start_time = 0;
-constexpr double end_time = 1000;
+constexpr double end_time = 2;
 constexpr double delta_t = 0.014;
 
 std::list<Particle> particles;
@@ -74,24 +74,42 @@ int main(int argc, char *argsv[]) {
 
 void calculateF() {
   std::list<Particle>::iterator iterator;
+  std::array<double, 3> p1_x, p2_x, p1_f, p12_f, p12_x;
+  double p1_m, p2_m, vf;
+  int i;
+
   iterator = particles.begin();
 
   for (auto &p1 : particles) {
+    p1_x = p1.getX();
+    p1_f = {0., 0., 0.};
+    p1_m = p1.getM();
     for (auto &p2 : particles) {
-      // @TODO: insert calculation of force here!
+      // calculate F_ij
+      p2_x = p2.getX();
+      if (p1_x[0] != p2_x[0] || p1_x[1] != p2_x[1] || p1_x[2] != p2_x[2]) {
+          p2_m = p2.getM();
+          vf = (p1_m * p2_m) / radiusPow3(p1_x, p2_x);
+          for (i=0; i<3; i++){
+              p1_f[i] += vf * (p2_x[i] - p1_x[i]);
+          }
+      }
     }
+    p1.setF(p1_f);
   }
 }
 
 void calculateX() {
   for (auto &p : particles) {
       // @TODO: insert calculation of force here!
+      p.calculateX();
   }
 }
 
 void calculateV() {
   for (auto &p : particles) {
     // @TODO: insert calculation of force here!
+    p.calculateV();
   }
 }
 
