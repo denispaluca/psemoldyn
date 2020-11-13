@@ -4,7 +4,9 @@
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
-#include "ParticleContainer.h"
+#include <list>
+#include <outputWriter/VTKWriter.h>
+
 /**** forward declaration of the calculation functions ****/
 
 /**
@@ -27,20 +29,16 @@ void calculateV();
  */
 void plotParticles(int iteration);
 
+/**
+ * Calculate (||x_i - x_j||_2)^3
+ */
+double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj);
+
 constexpr double start_time = 0;
-constexpr double end_time = 1000;
+constexpr double end_time = 2;
 constexpr double delta_t = 0.014;
 
-ParticleContainer container;
-
-void printParticle(Particle &p){
-  std::cout<<p.getX()<<" "<<p.getF()<<" "<<p.getV()<< " "<<p.getM()<<"\n";
-}
-
-void printPair(Particle &p1, Particle &p2){
-  printParticle(p1);
-  printParticle(p2);
-}
+std::list<Particle> particles;
 
 int main(int argc, char *argsv[]) {
 
@@ -50,10 +48,8 @@ int main(int argc, char *argsv[]) {
     std::cout << "./molsym filename" << std::endl;
   }
 
-  container = ParticleContainer(argsv[1]);
-
-  container.iterate(printParticle);
-  container.iteratePairs(printPair);
+  FileReader fileReader;
+  fileReader.readFile(particles, argsv[1]);
 
   double current_time = start_time;
 
@@ -82,32 +78,72 @@ int main(int argc, char *argsv[]) {
 }
 
 void calculateF() {
-//  std::list<Particle>::iterator iterator;
-//  iterator = particles.begin();
+  std::list<Particle>::iterator iterator;
+  std::array<double, 3> p1_x, p2_x, p1_f;
+  double p1_m, p2_m, vf;
+  int i;
 
-  for (auto &p1 : container.getParticles()) {
-    for (auto &p2 : container.getParticles()) {
-      // @TODO: insert calculation of force here!
+  iterator = particles.begin();
+
+  for (auto &p1 : particles) {
+    p1_x = p1.getX();
+    p1_f = {0., 0., 0.};
+    p1_m = p1.getM();
+    for (auto &p2 : particles) {
+      // calculate F_ij
+      p2_x = p2.getX();
+      if (p1_x[0] != p2_x[0] || p1_x[1] != p2_x[1] || p1_x[2] != p2_x[2]) {
+          p2_m = p2.getM();
+          vf = (p1_m * p2_m) / radiusPow3(p1_x, p2_x);
+          for (i=0; i<3; i++){
+              p1_f[i] += vf * (p2_x[i] - p1_x[i]);
+          }
+      }
     }
+    p1.setF(p1_f);
   }
 }
 
 void calculateX() {
-  for (auto &p : container.getParticles()) {
+  for (auto &p : particles) {
       // @TODO: insert calculation of force here!
+      p.calculateX();
   }
 }
 
 void calculateV() {
-  for (auto &p : container.getParticles()) {
+  for (auto &p : particles) {
     // @TODO: insert calculation of force here!
+    p.calculateV();
   }
 }
 
 void plotParticles(int iteration) {
 
-  std::string out_name("MD_vtk");
+    /* output in xyz format */
 
-  outputWriter::XYZWriter writer;
-  writer.plotParticles(container.getParticles(), out_name, iteration);
+    std::string out_name_xyz("MD_xyz");
+    outputWriter::XYZWriter writer;
+    writer.plotParticles(particles, out_name_xyz, iteration);
+
+    /* VTK output */
+
+    std::string out_name_vtk("MD_vtk");
+    outputWriter::VTKWriter vtkWriter;
+
+    vtkWriter.initializeOutput(particles.size());
+
+    for(auto &p : particles) {
+        vtkWriter.plotParticle(p);
+    }
+
+    vtkWriter.writeFile(out_name_vtk, iteration);
+}
+
+double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj) {
+    double result = 0;
+    for (int i = 0; i<3; i++){
+        result += pow((xi[i]-xj[i]), 2);
+    }
+    return pow(sqrt(result), 3);
 }
