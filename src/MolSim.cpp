@@ -6,28 +6,28 @@
 #include <iostream>
 #include <list>
 #include <outputWriter/VTKWriter.h>
-
+#include "ParticleContainer.h"
 /**** forward declaration of the calculation functions ****/
 
 /**
  * calculate the force for all particles
  */
-void calculateF();
+void calculateF(Particle &p1, Particle &p2);
 
 /**
  * calculate the position for all particles
  */
-void calculateX();
+void calculateX(Particle &p);
 
 /**
  * calculate the position for all particles
  */
-void calculateV();
+void calculateV(Particle &p);
 
 /**
  * plot the particles to a xyz-file
  */
-void plotParticles(int iteration);
+void plotParticles(int iteration, std::vector<Particle> particles);
 
 /**
  * Calculate (||x_i - x_j||_2)^3
@@ -35,10 +35,9 @@ void plotParticles(int iteration);
 double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj);
 
 constexpr double start_time = 0;
-constexpr double end_time = 2;
+constexpr double end_time = 100;
 constexpr double delta_t = 0.014;
 
-std::list<Particle> particles;
 
 int main(int argc, char *argsv[]) {
 
@@ -48,8 +47,7 @@ int main(int argc, char *argsv[]) {
     std::cout << "./molsym filename" << std::endl;
   }
 
-  FileReader fileReader;
-  fileReader.readFile(particles, argsv[1]);
+  ParticleContainer particleContainer = ParticleContainer(argsv[1]);
 
   double current_time = start_time;
 
@@ -58,15 +56,15 @@ int main(int argc, char *argsv[]) {
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < end_time) {
     // calculate new x
-    calculateX();
+    particleContainer.iterate(calculateX);
     // calculate new f
-    calculateF();
+    particleContainer.iteratePairs(calculateF);
     // calculate new v
-    calculateV();
+    particleContainer.iterate(calculateV);
 
     iteration++;
     if (iteration % 10 == 0) {
-      plotParticles(iteration);
+      plotParticles(iteration, particleContainer.getParticles());
     }
     std::cout << "Iteration " << iteration << " finished." << std::endl;
 
@@ -77,54 +75,44 @@ int main(int argc, char *argsv[]) {
   return 0;
 }
 
-void calculateF() {
-  std::list<Particle>::iterator iterator;
+void calculateF(Particle &p1, Particle &p2) {
   std::array<double, 3> p1_x, p2_x, p1_f;
   double p1_m, p2_m, vf;
   int i;
 
-  iterator = particles.begin();
-
-  for (auto &p1 : particles) {
-    p1_x = p1.getX();
-    p1_f = {0., 0., 0.};
-    p1_m = p1.getM();
-    for (auto &p2 : particles) {
-      // calculate F_ij
-      p2_x = p2.getX();
-      if (p1_x[0] != p2_x[0] || p1_x[1] != p2_x[1] || p1_x[2] != p2_x[2]) {
-          p2_m = p2.getM();
-          vf = (p1_m * p2_m) / radiusPow3(p1_x, p2_x);
-          for (i=0; i<3; i++){
-              p1_f[i] += vf * (p2_x[i] - p1_x[i]);
-          }
+  p1_x = p1.getX();
+  p1_f = {0., 0., 0.};
+  p1_m = p1.getM();
+  // calculate F_ij
+  p2_x = p2.getX();
+  if (p1_x[0] != p2_x[0] || p1_x[1] != p2_x[1] || p1_x[2] != p2_x[2]) {
+      p2_m = p2.getM();
+      vf = (p1_m * p2_m) / radiusPow3(p1_x, p2_x);
+      for (i=0; i<3; i++){
+          p1_f[i] += vf * (p2_x[i] - p1_x[i]);
       }
-    }
-    p1.setF(p1_f);
   }
+  p1.setF(p1_f);
+  p2.setF({-p1_f[0], -p1_f[1], -p1_f[2]});
 }
 
-void calculateX() {
-  for (auto &p : particles) {
-      // @TODO: insert calculation of force here!
-      p.calculateX();
-  }
-}
-
-void calculateV() {
-  for (auto &p : particles) {
+void calculateX(Particle &p) {
     // @TODO: insert calculation of force here!
-    p.calculateV();
-  }
+    p.calculateX();
 }
 
-void plotParticles(int iteration) {
+void calculateV(Particle &p) {
+  // @TODO: insert calculation of force here!
+  p.calculateV();
+}
+
+void plotParticles(int iteration, std::vector<Particle> particles) {
 
     /* output in xyz format */
 
-    std::string out_name_xyz("MD_xyz");
-    outputWriter::XYZWriter writer;
-    writer.plotParticles(particles, out_name_xyz, iteration);
+//    std::string out_name_xyz("MD_xyz");
+//    outputWriter::XYZWriter writer;
+//    writer.plotParticles(particles, out_name_xyz, iteration);
 
     /* VTK output */
 
