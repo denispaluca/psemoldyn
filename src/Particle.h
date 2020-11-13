@@ -81,6 +81,16 @@ public:
   bool operator==(Particle &other);
 
   std::string toString();
+
+  /**
+   * Add force
+   * @param fn
+   */
+  void addF(std::array<double, 3> fn);
+  /**
+   * Save f to old f
+   */
+  void saveOldF();
   
     /**
    * Set force and save previous f old_f

@@ -92,13 +92,14 @@ void calculateF(Particle &p1, Particle &p2) {
           p1_f[i] += vf * (p2_x[i] - p1_x[i]);
       }
   }
-  p1.setF(p1_f);
-  p2.setF({-p1_f[0], -p1_f[1], -p1_f[2]});
+  p1.addF(p1_f);
+  p2.addF({-p1_f[0], -p1_f[1], -p1_f[2]});
 }
 
 void calculateX(Particle &p) {
     // @TODO: insert calculation of force here!
     p.calculateX();
+    p.saveOldF();
 }
 
 void calculateV(Particle &p) {
