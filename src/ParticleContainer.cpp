@@ -18,7 +18,7 @@ ParticleContainer::ParticleContainer(char *filename) {
   fileReader.readFile(particles, filename);
 }
 
-std::vector<Particle> ParticleContainer::getParticles() {
+std::vector<Particle> &ParticleContainer::getParticles() {
   return particles;
 }
 

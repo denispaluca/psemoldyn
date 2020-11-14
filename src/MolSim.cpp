@@ -25,7 +25,7 @@ void calculateV(Particle &p);
 /**
  * plot the particles to a vtu-file
  */
-void plotParticles(int iteration, std::vector<Particle> particles);
+void plotParticles(int iteration, std::vector<Particle> &particles);
 
 /**
  * Calculate (||x||_2)^3
@@ -101,7 +101,7 @@ void calculateV(Particle &p) {
   p.calculateV();
 }
 
-void plotParticles(int iteration, std::vector<Particle> particles) {
+void plotParticles(int iteration, std::vector<Particle> &particles) {
 
     /* output in xyz format */
 

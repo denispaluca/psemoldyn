@@ -31,7 +31,7 @@ public:
      * Returns vector of particles in container
      * @return
      */
-    std::vector<Particle> getParticles();
+    std::vector<Particle> &getParticles();
     /**
      * push particle at the end of the list
      * @param particle
