@@ -9,7 +9,7 @@ ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
 }
 
-ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
+ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
   this->particles = particles;
 }
 
@@ -32,7 +32,7 @@ void ParticleContainer::iterate(void (*f)(Particle &)) {
 }
 
 void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {
-  for(std::vector<Particle>::iterator i = particles.begin(); i != particles.end(); ++i)
-    for(std::vector<Particle>::iterator j = i + 1; j != particles.end(); ++j)
+  for(auto i = particles.begin(); i != particles.end(); ++i)
+    for(auto j = i + 1; j != particles.end(); ++j)
       (*f)(*i,*j);
 }

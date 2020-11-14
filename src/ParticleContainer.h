@@ -21,7 +21,7 @@ public:
     /**
      * Init container with vector of particles
      */
-    ParticleContainer(std::vector<Particle>);
+    ParticleContainer(std::vector<Particle>&);
     /**
      * Init container with filename of file to be parsed
      * @param filename
