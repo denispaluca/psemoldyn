@@ -37,6 +37,11 @@ void FileReader::readFile(std::vector<Particle> &particles, char *filename) {
 
     std::istringstream numstream(tmp_string);
     numstream >> num_particles;
+
+    //reserve mem for vector as to not destruct/generate particles
+    //while adding to vector
+    particles.reserve(num_particles);
+
     std::cout << "Reading " << num_particles << "." << std::endl;
     getline(input_file, tmp_string);
     std::cout << "Read line: " << tmp_string << std::endl;
