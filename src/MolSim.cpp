@@ -1,10 +1,8 @@
 
 #include "FileReader.h"
-#include "outputWriter/XYZWriter.h"
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
-#include <list>
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
 /**** forward declaration of the calculation functions ****/
@@ -25,14 +23,14 @@ void calculateX(Particle &p);
 void calculateV(Particle &p);
 
 /**
- * plot the particles to a xyz-file
+ * plot the particles to a vtu-file
  */
 void plotParticles(int iteration, std::vector<Particle> particles);
 
 /**
- * Calculate (||x_i - x_j||_2)^3
+ * Calculate (||x||_2)^3
  */
-double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj);
+double radiusPow3(const std::array<double, 3> &x);
 
 constexpr double start_time = 0;
 constexpr double end_time = 100;
@@ -76,24 +74,20 @@ int main(int argc, char *argsv[]) {
 }
 
 void calculateF(Particle &p1, Particle &p2) {
-  std::array<double, 3> p1_x, p2_x, p1_f;
-  double p1_m, p2_m, vf;
-  int i;
+  std::array<double, 3> p1_x = p1.getX(),
+    xDiff = p2.getX(), f12;
+  xDiff[0] -= p1_x[0];
+  xDiff[1] -= p1_x[1];
+  xDiff[2] -= p1_x[2];
 
-  p1_x = p1.getX();
-  p1_f = {0., 0., 0.};
-  p1_m = p1.getM();
+  double divider = radiusPow3(xDiff), vf;
   // calculate F_ij
-  p2_x = p2.getX();
-  if (p1_x[0] != p2_x[0] || p1_x[1] != p2_x[1] || p1_x[2] != p2_x[2]) {
-      p2_m = p2.getM();
-      vf = (p1_m * p2_m) / radiusPow3(p1_x, p2_x);
-      for (i=0; i<3; i++){
-          p1_f[i] += vf * (p2_x[i] - p1_x[i]);
-      }
+  if (divider) {
+    vf = (p1.getM() * p2.getM()) / divider;
+    f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
+    p1.addF(f12);
+    p2.addF({-f12[0], -f12[1], -f12[2]});
   }
-  p1.addF(p1_f);
-  p2.addF({-p1_f[0], -p1_f[1], -p1_f[2]});
 }
 
 void calculateX(Particle &p) {
@@ -129,10 +123,7 @@ void plotParticles(int iteration, std::vector<Particle> particles) {
     vtkWriter.writeFile(out_name_vtk, iteration);
 }
 
-double radiusPow3(std::array<double, 3> &xi, std::array<double, 3> &xj) {
-    double result = 0;
-    for (int i = 0; i<3; i++){
-        result += pow((xi[i]-xj[i]), 2);
-    }
+double radiusPow3(const std::array<double, 3> &x) {
+    double result = x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
     return pow(sqrt(result), 3);
 }

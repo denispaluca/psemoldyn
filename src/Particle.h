@@ -86,17 +86,11 @@ public:
    * Add force
    * @param fn
    */
-  void addF(std::array<double, 3> fn);
+  void addF(const std::array<double, 3> &fn);
   /**
-   * Save f to old f
+   * Save f to old f and reset f
    */
   void saveOldF();
-  
-    /**
-   * Set force and save previous f old_f
-   * @param fn
-   */
-  void setF(std::array<double, 3> fn);
 
   /**
    * Calculate speed from t -> t+1

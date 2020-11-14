@@ -48,20 +48,16 @@ std::array<double, 3> &Particle::getF() { return f; }
 std::array<double, 3> &Particle::getOldF() { return old_f; }
 
 
-void Particle::addF(std::array<double, 3> fn) {
-  f = {f[0]+fn[0], f[1]+fn[1], f[2]+fn[2]};
+void Particle::addF(const std::array<double, 3> &fn) {
+  f[0] += fn[0];
+  f[1] += fn[1];
+  f[2] += fn[2];
 }
 
 void Particle::saveOldF() {
-  old_f = {f[0], f[1], f[2]};
+  old_f = f;
   f = {0., 0., 0.};
 }
-
-void Particle::setF(std::array<double, 3> fn) {
-    old_f = f;
-    f = fn;
-}
-
 
 double Particle::getM() { return m; }
 
