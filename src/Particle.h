@@ -42,6 +42,16 @@ private:
    * molecules belonging to different bodies, matters, and so on)
    */
   int type;
+  
+    /**
+   * Safe dt/2m
+   */
+  double dt_2m;
+
+  /**
+   * Safe (delta t)^2/2m
+   */
+  double dtsq_2m;
 
 public:
   Particle(int type = 0);
@@ -71,6 +81,26 @@ public:
   bool operator==(Particle &other);
 
   std::string toString();
+
+  /**
+   * Add force
+   * @param fn
+   */
+  void addF(const std::array<double, 3> &fn);
+  /**
+   * Save f to old f and reset f
+   */
+  void saveOldF();
+
+  /**
+   * Calculate speed from t -> t+1
+   */
+  void calculateV();
+
+  /**
+   * Calculate Position from t -> t+1
+   */
+  void calculateX();
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

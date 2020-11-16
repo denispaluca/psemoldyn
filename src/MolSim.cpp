@@ -1,38 +1,41 @@
 
 #include "FileReader.h"
-#include "outputWriter/XYZWriter.h"
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
-#include <list>
-
+#include <outputWriter/VTKWriter.h>
+#include "ParticleContainer.h"
 /**** forward declaration of the calculation functions ****/
 
 /**
  * calculate the force for all particles
  */
-void calculateF();
+void calculateF(Particle &p1, Particle &p2);
 
 /**
  * calculate the position for all particles
  */
-void calculateX();
+void calculateX(Particle &p);
 
 /**
  * calculate the position for all particles
  */
-void calculateV();
+void calculateV(Particle &p);
 
 /**
- * plot the particles to a xyz-file
+ * plot the particles to a vtu-file
  */
-void plotParticles(int iteration);
+void plotParticles(int iteration, std::vector<Particle> &particles);
+
+/**
+ * Calculate (||x||_2)^3
+ */
+double radiusPow3(const std::array<double, 3> &x);
 
 constexpr double start_time = 0;
-constexpr double end_time = 1000;
+constexpr double end_time = 100;
 constexpr double delta_t = 0.014;
 
-std::list<Particle> particles;
 
 int main(int argc, char *argsv[]) {
 
@@ -42,8 +45,7 @@ int main(int argc, char *argsv[]) {
     std::cout << "./molsym filename" << std::endl;
   }
 
-  FileReader fileReader;
-  fileReader.readFile(particles, argsv[1]);
+  ParticleContainer particleContainer = ParticleContainer(argsv[1]);
 
   double current_time = start_time;
 
@@ -52,15 +54,15 @@ int main(int argc, char *argsv[]) {
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < end_time) {
     // calculate new x
-    calculateX();
+    particleContainer.iterate(calculateX);
     // calculate new f
-    calculateF();
+    particleContainer.iteratePairs(calculateF);
     // calculate new v
-    calculateV();
+    particleContainer.iterate(calculateV);
 
     iteration++;
     if (iteration % 10 == 0) {
-      plotParticles(iteration);
+      plotParticles(iteration, particleContainer.getParticles());
     }
     std::cout << "Iteration " << iteration << " finished." << std::endl;
 
@@ -71,33 +73,57 @@ int main(int argc, char *argsv[]) {
   return 0;
 }
 
-void calculateF() {
-  std::list<Particle>::iterator iterator;
-  iterator = particles.begin();
+void calculateF(Particle &p1, Particle &p2) {
+  std::array<double, 3> p1_x = p1.getX(),
+    xDiff = p2.getX(), f12;
+  xDiff[0] -= p1_x[0];
+  xDiff[1] -= p1_x[1];
+  xDiff[2] -= p1_x[2];
 
-  for (auto &p1 : particles) {
-    for (auto &p2 : particles) {
-      // @TODO: insert calculation of force here!
-    }
+  double divider = radiusPow3(xDiff), vf;
+  // calculate F_ij
+  if (divider) {
+    vf = (p1.getM() * p2.getM()) / divider;
+    f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
+    p1.addF(f12);
+    p2.addF({-f12[0], -f12[1], -f12[2]});
   }
 }
 
-void calculateX() {
-  for (auto &p : particles) {
-      // @TODO: insert calculation of force here!
-  }
-}
-
-void calculateV() {
-  for (auto &p : particles) {
+void calculateX(Particle &p) {
     // @TODO: insert calculation of force here!
-  }
+    p.calculateX();
+    p.saveOldF();
 }
 
-void plotParticles(int iteration) {
+void calculateV(Particle &p) {
+  // @TODO: insert calculation of force here!
+  p.calculateV();
+}
 
-  std::string out_name("MD_vtk");
+void plotParticles(int iteration, std::vector<Particle> &particles) {
 
-  outputWriter::XYZWriter writer;
-  writer.plotParticles(particles, out_name, iteration);
+    /* output in xyz format */
+
+//    std::string out_name_xyz("MD_xyz");
+//    outputWriter::XYZWriter writer;
+//    writer.plotParticles(particles, out_name_xyz, iteration);
+
+    /* VTK output */
+
+    std::string out_name_vtk("MD_vtk");
+    outputWriter::VTKWriter vtkWriter;
+
+    vtkWriter.initializeOutput(particles.size());
+
+    for(auto &p : particles) {
+        vtkWriter.plotParticle(p);
+    }
+
+    vtkWriter.writeFile(out_name_vtk, iteration);
+}
+
+double radiusPow3(const std::array<double, 3> &x) {
+    double result = x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
+    return pow(sqrt(result), 3);
 }
