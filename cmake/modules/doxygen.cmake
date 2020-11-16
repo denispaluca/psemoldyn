@@ -19,4 +19,4 @@
              #WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
              VERBATIM
              )
- endif(NOT DISABLE_DOXYGEN) custom target for building the documentation.
+ endif(NOT DISABLE_DOXYGEN)
