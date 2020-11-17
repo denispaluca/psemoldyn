@@ -44,12 +44,12 @@ private:
   int type;
   
     /**
-   * Safe dt/2m
+   * Save dt/2m
    */
   double dt_2m;
 
   /**
-   * Safe (delta t)^2/2m
+   * Save (delta t)^2/2m
    */
   double dtsq_2m;
 
@@ -87,6 +87,7 @@ public:
    * @param fn
    */
   void addF(const std::array<double, 3> &fn);
+
   /**
    * Save f to old f and reset f
    */
@@ -101,6 +102,11 @@ public:
    * Calculate Position from t -> t+1
    */
   void calculateX();
+
+  /**
+   * Passes delta time to set dt_2m and dtsq_2m
+   */
+  void updateDT(double delta_t);
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);
