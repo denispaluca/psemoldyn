@@ -30,6 +30,14 @@ int \mbox{\hyperlink{classParticle_a0581d7b629eb17ac5bef8e934852ca8b}{get\+Type}
 bool \mbox{\hyperlink{classParticle_a5034babb77618a56e00927d8891afabe}{operator==}} (\mbox{\hyperlink{classParticle}{Particle}} \&other)
 \item 
 std\+::string \mbox{\hyperlink{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}{to\+String}} ()
+\item 
+void \mbox{\hyperlink{classParticle_a6a858d050335d6aa42dbf00a03f83fee}{addF}} (const std\+::array$<$ double, 3 $>$ \&fn)
+\item 
+void \mbox{\hyperlink{classParticle_a6f893f97470cb3b42ba9680d606758c5}{save\+OldF}} ()
+\item 
+void \mbox{\hyperlink{classParticle_a4f8782eee73f88368561ea90bb16a66b}{calculateV}} ()
+\item 
+void \mbox{\hyperlink{classParticle_acdb36305260c411c46729e11cbbaf03a}{calculateX}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -45,6 +53,10 @@ std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classParticle_a968dfd29adaa41fb25
 double \mbox{\hyperlink{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}{m}}
 \item 
 int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
+\item 
+double \mbox{\hyperlink{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}{dt\+\_\+2m}}
+\item 
+double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\_\+2m}}
 \end{DoxyCompactItemize}
 
 
@@ -76,7 +88,30 @@ int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classParticle_aee807bce6e527f4719167dcb014b401f}\label{classParticle_aee807bce6e527f4719167dcb014b401f}} 
+\mbox{\Hypertarget{classParticle_a6a858d050335d6aa42dbf00a03f83fee}\label{classParticle_a6a858d050335d6aa42dbf00a03f83fee}} 
+\index{Particle@{Particle}!addF@{addF}}
+\index{addF@{addF}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{addF()}{addF()}}
+{\footnotesize\ttfamily void Particle\+::addF (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 3 $>$ \&}]{fn }\end{DoxyParamCaption})}
+
+Add force 
+\begin{DoxyParams}{Parameters}
+{\em fn} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParticle_a4f8782eee73f88368561ea90bb16a66b}\label{classParticle_a4f8782eee73f88368561ea90bb16a66b}} 
+\index{Particle@{Particle}!calculateV@{calculateV}}
+\index{calculateV@{calculateV}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{calculateV()}{calculateV()}}
+{\footnotesize\ttfamily void Particle\+::calculateV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calculate speed from t -\/$>$ t+1 \mbox{\Hypertarget{classParticle_acdb36305260c411c46729e11cbbaf03a}\label{classParticle_acdb36305260c411c46729e11cbbaf03a}} 
+\index{Particle@{Particle}!calculateX@{calculateX}}
+\index{calculateX@{calculateX}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{calculateX()}{calculateX()}}
+{\footnotesize\ttfamily void Particle\+::calculateX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calculate Position from t -\/$>$ t+1 \mbox{\Hypertarget{classParticle_aee807bce6e527f4719167dcb014b401f}\label{classParticle_aee807bce6e527f4719167dcb014b401f}} 
 \index{Particle@{Particle}!getF@{getF}}
 \index{getF@{getF}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getF()}{getF()}}
@@ -118,7 +153,13 @@ int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
 {\footnotesize\ttfamily bool Particle\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{other }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}\label{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}} 
+\mbox{\Hypertarget{classParticle_a6f893f97470cb3b42ba9680d606758c5}\label{classParticle_a6f893f97470cb3b42ba9680d606758c5}} 
+\index{Particle@{Particle}!saveOldF@{saveOldF}}
+\index{saveOldF@{saveOldF}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{saveOldF()}{saveOldF()}}
+{\footnotesize\ttfamily void Particle\+::save\+OldF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Save f to old f and reset f \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}\label{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}} 
 \index{Particle@{Particle}!toString@{toString}}
 \index{toString@{toString}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
@@ -127,7 +168,19 @@ int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
+\mbox{\Hypertarget{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}\label{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}} 
+\index{Particle@{Particle}!dt\_2m@{dt\_2m}}
+\index{dt\_2m@{dt\_2m}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{dt\_2m}{dt\_2m}}
+{\footnotesize\ttfamily double Particle\+::dt\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
+
+Safe dt/2m \mbox{\Hypertarget{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}\label{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}} 
+\index{Particle@{Particle}!dtsq\_2m@{dtsq\_2m}}
+\index{dtsq\_2m@{dtsq\_2m}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{dtsq\_2m}{dtsq\_2m}}
+{\footnotesize\ttfamily double Particle\+::dtsq\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
+
+Safe (delta t)$^\wedge$2/2m \mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
 \index{Particle@{Particle}!f@{f}}
 \index{f@{f}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{f}{f}}
