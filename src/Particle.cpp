@@ -32,12 +32,17 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
   type = type_arg;
   f = {0., 0., 0.};
   old_f = {0., 0., 0.};
-  dt_2m = 0.014 / (2*m); //TODO delta_t
-  dtsq_2m = 0.014 * 0.014 / (2*m); //TODO delta_t
+  dt_2m = 0;
+  dtsq_2m = 0;
   std::cout << "Particle generated!" << std::endl;
 }
 
 Particle::~Particle() { std::cout << "Particle destructed!" << std::endl; }
+
+void Particle::updateDT(double delta_t) {
+    dt_2m = delta_t / (2*m);
+    dtsq_2m = delta_t * delta_t / (2*m);
+}
 
 std::array<double, 3> &Particle::getX() { return x; }
 

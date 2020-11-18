@@ -33,26 +33,33 @@ void plotParticles(int iteration, std::vector<Particle> &particles);
 double radiusPow3(const std::array<double, 3> &x);
 
 constexpr double start_time = 0;
-constexpr double end_time = 100;
-constexpr double delta_t = 0.014;
+double t_end = 0.0;
+double delta_t = 0.0;
 
 
 int main(int argc, char *argsv[]) {
 
   std::cout << "Hello from MolSim for PSE!" << std::endl;
-  if (argc != 2) {
+  if (argc != 4) {
     std::cout << "Errounous programme call! " << std::endl;
-    std::cout << "./molsym filename" << std::endl;
+    std::cout << "./MolSim filename t_end delta_t" << std::endl;
   }
 
   ParticleContainer particleContainer = ParticleContainer(argsv[1]);
 
   double current_time = start_time;
+  t_end = std::stod(argsv[2]);
+  delta_t = std::stod(argsv[3]);
+
+  particleContainer.iterate(
+          [] (Particle &p) {
+              p.updateDT(delta_t);
+          });
 
   int iteration = 0;
 
   // for this loop, we assume: current x, current f and current v are known
-  while (current_time < end_time) {
+  while (current_time < t_end) {
     // calculate new x
     particleContainer.iterate(calculateX);
     // calculate new f
@@ -88,6 +95,10 @@ void calculateF(Particle &p1, Particle &p2) {
     p1.addF(f12);
     p2.addF({-f12[0], -f12[1], -f12[2]});
   }
+}
+
+void setDeltaT(Particle &p){
+    p.updateDT(delta_t);
 }
 
 void calculateX(Particle &p) {
