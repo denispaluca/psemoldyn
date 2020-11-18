@@ -1,26 +1,31 @@
 \hypertarget{namespaceArrayUtils}{}\doxysection{Array\+Utils Namespace Reference}
 \label{namespaceArrayUtils}\index{ArrayUtils@{ArrayUtils}}
+
+
+Collection of utility functions and operators for iterable data containers like std\+::array, std\+::vector, etc.  
+
+
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
  \mbox{\hyperlink{namespaceArrayUtils_1_1is__container__impl}{is\+\_\+container\+\_\+impl}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Collection of structs that define what we consider a container. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structArrayUtils_1_1is__container}{is\+\_\+container}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Type trait to check if a given type is a container. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 {\footnotesize template$<$class Container $>$ }\\std\+::string \mbox{\hyperlink{namespaceArrayUtils_a5d85736aee11e2b5c8f321d05161a2ce}{to\+\_\+string}} (const Container \&container, const std\+::string \&delimiter=\char`\"{}, \char`\"{}, const std\+::array$<$ std\+::string, 2 $>$ \&surround=\{\char`\"{}\mbox{[}\char`\"{}, \char`\"{}\mbox{]}\char`\"{}\})
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a string representation of a container which fulfills the Container requirement (provide cbegin and cend). \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Container , class F $>$ }\\Container \mbox{\hyperlink{namespaceArrayUtils_a9b9c0bb4a1f4358b8d9a436a583f8eda}{element\+Wise\+Pair\+Op}} (const Container \&lhs, const Container \&rhs, F binary\+Function)
-\item 
+\begin{DoxyCompactList}\small\item\em Applies an element wise binary function F to two containers. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Scalar , class Container , class F $>$ }\\Container \mbox{\hyperlink{namespaceArrayUtils_a7959b05d2d307318e0bd1f79dbc3faec}{element\+Wise\+Scalar\+Op}} (const Scalar \&lhs, const Container \&rhs, F binary\+Function)
-\item 
+\begin{DoxyCompactList}\small\item\em Applies a binary function F to with a scalar to every element in a container. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Container $>$ }\\auto \mbox{\hyperlink{namespaceArrayUtils_a75ed8dcc1685d2373c6efcf45d4337fb}{L2\+Norm}} (const Container \&c)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the L2 norm for a given container. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -34,7 +39,9 @@ Collection of utility functions and operators for iterable data containers like 
 {\footnotesize\ttfamily template$<$class Container , class F $>$ \\
 Container Array\+Utils\+::element\+Wise\+Pair\+Op (\begin{DoxyParamCaption}\item[{const Container \&}]{lhs,  }\item[{const Container \&}]{rhs,  }\item[{F}]{binary\+Function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Applies an element wise binary function F to two containers.
+
+
+Applies an element wise binary function F to two containers. 
 
 If the containers differ in size the F is only applied to as many elements as are in the smaller container.
 
@@ -64,7 +71,9 @@ Element wise F(lhs, rhs).
 {\footnotesize\ttfamily template$<$class Scalar , class Container , class F $>$ \\
 Container Array\+Utils\+::element\+Wise\+Scalar\+Op (\begin{DoxyParamCaption}\item[{const Scalar \&}]{lhs,  }\item[{const Container \&}]{rhs,  }\item[{F}]{binary\+Function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Applies a binary function F to with a scalar to every element in a container.
+
+
+Applies a binary function F to with a scalar to every element in a container. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -94,7 +103,11 @@ Element wise F(lhs, rhs).
 {\footnotesize\ttfamily template$<$class Container $>$ \\
 auto Array\+Utils\+::\+L2\+Norm (\begin{DoxyParamCaption}\item[{const Container \&}]{c }\end{DoxyParamCaption})}
 
+
+
 Calculates the L2 norm for a given container. 
+
+
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Container} & \\
 \hline
@@ -114,7 +127,11 @@ sqrt(sum\+\_\+i(c\mbox{[}i\mbox{]}$\ast$c\mbox{[}i\mbox{]})).
 {\footnotesize\ttfamily template$<$class Container $>$ \\
 std\+::string Array\+Utils\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{const Container \&}]{container,  }\item[{const std\+::string \&}]{delimiter = {\ttfamily \char`\"{},~\char`\"{}},  }\item[{const std\+::array$<$ std\+::string, 2 $>$ \&}]{surround = {\ttfamily \{\char`\"{}\mbox{[}\char`\"{},~\char`\"{}\mbox{]}\char`\"{}\}} }\end{DoxyParamCaption})}
 
+
+
 Generates a string representation of a container which fulfills the Container requirement (provide cbegin and cend). 
+
+
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Container} & Type of Container. \\
 \hline

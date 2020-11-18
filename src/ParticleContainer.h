@@ -7,44 +7,63 @@
 
 #include "Particle.h"
 #include <vector>
+/**
+ * The ParticleContainer class encapsulates particles
+ * and makes it possible to iterate through them.
+ */
 class ParticleContainer {
 private:
     /**
-     * List of particles
+     * Vector of particles
      */
     std::vector<Particle> particles;
 public:
     /**
-     * Empty init container
+     * Constructs ParticleContainer with empty vector of particles.
+     * @return
+     * @param
      */
     ParticleContainer();
+
     /**
-     * Init container with vector of particles
-     */
-    ParticleContainer(std::vector<Particle>&);
-    /**
-     * Init container with filename of file to be parsed
-     * @param filename
-     */
-    ParticleContainer(char* filename);
-    /**
-     * Returns vector of particles in container
+     * Constructs ParticleContainer by copying particles.
+     * @param particles Particles to be copied.
      * @return
      */
-    std::vector<Particle> &getParticles();
+    ParticleContainer(std::vector<Particle> &particles);
+
     /**
-     * push particle at the end of the list
-     * @param particle
+     * Constructs ParticleContainer with filename to be parsed by FileReader.
+     * @param filename Name of the files which will be parsed.
+     * @return
+     */
+    ParticleContainer(char* filename);
+
+    /**
+     * Getter for the vector of particles in container.
+     * @return The vector of particles
+     * @param
+     */
+    std::vector<Particle> &getParticles();
+
+    /**
+     * Push particle at the end of the vector.
+     * @param particle The particle pushed in particles vector
+     * @return
      */
     void push(Particle &particle);
+
     /**
      * Iterate over all particles and apply function f
-     * @param f
+     * @param f Function applied to particles
+     * @return
      */
     void iterate(void (*f)(Particle&));
+
     /**
      * Iterate over all unique particle pairs and apply function f
-     * @param f
+     * @param f Function that is applied to pairs
+     * @return
      */
     void iteratePairs(void (*f)(Particle&,Particle&));
 };

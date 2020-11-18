@@ -2,6 +2,11 @@
 \label{classoutputWriter_1_1VTKWriter}\index{outputWriter::VTKWriter@{outputWriter::VTKWriter}}
 
 
+This class implements the functionality to generate vtk output from particles.  
+
+
+
+
 {\ttfamily \#include $<$V\+T\+K\+Writer.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
@@ -12,11 +17,11 @@
 virtual \mbox{\hyperlink{classoutputWriter_1_1VTKWriter_a196a54bcfa3f93638ef292c386f91b61}{$\sim$\+V\+T\+K\+Writer}} ()
 \item 
 void \mbox{\hyperlink{classoutputWriter_1_1VTKWriter_a41cfcefce4d7eb434f1dd45f5aeb3e8f}{initialize\+Output}} (int num\+Particles)
-\item 
+\begin{DoxyCompactList}\small\item\em set up internal data structures and prepare to plot a particle. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoutputWriter_1_1VTKWriter_a6d3f50ca3ae2390055d3f9cc0ed1eb4d}{plot\+Particle}} (\mbox{\hyperlink{classParticle}{Particle}} \&p)
-\item 
+\begin{DoxyCompactList}\small\item\em plot type, mass, position, velocity and force of a particle. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoutputWriter_1_1VTKWriter_ad0d7afb78a2027d05e9a03acde3799dd}{write\+File}} (const std\+::string \&filename, int iteration)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em writes the final output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -49,13 +54,19 @@ This class implements the functionality to generate vtk output from particles.
 \doxysubsubsection{\texorpdfstring{initializeOutput()}{initializeOutput()}}
 {\footnotesize\ttfamily void output\+Writer\+::\+V\+T\+K\+Writer\+::initialize\+Output (\begin{DoxyParamCaption}\item[{int}]{num\+Particles }\end{DoxyParamCaption})}
 
-set up internal data structures and prepare to plot a particle. \mbox{\Hypertarget{classoutputWriter_1_1VTKWriter_a6d3f50ca3ae2390055d3f9cc0ed1eb4d}\label{classoutputWriter_1_1VTKWriter_a6d3f50ca3ae2390055d3f9cc0ed1eb4d}} 
+
+
+set up internal data structures and prepare to plot a particle. 
+
+\mbox{\Hypertarget{classoutputWriter_1_1VTKWriter_a6d3f50ca3ae2390055d3f9cc0ed1eb4d}\label{classoutputWriter_1_1VTKWriter_a6d3f50ca3ae2390055d3f9cc0ed1eb4d}} 
 \index{outputWriter::VTKWriter@{outputWriter::VTKWriter}!plotParticle@{plotParticle}}
 \index{plotParticle@{plotParticle}!outputWriter::VTKWriter@{outputWriter::VTKWriter}}
 \doxysubsubsection{\texorpdfstring{plotParticle()}{plotParticle()}}
 {\footnotesize\ttfamily void output\+Writer\+::\+V\+T\+K\+Writer\+::plot\+Particle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p }\end{DoxyParamCaption})}
 
-plot type, mass, position, velocity and force of a particle.
+
+
+plot type, mass, position, velocity and force of a particle. 
 
 \begin{DoxyNote}{Note}
 \+: \mbox{\hyperlink{classoutputWriter_1_1VTKWriter_a41cfcefce4d7eb434f1dd45f5aeb3e8f}{initialize\+Output()}} must have been called before. 
@@ -66,7 +77,9 @@ plot type, mass, position, velocity and force of a particle.
 \doxysubsubsection{\texorpdfstring{writeFile()}{writeFile()}}
 {\footnotesize\ttfamily void output\+Writer\+::\+V\+T\+K\+Writer\+::write\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{int}]{iteration }\end{DoxyParamCaption})}
 
-writes the final output file.
+
+
+writes the final output file. 
 
 
 \begin{DoxyParams}{Parameters}
