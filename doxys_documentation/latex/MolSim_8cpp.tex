@@ -9,19 +9,13 @@
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{MolSim_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}{calculateF}} (\mbox{\hyperlink{classParticle}{Particle}} \&p1, \mbox{\hyperlink{classParticle}{Particle}} \&p2)
-\begin{DoxyCompactList}\small\item\em calculate the force for all particles \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{MolSim_8cpp_aac5f0edfc84d2e58e7a547f86038ff0f}{calculateX}} (\mbox{\hyperlink{classParticle}{Particle}} \&p)
-\begin{DoxyCompactList}\small\item\em calculate the position for all particles \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{MolSim_8cpp_aa1b06fce1a216da82735f814c972e246}{calculateV}} (\mbox{\hyperlink{classParticle}{Particle}} \&p)
-\begin{DoxyCompactList}\small\item\em calculate the position for all particles \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate force between 2 particles and add it to their respective forces. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}{plot\+Particles}} (int iteration, std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&particles)
-\begin{DoxyCompactList}\small\item\em plot the particles to a vtu-\/file \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plot the particles to a vtu-\/file. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}{radius\+Pow3}} (const std\+::array$<$ double, 3 $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Calculate ($\vert$$\vert$x$\vert$$\vert$\+\_\+2)$^\wedge$3. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate second norm cubed of array with length 3. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}{main}} (int argc, char $\ast$argsv\mbox{[}$\,$\mbox{]})
-\item 
-void \mbox{\hyperlink{MolSim_8cpp_a0d78ac52c08a0df478fb232ea430dbfb}{set\+DeltaT}} (\mbox{\hyperlink{classParticle}{Particle}} \&p)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -42,34 +36,38 @@ double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_
 
 
 
-calculate the force for all particles 
-
-\mbox{\Hypertarget{MolSim_8cpp_aa1b06fce1a216da82735f814c972e246}\label{MolSim_8cpp_aa1b06fce1a216da82735f814c972e246}} 
-\index{MolSim.cpp@{MolSim.cpp}!calculateV@{calculateV}}
-\index{calculateV@{calculateV}!MolSim.cpp@{MolSim.cpp}}
-\doxysubsubsection{\texorpdfstring{calculateV()}{calculateV()}}
-{\footnotesize\ttfamily void calculateV (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p }\end{DoxyParamCaption})}
+Calculate force between 2 particles and add it to their respective forces. 
 
 
+\begin{DoxyParams}{Parameters}
+{\em p1} & First \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+{\em p2} & Second \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
 
-calculate the position for all particles 
-
-\mbox{\Hypertarget{MolSim_8cpp_aac5f0edfc84d2e58e7a547f86038ff0f}\label{MolSim_8cpp_aac5f0edfc84d2e58e7a547f86038ff0f}} 
-\index{MolSim.cpp@{MolSim.cpp}!calculateX@{calculateX}}
-\index{calculateX@{calculateX}!MolSim.cpp@{MolSim.cpp}}
-\doxysubsubsection{\texorpdfstring{calculateX()}{calculateX()}}
-{\footnotesize\ttfamily void calculateX (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p }\end{DoxyParamCaption})}
-
-
-
-calculate the position for all particles 
-
+\end{DoxyReturn}
 \mbox{\Hypertarget{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}\label{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}} 
 \index{MolSim.cpp@{MolSim.cpp}!main@{main}}
 \index{main@{main}!MolSim.cpp@{MolSim.cpp}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argsv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
+
+
+Main function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argsv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}\label{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}} 
 \index{MolSim.cpp@{MolSim.cpp}!plotParticles@{plotParticles}}
 \index{plotParticles@{plotParticles}!MolSim.cpp@{MolSim.cpp}}
@@ -78,8 +76,18 @@ calculate the position for all particles
 
 
 
-plot the particles to a vtu-\/file 
+Plot the particles to a vtu-\/file. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em iteration} & Iteration counter \\
+\hline
+{\em particles} & Vector of particles to be plotted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}\label{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}} 
 \index{MolSim.cpp@{MolSim.cpp}!radiusPow3@{radiusPow3}}
 \index{radiusPow3@{radiusPow3}!MolSim.cpp@{MolSim.cpp}}
@@ -88,14 +96,16 @@ plot the particles to a vtu-\/file
 
 
 
-Calculate ($\vert$$\vert$x$\vert$$\vert$\+\_\+2)$^\wedge$3. 
+Calculate second norm cubed of array with length 3. 
 
-\mbox{\Hypertarget{MolSim_8cpp_a0d78ac52c08a0df478fb232ea430dbfb}\label{MolSim_8cpp_a0d78ac52c08a0df478fb232ea430dbfb}} 
-\index{MolSim.cpp@{MolSim.cpp}!setDeltaT@{setDeltaT}}
-\index{setDeltaT@{setDeltaT}!MolSim.cpp@{MolSim.cpp}}
-\doxysubsubsection{\texorpdfstring{setDeltaT()}{setDeltaT()}}
-{\footnotesize\ttfamily void set\+DeltaT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p }\end{DoxyParamCaption})}
 
+\begin{DoxyParams}{Parameters}
+{\em x} & Input coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+($\vert$$\vert$x$\vert$$\vert$\+\_\+2)$^\wedge$3 
+\end{DoxyReturn}
 
 
 \doxysubsection{Variable Documentation}

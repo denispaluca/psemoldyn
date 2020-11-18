@@ -40,9 +40,9 @@ public:
     ParticleContainer(char* filename);
 
     /**
-     * Returns vector of particles in container.
-     * @param
+     * Getter for the vector of particles in container.
      * @return The vector of particles
+     * @param
      */
     std::vector<Particle> &getParticles();
 

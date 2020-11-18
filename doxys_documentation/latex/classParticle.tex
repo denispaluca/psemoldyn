@@ -2,41 +2,46 @@
 \label{classParticle}\index{Particle@{Particle}}
 
 
+The particle class represents a particle and it\textquotesingle{}s characteristics.  
+
+
+
+
 {\ttfamily \#include $<$Particle.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classParticle_a866812d3dfb9c539e5e24593e596a8c9}{Particle}} (int \mbox{\hyperlink{classtype}{type}}=0)
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classParticle}{Particle}} constructor which sets its type. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classParticle_a24b04cb7c6f7ea4242d25c410f44ae56}{Particle}} (const \mbox{\hyperlink{classParticle}{Particle}} \&other)
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classParticle}{Particle}} constructor that copies attributes of another particle to the new particle. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classParticle_abd17e9e13b8ed36738424c79aa14e127}{Particle}} (std\+::array$<$ double, 3 $>$ x\+\_\+arg, std\+::array$<$ double, 3 $>$ v\+\_\+arg, double m\+\_\+arg, int \mbox{\hyperlink{classtype}{type}}=0)
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classParticle}{Particle}} constructor that takes all attributes of the particle as input. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classParticle_ad030d0fe7b88cf81744b127c99244ff4}{$\sim$\+Particle}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destructor of particle. \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \& \mbox{\hyperlink{classParticle_a5185075d28ff5adcdb44aa1d9b7a7646}{getX}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the position of the particle (x). \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \& \mbox{\hyperlink{classParticle_aee807bce6e527f4719167dcb014b401f}{getF}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the force on this particle (f). \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \& \mbox{\hyperlink{classParticle_abd84e212cdf8b9aa4c8af232453a1ee5}{get\+OldF}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the previous force on this particle (old\+\_\+f) \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \& \mbox{\hyperlink{classParticle_aa6e7faa3871c5456995dc4e7cf3c8dbc}{getV}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the velocity of this particle (v). \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_aa1ca800f9be9dd4bd6c604f608095b24}{getM}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the mass of this particle (m). \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classParticle_a0581d7b629eb17ac5bef8e934852ca8b}{get\+Type}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Getter for the type of this particle. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classParticle_a5034babb77618a56e00927d8891afabe}{operator==}} (\mbox{\hyperlink{classParticle}{Particle}} \&other)
-\item 
+\begin{DoxyCompactList}\small\item\em Operator that compares all attributes of this particle with another. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}{to\+String}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Represent this particle in string format. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a6a858d050335d6aa42dbf00a03f83fee}{addF}} (const std\+::array$<$ double, 3 $>$ \&fn)
-\begin{DoxyCompactList}\small\item\em Add force. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Adds force fn to current force. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a6f893f97470cb3b42ba9680d606758c5}{save\+OldF}} ()
-\begin{DoxyCompactList}\small\item\em Save f to old f and reset f. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Save f to old f and set f to 0. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a4f8782eee73f88368561ea90bb16a66b}{calculateV}} ()
-\begin{DoxyCompactList}\small\item\em Calculate speed from t -\/$>$ t+1. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate velocity from t -\/$>$ t+1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_acdb36305260c411c46729e11cbbaf03a}{calculateX}} ()
 \begin{DoxyCompactList}\small\item\em Calculate Position from t -\/$>$ t+1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a8d6b27c07627e73bd9d965f30834164e}{update\+DT}} (double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_\+t}})
@@ -62,6 +67,9 @@ double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\
 \begin{DoxyCompactList}\small\item\em Save (delta t)$^\wedge$2/2m. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+The particle class represents a particle and it\textquotesingle{}s characteristics. 
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classParticle_a866812d3dfb9c539e5e24593e596a8c9}\label{classParticle_a866812d3dfb9c539e5e24593e596a8c9}} 
 \index{Particle@{Particle}!Particle@{Particle}}
@@ -69,24 +77,75 @@ double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\
 \doxysubsubsection{\texorpdfstring{Particle()}{Particle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily Particle\+::\+Particle (\begin{DoxyParamCaption}\item[{int}]{type = {\ttfamily 0} }\end{DoxyParamCaption})}
 
+
+
+\mbox{\hyperlink{classParticle}{Particle}} constructor which sets its type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Type to be set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_a24b04cb7c6f7ea4242d25c410f44ae56}\label{classParticle_a24b04cb7c6f7ea4242d25c410f44ae56}} 
 \index{Particle@{Particle}!Particle@{Particle}}
 \index{Particle@{Particle}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{Particle()}{Particle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily Particle\+::\+Particle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classParticle}{Particle}} \&}]{other }\end{DoxyParamCaption})}
 
+
+
+\mbox{\hyperlink{classParticle}{Particle}} constructor that copies attributes of another particle to the new particle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The particle to be copied. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_abd17e9e13b8ed36738424c79aa14e127}\label{classParticle_abd17e9e13b8ed36738424c79aa14e127}} 
 \index{Particle@{Particle}!Particle@{Particle}}
 \index{Particle@{Particle}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{Particle()}{Particle()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily Particle\+::\+Particle (\begin{DoxyParamCaption}\item[{std\+::array$<$ double, 3 $>$}]{x\+\_\+arg,  }\item[{std\+::array$<$ double, 3 $>$}]{v\+\_\+arg,  }\item[{double}]{m\+\_\+arg,  }\item[{int}]{type = {\ttfamily 0} }\end{DoxyParamCaption})}
 
+
+
+\mbox{\hyperlink{classParticle}{Particle}} constructor that takes all attributes of the particle as input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+arg} & Position \\
+\hline
+{\em v\+\_\+arg} & Velocity \\
+\hline
+{\em m\+\_\+arg} & Mass \\
+\hline
+{\em type} & Type of particle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_ad030d0fe7b88cf81744b127c99244ff4}\label{classParticle_ad030d0fe7b88cf81744b127c99244ff4}} 
 \index{Particle@{Particle}!````~Particle@{$\sim$Particle}}
 \index{````~Particle@{$\sim$Particle}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{$\sim$Particle()}{~Particle()}}
 {\footnotesize\ttfamily Particle\+::$\sim$\+Particle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
+
+
+Destructor of particle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -98,13 +157,16 @@ double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\
 
 
 
-Add force. 
+Adds force fn to current force. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em fn} & \\
+{\em fn} & Force to be added. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_a4f8782eee73f88368561ea90bb16a66b}\label{classParticle_a4f8782eee73f88368561ea90bb16a66b}} 
 \index{Particle@{Particle}!calculateV@{calculateV}}
 \index{calculateV@{calculateV}!Particle@{Particle}}
@@ -113,8 +175,16 @@ Add force.
 
 
 
-Calculate speed from t -\/$>$ t+1. 
+Calculate velocity from t -\/$>$ t+1. 
 
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_acdb36305260c411c46729e11cbbaf03a}\label{classParticle_acdb36305260c411c46729e11cbbaf03a}} 
 \index{Particle@{Particle}!calculateX@{calculateX}}
 \index{calculateX@{calculateX}!Particle@{Particle}}
@@ -125,48 +195,127 @@ Calculate speed from t -\/$>$ t+1.
 
 Calculate Position from t -\/$>$ t+1. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_aee807bce6e527f4719167dcb014b401f}\label{classParticle_aee807bce6e527f4719167dcb014b401f}} 
 \index{Particle@{Particle}!getF@{getF}}
 \index{getF@{getF}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getF()}{getF()}}
 {\footnotesize\ttfamily std\+::array$<$ double, 3 $>$ \& Particle\+::getF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the force on this particle (f). 
+
+\begin{DoxyReturn}{Returns}
+f -\/ Force 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_aa1ca800f9be9dd4bd6c604f608095b24}\label{classParticle_aa1ca800f9be9dd4bd6c604f608095b24}} 
 \index{Particle@{Particle}!getM@{getM}}
 \index{getM@{getM}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getM()}{getM()}}
 {\footnotesize\ttfamily double Particle\+::getM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the mass of this particle (m). 
+
+\begin{DoxyReturn}{Returns}
+m -\/ Mass 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_abd84e212cdf8b9aa4c8af232453a1ee5}\label{classParticle_abd84e212cdf8b9aa4c8af232453a1ee5}} 
 \index{Particle@{Particle}!getOldF@{getOldF}}
 \index{getOldF@{getOldF}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getOldF()}{getOldF()}}
 {\footnotesize\ttfamily std\+::array$<$ double, 3 $>$ \& Particle\+::get\+OldF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the previous force on this particle (old\+\_\+f) 
+
+\begin{DoxyReturn}{Returns}
+old\+\_\+f -\/ Previous Force 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_a0581d7b629eb17ac5bef8e934852ca8b}\label{classParticle_a0581d7b629eb17ac5bef8e934852ca8b}} 
 \index{Particle@{Particle}!getType@{getType}}
 \index{getType@{getType}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getType()}{getType()}}
 {\footnotesize\ttfamily int Particle\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the type of this particle. 
+
+\begin{DoxyReturn}{Returns}
+type 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_aa6e7faa3871c5456995dc4e7cf3c8dbc}\label{classParticle_aa6e7faa3871c5456995dc4e7cf3c8dbc}} 
 \index{Particle@{Particle}!getV@{getV}}
 \index{getV@{getV}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getV()}{getV()}}
 {\footnotesize\ttfamily std\+::array$<$ double, 3 $>$ \& Particle\+::getV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the velocity of this particle (v). 
+
+\begin{DoxyReturn}{Returns}
+v -\/ Velocity 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_a5185075d28ff5adcdb44aa1d9b7a7646}\label{classParticle_a5185075d28ff5adcdb44aa1d9b7a7646}} 
 \index{Particle@{Particle}!getX@{getX}}
 \index{getX@{getX}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getX()}{getX()}}
 {\footnotesize\ttfamily std\+::array$<$ double, 3 $>$ \& Particle\+::getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Getter for the position of the particle (x). 
+
+\begin{DoxyReturn}{Returns}
+x -\/ Position 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_a5034babb77618a56e00927d8891afabe}\label{classParticle_a5034babb77618a56e00927d8891afabe}} 
 \index{Particle@{Particle}!operator==@{operator==}}
 \index{operator==@{operator==}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
 {\footnotesize\ttfamily bool Particle\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{other }\end{DoxyParamCaption})}
 
+
+
+Operator that compares all attributes of this particle with another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \mbox{\hyperlink{classParticle}{Particle}} to be compared to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE when all attributes are the same 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticle_a6f893f97470cb3b42ba9680d606758c5}\label{classParticle_a6f893f97470cb3b42ba9680d606758c5}} 
 \index{Particle@{Particle}!saveOldF@{saveOldF}}
 \index{saveOldF@{saveOldF}!Particle@{Particle}}
@@ -175,14 +324,34 @@ Calculate Position from t -\/$>$ t+1.
 
 
 
-Save f to old f and reset f. 
+Save f to old f and set f to 0. 
 
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}\label{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}} 
 \index{Particle@{Particle}!toString@{toString}}
 \index{toString@{toString}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
 {\footnotesize\ttfamily std\+::string Particle\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Represent this particle in string format. 
+
+\begin{DoxyReturn}{Returns}
+String representation of this particle. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticle_a8d6b27c07627e73bd9d965f30834164e}\label{classParticle_a8d6b27c07627e73bd9d965f30834164e}} 
 \index{Particle@{Particle}!updateDT@{updateDT}}
 \index{updateDT@{updateDT}!Particle@{Particle}}
@@ -193,6 +362,11 @@ Save f to old f and reset f.
 
 Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}

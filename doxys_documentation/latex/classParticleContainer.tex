@@ -2,19 +2,24 @@
 \label{classParticleContainer}\index{ParticleContainer@{ParticleContainer}}
 
 
+The \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} class encapsulates particles and makes it possible to iterate through them.  
+
+
+
+
 {\ttfamily \#include $<$Particle\+Container.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}{Particle\+Container}} ()
-\begin{DoxyCompactList}\small\item\em Empty init container. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classParticleContainer_a38d59629dabc3840367d1bfb49ffab95}{Particle\+Container}} (std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&)
-\begin{DoxyCompactList}\small\item\em Init container with vector of particles. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with empty vector of particles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classParticleContainer_a95c6639fd766435033d9c4508fccdf7f}{Particle\+Container}} (std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&\mbox{\hyperlink{classParticleContainer_a837d29fec29694cf90572fe943303776}{particles}})
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} by copying particles. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classParticleContainer_a3607447820fbc28a4b05151de844b398}{Particle\+Container}} (char $\ast$filename)
-\begin{DoxyCompactList}\small\item\em Init container with filename of file to be parsed. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with filename to be parsed by \mbox{\hyperlink{classFileReader}{File\+Reader}}. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \& \mbox{\hyperlink{classParticleContainer_a4e467aca8a39db3299adbc98b7103b53}{get\+Particles}} ()
-\begin{DoxyCompactList}\small\item\em Returns vector of particles in container. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Getter for the vector of particles in container. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticleContainer_a99433da6afe29aea451912f4480bd68c}{push}} (\mbox{\hyperlink{classParticle}{Particle}} \&particle)
 \begin{DoxyCompactList}\small\item\em Push particle at the end of the vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticleContainer_ac4f8083ab3943320a84d408d63541c84}{iterate}} (void($\ast$f)(\mbox{\hyperlink{classParticle}{Particle}} \&))
@@ -25,8 +30,11 @@ void \mbox{\hyperlink{classParticleContainer_ae65756884c6419a04ba40bf2d9fec3d3}{
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \mbox{\hyperlink{classParticleContainer_a837d29fec29694cf90572fe943303776}{particles}}
-\begin{DoxyCompactList}\small\item\em List of particles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Vector of particles. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} class encapsulates particles and makes it possible to iterate through them. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}\label{classParticleContainer_a76d21bdb5141158cf664d65e2d8b1db7}} 
@@ -37,9 +45,17 @@ std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \mbox{\hyperlink
 
 
 
-Empty init container. 
+Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with empty vector of particles. 
 
-\mbox{\Hypertarget{classParticleContainer_a38d59629dabc3840367d1bfb49ffab95}\label{classParticleContainer_a38d59629dabc3840367d1bfb49ffab95}} 
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParticleContainer_a95c6639fd766435033d9c4508fccdf7f}\label{classParticleContainer_a95c6639fd766435033d9c4508fccdf7f}} 
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
 \doxysubsubsection{\texorpdfstring{ParticleContainer()}{ParticleContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
@@ -47,8 +63,16 @@ Empty init container.
 
 
 
-Init container with vector of particles. 
+Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} by copying particles. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em particles} & Particles to be copied. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticleContainer_a3607447820fbc28a4b05151de844b398}\label{classParticleContainer_a3607447820fbc28a4b05151de844b398}} 
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
@@ -57,13 +81,16 @@ Init container with vector of particles.
 
 
 
-Init container with filename of file to be parsed. 
+Constructs \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with filename to be parsed by \mbox{\hyperlink{classFileReader}{File\+Reader}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & \\
+{\em filename} & Name of the files which will be parsed. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Function Documentation}
@@ -75,8 +102,11 @@ Init container with filename of file to be parsed.
 
 
 
-Returns vector of particles in container. 
+Getter for the vector of particles in container. 
 
+\begin{DoxyReturn}{Returns}
+The vector of particles 
+\end{DoxyReturn}
 
 \begin{DoxyParams}{Parameters}
 {\em } & \\
@@ -115,6 +145,9 @@ Iterate over all unique particle pairs and apply function f.
 {\em f} & Function that is applied to pairs \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticleContainer_a99433da6afe29aea451912f4480bd68c}\label{classParticleContainer_a99433da6afe29aea451912f4480bd68c}} 
 \index{ParticleContainer@{ParticleContainer}!push@{push}}
 \index{push@{push}!ParticleContainer@{ParticleContainer}}
@@ -144,7 +177,7 @@ Push particle at the end of the vector.
 
 
 
-List of particles. 
+Vector of particles. 
 
 
 

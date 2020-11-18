@@ -95,8 +95,8 @@ public:
 
   /**
    * Getter for the position of the particle (x).
-   * @param
    * @return x - Position
+   * @param
    */
   std::array<double, 3> &getX();
 
