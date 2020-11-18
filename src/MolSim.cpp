@@ -8,19 +8,14 @@
 /**** forward declaration of the calculation functions ****/
 
 /**
- * calculate the force for all particles
+ * Calculate force between 2 particles and add it
+ * to their respective forces.
+ *
+ * @param p1 First Particle
+ * @param p2 Second Particle
+ * @return
  */
 void calculateF(Particle &p1, Particle &p2);
-
-/**
- * calculate the position for all particles
- */
-void calculateX(Particle &p);
-
-/**
- * calculate the position for all particles
- */
-void calculateV(Particle &p);
 
 /**
  * plot the particles to a vtu-file
@@ -61,11 +56,16 @@ int main(int argc, char *argsv[]) {
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < t_end) {
     // calculate new x
-    particleContainer.iterate(calculateX);
+    particleContainer.iterate([](Particle &p){
+      p.calculateX();
+      p.saveOldF();
+    });
     // calculate new f
     particleContainer.iteratePairs(calculateF);
     // calculate new v
-    particleContainer.iterate(calculateV);
+    particleContainer.iterate([](Particle &p){
+      p.calculateV();
+    });
 
     iteration++;
     if (iteration % 10 == 0) {
@@ -95,21 +95,6 @@ void calculateF(Particle &p1, Particle &p2) {
     p1.addF(f12);
     p2.addF({-f12[0], -f12[1], -f12[2]});
   }
-}
-
-void setDeltaT(Particle &p){
-    p.updateDT(delta_t);
-}
-
-void calculateX(Particle &p) {
-    // @TODO: insert calculation of force here!
-    p.calculateX();
-    p.saveOldF();
-}
-
-void calculateV(Particle &p) {
-  // @TODO: insert calculation of force here!
-  p.calculateV();
 }
 
 void plotParticles(int iteration, std::vector<Particle> &particles) {
