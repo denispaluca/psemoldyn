@@ -99,33 +99,46 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07d071a0f91f8ce7413201a6db3afe7b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a07d071a0f91f8ce7413201a6db3afe7b">toString</a> ()</td></tr>
 <tr class="separator:a07d071a0f91f8ce7413201a6db3afe7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a858d050335d6aa42dbf00a03f83fee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a6a858d050335d6aa42dbf00a03f83fee">addF</a> (const std::array&lt; double, 3 &gt; &amp;fn)</td></tr>
+<tr class="memdesc:a6a858d050335d6aa42dbf00a03f83fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add force.  <a href="classParticle.html#a6a858d050335d6aa42dbf00a03f83fee">More...</a><br /></td></tr>
 <tr class="separator:a6a858d050335d6aa42dbf00a03f83fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f893f97470cb3b42ba9680d606758c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a6f893f97470cb3b42ba9680d606758c5">saveOldF</a> ()</td></tr>
+<tr class="memdesc:a6f893f97470cb3b42ba9680d606758c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save f to old f and reset f.  <a href="classParticle.html#a6f893f97470cb3b42ba9680d606758c5">More...</a><br /></td></tr>
 <tr class="separator:a6f893f97470cb3b42ba9680d606758c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f8782eee73f88368561ea90bb16a66b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a4f8782eee73f88368561ea90bb16a66b">calculateV</a> ()</td></tr>
+<tr class="memdesc:a4f8782eee73f88368561ea90bb16a66b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate speed from t -&gt; t+1.  <a href="classParticle.html#a4f8782eee73f88368561ea90bb16a66b">More...</a><br /></td></tr>
 <tr class="separator:a4f8782eee73f88368561ea90bb16a66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdb36305260c411c46729e11cbbaf03a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#acdb36305260c411c46729e11cbbaf03a">calculateX</a> ()</td></tr>
+<tr class="memdesc:acdb36305260c411c46729e11cbbaf03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Position from t -&gt; t+1.  <a href="classParticle.html#acdb36305260c411c46729e11cbbaf03a">More...</a><br /></td></tr>
 <tr class="separator:acdb36305260c411c46729e11cbbaf03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d6b27c07627e73bd9d965f30834164e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">updateDT</a> (double <a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a>)</td></tr>
+<tr class="memdesc:a8d6b27c07627e73bd9d965f30834164e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passes delta time to set dt_2m and dtsq_2m.  <a href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">More...</a><br /></td></tr>
 <tr class="separator:a8d6b27c07627e73bd9d965f30834164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a027e5a09c12953df5fcbbdb15896de3e"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a027e5a09c12953df5fcbbdb15896de3e">x</a></td></tr>
+<tr class="memdesc:a027e5a09c12953df5fcbbdb15896de3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of the particle.  <a href="classParticle.html#a027e5a09c12953df5fcbbdb15896de3e">More...</a><br /></td></tr>
 <tr class="separator:a027e5a09c12953df5fcbbdb15896de3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fe6d1e0651ad949d0b37ac327c9c6d1"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a0fe6d1e0651ad949d0b37ac327c9c6d1">v</a></td></tr>
+<tr class="memdesc:a0fe6d1e0651ad949d0b37ac327c9c6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity of the particle.  <a href="classParticle.html#a0fe6d1e0651ad949d0b37ac327c9c6d1">More...</a><br /></td></tr>
 <tr class="separator:a0fe6d1e0651ad949d0b37ac327c9c6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a795fa0b3046fc186e4ac1dc0b9230c4a"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a795fa0b3046fc186e4ac1dc0b9230c4a">f</a></td></tr>
+<tr class="memdesc:a795fa0b3046fc186e4ac1dc0b9230c4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force effective on this particle.  <a href="classParticle.html#a795fa0b3046fc186e4ac1dc0b9230c4a">More...</a><br /></td></tr>
 <tr class="separator:a795fa0b3046fc186e4ac1dc0b9230c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a968dfd29adaa41fb25a08d3c45903156"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a968dfd29adaa41fb25a08d3c45903156">old_f</a></td></tr>
+<tr class="memdesc:a968dfd29adaa41fb25a08d3c45903156"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force which was effective on this particle.  <a href="classParticle.html#a968dfd29adaa41fb25a08d3c45903156">More...</a><br /></td></tr>
 <tr class="separator:a968dfd29adaa41fb25a08d3c45903156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedcc7e1bc53b0e2b1a4a07c9a1b47563"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#aedcc7e1bc53b0e2b1a4a07c9a1b47563">m</a></td></tr>
+<tr class="memdesc:aedcc7e1bc53b0e2b1a4a07c9a1b47563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mass of this particle.  <a href="classParticle.html#aedcc7e1bc53b0e2b1a4a07c9a1b47563">More...</a><br /></td></tr>
 <tr class="separator:aedcc7e1bc53b0e2b1a4a07c9a1b47563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a2b73dd42bcd56ba2e7ffeb0a5515a866">type</a></td></tr>
+<tr class="memdesc:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the particle.  <a href="classParticle.html#a2b73dd42bcd56ba2e7ffeb0a5515a866">More...</a><br /></td></tr>
 <tr class="separator:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ab1397bdfd4b796412fa3f2acc17e0ab6">dt_2m</a></td></tr>
+<tr class="memdesc:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save dt/2m.  <a href="classParticle.html#ab1397bdfd4b796412fa3f2acc17e0ab6">More...</a><br /></td></tr>
 <tr class="separator:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea7e0a2acf01226700c6d3acb49acc5a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#aea7e0a2acf01226700c6d3acb49acc5a">dtsq_2m</a></td></tr>
+<tr class="memdesc:aea7e0a2acf01226700c6d3acb49acc5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save (delta t)^2/2m.  <a href="classParticle.html#aea7e0a2acf01226700c6d3acb49acc5a">More...</a><br /></td></tr>
 <tr class="separator:aea7e0a2acf01226700c6d3acb49acc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -246,7 +259,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add force </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Add force. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fn</td><td></td></tr>
   </table>
@@ -269,7 +284,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calculate speed from t -&gt; t+1 </p>
+
+<p>Calculate speed from t -&gt; t+1. </p>
 
 </div>
 </div>
@@ -287,7 +303,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calculate Position from t -&gt; t+1 </p>
+
+<p>Calculate Position from t -&gt; t+1. </p>
 
 </div>
 </div>
@@ -425,7 +442,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Save f to old f and reset f </p>
+
+<p>Save f to old f and reset f. </p>
 
 </div>
 </div>
@@ -461,7 +479,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Passes delta time to set dt_2m and dtsq_2m </p>
+
+<p>Passes delta time to set dt_2m and dtsq_2m. </p>
 
 </div>
 </div>
@@ -485,7 +504,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Save dt/2m </p>
+
+<p>Save dt/2m. </p>
 
 </div>
 </div>
@@ -508,7 +528,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Save (delta t)^2/2m </p>
+
+<p>Save (delta t)^2/2m. </p>
 
 </div>
 </div>
@@ -531,7 +552,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Force effective on this particle </p>
+
+<p>Force effective on this particle. </p>
 
 </div>
 </div>
@@ -554,7 +576,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Mass of this particle </p>
+
+<p>Mass of this particle. </p>
 
 </div>
 </div>
@@ -577,7 +600,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Force which was effective on this particle </p>
+
+<p>Force which was effective on this particle. </p>
 
 </div>
 </div>
@@ -600,7 +624,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Type of the particle. Use it for whatever you want (e.g. to separate molecules belonging to different bodies, matters, and so on) </p>
+
+<p>Type of the particle. </p>
+<p>Use it for whatever you want (e.g. to separate molecules belonging to different bodies, matters, and so on) </p>
 
 </div>
 </div>
@@ -623,7 +649,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Velocity of the particle </p>
+
+<p>Velocity of the particle. </p>
 
 </div>
 </div>
@@ -646,7 +673,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Position of the particle </p>
+
+<p>Position of the particle. </p>
 
 </div>
 </div>

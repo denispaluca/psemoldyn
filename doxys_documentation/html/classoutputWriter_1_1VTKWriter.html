@@ -74,6 +74,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>This class implements the functionality to generate vtk output from particles.  
+ <a href="classoutputWriter_1_1VTKWriter.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="VTKWriter_8h_source.html">VTKWriter.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -83,10 +86,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a196a54bcfa3f93638ef292c386f91b61"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1VTKWriter.html#a196a54bcfa3f93638ef292c386f91b61">~VTKWriter</a> ()</td></tr>
 <tr class="separator:a196a54bcfa3f93638ef292c386f91b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41cfcefce4d7eb434f1dd45f5aeb3e8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1VTKWriter.html#a41cfcefce4d7eb434f1dd45f5aeb3e8f">initializeOutput</a> (int numParticles)</td></tr>
+<tr class="memdesc:a41cfcefce4d7eb434f1dd45f5aeb3e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">set up internal data structures and prepare to plot a particle.  <a href="classoutputWriter_1_1VTKWriter.html#a41cfcefce4d7eb434f1dd45f5aeb3e8f">More...</a><br /></td></tr>
 <tr class="separator:a41cfcefce4d7eb434f1dd45f5aeb3e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d3f50ca3ae2390055d3f9cc0ed1eb4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1VTKWriter.html#a6d3f50ca3ae2390055d3f9cc0ed1eb4d">plotParticle</a> (<a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
+<tr class="memdesc:a6d3f50ca3ae2390055d3f9cc0ed1eb4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">plot type, mass, position, velocity and force of a particle.  <a href="classoutputWriter_1_1VTKWriter.html#a6d3f50ca3ae2390055d3f9cc0ed1eb4d">More...</a><br /></td></tr>
 <tr class="separator:a6d3f50ca3ae2390055d3f9cc0ed1eb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0d7afb78a2027d05e9a03acde3799dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1VTKWriter.html#ad0d7afb78a2027d05e9a03acde3799dd">writeFile</a> (const std::string &amp;filename, int iteration)</td></tr>
+<tr class="memdesc:ad0d7afb78a2027d05e9a03acde3799dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes the final output file.  <a href="classoutputWriter_1_1VTKWriter.html#ad0d7afb78a2027d05e9a03acde3799dd">More...</a><br /></td></tr>
 <tr class="separator:ad0d7afb78a2027d05e9a03acde3799dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -163,6 +169,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>set up internal data structures and prepare to plot a particle. </p>
 
 </div>
@@ -182,8 +189,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>plot type, mass, position, velocity and force of a particle.</p>
-<dl class="section note"><dt>Note</dt><dd>: <a class="el" href="classoutputWriter_1_1VTKWriter.html#a41cfcefce4d7eb434f1dd45f5aeb3e8f">initializeOutput()</a> must have been called before. </dd></dl>
+
+<p>plot type, mass, position, velocity and force of a particle. </p>
+<dl class="section note"><dt>Note</dt><dd>: <a class="el" href="classoutputWriter_1_1VTKWriter.html#a41cfcefce4d7eb434f1dd45f5aeb3e8f" title="set up internal data structures and prepare to plot a particle.">initializeOutput()</a> must have been called before. </dd></dl>
 
 </div>
 </div>
@@ -212,7 +220,8 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>writes the final output file.</p>
+
+<p>writes the final output file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>the base name of the file to be written. </td></tr>

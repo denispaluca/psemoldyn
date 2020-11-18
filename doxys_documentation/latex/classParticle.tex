@@ -32,34 +32,34 @@ bool \mbox{\hyperlink{classParticle_a5034babb77618a56e00927d8891afabe}{operator=
 std\+::string \mbox{\hyperlink{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}{to\+String}} ()
 \item 
 void \mbox{\hyperlink{classParticle_a6a858d050335d6aa42dbf00a03f83fee}{addF}} (const std\+::array$<$ double, 3 $>$ \&fn)
-\item 
+\begin{DoxyCompactList}\small\item\em Add force. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a6f893f97470cb3b42ba9680d606758c5}{save\+OldF}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Save f to old f and reset f. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a4f8782eee73f88368561ea90bb16a66b}{calculateV}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Calculate speed from t -\/$>$ t+1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_acdb36305260c411c46729e11cbbaf03a}{calculateX}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Calculate Position from t -\/$>$ t+1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_a8d6b27c07627e73bd9d965f30834164e}{update\+DT}} (double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_\+t}})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classParticle_a027e5a09c12953df5fcbbdb15896de3e}{x}}
-\item 
+\begin{DoxyCompactList}\small\item\em Position of the particle. \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classParticle_a0fe6d1e0651ad949d0b37ac327c9c6d1}{v}}
-\item 
+\begin{DoxyCompactList}\small\item\em Velocity of the particle. \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}{f}}
-\item 
+\begin{DoxyCompactList}\small\item\em Force effective on this particle. \end{DoxyCompactList}\item 
 std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classParticle_a968dfd29adaa41fb25a08d3c45903156}{old\+\_\+f}}
-\item 
+\begin{DoxyCompactList}\small\item\em Force which was effective on this particle. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}{m}}
-\item 
+\begin{DoxyCompactList}\small\item\em Mass of this particle. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
-\item 
+\begin{DoxyCompactList}\small\item\em Type of the particle. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}{dt\+\_\+2m}}
-\item 
+\begin{DoxyCompactList}\small\item\em Save dt/2m. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\_\+2m}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Save (delta t)$^\wedge$2/2m. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -96,7 +96,11 @@ double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\
 \doxysubsubsection{\texorpdfstring{addF()}{addF()}}
 {\footnotesize\ttfamily void Particle\+::addF (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 3 $>$ \&}]{fn }\end{DoxyParamCaption})}
 
-Add force 
+
+
+Add force. 
+
+
 \begin{DoxyParams}{Parameters}
 {\em fn} & \\
 \hline
@@ -107,13 +111,21 @@ Add force
 \doxysubsubsection{\texorpdfstring{calculateV()}{calculateV()}}
 {\footnotesize\ttfamily void Particle\+::calculateV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Calculate speed from t -\/$>$ t+1 \mbox{\Hypertarget{classParticle_acdb36305260c411c46729e11cbbaf03a}\label{classParticle_acdb36305260c411c46729e11cbbaf03a}} 
+
+
+Calculate speed from t -\/$>$ t+1. 
+
+\mbox{\Hypertarget{classParticle_acdb36305260c411c46729e11cbbaf03a}\label{classParticle_acdb36305260c411c46729e11cbbaf03a}} 
 \index{Particle@{Particle}!calculateX@{calculateX}}
 \index{calculateX@{calculateX}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{calculateX()}{calculateX()}}
 {\footnotesize\ttfamily void Particle\+::calculateX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Calculate Position from t -\/$>$ t+1 \mbox{\Hypertarget{classParticle_aee807bce6e527f4719167dcb014b401f}\label{classParticle_aee807bce6e527f4719167dcb014b401f}} 
+
+
+Calculate Position from t -\/$>$ t+1. 
+
+\mbox{\Hypertarget{classParticle_aee807bce6e527f4719167dcb014b401f}\label{classParticle_aee807bce6e527f4719167dcb014b401f}} 
 \index{Particle@{Particle}!getF@{getF}}
 \index{getF@{getF}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{getF()}{getF()}}
@@ -161,7 +173,11 @@ Calculate Position from t -\/$>$ t+1 \mbox{\Hypertarget{classParticle_aee807bce6
 \doxysubsubsection{\texorpdfstring{saveOldF()}{saveOldF()}}
 {\footnotesize\ttfamily void Particle\+::save\+OldF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Save f to old f and reset f \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}\label{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}} 
+
+
+Save f to old f and reset f. 
+
+\mbox{\Hypertarget{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}\label{classParticle_a07d071a0f91f8ce7413201a6db3afe7b}} 
 \index{Particle@{Particle}!toString@{toString}}
 \index{toString@{toString}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
@@ -173,7 +189,11 @@ Save f to old f and reset f \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce741
 \doxysubsubsection{\texorpdfstring{updateDT()}{updateDT()}}
 {\footnotesize\ttfamily void Particle\+::update\+DT (\begin{DoxyParamCaption}\item[{double}]{delta\+\_\+t }\end{DoxyParamCaption})}
 
-Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m 
+
+
+Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m. 
+
+
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}\label{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}} 
@@ -182,49 +202,81 @@ Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m
 \doxysubsubsection{\texorpdfstring{dt\_2m}{dt\_2m}}
 {\footnotesize\ttfamily double Particle\+::dt\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
 
-Save dt/2m \mbox{\Hypertarget{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}\label{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}} 
+
+
+Save dt/2m. 
+
+\mbox{\Hypertarget{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}\label{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}} 
 \index{Particle@{Particle}!dtsq\_2m@{dtsq\_2m}}
 \index{dtsq\_2m@{dtsq\_2m}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{dtsq\_2m}{dtsq\_2m}}
 {\footnotesize\ttfamily double Particle\+::dtsq\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
 
-Save (delta t)$^\wedge$2/2m \mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
+
+
+Save (delta t)$^\wedge$2/2m. 
+
+\mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
 \index{Particle@{Particle}!f@{f}}
 \index{f@{f}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{f}{f}}
 {\footnotesize\ttfamily std\+::array$<$double, 3$>$ Particle\+::f\hspace{0.3cm}{\ttfamily [private]}}
 
-Force effective on this particle \mbox{\Hypertarget{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}\label{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}} 
+
+
+Force effective on this particle. 
+
+\mbox{\Hypertarget{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}\label{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}} 
 \index{Particle@{Particle}!m@{m}}
 \index{m@{m}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{m}{m}}
 {\footnotesize\ttfamily double Particle\+::m\hspace{0.3cm}{\ttfamily [private]}}
 
-Mass of this particle \mbox{\Hypertarget{classParticle_a968dfd29adaa41fb25a08d3c45903156}\label{classParticle_a968dfd29adaa41fb25a08d3c45903156}} 
+
+
+Mass of this particle. 
+
+\mbox{\Hypertarget{classParticle_a968dfd29adaa41fb25a08d3c45903156}\label{classParticle_a968dfd29adaa41fb25a08d3c45903156}} 
 \index{Particle@{Particle}!old\_f@{old\_f}}
 \index{old\_f@{old\_f}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{old\_f}{old\_f}}
 {\footnotesize\ttfamily std\+::array$<$double, 3$>$ Particle\+::old\+\_\+f\hspace{0.3cm}{\ttfamily [private]}}
 
-Force which was effective on this particle \mbox{\Hypertarget{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}\label{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}} 
+
+
+Force which was effective on this particle. 
+
+\mbox{\Hypertarget{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}\label{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}} 
 \index{Particle@{Particle}!type@{type}}
 \index{type@{type}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{type}{type}}
 {\footnotesize\ttfamily int Particle\+::type\hspace{0.3cm}{\ttfamily [private]}}
 
-Type of the particle. Use it for whatever you want (e.\+g. to separate molecules belonging to different bodies, matters, and so on) \mbox{\Hypertarget{classParticle_a0fe6d1e0651ad949d0b37ac327c9c6d1}\label{classParticle_a0fe6d1e0651ad949d0b37ac327c9c6d1}} 
+
+
+Type of the particle. 
+
+Use it for whatever you want (e.\+g. to separate molecules belonging to different bodies, matters, and so on) \mbox{\Hypertarget{classParticle_a0fe6d1e0651ad949d0b37ac327c9c6d1}\label{classParticle_a0fe6d1e0651ad949d0b37ac327c9c6d1}} 
 \index{Particle@{Particle}!v@{v}}
 \index{v@{v}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{v}{v}}
 {\footnotesize\ttfamily std\+::array$<$double, 3$>$ Particle\+::v\hspace{0.3cm}{\ttfamily [private]}}
 
-Velocity of the particle \mbox{\Hypertarget{classParticle_a027e5a09c12953df5fcbbdb15896de3e}\label{classParticle_a027e5a09c12953df5fcbbdb15896de3e}} 
+
+
+Velocity of the particle. 
+
+\mbox{\Hypertarget{classParticle_a027e5a09c12953df5fcbbdb15896de3e}\label{classParticle_a027e5a09c12953df5fcbbdb15896de3e}} 
 \index{Particle@{Particle}!x@{x}}
 \index{x@{x}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{x}{x}}
 {\footnotesize\ttfamily std\+::array$<$double, 3$>$ Particle\+::x\hspace{0.3cm}{\ttfamily [private]}}
 
-Position of the particle 
+
+
+Position of the particle. 
+
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
