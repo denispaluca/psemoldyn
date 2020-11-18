@@ -41,13 +41,13 @@ Empty init container \mbox{\Hypertarget{classParticleContainer_a38d59629dabc3840
 \doxysubsubsection{\texorpdfstring{ParticleContainer()}{ParticleContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily Particle\+Container\+::\+Particle\+Container (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&}]{particles }\end{DoxyParamCaption})}
 
-Init container with vector of particles \mbox{\Hypertarget{classParticleContainer_a3607447820fbc28a4b05151de844b398}\label{classParticleContainer_a3607447820fbc28a4b05151de844b398}} 
+Init container with vector of particles. \mbox{\Hypertarget{classParticleContainer_a3607447820fbc28a4b05151de844b398}\label{classParticleContainer_a3607447820fbc28a4b05151de844b398}} 
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
 \index{ParticleContainer@{ParticleContainer}!ParticleContainer@{ParticleContainer}}
 \doxysubsubsection{\texorpdfstring{ParticleContainer()}{ParticleContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily Particle\+Container\+::\+Particle\+Container (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
 
-Init container with filename of file to be parsed 
+Init container with filename of file to be parsed. 
 \begin{DoxyParams}{Parameters}
 {\em filename} & \\
 \hline
@@ -61,9 +61,11 @@ Init container with filename of file to be parsed
 \doxysubsubsection{\texorpdfstring{getParticles()}{getParticles()}}
 {\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \& Particle\+Container\+::get\+Particles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Returns vector of particles in container \begin{DoxyReturn}{Returns}
-
-\end{DoxyReturn}
+Returns vector of particles in container. 
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classParticleContainer_ac4f8083ab3943320a84d408d63541c84}\label{classParticleContainer_ac4f8083ab3943320a84d408d63541c84}} 
 \index{ParticleContainer@{ParticleContainer}!iterate@{iterate}}
 \index{iterate@{iterate}!ParticleContainer@{ParticleContainer}}
@@ -72,9 +74,12 @@ Returns vector of particles in container \begin{DoxyReturn}{Returns}
 
 Iterate over all particles and apply function f 
 \begin{DoxyParams}{Parameters}
-{\em f} & \\
+{\em f} & Function applied to particles \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{classParticleContainer_ae65756884c6419a04ba40bf2d9fec3d3}\label{classParticleContainer_ae65756884c6419a04ba40bf2d9fec3d3}} 
 \index{ParticleContainer@{ParticleContainer}!iteratePairs@{iteratePairs}}
 \index{iteratePairs@{iteratePairs}!ParticleContainer@{ParticleContainer}}
@@ -83,7 +88,7 @@ Iterate over all particles and apply function f
 
 Iterate over all unique particle pairs and apply function f 
 \begin{DoxyParams}{Parameters}
-{\em f} & \\
+{\em f} & Function that is applied to pairs \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classParticleContainer_a99433da6afe29aea451912f4480bd68c}\label{classParticleContainer_a99433da6afe29aea451912f4480bd68c}} 
@@ -92,11 +97,14 @@ Iterate over all unique particle pairs and apply function f
 \doxysubsubsection{\texorpdfstring{push()}{push()}}
 {\footnotesize\ttfamily void Particle\+Container\+::push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{particle }\end{DoxyParamCaption})}
 
-push particle at the end of the list 
+Push particle at the end of the vector. 
 \begin{DoxyParams}{Parameters}
-{\em particle} & \\
+{\em particle} & The particle pushed in particles vector \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}

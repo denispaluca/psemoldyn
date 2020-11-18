@@ -92,15 +92,17 @@ Functions</h2></td></tr>
 <tr class="separator:a7fc120ee59f5477b079da51b401c3265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a329c95e85f063f49b0daaed5c5b56335"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a329c95e85f063f49b0daaed5c5b56335">main</a> (int argc, char *argsv[])</td></tr>
 <tr class="separator:a329c95e85f063f49b0daaed5c5b56335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d78ac52c08a0df478fb232ea430dbfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a0d78ac52c08a0df478fb232ea430dbfb">setDeltaT</a> (<a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
+<tr class="separator:a0d78ac52c08a0df478fb232ea430dbfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a638f9bb439eac914b175531577dfa7da"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a638f9bb439eac914b175531577dfa7da">start_time</a> = 0</td></tr>
 <tr class="separator:a638f9bb439eac914b175531577dfa7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a924c1917ec2c1749a9474c3266bfefe4"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a924c1917ec2c1749a9474c3266bfefe4">end_time</a> = 100</td></tr>
-<tr class="separator:a924c1917ec2c1749a9474c3266bfefe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17c077704a57c9103b5b3604a391dbd7"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a17c077704a57c9103b5b3604a391dbd7">delta_t</a> = 0.014</td></tr>
-<tr class="separator:a17c077704a57c9103b5b3604a391dbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b637c5fff609e604a3b2b2787f4a9fa"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a4b637c5fff609e604a3b2b2787f4a9fa">t_end</a> = 0.0</td></tr>
+<tr class="separator:a4b637c5fff609e604a3b2b2787f4a9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cfc079302fe9a34fe24637c4e44303a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a> = 0.0</td></tr>
+<tr class="separator:a4cfc079302fe9a34fe24637c4e44303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a925e9ef64620bfeb32239a1cef9d4e01"></a>
@@ -246,47 +248,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a17c077704a57c9103b5b3604a391dbd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17c077704a57c9103b5b3604a391dbd7">&#9670;&nbsp;</a></span>delta_t</h2>
+<a id="a0d78ac52c08a0df478fb232ea430dbfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d78ac52c08a0df478fb232ea430dbfb">&#9670;&nbsp;</a></span>setDeltaT()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr double delta_t = 0.014</td>
+          <td class="memname">void setDeltaT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a924c1917ec2c1749a9474c3266bfefe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a924c1917ec2c1749a9474c3266bfefe4">&#9670;&nbsp;</a></span>end_time</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a4cfc079302fe9a34fe24637c4e44303a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cfc079302fe9a34fe24637c4e44303a">&#9670;&nbsp;</a></span>delta_t</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr double end_time = 100</td>
+          <td class="memname">double delta_t = 0.0</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -309,6 +299,20 @@ Variables</h2></td></tr>
 <span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b637c5fff609e604a3b2b2787f4a9fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b637c5fff609e604a3b2b2787f4a9fa">&#9670;&nbsp;</a></span>t_end</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double t_end = 0.0</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>

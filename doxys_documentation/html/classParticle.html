@@ -106,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4f8782eee73f88368561ea90bb16a66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdb36305260c411c46729e11cbbaf03a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#acdb36305260c411c46729e11cbbaf03a">calculateX</a> ()</td></tr>
 <tr class="separator:acdb36305260c411c46729e11cbbaf03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6b27c07627e73bd9d965f30834164e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">updateDT</a> (double <a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a>)</td></tr>
+<tr class="separator:a8d6b27c07627e73bd9d965f30834164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -444,6 +446,25 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8d6b27c07627e73bd9d965f30834164e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d6b27c07627e73bd9d965f30834164e">&#9670;&nbsp;</a></span>updateDT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::updateDT </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>delta_t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Passes delta time to set dt_2m and dtsq_2m </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab1397bdfd4b796412fa3f2acc17e0ab6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab1397bdfd4b796412fa3f2acc17e0ab6">&#9670;&nbsp;</a></span>dt_2m</h2>
@@ -464,7 +485,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Safe dt/2m </p>
+<p>Save dt/2m </p>
 
 </div>
 </div>
@@ -487,7 +508,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Safe (delta t)^2/2m </p>
+<p>Save (delta t)^2/2m </p>
 
 </div>
 </div>

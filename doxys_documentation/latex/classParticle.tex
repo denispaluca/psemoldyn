@@ -38,6 +38,8 @@ void \mbox{\hyperlink{classParticle_a6f893f97470cb3b42ba9680d606758c5}{save\+Old
 void \mbox{\hyperlink{classParticle_a4f8782eee73f88368561ea90bb16a66b}{calculateV}} ()
 \item 
 void \mbox{\hyperlink{classParticle_acdb36305260c411c46729e11cbbaf03a}{calculateX}} ()
+\item 
+void \mbox{\hyperlink{classParticle_a8d6b27c07627e73bd9d965f30834164e}{update\+DT}} (double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_\+t}})
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -165,7 +167,13 @@ Save f to old f and reset f \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce741
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
 {\footnotesize\ttfamily std\+::string Particle\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{classParticle_a8d6b27c07627e73bd9d965f30834164e}\label{classParticle_a8d6b27c07627e73bd9d965f30834164e}} 
+\index{Particle@{Particle}!updateDT@{updateDT}}
+\index{updateDT@{updateDT}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{updateDT()}{updateDT()}}
+{\footnotesize\ttfamily void Particle\+::update\+DT (\begin{DoxyParamCaption}\item[{double}]{delta\+\_\+t }\end{DoxyParamCaption})}
 
+Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m 
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}\label{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}} 
@@ -174,13 +182,13 @@ Save f to old f and reset f \mbox{\Hypertarget{classParticle_a07d071a0f91f8ce741
 \doxysubsubsection{\texorpdfstring{dt\_2m}{dt\_2m}}
 {\footnotesize\ttfamily double Particle\+::dt\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
 
-Safe dt/2m \mbox{\Hypertarget{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}\label{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}} 
+Save dt/2m \mbox{\Hypertarget{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}\label{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}} 
 \index{Particle@{Particle}!dtsq\_2m@{dtsq\_2m}}
 \index{dtsq\_2m@{dtsq\_2m}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{dtsq\_2m}{dtsq\_2m}}
 {\footnotesize\ttfamily double Particle\+::dtsq\+\_\+2m\hspace{0.3cm}{\ttfamily [private]}}
 
-Safe (delta t)$^\wedge$2/2m \mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
+Save (delta t)$^\wedge$2/2m \mbox{\Hypertarget{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}\label{classParticle_a795fa0b3046fc186e4ac1dc0b9230c4a}} 
 \index{Particle@{Particle}!f@{f}}
 \index{f@{f}!Particle@{Particle}}
 \doxysubsubsection{\texorpdfstring{f}{f}}
