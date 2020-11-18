@@ -18,12 +18,17 @@
 void calculateF(Particle &p1, Particle &p2);
 
 /**
- * plot the particles to a vtu-file
+ * Plot the particles to a vtu-file.
+ * @param iteration Iteration counter
+ * @param particles Vector of particles to be plotted
+ * @return
  */
 void plotParticles(int iteration, std::vector<Particle> &particles);
 
 /**
- * Calculate (||x||_2)^3
+ * Calculate second norm cubed of array with length 3.
+ * @param x Input coordinates
+ * @return (||x||_2)^3
  */
 double radiusPow3(const std::array<double, 3> &x);
 
@@ -31,9 +36,13 @@ constexpr double start_time = 0;
 double t_end = 0.0;
 double delta_t = 0.0;
 
-
+/**
+ * Main function.
+ * @param argc
+ * @param argsv
+ * @return
+ */
 int main(int argc, char *argsv[]) {
-
   std::cout << "Hello from MolSim for PSE!" << std::endl;
   if (argc != 4) {
     std::cout << "Errounous programme call! " << std::endl;
