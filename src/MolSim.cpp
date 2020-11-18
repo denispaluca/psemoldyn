@@ -42,7 +42,7 @@ int main(int argc, char *argsv[]) {
   std::cout << "Hello from MolSim for PSE!" << std::endl;
   if (argc != 4) {
     std::cout << "Errounous programme call! " << std::endl;
-    std::cout << "./molsym filename t_end delta_t" << std::endl;
+    std::cout << "./MolSim filename t_end delta_t" << std::endl;
   }
 
   ParticleContainer particleContainer = ParticleContainer(argsv[1]);
@@ -54,8 +54,7 @@ int main(int argc, char *argsv[]) {
   particleContainer.iterate(
           [] (Particle &p) {
               p.updateDT(delta_t);
-          }
-          );
+          });
 
   int iteration = 0;
 
