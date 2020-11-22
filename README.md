@@ -36,4 +36,5 @@ Members:
 # Misc #
 * Compiler used: gcc 9.3.0
 * CMake version: 3.16.3
+* Google Tests version: 1.10.0
 
