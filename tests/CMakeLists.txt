@@ -13,3 +13,5 @@ add_executable(Tests_run ${TEST_SRC})
 
 target_link_libraries(Tests_run gtest gtest_main)
 target_link_libraries(Tests_run libmolsim)
+
+add_test(NAME Tests_run COMMAND Tests_run)
