@@ -5,6 +5,7 @@
 #include <iostream>
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
+#include "ParticleGenerator.h"
 /**** forward declaration of the calculation functions ****/
 
 /**
@@ -46,14 +47,25 @@ int main(int argc, char *argsv[]) {
   std::cout << "Hello from MolSim for PSE!" << std::endl;
   if (argc != 4) {
     std::cout << "Errounous programme call! " << std::endl;
-    std::cout << "./MolSim filename t_end delta_t" << std::endl;
+    std::cout << "./MolSim {p filename | c filename} t_end delta_t" << std::endl;
   }
 
-  ParticleContainer particleContainer = ParticleContainer(argsv[1]);
+  //TODO: add support for specifying cuboid parameters per command line
+
+  ParticleContainer particleContainer = ParticleContainer();
+  ParticleGenerator particleGenerator = ParticleGenerator();
+
+  char generation = argsv[1][0];
+  if(generation == 'p'){
+      particleContainer = ParticleContainer(argsv[2]);
+  } else if(generation == 'c'){
+     particleGenerator = ParticleGenerator(argsv[2]);
+     particleContainer = particleGenerator.getParticles();
+  }
 
   double current_time = start_time;
-  t_end = std::stod(argsv[2]);
-  delta_t = std::stod(argsv[3]);
+  t_end = std::stod(argsv[3]);
+  delta_t = std::stod(argsv[4]);
 
   particleContainer.iterate(
           [] (Particle &p) {

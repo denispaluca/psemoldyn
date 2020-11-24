@@ -15,7 +15,7 @@ ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
 
 ParticleContainer::ParticleContainer(char *filename) {
   FileReader fileReader;
-  fileReader.readFile(particles, filename);
+    fileReader.readParticles(particles, filename);
 }
 
 std::vector<Particle> &ParticleContainer::getParticles() {
@@ -36,3 +36,4 @@ void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {
     for(auto j = i + 1; j != particles.end(); ++j)
       (*f)(*i,*j);
 }
+
