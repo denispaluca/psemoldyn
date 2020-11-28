@@ -3,6 +3,8 @@
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
+#include <regex>
+#include <boost>
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
@@ -45,22 +47,31 @@ double delta_t = 0.0;
  */
 int main(int argc, char *argsv[]) {
   std::cout << "Hello from MolSim for PSE!" << std::endl;
-  if (argc != 4) {
+  //TODO: change condition
+  if (argc != 5) {
     std::cout << "Errounous programme call! " << std::endl;
-    std::cout << "./MolSim {p filename | c filename} t_end delta_t" << std::endl;
+    std::cout << "./MolSim {-f filename | -c <number of cuboids> <cuboid data>} t_end delta_t" << std::endl;
   }
-
-  //TODO: add support for specifying cuboid parameters per command line
 
   ParticleContainer particleContainer = ParticleContainer();
   ParticleGenerator particleGenerator = ParticleGenerator();
 
-  char generation = argsv[1][0];
-  if(generation == 'p'){
-      particleContainer = ParticleContainer(argsv[2]);
-  } else if(generation == 'c'){
-     particleGenerator = ParticleGenerator(argsv[2]);
-     particleContainer = particleGenerator.getParticles();
+  std::string input_method = argsv[1];
+  if(input_method == "-f"){
+      if (std::regex_match(argsv[2], std::regex(".+\\.particles"))) {
+          particleContainer = ParticleContainer(argsv[2]);
+      } else if (std::regex_match(argsv[2], std::regex(".+\\.cuboids"))) {
+          particleGenerator = ParticleGenerator(argsv[2]);
+          particleContainer = particleGenerator.getParticles();
+      } else {
+          //TODO: log error + input help
+          std::cout << "Invalid filename extension, must be .particles or .cuboids." << std::endl;
+          return -1;
+      }
+  } else if(input_method == "-c"){
+     // TODO: reading cuboid data from command line
+  } else {
+      std::cout << "Erroneous programme call!" << std::endl;
   }
 
   double current_time = start_time;
