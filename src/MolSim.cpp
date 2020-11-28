@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <regex>
-#include <boost>
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
@@ -50,18 +49,22 @@ int main(int argc, char *argsv[]) {
   //TODO: change condition
   if (argc != 5) {
     std::cout << "Errounous programme call! " << std::endl;
-    std::cout << "./MolSim {-f filename | -c <number of cuboids> <cuboid data>} t_end delta_t" << std::endl;
+    std::cout << "./MolSim t_end delta_t {-f filename | -c <number of cuboids> <cuboid data>}" << std::endl;
   }
+
+    double current_time = start_time;
+    t_end = std::stod(argsv[1]);
+    delta_t = std::stod(argsv[2]);
 
   ParticleContainer particleContainer = ParticleContainer();
   ParticleGenerator particleGenerator = ParticleGenerator();
 
-  std::string input_method = argsv[1];
+  std::string input_method = argsv[3];
   if(input_method == "-f"){
-      if (std::regex_match(argsv[2], std::regex(".+\\.particles"))) {
-          particleContainer = ParticleContainer(argsv[2]);
-      } else if (std::regex_match(argsv[2], std::regex(".+\\.cuboids"))) {
-          particleGenerator = ParticleGenerator(argsv[2]);
+      if (std::regex_match(argsv[4], std::regex(".+\\.particles"))) {
+          particleContainer = ParticleContainer(argsv[4]);
+      } else if (std::regex_match(argsv[4], std::regex(".+\\.cuboids"))) {
+          particleGenerator = ParticleGenerator(argsv[4]);
           particleContainer = particleGenerator.getParticles();
       } else {
           //TODO: log error + input help
@@ -73,10 +76,6 @@ int main(int argc, char *argsv[]) {
   } else {
       std::cout << "Erroneous programme call!" << std::endl;
   }
-
-  double current_time = start_time;
-  t_end = std::stod(argsv[3]);
-  delta_t = std::stod(argsv[4]);
 
   particleContainer.iterate(
           [] (Particle &p) {
