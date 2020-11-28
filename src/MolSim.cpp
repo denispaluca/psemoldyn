@@ -34,6 +34,9 @@ void plotParticles(int iteration, std::vector<Particle> &particles);
  */
 double radiusPow3(const std::array<double, 3> &x);
 
+/**
+ * Output help text for calling the program.
+ */
 void help();
 
 constexpr double start_time = 0;
