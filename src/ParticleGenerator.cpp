@@ -27,3 +27,8 @@ std::vector<Cuboid> ParticleGenerator::getCuboids() {
 ParticleContainer ParticleGenerator::getParticles() {
     return particles;
 }
+
+void ParticleGenerator::addCuboid(Cuboid c) {
+    cuboids.emplace_back(c);
+    c.generate(particles);
+}

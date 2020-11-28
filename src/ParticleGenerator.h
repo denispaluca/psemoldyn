@@ -45,6 +45,12 @@ public:
      */
     ParticleContainer getParticles();
 
+    /**
+     * @brief adds Cuboid to vector and generates + adds its particles to the ParticleContainer
+     * @param c the Cuboid to be added
+     */
+    void addCuboid(Cuboid c);
+
 };
 
 
