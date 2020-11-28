@@ -52,9 +52,9 @@ int main(int argc, char *argsv[]) {
     std::cout << "./MolSim t_end delta_t {-f filename | -c <number of cuboids> <cuboid data>}" << std::endl;
   }
 
-    double current_time = start_time;
-    t_end = std::stod(argsv[1]);
-    delta_t = std::stod(argsv[2]);
+  double current_time = start_time;
+  t_end = std::stod(argsv[1]);
+  delta_t = std::stod(argsv[2]);
 
   ParticleContainer particleContainer = ParticleContainer();
   ParticleGenerator particleGenerator = ParticleGenerator();
@@ -68,11 +68,40 @@ int main(int argc, char *argsv[]) {
           particleContainer = particleGenerator.getParticles();
       } else {
           //TODO: log error + input help
-          std::cout << "Invalid filename extension, must be .particles or .cuboids." << std::endl;
+          std::cout << "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids." << std::endl;
           return -1;
       }
   } else if(input_method == "-c"){
-     // TODO: reading cuboid data from command line
+
+      int num_cuboids = std::stoi(argsv[4]);
+      if (argc != num_cuboids * 11 + 5) {           //11 cuboid parameters (w/O mean value of Brownian Motion)
+          // TODO: log error + input help
+          std::cout << "Erroneous programme call! " << std::endl;
+          return -1;
+      }
+
+      Cuboid c = Cuboid();
+      std::array<double, 3> pos = {0, 0, 0},
+                v = {0, 0, 0};
+      std::array<int, 3> c_size = {0, 0, 0};
+      double h = 0, m = 0;
+
+      int offset = 5; //offset of cuboid data in command line args
+
+      for(int i = 0; i < num_cuboids; i++){
+          pos = {std::stod(argsv[offset + 0]), std::stod(argsv[offset + 1]), std::stod(argsv[offset + 2])};
+          c_size = {std::stoi(argsv[offset + 3]), std::stoi(argsv[offset + 4]), std::stoi(argsv[offset + 5])};
+          h = std::stod(argsv[offset + 6]);
+          m = std::stod(argsv[offset + 7]);
+          v = {std::stod(argsv[offset + 8]), std::stod(argsv[offset + 9]), std::stod(argsv[offset + 10])};
+
+          c = Cuboid(pos, c_size, h, m, v, 0); // TODO: change handling of mean Brownian?
+          particleGenerator.addCuboid(c);
+
+          offset += 11; //next cuboid
+      }
+
+      particleContainer = particleGenerator.getParticles();
   } else {
       std::cout << "Erroneous programme call!" << std::endl;
   }
