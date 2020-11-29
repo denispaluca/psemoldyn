@@ -12,33 +12,17 @@ if(NOT CMAKE_BUILD_TYPE)
             "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# collect all cpp files
-file(GLOB_RECURSE MY_SRC
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-    # header don't need to be included but this might be necessary for some IDEs
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
-)
+#----------- libmolsim ----------------------
+add_subdirectory(src)
 
+#----------- MolSim Target ------------------
 # create make target
-add_executable(MolSim ${MY_SRC})
+add_executable(MolSim src/MolSim.cpp)
 
-# set cxx standard. You may raise this if you want.
-target_compile_features(MolSim
-        PRIVATE
-            cxx_std_14
-)
-
-target_include_directories(MolSim
-        PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/libs/libxsd
-        PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
-
+#Link all libmolsim code
 target_link_libraries(MolSim
-        # stuff that is used in headers and source files
         PUBLIC
-            xerces-c
+            libmolsim
 )
 
 # activate all compiler warnings. Clean up your code :P
@@ -49,6 +33,11 @@ target_compile_options(MolSim
             # disable some spam warnings for icpc...
             $<$<CXX_COMPILER_ID:Intel>:-w3 -wd383,981,1418,1572,2259>
 )
+
+# -------------- GOOGLE TESTS --------------
+enable_testing()
+add_subdirectory(tests)
+# ------------------------------------------
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
