@@ -7,6 +7,10 @@
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
+
+#define EPSILON 5.0
+#define SIGMA  1.0
+
 /**** forward declaration of the calculation functions ****/
 
 /**
@@ -18,6 +22,8 @@
  * @return
  */
 void calculateF(Particle &p1, Particle &p2);
+
+void calculateLennardJones(Particle &p1, Particle &p2);
 
 /**
  * Plot the particles to a vtu-file.
@@ -38,6 +44,13 @@ double radiusPow3(const std::array<double, 3> &x);
  * Output help text for calling the program.
  */
 void help();
+
+/**
+ * Calculate second norm of array with length 3.
+ * @param x Input coordinates
+ * @return ||x||_2
+ */
+double radius(const std::array<double, 3> &x);
 
 constexpr double start_time = 0;
 double t_end = 0.0;
@@ -127,6 +140,7 @@ int main(int argc, char *argsv[]) {
           });
 
   int iteration = 0;
+  plotParticles(0, particleContainer.getParticles());
 
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < t_end) {
@@ -136,7 +150,7 @@ int main(int argc, char *argsv[]) {
       p.saveOldF();
     });
     // calculate new f
-    particleContainer.iteratePairs(calculateF);
+    particleContainer.iteratePairs(calculateLennardJones);
     // calculate new v
     particleContainer.iterate([](Particle &p){
       p.calculateV();
@@ -170,6 +184,28 @@ void calculateF(Particle &p1, Particle &p2) {
     p1.addF(f12);
     p2.addF({-f12[0], -f12[1], -f12[2]});
   }
+}
+
+void calculateLennardJones(Particle &p1, Particle &p2) {
+    std::array<double, 3> p1_x = p1.getX(),
+            xDiff = p2.getX(), f12;
+    xDiff[0] -= p1_x[0];
+    xDiff[1] -= p1_x[1];
+    xDiff[2] -= p1_x[2];
+
+    double divider = radius(xDiff), vf1, vf2;
+
+    if(divider) {
+        vf1 = 24*EPSILON / pow(divider, 2);
+
+        vf2 = pow(SIGMA/divider, 6) - 2*pow(SIGMA/divider, 12);
+
+        f12 = {vf1*vf2*xDiff[0], vf1*vf2*xDiff[1], vf1*vf2*xDiff[2]};
+
+        p1.addF(f12);
+        p2.addF({-f12[0], -f12[1], -f12[2]});
+    }
+
 }
 
 void plotParticles(int iteration, std::vector<Particle> &particles) {
@@ -217,4 +253,8 @@ void help() {
     std::cout << "               divided by blank spaces and in a single line." << std::endl;
     std::cout << "               Data of multiple cuboids must also be given in a single line with a blank space in between." << std::endl;
     std::cout << "This help text can be printed using ./MolSim -h or ./MolSim --help." << std::endl;
+}
+
+double radius(const std::array<double, 3> &x) {
+    return x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
 }
