@@ -44,7 +44,12 @@ private:
    * molecules belonging to different bodies, matters, and so on)
    */
   int type;
-  
+
+  /**
+   * Time step of the simulation
+   */
+  double delta_t;
+
   /**
    * Save dt/2m
    */
