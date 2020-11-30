@@ -196,24 +196,22 @@ void calculateF(Particle &p1, Particle &p2) {
 
 void calculateLennardJones(Particle &p1, Particle &p2) {
     std::array<double, 3> p1_x = p1.getX(),
-            xDiff = p2.getX(), f12;
+            xDiff = p2.getX();
     xDiff[0] -= p1_x[0];
     xDiff[1] -= p1_x[1];
     xDiff[2] -= p1_x[2];
 
-    double divider = radius(xDiff), vf1, vf2;
+    double divider = radius(xDiff);
 
     if(divider) {
-        vf1 = 24*EPSILON / pow(divider, 2);
+        double sigDivPow6 = pow(SIGMA/divider, 6);
+        double vf = ((24*EPSILON) / (divider*divider)) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
 
-        vf2 = pow(SIGMA/divider, 6) - 2*pow(SIGMA/divider, 12);
-
-        f12 = {vf1*vf2*xDiff[0], vf1*vf2*xDiff[1], vf1*vf2*xDiff[2]};
+        std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
 
         p1.addF(f12);
         p2.addF({-f12[0], -f12[1], -f12[2]});
     }
-
 }
 
 void plotParticles(int iteration, std::vector<Particle> &particles) {
