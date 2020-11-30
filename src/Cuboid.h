@@ -65,4 +65,10 @@ public:
      * @param p the ParticleContainer in which the generated Particles shall be stored
      */
     void generate(ParticleContainer &p);
+
+    /**
+     * Getter for the size of cuboid.
+     * @return Size of cuboid
+     */
+    std::array<int,3>  getSize();
 };

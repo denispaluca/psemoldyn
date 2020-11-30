@@ -16,6 +16,15 @@ ParticleGenerator::ParticleGenerator(char *filename) {
     fileReader.readCuboids(cuboids, filename);
 
     particles = ParticleContainer();
+
+    int numberOfParticles = 0;
+    for(auto &c : cuboids){
+        auto size = c.getSize();
+        numberOfParticles += size[0] * size[1] * size[2];
+    }
+
+    particles.reserve(numberOfParticles);
+
     for(auto &c : cuboids)
         c.generate(particles);
 }

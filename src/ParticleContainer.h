@@ -65,4 +65,11 @@ public:
      * @return
      */
     void iteratePairs(void (*f)(Particle&,Particle&));
+
+    /**
+     * Requests that the particles vector capacity be at least enough to contain n elements.
+     * @param n Minimum capacity for the particles vector.
+     * @return
+     */
+    void reserve(int n);
 };
