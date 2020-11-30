@@ -2,8 +2,7 @@
 // Created by denis on 10.11.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_PARTICLECONTAINER_H
-#define PSEMOLDYN_GROUPB_PARTICLECONTAINER_H
+#pragma once
 
 #include "Particle.h"
 #include <vector>
@@ -67,6 +66,3 @@ public:
      */
     void iteratePairs(void (*f)(Particle&,Particle&));
 };
-
-
-#endif //PSEMOLDYN_GROUPB_PARTICLECONTAINER_H

@@ -1,9 +1,7 @@
 //
 // Created by mira on 24.11.20.
 //
-
-#ifndef PSEMOLDYN_GROUPB_CUBOID_H
-#define PSEMOLDYN_GROUPB_CUBOID_H
+#pragma once
 
 #define MEAN_BROWNIAN 0.1
 
@@ -68,5 +66,3 @@ public:
      */
     void generate(ParticleContainer &p);
 };
-
-#endif //PSEMOLDYN_GROUPB_CUBOID_H
