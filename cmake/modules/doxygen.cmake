@@ -11,7 +11,7 @@ if(NOT DISABLE_DOXYGEN)
 
     SET(DOXYGEN_OUT ${PROJECT_SOURCE_DIR}/Doxyfile)
 
-    ADD_CUSTOM_TARGET(doc_doxygen ALL
+    ADD_CUSTOM_TARGET(doc_doxygen
         COMMAND Doxygen::doxygen ${DOXYGEN_OUT}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         COMMENT "Generating documentation using Doxygen" VERBATIM
