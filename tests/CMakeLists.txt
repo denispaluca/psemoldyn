@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(Tests)
+enable_testing()
 add_subdirectory(lib)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 file(GLOB_RECURSE TEST_SRC
@@ -15,3 +16,6 @@ target_link_libraries(Tests_run gtest gtest_main)
 target_link_libraries(Tests_run libmolsim)
 
 add_test(NAME Tests_run COMMAND Tests_run)
+message(${CMAKE_CURRENT_SOURCE_DIR})
+message("${EXECUTABLE_OUTPUT_PATH}")
+set_tests_properties(Tests_run PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
