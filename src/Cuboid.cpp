@@ -42,3 +42,7 @@ void Cuboid::generate(ParticleContainer &particles) {
         }
     }
 }
+
+bool Cuboid::operator==(Cuboid &other) {
+    return (position == other.position) and (size == other.size) and (distance == other.distance) and (mass == other.mass) and (meanV == other.meanV);
+}

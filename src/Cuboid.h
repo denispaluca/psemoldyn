@@ -61,6 +61,14 @@ public:
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
            double distance, double mass, std::array<double, 3> initalV, double meanV);
 
+        /**
+     * Operator that compares all attributes of
+     * this cuboid with another.
+     * @param other Cuboid to be compared to.
+     * @return TRUE when all attributes are the same
+     */
+    bool operator==(Cuboid &other);
+
 
     /**
      * Generates the particles in the cuboid and adds them into given ParticleContainer
