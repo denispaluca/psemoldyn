@@ -19,29 +19,21 @@ protected:
     FileReader reader;
     void SetUp() override {//TODO
 
-        // 3 Cuboids with 2x2x2 Particles each
-        for(int i = 0; i < 3; i++){
-            std::array<double, 3> pos = {0.0, i*2.0, 0.0};
-            Cuboid cub = Cuboid(pos, {2, 2, 2}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
-            c.emplace_back(cub);
-            Particle p1 = Particle(pos, {0.0, 0.0, 0.0}, 1.0);
-            Particle p2 = Particle({pos[0], pos[1], pos[2]+1.0}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p3 = Particle({pos[0], pos[1]+1.0, pos[2]}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p4 = Particle({pos[0], pos[1]+1.0, pos[2]+1.0}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p5 = Particle({pos[0]+1.0, pos[1], pos[2]}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p6 = Particle({pos[0]+1.0, pos[1], pos[2]+1.0}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p7 = Particle({pos[0]+1.0, pos[1]+1.0, pos[2]}, {0.0, 0.0, 0.0}, 1.0);
-            Particle p8 = Particle({pos[0]+1.0, pos[1]+1.0, pos[2]+1.0}, {0.0, 0.0, 0.0}, 1.0);
+        // Cuboids created manually
+        Cuboid cub1 = Cuboid({0.0, 0.0, 0.0}, {3, 3, 3}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
+        Cuboid cub2 = Cuboid({-2.0, -2.0, -2.0}, {1, 1, 10}, 2.0, 2.0, {0.0, 0.0, 0.0}, 0.0);
+        Cuboid cub3 = Cuboid({0.0, 5.0, 0.0}, {0, 0, 0}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
+        Cuboid cub4 = Cuboid({30.0, 0.0, -5.0}, {2, 1, 2}, 7.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
+        Cuboid cub5 = Cuboid({3.0, 3.0, 3.0}, {10, 0, 2}, 5.0, 3.0, {0.0, 0.0, 0.0}, 0.0);
+        c.emplace_back(cub1);
+        c.emplace_back(cub2);
+        c.emplace_back(cub3);
+        c.emplace_back(cub4);
+        c.emplace_back(cub5);
 
-            pc.push(p1);
-            pc.push(p2);
-            pc.push(p3);
-            pc.push(p4);
-            pc.push(p5);
-            pc.push(p6);
-            pc.push(p7);
-            pc.push(p8);
-        }
+        // file with manually calculated input data for the particles contained in the cuboids defined above
+        std::string test_file_particles = "input/test_particles.particles";
+        pc = ParticleContainer(const_cast<char *>(test_file_particles.c_str()));
 
         generated = ParticleContainer();
         for(auto &cuboid : c){
@@ -53,6 +45,7 @@ protected:
             pg.addCuboid(cuboid);
         }
 
+        // file with input data corresponding to the parameters of the cuboids defined above
         std::string test_file_normal = "input/test_reading_normal.cuboids";
         reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str()));
     }
