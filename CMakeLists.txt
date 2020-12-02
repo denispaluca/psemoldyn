@@ -19,10 +19,15 @@ add_subdirectory(src)
 # create make target
 add_executable(MolSim src/MolSim.cpp)
 
+#----------- include log4cxx----------- 
+find_package(log4cxx 0.11)
+
 #Link all libmolsim code
 target_link_libraries(MolSim
         PUBLIC
             libmolsim
+        PRIVATE
+            log4cxx
 )
 
 # activate all compiler warnings. Clean up your code :P
