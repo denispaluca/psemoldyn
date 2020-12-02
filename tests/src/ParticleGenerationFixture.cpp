@@ -102,8 +102,8 @@ TEST_F(ParticleGenerationFixture, Reading_Cuboids_Normal) {
 /**
  * Checks if program terminates if a faulty input file is read.
  */
-TEST_F(ParticleGenerationFixture, Reading_Cuboids_Faulty1) {
-    std::string test_file_normal = "input/test_reading_faulty1.cuboids";
+TEST_F(ParticleGenerationFixture, Reading_Cuboids_Incomplete_Data) {
+    std::string test_file_normal = "input/test_reading_incomplete_data.cuboids";
     ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
 }
 
