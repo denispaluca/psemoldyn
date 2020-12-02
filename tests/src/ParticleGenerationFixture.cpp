@@ -6,7 +6,7 @@
 #include "../../src/FileReader.h"
 
 /**
- * Fixture to write tests for //TODO
+ * Fixture to write tests for classes and functions used in the process of particle generation
  */
 class ParticleGenerationFixture : public testing::Test {
 protected:
@@ -17,7 +17,7 @@ protected:
     ParticleContainer generated;
     ParticleGenerator pg;
     FileReader reader;
-    void SetUp() override {
+    void SetUp() override {//TODO
 
         // 3 Cuboids with 2x2x2 Particles each
         for(int i = 0; i < 3; i++){
@@ -58,34 +58,57 @@ protected:
     }
 };
 
+/**
+ * Helper function for tests on generated Particles, checks for equality except for velocity field.
+ * Velocity is randomly calculated according to Maxwell-Boltzmann-Distribution
+ * and can therefore not be used to test if a Particle was generated correctly.
+ * @param p1 the first Particle
+ * @param p2 the second Particle
+ * @return true if the Particles share the same values in all fields except for the velocity, false otherwise
+ */
 bool generatedSame(Particle &p1, Particle &p2){
     return (p1.getX() == p2.getX() && p1.getF() == p2.getF() && p1.getM() == p2.getM() && p1.getType() == p2.getType());
 }
 
+/**
+ * Checks if the generate() function generates the expected Particles
+ */
 TEST_F(ParticleGenerationFixture, Particle_Generation) {
     for(int i=0;i<pc.getParticles().size();i++){
         EXPECT_TRUE(generatedSame(pc.getParticles().at(i), generated.getParticles().at(i)));
     }
 }
 
+/**
+ * Checks if Cuboid added to ParticleGenerator is stored as expected.
+ */
 TEST_F(ParticleGenerationFixture, Adding_Cuboids_Same_Cuboids) {
     for(int i=0;i<c.size();i++){
         EXPECT_TRUE(c.at(i) == pg.getCuboids().at(i));
     }
 }
 
+/**
+ * Checks if Particles generated after adding Cuboid to a ParticleGenerator are as expected.
+ */
 TEST_F(ParticleGenerationFixture, Adding_Cuboids_Same_Particles) {
     for(int i=0;i<pc.getParticles().size();i++){
         EXPECT_TRUE(generatedSame(pc.getParticles().at(i), pg.getParticles().getParticles().at(i)));
     }
 }
 
+/**
+ * Checks if Cuboids are created as expected from a correct input file.
+ */
 TEST_F(ParticleGenerationFixture, Reading_Cuboids_Normal) {
     for(int i=0;i<c.size();i++){
         EXPECT_TRUE(c.at(i) == read.at(i));
     }
 }
 
+/**
+ * Checks if program terminates if a faulty input file is read.
+ */
 TEST_F(ParticleGenerationFixture, Reading_Cuboids_Faulty1) {
     std::string test_file_normal = "input/test_reading_faulty1.cuboids";
     ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
