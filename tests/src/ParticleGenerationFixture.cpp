@@ -106,3 +106,27 @@ TEST_F(ParticleGenerationFixture, Reading_Cuboids_Faulty1) {
     std::string test_file_normal = "input/test_reading_faulty1.cuboids";
     ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
 }
+
+/**
+ * Checks if program / file reading terminates if a cuboid of negative size is given in input file.
+ */
+TEST_F(ParticleGenerationFixture, Reading_Cuboids_Negative_Size) {
+    std::string test_file_normal = "input/test_reading_negative_size.cuboids";
+    ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
+}
+
+/**
+ * Checks if program / file reading terminates if a cuboid with negative particle distance is given in input file.
+ */
+TEST_F(ParticleGenerationFixture, Reading_Cuboids_Negative_Distance) {
+    std::string test_file_normal = "input/test_reading_negative_distance.cuboids";
+    ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
+}
+
+/**
+ * Checks if program / file reading terminates if a cuboid with negative particle mass is given in input file.
+ */
+TEST_F(ParticleGenerationFixture, Reading_Cuboids_Negative_Mass) {
+    std::string test_file_normal = "input/test_reading_negative_mass.cuboids";
+    ASSERT_DEATH(reader.readCuboids(read, const_cast<char *>(test_file_normal.c_str())), "");
+}
