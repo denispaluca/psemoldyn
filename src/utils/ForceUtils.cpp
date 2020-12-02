@@ -25,7 +25,7 @@ static double radiusPow3(const std::array<double, 3> &x) {
  * @return ||x||_2
  */
 static inline double radius(const std::array<double, 3> &x) {
-    return x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
+    return sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
 }
 
 void calculateF(Particle &p1, Particle &p2) {
