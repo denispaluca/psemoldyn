@@ -4,6 +4,8 @@
 
 #include "Cuboid.h"
 #include "utils/MaxwellBoltzmannDistribution.h"
+#include <sstream>
+#include "utils/ArrayUtils.h"
 
 Cuboid::Cuboid() {
     this->position = {0.0,0.0,0.0};
@@ -45,4 +47,11 @@ void Cuboid::generate(ParticleContainer &particles) {
 
 bool Cuboid::operator==(Cuboid &other) {
     return (position == other.position) and (size == other.size) and (distance == other.distance) and (mass == other.mass) and (meanV == other.meanV);
+}
+
+std::string Cuboid::toString() {
+    std::stringstream stream;
+    stream << "Cuboid: x:" << position << " size: " << size << " distance: " << distance
+           << " mass: " << mass << " initialV: " << initialV;
+    return stream.str();
 }

@@ -69,6 +69,12 @@ public:
      */
     bool operator==(Cuboid &other);
 
+    /**
+   * Represent this cuboid in string format.
+   * @return String representation of this particle.
+   * @param
+   */
+    std::string toString();
 
     /**
      * Generates the particles in the cuboid and adds them into given ParticleContainer
