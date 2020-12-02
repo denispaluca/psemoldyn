@@ -8,7 +8,6 @@
 #include "Particle.h"
 
 #include <iostream>
-#include <sstream>
 #include "utils/ArrayUtils.h"
 
 #include <log4cxx/logger.h>

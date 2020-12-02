@@ -2,8 +2,7 @@
 // Created by mira on 24.11.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_PARTICLEGENERATOR_H
-#define PSEMOLDYN_GROUPB_PARTICLEGENERATOR_H
+#pragma once
 
 #include <vector>
 #include "ParticleContainer.h"
@@ -52,7 +51,3 @@ public:
     void addCuboid(Cuboid c);
 
 };
-
-
-
-#endif //PSEMOLDYN_GROUPB_PARTICLEGENERATOR_H

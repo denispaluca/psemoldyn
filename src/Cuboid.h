@@ -1,9 +1,7 @@
 //
 // Created by mira on 24.11.20.
 //
-
-#ifndef PSEMOLDYN_GROUPB_CUBOID_H
-#define PSEMOLDYN_GROUPB_CUBOID_H
+#pragma once
 
 #define MEAN_BROWNIAN 0.1
 
@@ -67,6 +65,10 @@ public:
      * @param p the ParticleContainer in which the generated Particles shall be stored
      */
     void generate(ParticleContainer &p);
-};
 
-#endif //PSEMOLDYN_GROUPB_CUBOID_H
+    /**
+     * Getter for the size of cuboid.
+     * @return Size of cuboid
+     */
+    std::array<int,3>  getSize();
+};

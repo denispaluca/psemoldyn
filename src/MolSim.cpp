@@ -1,9 +1,9 @@
 
 #include "FileReader.h"
 #include "utils/ArrayUtils.h"
+#include "utils/ForceUtils.h"
 
 #include <iostream>
-#include <string>
 #include <regex>
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
@@ -20,23 +20,6 @@ using namespace log4cxx::helpers;
 
 using namespace std;
 
-#define EPSILON 5.0
-#define SIGMA  1.0
-
-/**** forward declaration of the calculation functions ****/
-
-/**
- * Calculate force between 2 particles and add it
- * to their respective forces.
- *
- * @param p1 First Particle
- * @param p2 Second Particle
- * @return
- */
-void calculateF(Particle &p1, Particle &p2);
-
-void calculateLennardJones(Particle &p1, Particle &p2);
-
 /**
  * Plot the particles to a vtu-file.
  * @param iteration Iteration counter
@@ -46,23 +29,9 @@ void calculateLennardJones(Particle &p1, Particle &p2);
 void plotParticles(int iteration, std::vector<Particle> &particles);
 
 /**
- * Calculate second norm cubed of array with length 3.
- * @param x Input coordinates
- * @return (||x||_2)^3
- */
-double radiusPow3(const std::array<double, 3> &x);
-
-/**
  * Output help text for calling the program.
  */
 void help();
-
-/**
- * Calculate second norm of array with length 3.
- * @param x Input coordinates
- * @return ||x||_2
- */
-double radius(const std::array<double, 3> &x);
 
 constexpr double start_time = 0;
 double t_end = 0.0;
@@ -93,6 +62,7 @@ int main(int argc, char *argsv[]) {
       LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
     help();
     //std::cout << "./MolSim t_end delta_t {-f filename | -c <number of cuboids> <cuboid data>}" << std::endl;
+    return -1; //added to prevent further errors
   }
 
   double current_time = start_time;
@@ -193,45 +163,6 @@ int main(int argc, char *argsv[]) {
   return 0;
 }
 
-void calculateF(Particle &p1, Particle &p2) {
-  std::array<double, 3> p1_x = p1.getX(),
-    xDiff = p2.getX(), f12;
-  xDiff[0] -= p1_x[0];
-  xDiff[1] -= p1_x[1];
-  xDiff[2] -= p1_x[2];
-
-  double divider = radiusPow3(xDiff), vf;
-  // calculate F_ij
-  if (divider) {
-    vf = (p1.getM() * p2.getM()) / divider;
-    f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
-    p1.addF(f12);
-    p2.addF({-f12[0], -f12[1], -f12[2]});
-  }
-}
-
-void calculateLennardJones(Particle &p1, Particle &p2) {
-    std::array<double, 3> p1_x = p1.getX(),
-            xDiff = p2.getX(), f12;
-    xDiff[0] -= p1_x[0];
-    xDiff[1] -= p1_x[1];
-    xDiff[2] -= p1_x[2];
-
-    double divider = radius(xDiff), vf1, vf2;
-
-    if(divider) {
-        vf1 = 24*EPSILON / pow(divider, 2);
-
-        vf2 = pow(SIGMA/divider, 6) - 2*pow(SIGMA/divider, 12);
-
-        f12 = {vf1*vf2*xDiff[0], vf1*vf2*xDiff[1], vf1*vf2*xDiff[2]};
-
-        p1.addF(f12);
-        p2.addF({-f12[0], -f12[1], -f12[2]});
-    }
-
-}
-
 void plotParticles(int iteration, std::vector<Particle> &particles) {
 
     /* output in xyz format */
@@ -252,11 +183,6 @@ void plotParticles(int iteration, std::vector<Particle> &particles) {
     }
 
     vtkWriter.writeFile(out_name_vtk, iteration);
-}
-
-double radiusPow3(const std::array<double, 3> &x) {
-    double result = x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
-    return pow(sqrt(result), 3);
 }
 
 void help() {
@@ -296,8 +222,4 @@ void help() {
     std::cout << "               Data of multiple cuboids must also be given in a single line with a blank space in between." << std::endl;
     std::cout << "This help text can be printed using ./MolSim -h or ./MolSim --help." << std::endl;
      */
-}
-
-double radius(const std::array<double, 3> &x) {
-    return x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
 }

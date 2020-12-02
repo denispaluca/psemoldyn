@@ -25,14 +25,14 @@ Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumber
 }
 
 void Cuboid::generate(ParticleContainer &particles) {
-    //int particleNumber = size[0] * size[1] * size[2];
-    //particles.getParticles().reserve(particleNumber); // TODO: allocate space?
+    std::array<double, 3> newPosition = {0., 0., 0.};
 
-    // TODO: better way of generating Particles?
     for(int i = 0; i < size[0]; i++){
+        newPosition[0] = position[0] + i*distance; //xpos
         for(int j = 0; j < size[1]; j++){
+            newPosition[1] = position[1] + j*distance; //ypos
             for(int k = 0; k < size[2]; k++){
-                std::array<double, 3> newPosition = {position[0] + i*distance, position[1] + j*distance, position[2] + k*distance};
+                newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass);
 
                 MaxwellBoltzmannDistribution(newParticle, meanV, 3);
@@ -41,4 +41,8 @@ void Cuboid::generate(ParticleContainer &particles) {
             }
         }
     }
+}
+
+std::array<int,3> Cuboid::getSize(){
+    return size;
 }

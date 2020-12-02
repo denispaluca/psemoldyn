@@ -37,3 +37,6 @@ void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {
       (*f)(*i,*j);
 }
 
+void ParticleContainer::reserve(const int n){
+    particles.reserve(n);
+}
