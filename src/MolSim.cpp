@@ -9,6 +9,16 @@
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
 
+/*
+ * Log4cxx includes
+ */
+#include <log4cxx/logger.h>
+#include <log4cxx/propertyconfigurator.h>
+
+using namespace log4cxx;
+using namespace log4cxx::helpers;
+
+using namespace std;
 
 /**
  * Plot the particles to a vtu-file.
@@ -27,6 +37,10 @@ constexpr double start_time = 0;
 double t_end = 0.0;
 double delta_t = 0.0;
 
+//static logger variables molsimLogger
+log4cxx::LoggerPtr molsimLogger(log4cxx::Logger::getLogger("molsim.console"));
+log4cxx::LoggerPtr molsimFileLogger(log4cxx::Logger::getLogger("molsim"));
+
 /**
  * Main function.
  * @param argc
@@ -34,7 +48,9 @@ double delta_t = 0.0;
  * @return
  */
 int main(int argc, char *argsv[]) {
-  std::cout << "Hello from MolSim for PSE!" << std::endl;
+    PropertyConfigurator::configure("../log4cxx.cfg");
+    LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution...");
+  //std::cout << "Hello from MolSim for PSE!" << std::endl;
 
   if(argc == 2 && (std::string(argsv[1]) == "-h" || (std::string(argsv[1]) == "--help"))) {
       help();
@@ -43,10 +59,10 @@ int main(int argc, char *argsv[]) {
 
   //TODO: change condition
   if (argc < 5) {
-    std::cout << "Errounous programme call! " << std::endl;
+      LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
     help();
     //std::cout << "./MolSim t_end delta_t {-f filename | -c <number of cuboids> <cuboid data>}" << std::endl;
-    return 1; //added to prevent further errors
+    return -1; //added to prevent further errors
   }
 
   double current_time = start_time;
@@ -65,7 +81,8 @@ int main(int argc, char *argsv[]) {
           particleContainer = particleGenerator.getParticles();
       } else {
           //TODO: log error + input help
-          std::cout << "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids." << std::endl;
+          LOG4CXX_FATAL(molsimLogger, "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids.");
+          //std::cout << "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids." << std::endl;
           help();
           return -1;
       }
@@ -74,7 +91,8 @@ int main(int argc, char *argsv[]) {
       int num_cuboids = std::stoi(argsv[4]);
       if (argc != num_cuboids * 11 + 5) {           //11 cuboid parameters (w/O mean value of Brownian Motion)
           // TODO: log error + input help
-          std::cout << "Faulty cuboid data input" << std::endl;
+          LOG4CXX_FATAL(molsimLogger, "Faulty cuboid data input");
+          //std::cout << "Faulty cuboid data input" << std::endl;
           help();
           return -1;
       }
@@ -102,7 +120,8 @@ int main(int argc, char *argsv[]) {
 
       particleContainer = particleGenerator.getParticles();
   } else {
-      std::cout << "Erroneous programme call!" << std::endl;
+      LOG4CXX_FATAL(molsimLogger, "Erroneous programme call: unsupported input_method");
+      //std::cout << "Erroneous programme call!" << std::endl;
       help();
   }
 
@@ -132,12 +151,15 @@ int main(int argc, char *argsv[]) {
     if (iteration % 10 == 0) {
       plotParticles(iteration, particleContainer.getParticles());
     }
-    std::cout << "Iteration " << iteration << " finished." << std::endl;
+
+    LOG4CXX_INFO(molsimFileLogger, "Iteration " << iteration << " finished.");
+    //std::cout << "Iteration " << iteration << " finished." << std::endl;
 
     current_time += delta_t;
   }
 
-  std::cout << "output written. Terminating..." << std::endl;
+    LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
+  //std::cout << "output written. Terminating..." << std::endl;
   return 0;
 }
 
@@ -164,6 +186,24 @@ void plotParticles(int iteration, std::vector<Particle> &particles) {
 }
 
 void help() {
+    string help = "This Program should be called as follows:\n";
+    help +=       "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}\n";
+    help +=       "---------------------------------------------------------------\n";
+    help +=       "t_end:\t\t\tend time of the simulation\n";
+    help +=       "delta_t:\t\tlength of time step between iterations\n";
+    help +=       "-f, --file:\t\tenables input via file. Accepted file extensions are .particles and .cuboids.\n";
+    help +=       "\t\t\t\tThe corresponding file formats are specified in the project's ReadMe.\n";
+    help +=       "-c, --cuboid:\tallows for direct input of cuboid parameters. The data is expected to be given in the following order:\n";
+    help +=       "\t\t\t\t\t<position of cuboid> - 3 double values\n";
+    help +=       "\t\t\t\t\t<number of particles per dimension> - 3 integer values\n";
+    help +=       "\t\t\t\t\t<mesh width> - 1 double value\n";
+    help +=       "\t\t\t\t\t<mass of 1 particle> - 1 double value\n";
+    help +=       "\t\t\t\t\t<initial velocity> - 3 double values\n";
+    help +=       "\t\t\t\tdivided by blank spaces and in a single line.\n";
+    help +=       "\t\t\t\tData of multiple cuboids must also be given in a single line with a blank space in between.\n";
+    help +=       "This help text can be printed using ./MolSim -h or ./MolSim --help.\n";
+    LOG4CXX_INFO(molsimLogger, help);
+    /*
     std::cout << std::endl;
     std::cout << "This Program should be called as follows:" << std::endl;
     std::cout << "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}" << std::endl;
@@ -181,4 +221,5 @@ void help() {
     std::cout << "               divided by blank spaces and in a single line." << std::endl;
     std::cout << "               Data of multiple cuboids must also be given in a single line with a blank space in between." << std::endl;
     std::cout << "This help text can be printed using ./MolSim -h or ./MolSim --help." << std::endl;
+     */
 }

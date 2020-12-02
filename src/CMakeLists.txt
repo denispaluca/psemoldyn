@@ -24,4 +24,7 @@ target_link_libraries(libmolsim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
+        #----------- include log4cxx-----------
+        PRIVATE
+            log4cxx
         )

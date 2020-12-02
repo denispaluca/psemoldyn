@@ -33,6 +33,11 @@ Members:
 
 ---
 
+---
+## Requirements
+- log4cxx
+
+
 # Misc #
 * Compiler used: gcc 9.3.0
 * CMake version: 3.16.3
