@@ -17,7 +17,7 @@ protected:
     ParticleContainer generated;
     ParticleGenerator pg;
     FileReader reader;
-    void SetUp() override {//TODO
+    void SetUp() override {
 
         // Cuboids created manually
         Cuboid cub1 = Cuboid({0.0, 0.0, 0.0}, {3, 3, 3}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
