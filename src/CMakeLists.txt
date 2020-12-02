@@ -26,5 +26,5 @@ target_link_libraries(libmolsim
             xerces-c
         #----------- include log4cxx-----------
         PRIVATE
-            log4cxxx
+            log4cxx
         )
