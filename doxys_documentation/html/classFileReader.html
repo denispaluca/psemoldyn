@@ -77,8 +77,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a615dcb2443cad1f2ca123c7c0c334480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1382969e8f1468f3b04ad4b44ab39dee"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">~FileReader</a> ()</td></tr>
 <tr class="separator:a1382969e8f1468f3b04ad4b44ab39dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e3baa0bfff15e24c5e86c2e219ae677"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#a2e3baa0bfff15e24c5e86c2e219ae677">readFile</a> (std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;particles, char *filename)</td></tr>
-<tr class="separator:a2e3baa0bfff15e24c5e86c2e219ae677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ede066790561a6bd36c0b133631b61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#a67ede066790561a6bd36c0b133631b61">readParticles</a> (std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;particles, char *filename)</td></tr>
+<tr class="memdesc:a67ede066790561a6bd36c0b133631b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads <a class="el" href="classParticle.html" title="The particle class represents a particle and it&#39;s characteristics.">Particle</a> data from file and constructs Particles into given vector.  <a href="classFileReader.html#a67ede066790561a6bd36c0b133631b61">More...</a><br /></td></tr>
+<tr class="separator:a67ede066790561a6bd36c0b133631b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1bc0896c86f71e7218dfb3ec7944202"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#ae1bc0896c86f71e7218dfb3ec7944202">readCuboids</a> (std::vector&lt; <a class="el" href="classCuboid.html">Cuboid</a> &gt; &amp;cuboids, char *filename)</td></tr>
+<tr class="memdesc:ae1bc0896c86f71e7218dfb3ec7944202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads <a class="el" href="classCuboid.html">Cuboid</a> data from file and constructs Cuboids into given vector.  <a href="classFileReader.html#ae1bc0896c86f71e7218dfb3ec7944202">More...</a><br /></td></tr>
+<tr class="separator:ae1bc0896c86f71e7218dfb3ec7944202"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a615dcb2443cad1f2ca123c7c0c334480"></a>
@@ -132,14 +136,51 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2e3baa0bfff15e24c5e86c2e219ae677"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e3baa0bfff15e24c5e86c2e219ae677">&#9670;&nbsp;</a></span>readFile()</h2>
+<a id="ae1bc0896c86f71e7218dfb3ec7944202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1bc0896c86f71e7218dfb3ec7944202">&#9670;&nbsp;</a></span>readCuboids()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void FileReader::readFile </td>
+          <td class="memname">void FileReader::readCuboids </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classCuboid.html">Cuboid</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>cuboids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads <a class="el" href="classCuboid.html">Cuboid</a> data from file and constructs Cuboids into given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cuboids</td><td>Vector where the constructed Cuboids are stored </td></tr>
+    <tr><td class="paramname">filename</td><td>Name of file with data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a67ede066790561a6bd36c0b133631b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ede066790561a6bd36c0b133631b61">&#9670;&nbsp;</a></span>readParticles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileReader::readParticles </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>particles</em>, </td>
@@ -157,6 +198,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reads <a class="el" href="classParticle.html" title="The particle class represents a particle and it&#39;s characteristics.">Particle</a> data from file and constructs Particles into given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">particles</td><td>Vector where the constructed Particles are stored </td></tr>
+    <tr><td class="paramname">filename</td><td>Name of file with data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

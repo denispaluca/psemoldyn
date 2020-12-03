@@ -71,36 +71,51 @@ $(function() {
 <div class="title">MaxwellBoltzmannDistribution.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;random&gt;</code><br />
-<code>#include &lt;array&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Particle_8h_source.html">Particle.h</a>&quot;</code><br />
 </div>
 <p><a href="MaxwellBoltzmannDistribution_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a23ee8aa14a5a2320bbc0672ca648fd91"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MaxwellBoltzmannDistribution_8h.html#a23ee8aa14a5a2320bbc0672ca648fd91">maxwellBoltzmannDistributedVelocity</a> (double averageVelocity)</td></tr>
-<tr class="memdesc:a23ee8aa14a5a2320bbc0672ca648fd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random velocity according to the Maxwell-Boltzmann distribution, with a given average velocity.  <a href="MaxwellBoltzmannDistribution_8h.html#a23ee8aa14a5a2320bbc0672ca648fd91">More...</a><br /></td></tr>
-<tr class="separator:a23ee8aa14a5a2320bbc0672ca648fd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a916086c618022af760c579d14add55e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MaxwellBoltzmannDistribution_8h.html#a916086c618022af760c579d14add55e4">MaxwellBoltzmannDistribution</a> (<a class="el" href="classParticle.html">Particle</a> &amp;p, double factor, int dimensions)</td></tr>
+<tr class="memdesc:a916086c618022af760c579d14add55e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a random velocity according to the Maxwell-Boltzmann distribution to the particles, with a given mean velocity.  <a href="MaxwellBoltzmannDistribution_8h.html#a916086c618022af760c579d14add55e4">More...</a><br /></td></tr>
+<tr class="separator:a916086c618022af760c579d14add55e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a23ee8aa14a5a2320bbc0672ca648fd91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23ee8aa14a5a2320bbc0672ca648fd91">&#9670;&nbsp;</a></span>maxwellBoltzmannDistributedVelocity()</h2>
+<a id="a916086c618022af760c579d14add55e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a916086c618022af760c579d14add55e4">&#9670;&nbsp;</a></span>MaxwellBoltzmannDistribution()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt;double, 3&gt; maxwellBoltzmannDistributedVelocity </td>
+          <td class="memname">void MaxwellBoltzmannDistribution </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>averageVelocity</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>factor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dimensions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generate a random velocity according to the Maxwell-Boltzmann distribution, with a given average velocity. </p>
-<p>@averageVelocity The average velocity of the brownian motion for the system. </p>
+<p>Add a random velocity according to the Maxwell-Boltzmann distribution to the particles, with a given mean velocity. </p>
+<p><code>The</code> particle to initialize. @meanVelocity The mean velocity of the brownian motion for the particle. @dimensions The number of dimensions to initialize (2 or 3). </p>
 
 </div>
 </div>

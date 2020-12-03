@@ -44,7 +44,7 @@ void \mbox{\hyperlink{classParticle_a4f8782eee73f88368561ea90bb16a66b}{calculate
 \begin{DoxyCompactList}\small\item\em Calculate velocity from t -\/$>$ t+1. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticle_acdb36305260c411c46729e11cbbaf03a}{calculateX}} ()
 \begin{DoxyCompactList}\small\item\em Calculate Position from t -\/$>$ t+1. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classParticle_a8d6b27c07627e73bd9d965f30834164e}{update\+DT}} (double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_\+t}})
+void \mbox{\hyperlink{classParticle_a8d6b27c07627e73bd9d965f30834164e}{update\+DT}} (double \mbox{\hyperlink{classParticle_a15b3b4db0d009288b4a68b720d034aef}{delta\+\_\+t}})
 \begin{DoxyCompactList}\small\item\em Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -61,6 +61,8 @@ double \mbox{\hyperlink{classParticle_aedcc7e1bc53b0e2b1a4a07c9a1b47563}{m}}
 \begin{DoxyCompactList}\small\item\em Mass of this particle. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classParticle_a2b73dd42bcd56ba2e7ffeb0a5515a866}{type}}
 \begin{DoxyCompactList}\small\item\em Type of the particle. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classParticle_a15b3b4db0d009288b4a68b720d034aef}{delta\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Time step of the simulation. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}{dt\+\_\+2m}}
 \begin{DoxyCompactList}\small\item\em Save dt/2m. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classParticle_aea7e0a2acf01226700c6d3acb49acc5a}{dtsq\+\_\+2m}}
@@ -370,6 +372,16 @@ Passes delta time to set dt\+\_\+2m and dtsq\+\_\+2m.
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classParticle_a15b3b4db0d009288b4a68b720d034aef}\label{classParticle_a15b3b4db0d009288b4a68b720d034aef}} 
+\index{Particle@{Particle}!delta\_t@{delta\_t}}
+\index{delta\_t@{delta\_t}!Particle@{Particle}}
+\doxysubsubsection{\texorpdfstring{delta\_t}{delta\_t}}
+{\footnotesize\ttfamily double Particle\+::delta\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Time step of the simulation. 
+
 \mbox{\Hypertarget{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}\label{classParticle_ab1397bdfd4b796412fa3f2acc17e0ab6}} 
 \index{Particle@{Particle}!dt\_2m@{dt\_2m}}
 \index{dt\_2m@{dt\_2m}!Particle@{Particle}}

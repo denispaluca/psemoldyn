@@ -2,8 +2,7 @@
 // Created by denis on 10.11.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_PARTICLECONTAINER_H
-#define PSEMOLDYN_GROUPB_PARTICLECONTAINER_H
+#pragma once
 
 #include "Particle.h"
 #include <vector>
@@ -66,7 +65,11 @@ public:
      * @return
      */
     void iteratePairs(void (*f)(Particle&,Particle&));
+
+    /**
+     * Requests that the particles vector capacity be at least enough to contain n elements.
+     * @param n Minimum capacity for the particles vector.
+     * @return
+     */
+    void reserve(int n);
 };
-
-
-#endif //PSEMOLDYN_GROUPB_PARTICLECONTAINER_H

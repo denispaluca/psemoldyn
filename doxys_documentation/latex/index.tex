@@ -1,4 +1,48 @@
-The Molecular Dynamics teaching code.
+\hypertarget{index_autotoc_md1}{}\doxysection{Group B}\label{index_autotoc_md1}
+Members\+:
+\begin{DoxyItemize}
+\item Höbenreich, Jonas
+\item Paluca, Denis
+\item Trouvain, Mira
+\end{DoxyItemize}
 
-Git Repository\+: \href{https://gitlab.lrz.de/denis/psemoldyn_groupb/}{\texttt{ https\+://gitlab.\+lrz.\+de/denis/psemoldyn\+\_\+groupb/}} ~\newline
- Documentation\+: \href{doxys_documentation/html/index.html}{\texttt{ Link}} 
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md3}{}\doxysection{Build and Run Instructions}\label{index_autotoc_md3}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{Task\+: Mol\+Sim program}\label{index_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Compile with \begin{DoxyVerb}cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+make MolSim -j <1.5 * number of cores>
+\end{DoxyVerb}
+
+\item run \begin{DoxyVerb}./MolSim eingabe-sonne.txt
+\end{DoxyVerb}
+
+\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{Task\+: Doxygen documentation}\label{index_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Build with \begin{DoxyVerb}cmake -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+make doc_doxygen
+\end{DoxyVerb}
+
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md6}{}\doxysection{Media}\label{index_autotoc_md6}
+\href{https://drive.google.com/file/d/1UxXaNrurPYt-dpr_sanyrpkHd82IDQil/view?usp=sharing}{\texttt{ Simulation video}}
+
+\DoxyHorRuler{0}
+
+
+\DoxyHorRuler{0}
+ \hypertarget{index_autotoc_md9}{}\doxysubsection{Requirements}\label{index_autotoc_md9}
+
+\begin{DoxyItemize}
+\item log4cxx
+\end{DoxyItemize}\hypertarget{index_autotoc_md10}{}\doxysection{Misc}\label{index_autotoc_md10}
+
+\begin{DoxyItemize}
+\item Compiler used\+: gcc 9.\+3.\+0
+\item C\+Make version\+: 3.\+16.\+3
+\item Google Tests version\+: 1.\+10.\+0 
+\end{DoxyItemize}
