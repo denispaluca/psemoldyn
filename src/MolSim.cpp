@@ -57,7 +57,6 @@ int main(int argc, char *argsv[]) {
       return 0;
   }
 
-  //TODO: change condition
   if (argc < 5) {
       LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
     help();
@@ -80,17 +79,15 @@ int main(int argc, char *argsv[]) {
           particleGenerator = ParticleGenerator(argsv[4]);
           particleContainer = particleGenerator.getParticles();
       } else {
-          //TODO: log error + input help
           LOG4CXX_FATAL(molsimLogger, "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids.");
           //std::cout << "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids." << std::endl;
           help();
           return -1;
       }
-  } else if(input_method == "-c" || input_method == "--cuboid"){
+  } else if(input_method == "-c" || input_method == "--cuboids"){
 
       int num_cuboids = std::stoi(argsv[4]);
       if (argc != num_cuboids * 11 + 5) {           //11 cuboid parameters (w/O mean value of Brownian Motion)
-          // TODO: log error + input help
           LOG4CXX_FATAL(molsimLogger, "Faulty cuboid data input");
           //std::cout << "Faulty cuboid data input" << std::endl;
           help();
@@ -112,7 +109,7 @@ int main(int argc, char *argsv[]) {
           m = std::stod(argsv[offset + 7]);
           v = {std::stod(argsv[offset + 8]), std::stod(argsv[offset + 9]), std::stod(argsv[offset + 10])};
 
-          c = Cuboid(pos, c_size, h, m, v, 0); // TODO: change handling of mean Brownian?
+          c = Cuboid(pos, c_size, h, m, v, 0); // meanV is set to hard-coded value by Cuboid constructor regardless of passed value
           particleGenerator.addCuboid(c);
 
           offset += 11; //next cuboid
