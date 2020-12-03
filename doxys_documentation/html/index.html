@@ -65,9 +65,50 @@ $(function() {
 <div class="title">MolSim </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The Molecular Dynamics teaching code.</p>
-<p>Git Repository: <a href="https://gitlab.lrz.de/denis/psemoldyn_groupb/">https://gitlab.lrz.de/denis/psemoldyn_groupb/</a> <br  />
- Documentation: <a href="doxys_documentation/html/index.html">Link</a> </p>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Group B</h1>
+<p>Members:</p><ul>
+<li>Höbenreich, Jonas</li>
+<li>Paluca, Denis</li>
+<li>Trouvain, Mira</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md3"></a>
+Build and Run Instructions</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Task: MolSim program</h2>
+<ul>
+<li>Compile with <pre class="fragment">cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+make MolSim -j &lt;1.5 * number of cores&gt;
+</pre></li>
+<li>run <pre class="fragment">./MolSim eingabe-sonne.txt
+</pre></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Task: Doxygen documentation</h2>
+<ul>
+<li>Build with <pre class="fragment">cmake -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+make doc_doxygen
+</pre></li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md6"></a>
+Media</h1>
+<p><a href="https://drive.google.com/file/d/1UxXaNrurPYt-dpr_sanyrpkHd82IDQil/view?usp=sharing">Simulation video</a></p>
+<hr  />
+<hr  />
+ <h2><a class="anchor" id="autotoc_md9"></a>
+Requirements</h2>
+<ul>
+<li>log4cxx</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Misc</h1>
+<ul>
+<li>Compiler used: gcc 9.3.0</li>
+<li>CMake version: 3.16.3</li>
+<li>Google Tests version: 1.10.0 </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

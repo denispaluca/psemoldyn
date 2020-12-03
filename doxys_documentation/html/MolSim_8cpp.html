@@ -74,21 +74,27 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="FileReader_8h_source.html">FileReader.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ArrayUtils_8h_source.html">utils/ArrayUtils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ForceUtils_8h_source.html">utils/ForceUtils.h</a>&quot;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;regex&gt;</code><br />
 <code>#include &lt;<a class="el" href="VTKWriter_8h_source.html">outputWriter/VTKWriter.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="ParticleContainer_8h_source.html">ParticleContainer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ParticleGenerator_8h_source.html">ParticleGenerator.h</a>&quot;</code><br />
+<code>#include &lt;log4cxx/logger.h&gt;</code><br />
+<code>#include &lt;log4cxx/propertyconfigurator.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a925e9ef64620bfeb32239a1cef9d4e01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a925e9ef64620bfeb32239a1cef9d4e01">calculateF</a> (<a class="el" href="classParticle.html">Particle</a> &amp;p1, <a class="el" href="classParticle.html">Particle</a> &amp;p2)</td></tr>
-<tr class="memdesc:a925e9ef64620bfeb32239a1cef9d4e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate force between 2 particles and add it to their respective forces.  <a href="MolSim_8cpp.html#a925e9ef64620bfeb32239a1cef9d4e01">More...</a><br /></td></tr>
-<tr class="separator:a925e9ef64620bfeb32239a1cef9d4e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa18ac559812fb9906574fe12b796a510"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#aa18ac559812fb9906574fe12b796a510">plotParticles</a> (int iteration, std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;particles)</td></tr>
 <tr class="memdesc:aa18ac559812fb9906574fe12b796a510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot the particles to a vtu-file.  <a href="MolSim_8cpp.html#aa18ac559812fb9906574fe12b796a510">More...</a><br /></td></tr>
 <tr class="separator:aa18ac559812fb9906574fe12b796a510"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fc120ee59f5477b079da51b401c3265"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a7fc120ee59f5477b079da51b401c3265">radiusPow3</a> (const std::array&lt; double, 3 &gt; &amp;x)</td></tr>
-<tr class="memdesc:a7fc120ee59f5477b079da51b401c3265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate second norm cubed of array with length 3.  <a href="MolSim_8cpp.html#a7fc120ee59f5477b079da51b401c3265">More...</a><br /></td></tr>
-<tr class="separator:a7fc120ee59f5477b079da51b401c3265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ee70a8770dc30d06c744b24eb2fcfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a97ee70a8770dc30d06c744b24eb2fcfc">help</a> ()</td></tr>
+<tr class="memdesc:a97ee70a8770dc30d06c744b24eb2fcfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output help text for calling the program.  <a href="MolSim_8cpp.html#a97ee70a8770dc30d06c744b24eb2fcfc">More...</a><br /></td></tr>
+<tr class="separator:a97ee70a8770dc30d06c744b24eb2fcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5591dea4939a04441ec6ab7f70b1e1c"><td class="memItemLeft" align="right" valign="top">log4cxx::LoggerPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#ae5591dea4939a04441ec6ab7f70b1e1c">molsimLogger</a> (log4cxx::Logger::getLogger(&quot;molsim.console&quot;))</td></tr>
+<tr class="separator:ae5591dea4939a04441ec6ab7f70b1e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4585140344a52ca38b70e70f35187dcc"><td class="memItemLeft" align="right" valign="top">log4cxx::LoggerPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a4585140344a52ca38b70e70f35187dcc">molsimFileLogger</a> (log4cxx::Logger::getLogger(&quot;molsim&quot;))</td></tr>
+<tr class="separator:a4585140344a52ca38b70e70f35187dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a329c95e85f063f49b0daaed5c5b56335"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a329c95e85f063f49b0daaed5c5b56335">main</a> (int argc, char *argsv[])</td></tr>
 <tr class="memdesc:a329c95e85f063f49b0daaed5c5b56335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function.  <a href="MolSim_8cpp.html#a329c95e85f063f49b0daaed5c5b56335">More...</a><br /></td></tr>
 <tr class="separator:a329c95e85f063f49b0daaed5c5b56335"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,41 +109,22 @@ Variables</h2></td></tr>
 <tr class="separator:a4cfc079302fe9a34fe24637c4e44303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a925e9ef64620bfeb32239a1cef9d4e01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a925e9ef64620bfeb32239a1cef9d4e01">&#9670;&nbsp;</a></span>calculateF()</h2>
+<a id="a97ee70a8770dc30d06c744b24eb2fcfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ee70a8770dc30d06c744b24eb2fcfc">&#9670;&nbsp;</a></span>help()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void calculateF </td>
+          <td class="memname">void help </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
-          <td class="paramname"><em>p1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
-          <td class="paramname"><em>p2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate force between 2 particles and add it to their respective forces. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p1</td><td>First <a class="el" href="classParticle.html" title="The particle class represents a particle and it&#39;s characteristics.">Particle</a> </td></tr>
-    <tr><td class="paramname">p2</td><td>Second <a class="el" href="classParticle.html" title="The particle class represents a particle and it&#39;s characteristics.">Particle</a> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<p>Output help text for calling the program. </p>
 
 </div>
 </div>
@@ -179,6 +166,42 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a4585140344a52ca38b70e70f35187dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4585140344a52ca38b70e70f35187dcc">&#9670;&nbsp;</a></span>molsimFileLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">log4cxx::LoggerPtr molsimFileLogger </td>
+          <td>(</td>
+          <td class="paramtype">log4cxx::Logger::getLogger(&quot;molsim&quot;)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5591dea4939a04441ec6ab7f70b1e1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5591dea4939a04441ec6ab7f70b1e1c">&#9670;&nbsp;</a></span>molsimLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">log4cxx::LoggerPtr molsimLogger </td>
+          <td>(</td>
+          <td class="paramtype">log4cxx::Logger::getLogger(&quot;molsim.console&quot;)&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa18ac559812fb9906574fe12b796a510"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa18ac559812fb9906574fe12b796a510">&#9670;&nbsp;</a></span>plotParticles()</h2>
 
@@ -214,33 +237,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-</div>
-</div>
-<a id="a7fc120ee59f5477b079da51b401c3265"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fc120ee59f5477b079da51b401c3265">&#9670;&nbsp;</a></span>radiusPow3()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double radiusPow3 </td>
-          <td>(</td>
-          <td class="paramtype">const std::array&lt; double, 3 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>x</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate second norm cubed of array with length 3. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Input coordinates </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>(||x||_2)^3 </dd></dl>
 
 </div>
 </div>

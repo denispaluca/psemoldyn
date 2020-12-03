@@ -1,0 +1,130 @@
+\hypertarget{classParticleGenerator}{}\doxysection{Particle\+Generator Class Reference}
+\label{classParticleGenerator}\index{ParticleGenerator@{ParticleGenerator}}
+
+
+{\ttfamily \#include $<$Particle\+Generator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classParticleGenerator_a66cee361b12e3294bc7a2259d401fe02}{Particle\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classParticleGenerator}{Particle\+Generator}} with empty \mbox{\hyperlink{classCuboid}{Cuboid}} vector and \mbox{\hyperlink{classParticleContainer}{Particle\+Container}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classParticleGenerator_a7f5c469f5c0d6f5f0825c5e19a0c5da7}{Particle\+Generator}} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classParticleGenerator}{Particle\+Generator}} by reading \mbox{\hyperlink{classCuboid}{Cuboid}} parameters from file. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classCuboid}{Cuboid}} $>$ \mbox{\hyperlink{classParticleGenerator_ade690b9f6faf29f0a1015cbc811eb4c3}{get\+Cuboids}} ()
+\begin{DoxyCompactList}\small\item\em Getter for vector of Cuboids. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} \mbox{\hyperlink{classParticleGenerator_a208283337bf6f9fc0551db340efe4e3e}{get\+Particles}} ()
+\begin{DoxyCompactList}\small\item\em Getter for \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with generated particles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParticleGenerator_a61233a21304f487542bd3c47027797d3}{add\+Cuboid}} (\mbox{\hyperlink{classCuboid}{Cuboid}} c)
+\begin{DoxyCompactList}\small\item\em adds \mbox{\hyperlink{classCuboid}{Cuboid}} to vector and generates + adds its particles to the \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classCuboid}{Cuboid}} $>$ \mbox{\hyperlink{classParticleGenerator_af6a9c8cffc286b12f1ed411d266beb57}{cuboids}}
+\begin{DoxyCompactList}\small\item\em Vector of all generated cuboids. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} \mbox{\hyperlink{classParticleGenerator_acc6af516df3f44ac3b7168e3981d9a01}{particles}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with all particles from all generated cuboids. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classParticleGenerator_a66cee361b12e3294bc7a2259d401fe02}\label{classParticleGenerator_a66cee361b12e3294bc7a2259d401fe02}} 
+\index{ParticleGenerator@{ParticleGenerator}!ParticleGenerator@{ParticleGenerator}}
+\index{ParticleGenerator@{ParticleGenerator}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{ParticleGenerator()}{ParticleGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Particle\+Generator\+::\+Particle\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructs \mbox{\hyperlink{classParticleGenerator}{Particle\+Generator}} with empty \mbox{\hyperlink{classCuboid}{Cuboid}} vector and \mbox{\hyperlink{classParticleContainer}{Particle\+Container}}. 
+
+\mbox{\Hypertarget{classParticleGenerator_a7f5c469f5c0d6f5f0825c5e19a0c5da7}\label{classParticleGenerator_a7f5c469f5c0d6f5f0825c5e19a0c5da7}} 
+\index{ParticleGenerator@{ParticleGenerator}!ParticleGenerator@{ParticleGenerator}}
+\index{ParticleGenerator@{ParticleGenerator}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{ParticleGenerator()}{ParticleGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Particle\+Generator\+::\+Particle\+Generator (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs \mbox{\hyperlink{classParticleGenerator}{Particle\+Generator}} by reading \mbox{\hyperlink{classCuboid}{Cuboid}} parameters from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file which will be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classParticleGenerator_a61233a21304f487542bd3c47027797d3}\label{classParticleGenerator_a61233a21304f487542bd3c47027797d3}} 
+\index{ParticleGenerator@{ParticleGenerator}!addCuboid@{addCuboid}}
+\index{addCuboid@{addCuboid}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{addCuboid()}{addCuboid()}}
+{\footnotesize\ttfamily void Particle\+Generator\+::add\+Cuboid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCuboid}{Cuboid}}}]{c }\end{DoxyParamCaption})}
+
+
+
+adds \mbox{\hyperlink{classCuboid}{Cuboid}} to vector and generates + adds its particles to the \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & the \mbox{\hyperlink{classCuboid}{Cuboid}} to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParticleGenerator_ade690b9f6faf29f0a1015cbc811eb4c3}\label{classParticleGenerator_ade690b9f6faf29f0a1015cbc811eb4c3}} 
+\index{ParticleGenerator@{ParticleGenerator}!getCuboids@{getCuboids}}
+\index{getCuboids@{getCuboids}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{getCuboids()}{getCuboids()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classCuboid}{Cuboid}} $>$ Particle\+Generator\+::get\+Cuboids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for vector of Cuboids. 
+
+\begin{DoxyReturn}{Returns}
+Vector of Cuboids 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classParticleGenerator_a208283337bf6f9fc0551db340efe4e3e}\label{classParticleGenerator_a208283337bf6f9fc0551db340efe4e3e}} 
+\index{ParticleGenerator@{ParticleGenerator}!getParticles@{getParticles}}
+\index{getParticles@{getParticles}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{getParticles()}{getParticles()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} Particle\+Generator\+::get\+Particles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with generated particles. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classParticleGenerator_af6a9c8cffc286b12f1ed411d266beb57}\label{classParticleGenerator_af6a9c8cffc286b12f1ed411d266beb57}} 
+\index{ParticleGenerator@{ParticleGenerator}!cuboids@{cuboids}}
+\index{cuboids@{cuboids}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{cuboids}{cuboids}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classCuboid}{Cuboid}}$>$ Particle\+Generator\+::cuboids\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vector of all generated cuboids. 
+
+\mbox{\Hypertarget{classParticleGenerator_acc6af516df3f44ac3b7168e3981d9a01}\label{classParticleGenerator_acc6af516df3f44ac3b7168e3981d9a01}} 
+\index{ParticleGenerator@{ParticleGenerator}!particles@{particles}}
+\index{particles@{particles}!ParticleGenerator@{ParticleGenerator}}
+\doxysubsubsection{\texorpdfstring{particles}{particles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} Particle\+Generator\+::particles\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} with all particles from all generated cuboids. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{ParticleGenerator_8h}{Particle\+Generator.\+h}}\item 
+src/\mbox{\hyperlink{ParticleGenerator_8cpp}{Particle\+Generator.\+cpp}}\end{DoxyCompactItemize}

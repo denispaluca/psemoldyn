@@ -1,0 +1,170 @@
+\hypertarget{classCuboid}{}\doxysection{Cuboid Class Reference}
+\label{classCuboid}\index{Cuboid@{Cuboid}}
+
+
+{\ttfamily \#include $<$Cuboid.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCuboid_a1abf60e93d024b7a01ee5b1a48f1f08a}{Cuboid}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCuboid_aed4c73ebea298db11ad24d59f063cacc}{Cuboid}} (std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classCuboid_ab46d52b7872539f4c24c7abcb7063dec}{position}}, std\+::array$<$ int, 3 $>$ \mbox{\hyperlink{classCuboid_a9e1084f19a264d272dcbbb22560c1e7e}{size}}, double \mbox{\hyperlink{classCuboid_adbd270aa2674f3e9a80100c03a876da9}{distance}}, double \mbox{\hyperlink{classCuboid_a29c13c34316cebabcc7cc47f8741e51e}{mass}}, std\+::array$<$ double, 3 $>$ initalV, double \mbox{\hyperlink{classCuboid_ab6bb8eb2a87d77e67acea088f6a8ba88}{meanV}})
+\begin{DoxyCompactList}\small\item\em Constructs \mbox{\hyperlink{classCuboid}{Cuboid}} with given parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCuboid_a8a663d3109224628851bbb87d4ad75a8}{generate}} (\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} \&p)
+\begin{DoxyCompactList}\small\item\em Generates the particles in the cuboid and adds them into given \mbox{\hyperlink{classParticleContainer}{Particle\+Container}}. \end{DoxyCompactList}\item 
+std\+::array$<$ int, 3 $>$ \mbox{\hyperlink{classCuboid_ae7ba37cc225e48355a50f96b338acae7}{get\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Getter for the size of cuboid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classCuboid_ab46d52b7872539f4c24c7abcb7063dec}{position}} \{\}
+\begin{DoxyCompactList}\small\item\em Position of cuboid (lower left corner) \end{DoxyCompactList}\item 
+std\+::array$<$ int, 3 $>$ \mbox{\hyperlink{classCuboid_a9e1084f19a264d272dcbbb22560c1e7e}{size}} \{\}
+\item 
+double \mbox{\hyperlink{classCuboid_adbd270aa2674f3e9a80100c03a876da9}{distance}}
+\begin{DoxyCompactList}\small\item\em Mesh width. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classCuboid_a29c13c34316cebabcc7cc47f8741e51e}{mass}}
+\begin{DoxyCompactList}\small\item\em Mass of particles. \end{DoxyCompactList}\item 
+std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{classCuboid_a85f20af6978930f40aebea677b3a39f4}{initialV}} \{\}
+\begin{DoxyCompactList}\small\item\em Initial velocity of particles. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classCuboid_ab6bb8eb2a87d77e67acea088f6a8ba88}{meanV}}
+\begin{DoxyCompactList}\small\item\em Mean value of velocity of Brownian Motion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCuboid_a1abf60e93d024b7a01ee5b1a48f1f08a}\label{classCuboid_a1abf60e93d024b7a01ee5b1a48f1f08a}} 
+\index{Cuboid@{Cuboid}!Cuboid@{Cuboid}}
+\index{Cuboid@{Cuboid}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{Cuboid()}{Cuboid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Cuboid\+::\+Cuboid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCuboid_aed4c73ebea298db11ad24d59f063cacc}\label{classCuboid_aed4c73ebea298db11ad24d59f063cacc}} 
+\index{Cuboid@{Cuboid}!Cuboid@{Cuboid}}
+\index{Cuboid@{Cuboid}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{Cuboid()}{Cuboid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Cuboid\+::\+Cuboid (\begin{DoxyParamCaption}\item[{std\+::array$<$ double, 3 $>$}]{position,  }\item[{std\+::array$<$ int, 3 $>$}]{size,  }\item[{double}]{distance,  }\item[{double}]{mass,  }\item[{std\+::array$<$ double, 3 $>$}]{initalV,  }\item[{double}]{meanV }\end{DoxyParamCaption})}
+
+
+
+Constructs \mbox{\hyperlink{classCuboid}{Cuboid}} with given parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & coordinates of the lower left front-\/side corner \\
+\hline
+{\em size} & size of the \mbox{\hyperlink{classCuboid}{Cuboid}}, given in number of particles per dimension \\
+\hline
+{\em distance} & distance between particles/mesh width \\
+\hline
+{\em mass} & mass of one particle \\
+\hline
+{\em initalV} & initial velocity of the particles \\
+\hline
+{\em meanV} & mean-\/value of velocity of Brownian Motion (will be discarded, we use a hard-\/coded value instead) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCuboid_a8a663d3109224628851bbb87d4ad75a8}\label{classCuboid_a8a663d3109224628851bbb87d4ad75a8}} 
+\index{Cuboid@{Cuboid}!generate@{generate}}
+\index{generate@{generate}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily void Cuboid\+::generate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticleContainer}{Particle\+Container}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Generates the particles in the cuboid and adds them into given \mbox{\hyperlink{classParticleContainer}{Particle\+Container}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & the \mbox{\hyperlink{classParticleContainer}{Particle\+Container}} in which the generated Particles shall be stored \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCuboid_ae7ba37cc225e48355a50f96b338acae7}\label{classCuboid_ae7ba37cc225e48355a50f96b338acae7}} 
+\index{Cuboid@{Cuboid}!getSize@{getSize}}
+\index{getSize@{getSize}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily std\+::array$<$ int, 3 $>$ Cuboid\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for the size of cuboid. 
+
+\begin{DoxyReturn}{Returns}
+Size of cuboid 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCuboid_adbd270aa2674f3e9a80100c03a876da9}\label{classCuboid_adbd270aa2674f3e9a80100c03a876da9}} 
+\index{Cuboid@{Cuboid}!distance@{distance}}
+\index{distance@{distance}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily double Cuboid\+::distance\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mesh width. 
+
+\mbox{\Hypertarget{classCuboid_a85f20af6978930f40aebea677b3a39f4}\label{classCuboid_a85f20af6978930f40aebea677b3a39f4}} 
+\index{Cuboid@{Cuboid}!initialV@{initialV}}
+\index{initialV@{initialV}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{initialV}{initialV}}
+{\footnotesize\ttfamily std\+::array$<$double, 3$>$ Cuboid\+::initialV \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initial velocity of particles. 
+
+\mbox{\Hypertarget{classCuboid_a29c13c34316cebabcc7cc47f8741e51e}\label{classCuboid_a29c13c34316cebabcc7cc47f8741e51e}} 
+\index{Cuboid@{Cuboid}!mass@{mass}}
+\index{mass@{mass}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{mass}{mass}}
+{\footnotesize\ttfamily double Cuboid\+::mass\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mass of particles. 
+
+\mbox{\Hypertarget{classCuboid_ab6bb8eb2a87d77e67acea088f6a8ba88}\label{classCuboid_ab6bb8eb2a87d77e67acea088f6a8ba88}} 
+\index{Cuboid@{Cuboid}!meanV@{meanV}}
+\index{meanV@{meanV}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{meanV}{meanV}}
+{\footnotesize\ttfamily double Cuboid\+::meanV\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Mean value of velocity of Brownian Motion. 
+
+\mbox{\Hypertarget{classCuboid_ab46d52b7872539f4c24c7abcb7063dec}\label{classCuboid_ab46d52b7872539f4c24c7abcb7063dec}} 
+\index{Cuboid@{Cuboid}!position@{position}}
+\index{position@{position}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily std\+::array$<$double, 3$>$ Cuboid\+::position \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Position of cuboid (lower left corner) 
+
+\mbox{\Hypertarget{classCuboid_a9e1084f19a264d272dcbbb22560c1e7e}\label{classCuboid_a9e1084f19a264d272dcbbb22560c1e7e}} 
+\index{Cuboid@{Cuboid}!size@{size}}
+\index{size@{size}!Cuboid@{Cuboid}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily std\+::array$<$int, 3$>$ Cuboid\+::size \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classCuboid_autotoc_md0}{}\doxysubsection{of particles for each dimension}\label{classCuboid_autotoc_md0}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{Cuboid_8h}{Cuboid.\+h}}\item 
+src/\mbox{\hyperlink{Cuboid_8cpp}{Cuboid.\+cpp}}\end{DoxyCompactItemize}

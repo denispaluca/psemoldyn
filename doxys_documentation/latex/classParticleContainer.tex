@@ -25,7 +25,9 @@ void \mbox{\hyperlink{classParticleContainer_a99433da6afe29aea451912f4480bd68c}{
 void \mbox{\hyperlink{classParticleContainer_ac4f8083ab3943320a84d408d63541c84}{iterate}} (void($\ast$f)(\mbox{\hyperlink{classParticle}{Particle}} \&))
 \begin{DoxyCompactList}\small\item\em Iterate over all particles and apply function f. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classParticleContainer_ae65756884c6419a04ba40bf2d9fec3d3}{iterate\+Pairs}} (void($\ast$f)(\mbox{\hyperlink{classParticle}{Particle}} \&, \mbox{\hyperlink{classParticle}{Particle}} \&))
-\begin{DoxyCompactList}\small\item\em Iterate over all unique particle pairs and apply function f. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Iterate over all unique particle pairs and apply function f. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParticleContainer_ac41c4532444b71156d89b1fe19ba4db1}{reserve}} (int n)
+\begin{DoxyCompactList}\small\item\em Requests that the particles vector capacity be at least enough to contain n elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -161,6 +163,24 @@ Push particle at the end of the vector.
 
 \begin{DoxyParams}{Parameters}
 {\em particle} & The particle pushed in particles vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classParticleContainer_ac41c4532444b71156d89b1fe19ba4db1}\label{classParticleContainer_ac41c4532444b71156d89b1fe19ba4db1}} 
+\index{ParticleContainer@{ParticleContainer}!reserve@{reserve}}
+\index{reserve@{reserve}!ParticleContainer@{ParticleContainer}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily void Particle\+Container\+::reserve (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Requests that the particles vector capacity be at least enough to contain n elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Minimum capacity for the particles vector. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

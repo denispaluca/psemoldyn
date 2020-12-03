@@ -1,23 +1,22 @@
 \hypertarget{MaxwellBoltzmannDistribution_8h}{}\doxysection{src/utils/\+Maxwell\+Boltzmann\+Distribution.h File Reference}
 \label{MaxwellBoltzmannDistribution_8h}\index{src/utils/MaxwellBoltzmannDistribution.h@{src/utils/MaxwellBoltzmannDistribution.h}}
-{\ttfamily \#include $<$random$>$}\newline
-{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include \char`\"{}Particle.\+h\char`\"{}}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{MaxwellBoltzmannDistribution_8h_a23ee8aa14a5a2320bbc0672ca648fd91}{maxwell\+Boltzmann\+Distributed\+Velocity}} (double average\+Velocity)
-\begin{DoxyCompactList}\small\item\em Generate a random velocity according to the Maxwell-\/\+Boltzmann distribution, with a given average velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{MaxwellBoltzmannDistribution_8h_a916086c618022af760c579d14add55e4}{Maxwell\+Boltzmann\+Distribution}} (\mbox{\hyperlink{classParticle}{Particle}} \&p, double factor, int dimensions)
+\begin{DoxyCompactList}\small\item\em Add a random velocity according to the Maxwell-\/\+Boltzmann distribution to the particles, with a given mean velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{MaxwellBoltzmannDistribution_8h_a23ee8aa14a5a2320bbc0672ca648fd91}\label{MaxwellBoltzmannDistribution_8h_a23ee8aa14a5a2320bbc0672ca648fd91}} 
-\index{MaxwellBoltzmannDistribution.h@{MaxwellBoltzmannDistribution.h}!maxwellBoltzmannDistributedVelocity@{maxwellBoltzmannDistributedVelocity}}
-\index{maxwellBoltzmannDistributedVelocity@{maxwellBoltzmannDistributedVelocity}!MaxwellBoltzmannDistribution.h@{MaxwellBoltzmannDistribution.h}}
-\doxysubsubsection{\texorpdfstring{maxwellBoltzmannDistributedVelocity()}{maxwellBoltzmannDistributedVelocity()}}
-{\footnotesize\ttfamily std\+::array$<$double, 3$>$ maxwell\+Boltzmann\+Distributed\+Velocity (\begin{DoxyParamCaption}\item[{double}]{average\+Velocity }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{MaxwellBoltzmannDistribution_8h_a916086c618022af760c579d14add55e4}\label{MaxwellBoltzmannDistribution_8h_a916086c618022af760c579d14add55e4}} 
+\index{MaxwellBoltzmannDistribution.h@{MaxwellBoltzmannDistribution.h}!MaxwellBoltzmannDistribution@{MaxwellBoltzmannDistribution}}
+\index{MaxwellBoltzmannDistribution@{MaxwellBoltzmannDistribution}!MaxwellBoltzmannDistribution.h@{MaxwellBoltzmannDistribution.h}}
+\doxysubsubsection{\texorpdfstring{MaxwellBoltzmannDistribution()}{MaxwellBoltzmannDistribution()}}
+{\footnotesize\ttfamily void Maxwell\+Boltzmann\+Distribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p,  }\item[{double}]{factor,  }\item[{int}]{dimensions }\end{DoxyParamCaption})}
 
 
 
-Generate a random velocity according to the Maxwell-\/\+Boltzmann distribution, with a given average velocity. 
+Add a random velocity according to the Maxwell-\/\+Boltzmann distribution to the particles, with a given mean velocity. 
 
-@average\+Velocity The average velocity of the brownian motion for the system. 
+{\ttfamily The} particle to initialize. @mean\+Velocity The mean velocity of the brownian motion for the particle. @dimensions The number of dimensions to initialize (2 or 3). 

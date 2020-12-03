@@ -1,0 +1,116 @@
+\hypertarget{ForceUtils_8cpp}{}\doxysection{src/utils/\+Force\+Utils.cpp File Reference}
+\label{ForceUtils_8cpp}\index{src/utils/ForceUtils.cpp@{src/utils/ForceUtils.cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include \char`\"{}Force\+Utils.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ForceUtils_8cpp_a002b2f4894492820fe708b1b7e7c5e70}{E\+P\+S\+I\+L\+ON}}~5.\+0
+\item 
+\#define \mbox{\hyperlink{ForceUtils_8cpp_ab899f53048f1f06a224b5eb1fa369750}{S\+I\+G\+MA}}~1.\+0
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{ForceUtils_8cpp_a256c9f9d9ab1be857a4e04f58cba3bcf}{radius\+Pow3}} (const std\+::array$<$ double, 3 $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate second norm cubed of array with length 3. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{ForceUtils_8cpp_a121fc141311f7d9ee82f99ee92f76057}{radius}} (const std\+::array$<$ double, 3 $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculate second norm of array with length 3. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ForceUtils_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}{calculateF}} (\mbox{\hyperlink{classParticle}{Particle}} \&p1, \mbox{\hyperlink{classParticle}{Particle}} \&p2)
+\begin{DoxyCompactList}\small\item\em Calculate force between 2 particles and add it to their respective forces. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ForceUtils_8cpp_ab789f71b2bcf377e37725dad86dd4cbe}{calculate\+Lennard\+Jones}} (\mbox{\hyperlink{classParticle}{Particle}} \&p1, \mbox{\hyperlink{classParticle}{Particle}} \&p2)
+\begin{DoxyCompactList}\small\item\em Calculate Lennard-\/\+Jones force between 2 particles and add it to their respective forces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ForceUtils_8cpp_a002b2f4894492820fe708b1b7e7c5e70}\label{ForceUtils_8cpp_a002b2f4894492820fe708b1b7e7c5e70}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!EPSILON@{EPSILON}}
+\index{EPSILON@{EPSILON}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{EPSILON}{EPSILON}}
+{\footnotesize\ttfamily \#define E\+P\+S\+I\+L\+ON~5.\+0}
+
+\mbox{\Hypertarget{ForceUtils_8cpp_ab899f53048f1f06a224b5eb1fa369750}\label{ForceUtils_8cpp_ab899f53048f1f06a224b5eb1fa369750}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!SIGMA@{SIGMA}}
+\index{SIGMA@{SIGMA}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{SIGMA}{SIGMA}}
+{\footnotesize\ttfamily \#define S\+I\+G\+MA~1.\+0}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ForceUtils_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}\label{ForceUtils_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!calculateF@{calculateF}}
+\index{calculateF@{calculateF}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{calculateF()}{calculateF()}}
+{\footnotesize\ttfamily void calculateF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p1,  }\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Calculate force between 2 particles and add it to their respective forces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & First \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+{\em p2} & Second \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{ForceUtils_8cpp_ab789f71b2bcf377e37725dad86dd4cbe}\label{ForceUtils_8cpp_ab789f71b2bcf377e37725dad86dd4cbe}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!calculateLennardJones@{calculateLennardJones}}
+\index{calculateLennardJones@{calculateLennardJones}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{calculateLennardJones()}{calculateLennardJones()}}
+{\footnotesize\ttfamily void calculate\+Lennard\+Jones (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p1,  }\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Calculate Lennard-\/\+Jones force between 2 particles and add it to their respective forces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & First \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+{\em p2} & Second \mbox{\hyperlink{classParticle}{Particle}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{ForceUtils_8cpp_a121fc141311f7d9ee82f99ee92f76057}\label{ForceUtils_8cpp_a121fc141311f7d9ee82f99ee92f76057}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!radius@{radius}}
+\index{radius@{radius}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{radius()}{radius()}}
+{\footnotesize\ttfamily static double radius (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 3 $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate second norm of array with length 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\vert$$\vert$x$\vert$$\vert$\+\_\+2 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ForceUtils_8cpp_a256c9f9d9ab1be857a4e04f58cba3bcf}\label{ForceUtils_8cpp_a256c9f9d9ab1be857a4e04f58cba3bcf}} 
+\index{ForceUtils.cpp@{ForceUtils.cpp}!radiusPow3@{radiusPow3}}
+\index{radiusPow3@{radiusPow3}!ForceUtils.cpp@{ForceUtils.cpp}}
+\doxysubsubsection{\texorpdfstring{radiusPow3()}{radiusPow3()}}
+{\footnotesize\ttfamily static double radius\+Pow3 (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 3 $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculate second norm cubed of array with length 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Input coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+($\vert$$\vert$x$\vert$$\vert$\+\_\+2)$^\wedge$3 
+\end{DoxyReturn}
