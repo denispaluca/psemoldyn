@@ -12,7 +12,8 @@ Members:
 ## Requirements
 - log4cxx
 
-## MolSim program ##
+## MolSim program - collision of two bodies ##
+
 * Compile with 
 
       cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
@@ -62,11 +63,15 @@ Members:
 * Compile with
 
       cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
-      make MolSim -j <1.5 * number of cores>
+      make Tests_run -j <1.5 * number of cores>
 
 * run
       
       ctest
+
+  or
+
+      ./{PATH_TO_PROJECT}/tests/Tests_run
 
 ## Doxygen documentation ##
 * Build with
@@ -112,8 +117,28 @@ initial velocity | 3 double values
 </center>
 
 # Media #
-[Simulation video](https://drive.google.com/file/d/12MlUt1T5JHMlBw5voAf6p6pohGsnbqJ7/view?usp=sharing)
+[Simulation video](https://youtu.be/IOv_u4uau1g)
 
+
+# Performance measurements
+
+The OS/hardware the measurements were made on:
+
+* OS: Ubuntu 20.04.1 LTS x86_64  
+* Kernel: 5.4.0-54-generic  
+* CPU: Intel i7-8550U (8) @ 1.800GHz  
+* GPU: Intel UHD Graphics 620  
+* GPU: AMD ATI Radeon R7 M260/M265 / M  
+* Memory: 4865MiB / 7876MiB
+
+Measurements:
+
+./MolSim 5 0.0002 -f ../inputs/collision_task3.cuboids  
+vtk files and logs suppressed  
+Time in nanoseconds  
+Naive approach: 489953572838 (8.17 minutes)  
+Slight optimizations: 369851437310 (6.16 minutes)  
+(Single runs not averages)
 
 # Misc #
 * Compiler used: gcc 9.3.0
