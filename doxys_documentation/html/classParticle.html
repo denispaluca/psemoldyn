@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acdb36305260c411c46729e11cbbaf03a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#acdb36305260c411c46729e11cbbaf03a">calculateX</a> ()</td></tr>
 <tr class="memdesc:acdb36305260c411c46729e11cbbaf03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Position from t -&gt; t+1.  <a href="classParticle.html#acdb36305260c411c46729e11cbbaf03a">More...</a><br /></td></tr>
 <tr class="separator:acdb36305260c411c46729e11cbbaf03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d6b27c07627e73bd9d965f30834164e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">updateDT</a> (double <a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a>)</td></tr>
+<tr class="memitem:a8d6b27c07627e73bd9d965f30834164e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">updateDT</a> (double <a class="el" href="classParticle.html#a15b3b4db0d009288b4a68b720d034aef">delta_t</a>)</td></tr>
 <tr class="memdesc:a8d6b27c07627e73bd9d965f30834164e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passes delta time to set dt_2m and dtsq_2m.  <a href="classParticle.html#a8d6b27c07627e73bd9d965f30834164e">More...</a><br /></td></tr>
 <tr class="separator:a8d6b27c07627e73bd9d965f30834164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -149,6 +149,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a2b73dd42bcd56ba2e7ffeb0a5515a866">type</a></td></tr>
 <tr class="memdesc:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the particle.  <a href="classParticle.html#a2b73dd42bcd56ba2e7ffeb0a5515a866">More...</a><br /></td></tr>
 <tr class="separator:a2b73dd42bcd56ba2e7ffeb0a5515a866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15b3b4db0d009288b4a68b720d034aef"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a15b3b4db0d009288b4a68b720d034aef">delta_t</a></td></tr>
+<tr class="memdesc:a15b3b4db0d009288b4a68b720d034aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time step of the simulation.  <a href="classParticle.html#a15b3b4db0d009288b4a68b720d034aef">More...</a><br /></td></tr>
+<tr class="separator:a15b3b4db0d009288b4a68b720d034aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ab1397bdfd4b796412fa3f2acc17e0ab6">dt_2m</a></td></tr>
 <tr class="memdesc:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save dt/2m.  <a href="classParticle.html#ab1397bdfd4b796412fa3f2acc17e0ab6">More...</a><br /></td></tr>
 <tr class="separator:ab1397bdfd4b796412fa3f2acc17e0ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -627,6 +630,30 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a15b3b4db0d009288b4a68b720d034aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15b3b4db0d009288b4a68b720d034aef">&#9670;&nbsp;</a></span>delta_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Particle::delta_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Time step of the simulation. </p>
+
+</div>
+</div>
 <a id="ab1397bdfd4b796412fa3f2acc17e0ab6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab1397bdfd4b796412fa3f2acc17e0ab6">&#9670;&nbsp;</a></span>dt_2m</h2>
 

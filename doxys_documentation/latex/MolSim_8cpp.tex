@@ -2,18 +2,25 @@
 \label{MolSim_8cpp}\index{src/MolSim.cpp@{src/MolSim.cpp}}
 {\ttfamily \#include \char`\"{}File\+Reader.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}utils/\+Array\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils/\+Force\+Utils.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
 {\ttfamily \#include $<$output\+Writer/\+V\+T\+K\+Writer.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}Particle\+Container.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Particle\+Generator.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$log4cxx/logger.\+h$>$}\newline
+{\ttfamily \#include $<$log4cxx/propertyconfigurator.\+h$>$}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{MolSim_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}{calculateF}} (\mbox{\hyperlink{classParticle}{Particle}} \&p1, \mbox{\hyperlink{classParticle}{Particle}} \&p2)
-\begin{DoxyCompactList}\small\item\em Calculate force between 2 particles and add it to their respective forces. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}{plot\+Particles}} (int iteration, std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&particles)
 \begin{DoxyCompactList}\small\item\em Plot the particles to a vtu-\/file. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}{radius\+Pow3}} (const std\+::array$<$ double, 3 $>$ \&x)
-\begin{DoxyCompactList}\small\item\em Calculate second norm cubed of array with length 3. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{MolSim_8cpp_a97ee70a8770dc30d06c744b24eb2fcfc}{help}} ()
+\begin{DoxyCompactList}\small\item\em Output help text for calling the program. \end{DoxyCompactList}\item 
+log4cxx\+::\+Logger\+Ptr \mbox{\hyperlink{MolSim_8cpp_ae5591dea4939a04441ec6ab7f70b1e1c}{molsim\+Logger}} (log4cxx\+::\+Logger\+::get\+Logger(\char`\"{}molsim.\+console\char`\"{}))
+\item 
+log4cxx\+::\+Logger\+Ptr \mbox{\hyperlink{MolSim_8cpp_a4585140344a52ca38b70e70f35187dcc}{molsim\+File\+Logger}} (log4cxx\+::\+Logger\+::get\+Logger(\char`\"{}molsim\char`\"{}))
+\item 
 int \mbox{\hyperlink{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}{main}} (int argc, char $\ast$argsv\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
@@ -28,26 +35,16 @@ double \mbox{\hyperlink{MolSim_8cpp_a4cfc079302fe9a34fe24637c4e44303a}{delta\+\_
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{MolSim_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}\label{MolSim_8cpp_a925e9ef64620bfeb32239a1cef9d4e01}} 
-\index{MolSim.cpp@{MolSim.cpp}!calculateF@{calculateF}}
-\index{calculateF@{calculateF}!MolSim.cpp@{MolSim.cpp}}
-\doxysubsubsection{\texorpdfstring{calculateF()}{calculateF()}}
-{\footnotesize\ttfamily void calculateF (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p1,  }\item[{\mbox{\hyperlink{classParticle}{Particle}} \&}]{p2 }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{MolSim_8cpp_a97ee70a8770dc30d06c744b24eb2fcfc}\label{MolSim_8cpp_a97ee70a8770dc30d06c744b24eb2fcfc}} 
+\index{MolSim.cpp@{MolSim.cpp}!help@{help}}
+\index{help@{help}!MolSim.cpp@{MolSim.cpp}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily void help (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Calculate force between 2 particles and add it to their respective forces. 
+Output help text for calling the program. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em p1} & First \mbox{\hyperlink{classParticle}{Particle}} \\
-\hline
-{\em p2} & Second \mbox{\hyperlink{classParticle}{Particle}} \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-
-\end{DoxyReturn}
 \mbox{\Hypertarget{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}\label{MolSim_8cpp_a329c95e85f063f49b0daaed5c5b56335}} 
 \index{MolSim.cpp@{MolSim.cpp}!main@{main}}
 \index{main@{main}!MolSim.cpp@{MolSim.cpp}}
@@ -68,6 +65,18 @@ Main function.
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
+\mbox{\Hypertarget{MolSim_8cpp_a4585140344a52ca38b70e70f35187dcc}\label{MolSim_8cpp_a4585140344a52ca38b70e70f35187dcc}} 
+\index{MolSim.cpp@{MolSim.cpp}!molsimFileLogger@{molsimFileLogger}}
+\index{molsimFileLogger@{molsimFileLogger}!MolSim.cpp@{MolSim.cpp}}
+\doxysubsubsection{\texorpdfstring{molsimFileLogger()}{molsimFileLogger()}}
+{\footnotesize\ttfamily log4cxx\+::\+Logger\+Ptr molsim\+File\+Logger (\begin{DoxyParamCaption}\item[{log4cxx\+::\+Logger\+::get\+Logger(\char`\"{}molsim\char`\"{})}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{MolSim_8cpp_ae5591dea4939a04441ec6ab7f70b1e1c}\label{MolSim_8cpp_ae5591dea4939a04441ec6ab7f70b1e1c}} 
+\index{MolSim.cpp@{MolSim.cpp}!molsimLogger@{molsimLogger}}
+\index{molsimLogger@{molsimLogger}!MolSim.cpp@{MolSim.cpp}}
+\doxysubsubsection{\texorpdfstring{molsimLogger()}{molsimLogger()}}
+{\footnotesize\ttfamily log4cxx\+::\+Logger\+Ptr molsim\+Logger (\begin{DoxyParamCaption}\item[{log4cxx\+::\+Logger\+::get\+Logger(\char`\"{}molsim.\+console\char`\"{})}]{ }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}\label{MolSim_8cpp_aa18ac559812fb9906574fe12b796a510}} 
 \index{MolSim.cpp@{MolSim.cpp}!plotParticles@{plotParticles}}
 \index{plotParticles@{plotParticles}!MolSim.cpp@{MolSim.cpp}}
@@ -87,24 +96,6 @@ Plot the particles to a vtu-\/file.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 
-\end{DoxyReturn}
-\mbox{\Hypertarget{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}\label{MolSim_8cpp_a7fc120ee59f5477b079da51b401c3265}} 
-\index{MolSim.cpp@{MolSim.cpp}!radiusPow3@{radiusPow3}}
-\index{radiusPow3@{radiusPow3}!MolSim.cpp@{MolSim.cpp}}
-\doxysubsubsection{\texorpdfstring{radiusPow3()}{radiusPow3()}}
-{\footnotesize\ttfamily double radius\+Pow3 (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 3 $>$ \&}]{x }\end{DoxyParamCaption})}
-
-
-
-Calculate second norm cubed of array with length 3. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x} & Input coordinates \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-($\vert$$\vert$x$\vert$$\vert$\+\_\+2)$^\wedge$3 
 \end{DoxyReturn}
 
 

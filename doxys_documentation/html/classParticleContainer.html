@@ -98,6 +98,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae65756884c6419a04ba40bf2d9fec3d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#ae65756884c6419a04ba40bf2d9fec3d3">iteratePairs</a> (void(*f)(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;))</td></tr>
 <tr class="memdesc:ae65756884c6419a04ba40bf2d9fec3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate over all unique particle pairs and apply function f.  <a href="classParticleContainer.html#ae65756884c6419a04ba40bf2d9fec3d3">More...</a><br /></td></tr>
 <tr class="separator:ae65756884c6419a04ba40bf2d9fec3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41c4532444b71156d89b1fe19ba4db1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#ac41c4532444b71156d89b1fe19ba4db1">reserve</a> (int n)</td></tr>
+<tr class="memdesc:ac41c4532444b71156d89b1fe19ba4db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests that the particles vector capacity be at least enough to contain n elements.  <a href="classParticleContainer.html#ac41c4532444b71156d89b1fe19ba4db1">More...</a><br /></td></tr>
+<tr class="separator:ac41c4532444b71156d89b1fe19ba4db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -289,6 +292,33 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">particle</td><td>The particle pushed in particles vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ac41c4532444b71156d89b1fe19ba4db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41c4532444b71156d89b1fe19ba4db1">&#9670;&nbsp;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ParticleContainer::reserve </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Requests that the particles vector capacity be at least enough to contain n elements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>Minimum capacity for the particles vector. </td></tr>
   </table>
   </dd>
 </dl>

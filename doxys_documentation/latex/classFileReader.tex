@@ -11,8 +11,10 @@
 \item 
 virtual \mbox{\hyperlink{classFileReader_a1382969e8f1468f3b04ad4b44ab39dee}{$\sim$\+File\+Reader}} ()
 \item 
-void \mbox{\hyperlink{classFileReader_a2e3baa0bfff15e24c5e86c2e219ae677}{read\+File}} (std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&particles, char $\ast$filename)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classFileReader_a67ede066790561a6bd36c0b133631b61}{read\+Particles}} (std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&particles, char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Reads \mbox{\hyperlink{classParticle}{Particle}} data from file and constructs Particles into given vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classFileReader_ae1bc0896c86f71e7218dfb3ec7944202}{read\+Cuboids}} (std\+::vector$<$ \mbox{\hyperlink{classCuboid}{Cuboid}} $>$ \&cuboids, char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Reads \mbox{\hyperlink{classCuboid}{Cuboid}} data from file and constructs Cuboids into given vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -31,12 +33,40 @@ void \mbox{\hyperlink{classFileReader_a2e3baa0bfff15e24c5e86c2e219ae677}{read\+F
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classFileReader_a2e3baa0bfff15e24c5e86c2e219ae677}\label{classFileReader_a2e3baa0bfff15e24c5e86c2e219ae677}} 
-\index{FileReader@{FileReader}!readFile@{readFile}}
-\index{readFile@{readFile}!FileReader@{FileReader}}
-\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
-{\footnotesize\ttfamily void File\+Reader\+::read\+File (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&}]{particles,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classFileReader_ae1bc0896c86f71e7218dfb3ec7944202}\label{classFileReader_ae1bc0896c86f71e7218dfb3ec7944202}} 
+\index{FileReader@{FileReader}!readCuboids@{readCuboids}}
+\index{readCuboids@{readCuboids}!FileReader@{FileReader}}
+\doxysubsubsection{\texorpdfstring{readCuboids()}{readCuboids()}}
+{\footnotesize\ttfamily void File\+Reader\+::read\+Cuboids (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classCuboid}{Cuboid}} $>$ \&}]{cuboids,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
 
+
+
+Reads \mbox{\hyperlink{classCuboid}{Cuboid}} data from file and constructs Cuboids into given vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cuboids} & Vector where the constructed Cuboids are stored \\
+\hline
+{\em filename} & Name of file with data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFileReader_a67ede066790561a6bd36c0b133631b61}\label{classFileReader_a67ede066790561a6bd36c0b133631b61}} 
+\index{FileReader@{FileReader}!readParticles@{readParticles}}
+\index{readParticles@{readParticles}!FileReader@{FileReader}}
+\doxysubsubsection{\texorpdfstring{readParticles()}{readParticles()}}
+{\footnotesize\ttfamily void File\+Reader\+::read\+Particles (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classParticle}{Particle}} $>$ \&}]{particles,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads \mbox{\hyperlink{classParticle}{Particle}} data from file and constructs Particles into given vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em particles} & Vector where the constructed Particles are stored \\
+\hline
+{\em filename} & Name of file with data \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
