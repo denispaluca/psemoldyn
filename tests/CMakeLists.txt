@@ -10,6 +10,11 @@ file(GLOB_RECURSE TEST_SRC
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
         )
 
+#copy input files in binary folder
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/input/"
+        DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/input")
+
+
 add_executable(Tests_run ${TEST_SRC})
 set_target_properties(Tests_run PROPERTIES EXCLUDE_FROM_ALL 1)
 
@@ -19,4 +24,3 @@ target_link_libraries(Tests_run libmolsim)
 add_test(NAME Tests_run COMMAND Tests_run)
 message(${CMAKE_CURRENT_SOURCE_DIR})
 message("${EXECUTABLE_OUTPUT_PATH}")
-set_tests_properties(Tests_run PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
