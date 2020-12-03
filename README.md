@@ -71,7 +71,8 @@ Members:
 
   or
 
-      ./{PATH_TO_PROJECT}/tests/Tests_run
+      cd tests/
+      ./Tests_run
 
 ## Doxygen documentation ##
 * Build with
