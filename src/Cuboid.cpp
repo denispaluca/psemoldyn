@@ -55,3 +55,7 @@ std::string Cuboid::toString() {
            << " mass: " << mass << " initialV: " << initialV;
     return stream.str();
 }
+
+std::array<int,3> Cuboid::getSize() {
+    return size;
+}
