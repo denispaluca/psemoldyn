@@ -135,6 +135,12 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, char *filename) {
             }
             for (auto &sj : size) {
                 datastream >> sj;
+                if(sj < 0) {
+                    std::cout
+                            << "Error reading file: negative cuboid size found in line "
+                            << i << std::endl;
+                    exit(-1);
+                }
             }
             if (datastream.eof()) {
                 LOG4CXX_FATAL(fileReaderLogger, "Error reading file: eof reached unexpectedly reading from line " << i);
@@ -146,7 +152,19 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, char *filename) {
                 exit(-1);
             }
             datastream >> d;
+            if(d < 0) {
+                std::cout
+                        << "Error reading file: negative distance found in line "
+                        << i << std::endl;
+                exit(-1);
+            }
             datastream >> m;
+            if(m < 0) {
+                std::cout
+                        << "Error reading file: negative mass found in line "
+                        << i << std::endl;
+                exit(-1);
+            }
             for (auto &vj : v) {
                 datastream >> vj;
             }
