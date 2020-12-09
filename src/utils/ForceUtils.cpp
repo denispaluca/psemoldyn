@@ -43,7 +43,8 @@ static inline double pow3(const double x){
  * @return x^6
  */
 static inline double pow6(const double x){
-    return pow3(x) * pow3(x);
+    const double r = pow3(x);
+    return r*r;
 }
 
 void calculateF(Particle &p1, Particle &p2) {
