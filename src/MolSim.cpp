@@ -64,6 +64,17 @@ int main(int argc, char *argsv[]) {
     return -1; //added to prevent further errors
   }
 
+  bool isPT = argc == 6 && strcmp("-pt",argsv[5]) == 0;
+  if(isPT){
+    //Disable all loggers, cant only disable rootLogger
+    auto offptr =  Level::getOff();
+    molsimFileLogger->setLevel(offptr);
+    molsimLogger->setLevel(offptr);
+    log4cxx::Logger::getLogger("particle")->setLevel(offptr);
+    log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
+    log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
+  }
+
   double current_time = start_time;
   t_end = std::stod(argsv[1]);
   delta_t = std::stod(argsv[2]);
