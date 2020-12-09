@@ -1,1 +1,18 @@
-2020-12-09 11:46:59,491 INFO  /home/denis/Desktop/MolSim/src/MolSim.cpp:52 - Hi from MolSim. Starting code execution...
+2020-12-09 11:57:18,507 INFO  /home/denis/Desktop/MolSim/src/MolSim.cpp:52 - Hi from MolSim. Starting code execution...
+2020-12-09 11:57:18,507 INFO  /home/denis/Desktop/MolSim/src/MolSim.cpp:207 - This Program should be called as follows:
+./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}
+---------------------------------------------------------------
+t_end:			end time of the simulation
+delta_t:		length of time step between iterations
+-f, --file:		enables input via file. Accepted file extensions are .particles and .cuboids.
+				The corresponding file formats are specified in the project's ReadMe.
+-c, --cuboid:	allows for direct input of cuboid parameters. The data is expected to be given in the following order:
+					<position of cuboid> - 3 double values
+					<number of particles per dimension> - 3 integer values
+					<mesh width> - 1 double value
+					<mass of 1 particle> - 1 double value
+					<initial velocity> - 3 double values
+				divided by blank spaces and in a single line.
+				Data of multiple cuboids must also be given in a single line with a blank space in between.
+This help text can be printed using ./MolSim -h or ./MolSim --help.
+
