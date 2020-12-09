@@ -14,6 +14,7 @@
  */
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
+#include <chrono>
 
 using namespace log4cxx;
 using namespace log4cxx::helpers;
@@ -63,6 +64,7 @@ int main(int argc, char *argsv[]) {
   }
 
   bool isPT = argc == 6 && strcmp("-pt",argsv[5]) == 0;
+    chrono::duration<int64_t, nano> t0;
   if(isPT){
     //Disable all loggers, cant only disable rootLogger
     auto offptr =  Level::getOff();
@@ -71,6 +73,7 @@ int main(int argc, char *argsv[]) {
     log4cxx::Logger::getLogger("particle")->setLevel(offptr);
     log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
     log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
+      t0 = std::chrono::high_resolution_clock::now().time_since_epoch();
   }
 
   double current_time = start_time;
@@ -161,6 +164,11 @@ int main(int argc, char *argsv[]) {
   }
 
     LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
+  if(isPT){
+      auto t1 = std::chrono::high_resolution_clock::now().time_since_epoch();
+      t1-=t0;
+      std::cout<<"Performance test mode. Elapsed time: "<< t1.count() << " ns";
+  }
   return 0;
 }
 
