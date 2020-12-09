@@ -139,7 +139,7 @@ int main(int argc, char *argsv[]) {
           });
 
   int iteration = 0;
-  plotParticles(0, particleContainer.getParticles());
+  if(!isPT) plotParticles(0, particleContainer.getParticles());
 
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < t_end) {
@@ -156,7 +156,7 @@ int main(int argc, char *argsv[]) {
     });
 
     iteration++;
-    if (iteration % 10 == 0) {
+    if (!isPT && iteration % 10 == 0) {
       plotParticles(iteration, particleContainer.getParticles());
     }
 
