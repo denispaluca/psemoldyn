@@ -20,12 +20,30 @@ static double radiusPow3(const std::array<double, 3> &x) {
 }
 
 /**
- * Calculate second norm of array with length 3.
+ * Calculate square sum of array elements.
  * @param x Input coordinates
- * @return ||x||_2
+ * @return Square sum
  */
-static inline double radius(const std::array<double, 3> &x) {
-    return sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
+static inline double squareSum(const std::array<double, 3> &x) {
+    return x[0]*x[0] + x[1]*x[1] + x[2]*x[2];
+}
+
+/**
+ * Calculate x^3.
+ * @param x input
+ * @return x^3
+ */
+static inline double pow3(const double x){
+    return x*x*x;
+}
+
+/**
+ * Calculate x^6.
+ * @param x input
+ * @return x^6
+ */
+static inline double pow6(const double x){
+    return pow3(x) * pow3(x);
 }
 
 void calculateF(Particle &p1, Particle &p2) {
@@ -52,11 +70,11 @@ void calculateLennardJones(Particle &p1, Particle &p2) {
     xDiff[1] -= p1_x[1];
     xDiff[2] -= p1_x[2];
 
-    double divider = radius(xDiff);
+    double divider = squareSum(xDiff);
 
     if(divider) {
-        double sigDivPow6 = pow(SIGMA/divider, 6);
-        double vf = ((24*EPSILON) / (divider*divider)) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
+        double sigDivPow6 = pow6(SIGMA)/pow3(divider);
+        double vf = ((24*EPSILON) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
 
         std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
 
