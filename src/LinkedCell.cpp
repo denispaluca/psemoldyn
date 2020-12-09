@@ -30,6 +30,10 @@ ParticleContainer LinkedCell::getParticles() {
     return particles;
 }
 
+void LinkedCell::setParticles(const ParticleContainer &particles) {
+    LinkedCell::particles = particles;
+}
+
 bool LinkedCell::particleBelongs(Particle &p) {
     return (position[0] < p.getX()[0] && position[1] < p.getX()[1] && position[1] < p.getX()[1] &&
             p.getX()[0] < position[0] + cutoff  && p.getX()[1] < position[1] + cutoff && p.getX()[2] < position[2] + cutoff);

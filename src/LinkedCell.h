@@ -61,6 +61,12 @@ public:
     ParticleContainer getParticles();
 
     /**
+     * Setter for particles
+     * @param particles a ParticleContainer to which the particles field will be set
+     */
+    void setParticles(const ParticleContainer &particles);
+
+    /**
      * Checks if another cell is a direct neighbor of the current cell.
      * @param other the other cell
      * @return true if the cells are neighbors, false otherwise
