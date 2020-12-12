@@ -30,6 +30,11 @@ private:
     std::vector<LinkedCell> cells;
 
     /**
+     * A vector containing all cells within the domain (inner + boundary)
+     */
+    std::vector<LinkedCell> domainCells;
+
+    /**
      * A vector containing only the inner cells
      */
     std::vector<LinkedCell> inner;
@@ -102,13 +107,10 @@ public:
      */
     const std::vector<LinkedCell> &getHalo() const;
 
-
-
     /**
-     *
-     * @param f
+     * Calculates the forces between the particles using the Linked-Cell-Algorithm.
      */
-    void iterateNeighborCells(void (*f)(LinkedCell&,LinkedCell&));
+    void linkedCellForceCalc();
 
     /**
      * Deletes all the particles located in halo cells
