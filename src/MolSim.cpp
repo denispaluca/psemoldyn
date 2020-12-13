@@ -15,6 +15,11 @@
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
 
+/**
+ * XML Input
+ */
+#include "xml/molsimInput.cxx"
+
 using namespace log4cxx;
 using namespace log4cxx::helpers;
 
@@ -33,6 +38,21 @@ void plotParticles(int iteration, std::vector<Particle> &particles);
  */
 void help();
 
+/**
+ * Execute main molsim Routine
+ * @param argc
+ * @param argsv
+ * @return
+ */
+int mainRoutine(int argc, char *argsv[]);
+
+/**
+ * Execute main routine with xml input
+ * @param argsv
+ * @return
+ */
+int xmlRoutine(char *argsv[]);
+
 constexpr double start_time = 0;
 double t_end = 0.0;
 double delta_t = 0.0;
@@ -50,20 +70,34 @@ log4cxx::LoggerPtr molsimFileLogger(log4cxx::Logger::getLogger("molsim"));
 int main(int argc, char *argsv[]) {
     PropertyConfigurator::configure("../log4cxx.cfg");
     LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution...");
-  //std::cout << "Hello from MolSim for PSE!" << std::endl;
 
-  if(argc == 2 && (std::string(argsv[1]) == "-h" || (std::string(argsv[1]) == "--help"))) {
-      help();
-      return 0;
-  }
+    switch (argc) {
+        case 3:
+            if (!strcmp(argsv[1], "-xml")) {
+                return xmlRoutine(argsv);
+            }
+        case 4:
+        case 2:
+            if (!strcmp(argsv[1], "-h") || !strcmp(argsv[1], "-help")) {
+                help();
+                return 0;
+            }
+        case 1:
+            LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
+            help();
+            return -1;
+        default:
+            return mainRoutine(argc, argsv);
+    }
+}
 
-  if (argc < 5) {
-      LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
-    help();
-    //std::cout << "./MolSim t_end delta_t {-f filename | -c <number of cuboids> <cuboid data>}" << std::endl;
-    return -1; //added to prevent further errors
-  }
+int xmlRoutine(char *argsv[]) {
+    fileReader(argsv[1]);
+    //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
+    return 0;
+}
 
+int mainRoutine(int argc, char *argsv[]) {
   double current_time = start_time;
   t_end = std::stod(argsv[1]);
   delta_t = std::stod(argsv[2]);
@@ -81,7 +115,7 @@ int main(int argc, char *argsv[]) {
       } else {
           LOG4CXX_FATAL(molsimLogger, "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids.");
           //std::cout << "Invalid filename or filename extension, must be <name>.particles or <name>.cuboids." << std::endl;
-          help();
+          help(argsv);
           return -1;
       }
   } else if(input_method == "-c" || input_method == "--cuboids"){
@@ -90,7 +124,7 @@ int main(int argc, char *argsv[]) {
       if (argc != num_cuboids * 11 + 5) {           //11 cuboid parameters (w/O mean value of Brownian Motion)
           LOG4CXX_FATAL(molsimLogger, "Faulty cuboid data input");
           //std::cout << "Faulty cuboid data input" << std::endl;
-          help();
+          help(argsv);
           return -1;
       }
 
@@ -160,6 +194,8 @@ int main(int argc, char *argsv[]) {
   return 0;
 }
 
+
+
 void plotParticles(int iteration, std::vector<Particle> &particles) {
 
     /* output in xyz format */
@@ -182,8 +218,9 @@ void plotParticles(int iteration, std::vector<Particle> &particles) {
     vtkWriter.writeFile(out_name_vtk, iteration);
 }
 
-void help() {
-    string help = "This Program should be called as follows:\n";
+void help(char *argsv[]) {
+    /*
+    string help = "";
     help +=       "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}\n";
     help +=       "---------------------------------------------------------------\n";
     help +=       "t_end:\t\t\tend time of the simulation\n";
@@ -199,24 +236,6 @@ void help() {
     help +=       "\t\t\t\tdivided by blank spaces and in a single line.\n";
     help +=       "\t\t\t\tData of multiple cuboids must also be given in a single line with a blank space in between.\n";
     help +=       "This help text can be printed using ./MolSim -h or ./MolSim --help.\n";
-    LOG4CXX_INFO(molsimLogger, help);
-    /*
-    std::cout << std::endl;
-    std::cout << "This Program should be called as follows:" << std::endl;
-    std::cout << "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}" << std::endl;
-    std::cout << "---------------------------------------------------------------" << std::endl;
-    std::cout << "t_end:         end time of the simulation" << std::endl;
-    std::cout << "delta_t:       length of time step between iterations" << std::endl;
-    std::cout << "-f, --file:    enables input via file. Accepted file extensions are .particles and .cuboids." << std::endl;
-    std::cout << "               The corresponding file formats are specified in the project's ReadMe." << std::endl;
-    std::cout << "-c, --cuboid:  allows for direct input of cuboid parameters. The data is expected to be given in the following order:" << std::endl;
-    std::cout << "                 <position of cuboid> - 3 double values" << std::endl ;
-    std::cout << "                 <number of particles per dimension> - 3 integer values" << std::endl;
-    std::cout << "                 <mesh width> - 1 double value" << std::endl;
-    std::cout << "                 <mass of 1 particle> - 1 double value" << std::endl;
-    std::cout << "                 <initial velocity> - 3 double values" << std::endl;
-    std::cout << "               divided by blank spaces and in a single line." << std::endl;
-    std::cout << "               Data of multiple cuboids must also be given in a single line with a blank space in between." << std::endl;
-    std::cout << "This help text can be printed using ./MolSim -h or ./MolSim --help." << std::endl;
      */
+    LOG4CXX_INFO(molsimLogger, "This Program should be called as follows:\n" << argsv[0]);
 }

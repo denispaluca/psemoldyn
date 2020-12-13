@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<molsimInput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="molsimInput.xsd">
+    <name_output>Blub</name_output>
+    <frequency_output>10</frequency_output>
+    <delta_t>0.01</delta_t>
+    <t_end>2</t_end>
+    <particles>
+        <particle_file>eingabe-sonne.particles</particle_file>
+    </particles>
+</molsimInput>

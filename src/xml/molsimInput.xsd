@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- double vector with length 3 -->
+  <xsd:complexType name="double_vector">
+    <xsd:sequence>
+      <xsd:element name="x" type="xsd:string"/>
+      <xsd:element name="y" type="xsd:string"/>
+      <xsd:element name="z" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- integer vector with length 3 -->
+  <xsd:complexType name="integer_vector">
+    <xsd:sequence>
+      <xsd:element name="x" type="xsd:string"/>
+      <xsd:element name="y" type="xsd:string"/>
+      <xsd:element name="z" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- specification of one cuboid -->
+  <xsd:complexType name="cuboid">
+    <xsd:sequence>
+      <!-- coordinates of cuboid -->
+      <xsd:element name="coordinates" type="double_vector"/>
+      <!-- Number of particles per dimension -->
+      <xsd:element name="particles_per_dimension" type="integer_vector"/>
+      <!-- Mesh width/distance beween particles -->
+      <xsd:element name="distance_particles" type="xsd:string"/>
+      <!-- mass of one particle -->
+      <xsd:element name="mass" type="xsd:string"/>
+      <!-- initial velocity -->
+      <xsd:element name="velocity" type="double_vector"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- multiple cuboids -->
+  <xsd:complexType name="cuboid_cluster">
+    <xsd:sequence>
+      <xsd:element name="cuboid" type="cuboid" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- specification of one particle -->  
+  <xsd:complexType name="particle">
+    <xsd:sequence>
+      <!-- coordinates of particle -->
+      <xsd:element name="coordinates" type="double_vector"/>
+      <!-- initial velocity -->
+      <xsd:element name="velocity" type="double_vector"/>
+      <!-- mass of particle -->
+      <xsd:element name="mass" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- multiple particles -->
+  <xsd:complexType name="particle_cluster">
+    <xsd:sequence>
+      <xsd:element name="particle" type="particle" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- specify how you want to specify the input particles -->
+  <xsd:complexType name="input_particles">
+    <xsd:choice>
+      <!-- .particle file -->
+      <xsd:element name="particle_file" type="xsd:string"/>
+      <!-- .cuboids file -->
+      <xsd:element name="cuboids_file" type="xsd:string"/>
+      <!-- Directly specify cuboids -->
+      <xsd:element name="cuboids" type="cuboid_cluster"/>
+      <!-- Set t_end -->
+      <xsd:element name="particles" type="particle_cluster"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <!-- base element of the molsim input xml file -->
+  <xsd:complexType name="molsimInput">
+    <xsd:sequence>
+      <!-- Set base name of output files (optional, default name: MD_vtk) -->
+      <xsd:element name="name_output" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Set frequency of the output files (optional, default: 10) -->
+      <xsd:element name="frequency_output" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <!-- Set delta_t -->
+      <xsd:element name="delta_t" type="xsd:string"/>
+      <!-- Set t_end -->
+      <xsd:element name="t_end" type="xsd:string"/>
+      <!-- Set input particles -->
+      <xsd:element name="particles" type="input_particles"/>
+    </xsd:sequence>    
+  </xsd:complexType>
+
+
+  <xsd:element name="molsimInput" type="molsimInput"/>
+
+</xsd:schema>
