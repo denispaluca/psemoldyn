@@ -10,7 +10,7 @@ ParticleGenerator::ParticleGenerator() {
     particles = ParticleContainer();
 }
 
-ParticleGenerator::ParticleGenerator(char *filename) {
+ParticleGenerator::ParticleGenerator(const char *filename) {
     cuboids = std::vector<Cuboid>();
     FileReader fileReader;
     fileReader.readCuboids(cuboids, filename);

@@ -81,13 +81,13 @@
       <!-- Set base name of output files (optional, default name: MD_vtk) -->
       <xsd:element name="name_output" type="xsd:string" minOccurs="0" maxOccurs="1"/>
       <!-- Set frequency of the output files (optional, default: 10) -->
-      <xsd:element name="frequency_output" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="frequency_output" type="xsd:int" minOccurs="0" maxOccurs="1"/>
       <!-- Set delta_t -->
-      <xsd:element name="delta_t" type="xsd:string"/>
+      <xsd:element name="delta_t" type="xsd:double"/>
       <!-- Set t_end -->
-      <xsd:element name="t_end" type="xsd:string"/>
+      <xsd:element name="t_end" type="xsd:double"/>
       <!-- Set input particles -->
-      <xsd:element name="particles" type="input_particles"/>
+      <xsd:element name="filelocation" type="xsd:string"/>
     </xsd:sequence>    
   </xsd:complexType>
 

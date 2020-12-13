@@ -23,12 +23,12 @@ public:
    * @param particles Vector where the constructed Particles are stored
    * @param filename Name of file with data
    */
-  void readParticles(std::vector<Particle> &particles, char *filename);
+  void readParticles(std::vector<Particle> &particles, const char *filename);
 
   /**
    * @brief Reads Cuboid data from file and constructs Cuboids into given vector
    * @param cuboids Vector where the constructed Cuboids are stored
    * @param filename Name of file with data
    */
-  void readCuboids(std::vector<Cuboid> &cuboids, char *filename);
+  void readCuboids(std::vector<Cuboid> &cuboids, const char *filename);
 };

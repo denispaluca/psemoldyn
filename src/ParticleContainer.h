@@ -36,7 +36,7 @@ public:
      * @param filename Name of the files which will be parsed.
      * @return
      */
-    ParticleContainer(char* filename);
+    ParticleContainer(const char* filename);
 
     /**
      * Getter for the vector of particles in container.

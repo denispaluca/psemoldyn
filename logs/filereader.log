@@ -1,19 +1,19 @@
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:108 - Read line: #
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # file format:
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Lines of comment start with '#' and are only allowed at the beginning of the file
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Empty lines are not allowed.
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # The first line not being a comment has to be one integer, indicating the number of cuboids.
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: #
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Cuboid data consists of
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * xyz-coordinates (3 double values)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Number of particles per dimension (3 integer values)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Mesh width/distance beween particles (1 double value)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Mass m of one particle (1 double value)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * initial velocity (3 double values)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # (to be added: mean value of Brownian Motion velocity)
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: #
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: 2
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:124 - Reading 2.
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:127 - Read line: 0.0  0.0  0.0    40 8 1    1.1225   1.0   0.0   0.0 0.0
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:156 - Read line: 15.0 15.0 0.0     8 8 1    1.1225   1.0   0.0 -10.0 0.0
-2020-12-02 17:49:45,465 INFO  /home/denis/Desktop/MolSim/src/FileReader.cpp:156 - Read line: 
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:108 - Read line: #
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # file format:
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Lines of comment start with '#' and are only allowed at the beginning of the file
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Empty lines are not allowed.
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # The first line not being a comment has to be one integer, indicating the number of cuboids.
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: #
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # Cuboid data consists of
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * xyz-coordinates (3 double values)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Number of particles per dimension (3 integer values)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Mesh width/distance beween particles (1 double value)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * Mass m of one particle (1 double value)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # * initial velocity (3 double values)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: # (to be added: mean value of Brownian Motion velocity)
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: #
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:113 - Read line: 2
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:124 - Reading 2.
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:127 - Read line: 0.0  0.0  0.0    40 8 1    1.1225   1.0   0.0   0.0 0.0
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:183 - Read line: 15.0 15.0 0.0     8 8 1    1.1225   1.0   0.0 -10.0 0.0
+2020-12-13 16:04:53,113 DEBUG /home/denis/Desktop/MolSim/src/FileReader.cpp:183 - Read line: 

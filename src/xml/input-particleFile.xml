@@ -3,9 +3,7 @@
        xsi:noNamespaceSchemaLocation="molsimInput.xsd">
     <name_output>Blub</name_output>
     <frequency_output>10</frequency_output>
-    <delta_t>0.01</delta_t>
-    <t_end>2</t_end>
-    <particles>
-        <particle_file>eingabe-sonne.particles</particle_file>
-    </particles>
+    <delta_t>0.0002</delta_t>
+    <t_end>0.05</t_end>
+    <filelocation>../inputs/collision_task3.cuboids</filelocation>
 </molsimInput>

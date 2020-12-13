@@ -13,7 +13,7 @@ ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
   this->particles = particles;
 }
 
-ParticleContainer::ParticleContainer(char *filename) {
+ParticleContainer::ParticleContainer(const char *filename) {
   FileReader fileReader;
     fileReader.readParticles(particles, filename);
 }

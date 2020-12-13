@@ -30,7 +30,7 @@ public:
      * @param filename Name of the file which will be parsed.
      * @return
      */
-    explicit ParticleGenerator(char* filename);
+    explicit ParticleGenerator(const char* filename);
 
     /**
      * @brief Getter for vector of Cuboids
