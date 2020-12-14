@@ -6,20 +6,14 @@
 #include <iostream>
 #include <regex>
 #include <outputWriter/VTKWriter.h>
-#include "ParticleContainer.h"
-#include "ParticleGenerator.h"
-#include "xml/molsimInput.hxx"
+#include "Simulation.h"
+#include "xml/molsimInput.cxx"
 
 /*
  * Log4cxx includes
  */
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
-
-/**
- * XML Input
- */
-#include "xml/molsimInput.cxx"
 
 using namespace log4cxx;
 using namespace log4cxx::helpers;
@@ -52,7 +46,7 @@ int mainRoutine(molsimInput& m);
  * @param argsv
  * @return
  */
-int xmlRoutine(char *argsv);
+int xmlRoutine(char * xmlFile);
 
 constexpr double start_time = 0;
 double t_end = 0.0;
@@ -91,12 +85,13 @@ int main(int argc, char *argsv[]) {
     }
 }
 
-int xmlRoutine(char *xmlFile) {
+int xmlRoutine(char * xmlFile) {
     //fileReader(argsv[1]);
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
-    unique_ptr<molsimInput> k (molsimInput_(xmlFile));
+    unique_ptr<molsimInput> k (input(xmlFile));
 
-    mainRoutine(*k);
+    auto sim = Simulation(*k);
+    sim.start();
 
     return 0;
 }
@@ -109,7 +104,9 @@ int mainRoutine(molsimInput& m) {
   ParticleContainer particleContainer = ParticleContainer();
   ParticleGenerator particleGenerator = ParticleGenerator();
 
-  auto filename = m.filelocation().c_str();
+  auto filename ="hold";
+
+
 //  std::string input_method = argsv[3];
 //  if(input_method == "-f" || input_method == "--file"){
       if (std::regex_match(filename, std::regex(".+\\.particles"))) {

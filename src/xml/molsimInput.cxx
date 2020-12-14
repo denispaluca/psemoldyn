@@ -61,12 +61,6 @@ x (const x_type& x)
   this->x_.set (x);
 }
 
-void double_vector::
-x (::std::unique_ptr< x_type > x)
-{
-  this->x_.set (std::move (x));
-}
-
 const double_vector::y_type& double_vector::
 y () const
 {
@@ -85,12 +79,6 @@ y (const y_type& x)
   this->y_.set (x);
 }
 
-void double_vector::
-y (::std::unique_ptr< y_type > x)
-{
-  this->y_.set (std::move (x));
-}
-
 const double_vector::z_type& double_vector::
 z () const
 {
@@ -107,12 +95,6 @@ void double_vector::
 z (const z_type& x)
 {
   this->z_.set (x);
-}
-
-void double_vector::
-z (::std::unique_ptr< z_type > x)
-{
-  this->z_.set (std::move (x));
 }
 
 
@@ -137,12 +119,6 @@ x (const x_type& x)
   this->x_.set (x);
 }
 
-void integer_vector::
-x (::std::unique_ptr< x_type > x)
-{
-  this->x_.set (std::move (x));
-}
-
 const integer_vector::y_type& integer_vector::
 y () const
 {
@@ -159,12 +135,6 @@ void integer_vector::
 y (const y_type& x)
 {
   this->y_.set (x);
-}
-
-void integer_vector::
-y (::std::unique_ptr< y_type > x)
-{
-  this->y_.set (std::move (x));
 }
 
 const integer_vector::z_type& integer_vector::
@@ -185,86 +155,74 @@ z (const z_type& x)
   this->z_.set (x);
 }
 
-void integer_vector::
-z (::std::unique_ptr< z_type > x)
-{
-  this->z_.set (std::move (x));
-}
-
 
 // cuboid
 // 
 
-const cuboid::coordinates_type& cuboid::
-coordinates () const
+const cuboid::position_type& cuboid::
+position () const
 {
-  return this->coordinates_.get ();
+  return this->position_.get ();
 }
 
-cuboid::coordinates_type& cuboid::
-coordinates ()
+cuboid::position_type& cuboid::
+position ()
 {
-  return this->coordinates_.get ();
-}
-
-void cuboid::
-coordinates (const coordinates_type& x)
-{
-  this->coordinates_.set (x);
+  return this->position_.get ();
 }
 
 void cuboid::
-coordinates (::std::unique_ptr< coordinates_type > x)
+position (const position_type& x)
 {
-  this->coordinates_.set (std::move (x));
-}
-
-const cuboid::particles_per_dimension_type& cuboid::
-particles_per_dimension () const
-{
-  return this->particles_per_dimension_.get ();
-}
-
-cuboid::particles_per_dimension_type& cuboid::
-particles_per_dimension ()
-{
-  return this->particles_per_dimension_.get ();
+  this->position_.set (x);
 }
 
 void cuboid::
-particles_per_dimension (const particles_per_dimension_type& x)
+position (::std::unique_ptr< position_type > x)
 {
-  this->particles_per_dimension_.set (x);
+  this->position_.set (std::move (x));
+}
+
+const cuboid::size_type& cuboid::
+size () const
+{
+  return this->size_.get ();
+}
+
+cuboid::size_type& cuboid::
+size ()
+{
+  return this->size_.get ();
 }
 
 void cuboid::
-particles_per_dimension (::std::unique_ptr< particles_per_dimension_type > x)
+size (const size_type& x)
 {
-  this->particles_per_dimension_.set (std::move (x));
-}
-
-const cuboid::distance_particles_type& cuboid::
-distance_particles () const
-{
-  return this->distance_particles_.get ();
-}
-
-cuboid::distance_particles_type& cuboid::
-distance_particles ()
-{
-  return this->distance_particles_.get ();
+  this->size_.set (x);
 }
 
 void cuboid::
-distance_particles (const distance_particles_type& x)
+size (::std::unique_ptr< size_type > x)
 {
-  this->distance_particles_.set (x);
+  this->size_.set (std::move (x));
+}
+
+const cuboid::distance_type& cuboid::
+distance () const
+{
+  return this->distance_.get ();
+}
+
+cuboid::distance_type& cuboid::
+distance ()
+{
+  return this->distance_.get ();
 }
 
 void cuboid::
-distance_particles (::std::unique_ptr< distance_particles_type > x)
+distance (const distance_type& x)
 {
-  this->distance_particles_.set (std::move (x));
+  this->distance_.set (x);
 }
 
 const cuboid::mass_type& cuboid::
@@ -283,12 +241,6 @@ void cuboid::
 mass (const mass_type& x)
 {
   this->mass_.set (x);
-}
-
-void cuboid::
-mass (::std::unique_ptr< mass_type > x)
-{
-  this->mass_.set (std::move (x));
 }
 
 const cuboid::velocity_type& cuboid::
@@ -313,6 +265,24 @@ void cuboid::
 velocity (::std::unique_ptr< velocity_type > x)
 {
   this->velocity_.set (std::move (x));
+}
+
+const cuboid::meanv_type& cuboid::
+meanv () const
+{
+  return this->meanv_.get ();
+}
+
+cuboid::meanv_type& cuboid::
+meanv ()
+{
+  return this->meanv_.get ();
+}
+
+void cuboid::
+meanv (const meanv_type& x)
+{
+  this->meanv_.set (x);
 }
 
 
@@ -341,76 +311,70 @@ cuboid (const cuboid_sequence& s)
 // particle
 // 
 
-const particle::coordinates_type& particle::
-coordinates () const
+const particle::x_type& particle::
+x () const
 {
-  return this->coordinates_.get ();
+  return this->x_.get ();
 }
 
-particle::coordinates_type& particle::
-coordinates ()
+particle::x_type& particle::
+x ()
 {
-  return this->coordinates_.get ();
-}
-
-void particle::
-coordinates (const coordinates_type& x)
-{
-  this->coordinates_.set (x);
+  return this->x_.get ();
 }
 
 void particle::
-coordinates (::std::unique_ptr< coordinates_type > x)
+x (const x_type& x)
 {
-  this->coordinates_.set (std::move (x));
-}
-
-const particle::velocity_type& particle::
-velocity () const
-{
-  return this->velocity_.get ();
-}
-
-particle::velocity_type& particle::
-velocity ()
-{
-  return this->velocity_.get ();
+  this->x_.set (x);
 }
 
 void particle::
-velocity (const velocity_type& x)
+x (::std::unique_ptr< x_type > x)
 {
-  this->velocity_.set (x);
+  this->x_.set (std::move (x));
+}
+
+const particle::v_type& particle::
+v () const
+{
+  return this->v_.get ();
+}
+
+particle::v_type& particle::
+v ()
+{
+  return this->v_.get ();
 }
 
 void particle::
-velocity (::std::unique_ptr< velocity_type > x)
+v (const v_type& x)
 {
-  this->velocity_.set (std::move (x));
-}
-
-const particle::mass_type& particle::
-mass () const
-{
-  return this->mass_.get ();
-}
-
-particle::mass_type& particle::
-mass ()
-{
-  return this->mass_.get ();
+  this->v_.set (x);
 }
 
 void particle::
-mass (const mass_type& x)
+v (::std::unique_ptr< v_type > x)
 {
-  this->mass_.set (x);
+  this->v_.set (std::move (x));
+}
+
+const particle::m_type& particle::
+m () const
+{
+  return this->m_.get ();
+}
+
+particle::m_type& particle::
+m ()
+{
+  return this->m_.get ();
 }
 
 void particle::
-mass (::std::unique_ptr< mass_type > x)
+m (const m_type& x)
 {
-  this->mass_.set (std::move (x));
+  this->m_.set (x);
 }
 
 
@@ -436,127 +400,213 @@ particle (const particle_sequence& s)
 }
 
 
-// input_particles
+// sphere
 // 
 
-const input_particles::particle_file_optional& input_particles::
-particle_file () const
+const sphere::center_type& sphere::
+center () const
 {
-  return this->particle_file_;
+  return this->center_.get ();
 }
 
-input_particles::particle_file_optional& input_particles::
-particle_file ()
+sphere::center_type& sphere::
+center ()
 {
-  return this->particle_file_;
+  return this->center_.get ();
 }
 
-void input_particles::
-particle_file (const particle_file_type& x)
+void sphere::
+center (const center_type& x)
 {
-  this->particle_file_.set (x);
+  this->center_.set (x);
 }
 
-void input_particles::
-particle_file (const particle_file_optional& x)
+void sphere::
+center (::std::unique_ptr< center_type > x)
 {
-  this->particle_file_ = x;
+  this->center_.set (std::move (x));
 }
 
-void input_particles::
-particle_file (::std::unique_ptr< particle_file_type > x)
+const sphere::d_type& sphere::
+d () const
 {
-  this->particle_file_.set (std::move (x));
+  return this->d_.get ();
 }
 
-const input_particles::cuboids_file_optional& input_particles::
-cuboids_file () const
+sphere::d_type& sphere::
+d ()
 {
-  return this->cuboids_file_;
+  return this->d_.get ();
 }
 
-input_particles::cuboids_file_optional& input_particles::
-cuboids_file ()
+void sphere::
+d (const d_type& x)
 {
-  return this->cuboids_file_;
+  this->d_.set (x);
 }
 
-void input_particles::
-cuboids_file (const cuboids_file_type& x)
+const sphere::v_type& sphere::
+v () const
 {
-  this->cuboids_file_.set (x);
+  return this->v_.get ();
 }
 
-void input_particles::
-cuboids_file (const cuboids_file_optional& x)
+sphere::v_type& sphere::
+v ()
 {
-  this->cuboids_file_ = x;
+  return this->v_.get ();
 }
 
-void input_particles::
-cuboids_file (::std::unique_ptr< cuboids_file_type > x)
+void sphere::
+v (const v_type& x)
 {
-  this->cuboids_file_.set (std::move (x));
+  this->v_.set (x);
 }
 
-const input_particles::cuboids_optional& input_particles::
+void sphere::
+v (::std::unique_ptr< v_type > x)
+{
+  this->v_.set (std::move (x));
+}
+
+const sphere::m_type& sphere::
+m () const
+{
+  return this->m_.get ();
+}
+
+sphere::m_type& sphere::
+m ()
+{
+  return this->m_.get ();
+}
+
+void sphere::
+m (const m_type& x)
+{
+  this->m_.set (x);
+}
+
+const sphere::r_type& sphere::
+r () const
+{
+  return this->r_.get ();
+}
+
+sphere::r_type& sphere::
+r ()
+{
+  return this->r_.get ();
+}
+
+void sphere::
+r (const r_type& x)
+{
+  this->r_.set (x);
+}
+
+void sphere::
+r (::std::unique_ptr< r_type > x)
+{
+  this->r_.set (std::move (x));
+}
+
+
+// sphere_cluster
+// 
+
+const sphere_cluster::sphere_sequence& sphere_cluster::
+sphere () const
+{
+  return this->sphere_;
+}
+
+sphere_cluster::sphere_sequence& sphere_cluster::
+sphere ()
+{
+  return this->sphere_;
+}
+
+void sphere_cluster::
+sphere (const sphere_sequence& s)
+{
+  this->sphere_ = s;
+}
+
+
+// particle_data
+// 
+
+const particle_data::cuboids_type& particle_data::
 cuboids () const
 {
-  return this->cuboids_;
+  return this->cuboids_.get ();
 }
 
-input_particles::cuboids_optional& input_particles::
+particle_data::cuboids_type& particle_data::
 cuboids ()
 {
-  return this->cuboids_;
+  return this->cuboids_.get ();
 }
 
-void input_particles::
+void particle_data::
 cuboids (const cuboids_type& x)
 {
   this->cuboids_.set (x);
 }
 
-void input_particles::
-cuboids (const cuboids_optional& x)
-{
-  this->cuboids_ = x;
-}
-
-void input_particles::
+void particle_data::
 cuboids (::std::unique_ptr< cuboids_type > x)
 {
   this->cuboids_.set (std::move (x));
 }
 
-const input_particles::particles_optional& input_particles::
+const particle_data::particles_type& particle_data::
 particles () const
 {
-  return this->particles_;
+  return this->particles_.get ();
 }
 
-input_particles::particles_optional& input_particles::
+particle_data::particles_type& particle_data::
 particles ()
 {
-  return this->particles_;
+  return this->particles_.get ();
 }
 
-void input_particles::
+void particle_data::
 particles (const particles_type& x)
 {
   this->particles_.set (x);
 }
 
-void input_particles::
-particles (const particles_optional& x)
-{
-  this->particles_ = x;
-}
-
-void input_particles::
+void particle_data::
 particles (::std::unique_ptr< particles_type > x)
 {
   this->particles_.set (std::move (x));
+}
+
+const particle_data::spheres_type& particle_data::
+spheres () const
+{
+  return this->spheres_.get ();
+}
+
+particle_data::spheres_type& particle_data::
+spheres ()
+{
+  return this->spheres_.get ();
+}
+
+void particle_data::
+spheres (const spheres_type& x)
+{
+  this->spheres_.set (x);
+}
+
+void particle_data::
+spheres (::std::unique_ptr< spheres_type > x)
+{
+  this->spheres_.set (std::move (x));
 }
 
 
@@ -653,28 +703,70 @@ t_end (const t_end_type& x)
   this->t_end_.set (x);
 }
 
-const molsimInput::filelocation_type& molsimInput::
-filelocation () const
+const molsimInput::domain_size_type& molsimInput::
+domain_size () const
 {
-  return this->filelocation_.get ();
+  return this->domain_size_.get ();
 }
 
-molsimInput::filelocation_type& molsimInput::
-filelocation ()
+molsimInput::domain_size_type& molsimInput::
+domain_size ()
 {
-  return this->filelocation_.get ();
-}
-
-void molsimInput::
-filelocation (const filelocation_type& x)
-{
-  this->filelocation_.set (x);
+  return this->domain_size_.get ();
 }
 
 void molsimInput::
-filelocation (::std::unique_ptr< filelocation_type > x)
+domain_size (const domain_size_type& x)
 {
-  this->filelocation_.set (std::move (x));
+  this->domain_size_.set (x);
+}
+
+void molsimInput::
+domain_size (::std::unique_ptr< domain_size_type > x)
+{
+  this->domain_size_.set (std::move (x));
+}
+
+const molsimInput::cutoff_radius_type& molsimInput::
+cutoff_radius () const
+{
+  return this->cutoff_radius_.get ();
+}
+
+molsimInput::cutoff_radius_type& molsimInput::
+cutoff_radius ()
+{
+  return this->cutoff_radius_.get ();
+}
+
+void molsimInput::
+cutoff_radius (const cutoff_radius_type& x)
+{
+  this->cutoff_radius_.set (x);
+}
+
+const molsimInput::particle_data_type& molsimInput::
+particle_data () const
+{
+  return this->particle_data_.get ();
+}
+
+molsimInput::particle_data_type& molsimInput::
+particle_data ()
+{
+  return this->particle_data_.get ();
+}
+
+void molsimInput::
+particle_data (const particle_data_type& x)
+{
+  this->particle_data_.set (x);
+}
+
+void molsimInput::
+particle_data (::std::unique_ptr< particle_data_type > x)
+{
+  this->particle_data_.set (std::move (x));
 }
 
 
@@ -735,12 +827,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "x" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< x_type > r (
-        x_traits::create (i, f, this));
-
       if (!x_.present ())
       {
-        this->x_.set (::std::move (r));
+        this->x_.set (x_traits::create (i, f, this));
         continue;
       }
     }
@@ -749,12 +838,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "y" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< y_type > r (
-        y_traits::create (i, f, this));
-
       if (!y_.present ())
       {
-        this->y_.set (::std::move (r));
+        this->y_.set (y_traits::create (i, f, this));
         continue;
       }
     }
@@ -763,12 +849,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "z" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< z_type > r (
-        z_traits::create (i, f, this));
-
       if (!z_.present ())
       {
-        this->z_.set (::std::move (r));
+        this->z_.set (z_traits::create (i, f, this));
         continue;
       }
     }
@@ -879,12 +962,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "x" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< x_type > r (
-        x_traits::create (i, f, this));
-
       if (!x_.present ())
       {
-        this->x_.set (::std::move (r));
+        this->x_.set (x_traits::create (i, f, this));
         continue;
       }
     }
@@ -893,12 +973,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "y" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< y_type > r (
-        y_traits::create (i, f, this));
-
       if (!y_.present ())
       {
-        this->y_.set (::std::move (r));
+        this->y_.set (y_traits::create (i, f, this));
         continue;
       }
     }
@@ -907,12 +984,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "z" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< z_type > r (
-        z_traits::create (i, f, this));
-
       if (!z_.present ())
       {
-        this->z_.set (::std::move (r));
+        this->z_.set (z_traits::create (i, f, this));
         continue;
       }
     }
@@ -972,32 +1046,36 @@ integer_vector::
 //
 
 cuboid::
-cuboid (const coordinates_type& coordinates,
-        const particles_per_dimension_type& particles_per_dimension,
-        const distance_particles_type& distance_particles,
+cuboid (const position_type& position,
+        const size_type& size,
+        const distance_type& distance,
         const mass_type& mass,
-        const velocity_type& velocity)
+        const velocity_type& velocity,
+        const meanv_type& meanv)
 : ::xml_schema::type (),
-  coordinates_ (coordinates, this),
-  particles_per_dimension_ (particles_per_dimension, this),
-  distance_particles_ (distance_particles, this),
+  position_ (position, this),
+  size_ (size, this),
+  distance_ (distance, this),
   mass_ (mass, this),
-  velocity_ (velocity, this)
+  velocity_ (velocity, this),
+  meanv_ (meanv, this)
 {
 }
 
 cuboid::
-cuboid (::std::unique_ptr< coordinates_type > coordinates,
-        ::std::unique_ptr< particles_per_dimension_type > particles_per_dimension,
-        const distance_particles_type& distance_particles,
+cuboid (::std::unique_ptr< position_type > position,
+        ::std::unique_ptr< size_type > size,
+        const distance_type& distance,
         const mass_type& mass,
-        ::std::unique_ptr< velocity_type > velocity)
+        ::std::unique_ptr< velocity_type > velocity,
+        const meanv_type& meanv)
 : ::xml_schema::type (),
-  coordinates_ (std::move (coordinates), this),
-  particles_per_dimension_ (std::move (particles_per_dimension), this),
-  distance_particles_ (distance_particles, this),
+  position_ (std::move (position), this),
+  size_ (std::move (size), this),
+  distance_ (distance, this),
   mass_ (mass, this),
-  velocity_ (std::move (velocity), this)
+  velocity_ (std::move (velocity), this),
+  meanv_ (meanv, this)
 {
 }
 
@@ -1006,11 +1084,12 @@ cuboid (const cuboid& x,
         ::xml_schema::flags f,
         ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
-  coordinates_ (x.coordinates_, f, this),
-  particles_per_dimension_ (x.particles_per_dimension_, f, this),
-  distance_particles_ (x.distance_particles_, f, this),
+  position_ (x.position_, f, this),
+  size_ (x.size_, f, this),
+  distance_ (x.distance_, f, this),
   mass_ (x.mass_, f, this),
-  velocity_ (x.velocity_, f, this)
+  velocity_ (x.velocity_, f, this),
+  meanv_ (x.meanv_, f, this)
 {
 }
 
@@ -1019,11 +1098,12 @@ cuboid (const ::xercesc::DOMElement& e,
         ::xml_schema::flags f,
         ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  coordinates_ (this),
-  particles_per_dimension_ (this),
-  distance_particles_ (this),
+  position_ (this),
+  size_ (this),
+  distance_ (this),
   mass_ (this),
-  velocity_ (this)
+  velocity_ (this),
+  meanv_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1042,44 +1122,41 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
 
-    // coordinates
+    // position
     //
-    if (n.name () == "coordinates" && n.namespace_ ().empty ())
+    if (n.name () == "position" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< coordinates_type > r (
-        coordinates_traits::create (i, f, this));
+      ::std::unique_ptr< position_type > r (
+        position_traits::create (i, f, this));
 
-      if (!coordinates_.present ())
+      if (!position_.present ())
       {
-        this->coordinates_.set (::std::move (r));
+        this->position_.set (::std::move (r));
         continue;
       }
     }
 
-    // particles_per_dimension
+    // size
     //
-    if (n.name () == "particles_per_dimension" && n.namespace_ ().empty ())
+    if (n.name () == "size" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< particles_per_dimension_type > r (
-        particles_per_dimension_traits::create (i, f, this));
+      ::std::unique_ptr< size_type > r (
+        size_traits::create (i, f, this));
 
-      if (!particles_per_dimension_.present ())
+      if (!size_.present ())
       {
-        this->particles_per_dimension_.set (::std::move (r));
+        this->size_.set (::std::move (r));
         continue;
       }
     }
 
-    // distance_particles
+    // distance
     //
-    if (n.name () == "distance_particles" && n.namespace_ ().empty ())
+    if (n.name () == "distance" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< distance_particles_type > r (
-        distance_particles_traits::create (i, f, this));
-
-      if (!distance_particles_.present ())
+      if (!distance_.present ())
       {
-        this->distance_particles_.set (::std::move (r));
+        this->distance_.set (distance_traits::create (i, f, this));
         continue;
       }
     }
@@ -1088,12 +1165,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "mass" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< mass_type > r (
-        mass_traits::create (i, f, this));
-
       if (!mass_.present ())
       {
-        this->mass_.set (::std::move (r));
+        this->mass_.set (mass_traits::create (i, f, this));
         continue;
       }
     }
@@ -1112,27 +1186,38 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // meanv
+    //
+    if (n.name () == "meanv" && n.namespace_ ().empty ())
+    {
+      if (!meanv_.present ())
+      {
+        this->meanv_.set (meanv_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
-  if (!coordinates_.present ())
+  if (!position_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "coordinates",
+      "position",
       "");
   }
 
-  if (!particles_per_dimension_.present ())
+  if (!size_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "particles_per_dimension",
+      "size",
       "");
   }
 
-  if (!distance_particles_.present ())
+  if (!distance_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "distance_particles",
+      "distance",
       "");
   }
 
@@ -1147,6 +1232,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "velocity",
+      "");
+  }
+
+  if (!meanv_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "meanv",
       "");
   }
 }
@@ -1164,11 +1256,12 @@ operator= (const cuboid& x)
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
-    this->coordinates_ = x.coordinates_;
-    this->particles_per_dimension_ = x.particles_per_dimension_;
-    this->distance_particles_ = x.distance_particles_;
+    this->position_ = x.position_;
+    this->size_ = x.size_;
+    this->distance_ = x.distance_;
     this->mass_ = x.mass_;
     this->velocity_ = x.velocity_;
+    this->meanv_ = x.meanv_;
   }
 
   return *this;
@@ -1265,24 +1358,24 @@ cuboid_cluster::
 //
 
 particle::
-particle (const coordinates_type& coordinates,
-          const velocity_type& velocity,
-          const mass_type& mass)
+particle (const x_type& x,
+          const v_type& v,
+          const m_type& m)
 : ::xml_schema::type (),
-  coordinates_ (coordinates, this),
-  velocity_ (velocity, this),
-  mass_ (mass, this)
+  x_ (x, this),
+  v_ (v, this),
+  m_ (m, this)
 {
 }
 
 particle::
-particle (::std::unique_ptr< coordinates_type > coordinates,
-          ::std::unique_ptr< velocity_type > velocity,
-          const mass_type& mass)
+particle (::std::unique_ptr< x_type > x,
+          ::std::unique_ptr< v_type > v,
+          const m_type& m)
 : ::xml_schema::type (),
-  coordinates_ (std::move (coordinates), this),
-  velocity_ (std::move (velocity), this),
-  mass_ (mass, this)
+  x_ (std::move (x), this),
+  v_ (std::move (v), this),
+  m_ (m, this)
 {
 }
 
@@ -1291,9 +1384,9 @@ particle (const particle& x,
           ::xml_schema::flags f,
           ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
-  coordinates_ (x.coordinates_, f, this),
-  velocity_ (x.velocity_, f, this),
-  mass_ (x.mass_, f, this)
+  x_ (x.x_, f, this),
+  v_ (x.v_, f, this),
+  m_ (x.m_, f, this)
 {
 }
 
@@ -1302,9 +1395,9 @@ particle (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f,
           ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  coordinates_ (this),
-  velocity_ (this),
-  mass_ (this)
+  x_ (this),
+  v_ (this),
+  m_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1323,44 +1416,41 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
 
-    // coordinates
+    // x
     //
-    if (n.name () == "coordinates" && n.namespace_ ().empty ())
+    if (n.name () == "x" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< coordinates_type > r (
-        coordinates_traits::create (i, f, this));
+      ::std::unique_ptr< x_type > r (
+        x_traits::create (i, f, this));
 
-      if (!coordinates_.present ())
+      if (!x_.present ())
       {
-        this->coordinates_.set (::std::move (r));
+        this->x_.set (::std::move (r));
         continue;
       }
     }
 
-    // velocity
+    // v
     //
-    if (n.name () == "velocity" && n.namespace_ ().empty ())
+    if (n.name () == "v" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< velocity_type > r (
-        velocity_traits::create (i, f, this));
+      ::std::unique_ptr< v_type > r (
+        v_traits::create (i, f, this));
 
-      if (!velocity_.present ())
+      if (!v_.present ())
       {
-        this->velocity_.set (::std::move (r));
+        this->v_.set (::std::move (r));
         continue;
       }
     }
 
-    // mass
+    // m
     //
-    if (n.name () == "mass" && n.namespace_ ().empty ())
+    if (n.name () == "m" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< mass_type > r (
-        mass_traits::create (i, f, this));
-
-      if (!mass_.present ())
+      if (!m_.present ())
       {
-        this->mass_.set (::std::move (r));
+        this->m_.set (m_traits::create (i, f, this));
         continue;
       }
     }
@@ -1368,24 +1458,24 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     break;
   }
 
-  if (!coordinates_.present ())
+  if (!x_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "coordinates",
+      "x",
       "");
   }
 
-  if (!velocity_.present ())
+  if (!v_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "velocity",
+      "v",
       "");
   }
 
-  if (!mass_.present ())
+  if (!m_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "mass",
+      "m",
       "");
   }
 }
@@ -1403,9 +1493,9 @@ operator= (const particle& x)
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
-    this->coordinates_ = x.coordinates_;
-    this->velocity_ = x.velocity_;
-    this->mass_ = x.mass_;
+    this->x_ = x.x_;
+    this->v_ = x.v_;
+    this->m_ = x.m_;
   }
 
   return *this;
@@ -1498,40 +1588,62 @@ particle_cluster::
 {
 }
 
-// input_particles
+// sphere
 //
 
-input_particles::
-input_particles ()
+sphere::
+sphere (const center_type& center,
+        const d_type& d,
+        const v_type& v,
+        const m_type& m,
+        const r_type& r)
 : ::xml_schema::type (),
-  particle_file_ (this),
-  cuboids_file_ (this),
-  cuboids_ (this),
-  particles_ (this)
+  center_ (center, this),
+  d_ (d, this),
+  v_ (v, this),
+  m_ (m, this),
+  r_ (r, this)
 {
 }
 
-input_particles::
-input_particles (const input_particles& x,
-                 ::xml_schema::flags f,
-                 ::xml_schema::container* c)
+sphere::
+sphere (::std::unique_ptr< center_type > center,
+        const d_type& d,
+        ::std::unique_ptr< v_type > v,
+        const m_type& m,
+        ::std::unique_ptr< r_type > r)
+: ::xml_schema::type (),
+  center_ (std::move (center), this),
+  d_ (d, this),
+  v_ (std::move (v), this),
+  m_ (m, this),
+  r_ (std::move (r), this)
+{
+}
+
+sphere::
+sphere (const sphere& x,
+        ::xml_schema::flags f,
+        ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
-  particle_file_ (x.particle_file_, f, this),
-  cuboids_file_ (x.cuboids_file_, f, this),
-  cuboids_ (x.cuboids_, f, this),
-  particles_ (x.particles_, f, this)
+  center_ (x.center_, f, this),
+  d_ (x.d_, f, this),
+  v_ (x.v_, f, this),
+  m_ (x.m_, f, this),
+  r_ (x.r_, f, this)
 {
 }
 
-input_particles::
-input_particles (const ::xercesc::DOMElement& e,
-                 ::xml_schema::flags f,
-                 ::xml_schema::container* c)
+sphere::
+sphere (const ::xercesc::DOMElement& e,
+        ::xml_schema::flags f,
+        ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  particle_file_ (this),
-  cuboids_file_ (this),
-  cuboids_ (this),
-  particles_ (this)
+  center_ (this),
+  d_ (this),
+  v_ (this),
+  m_ (this),
+  r_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1540,7 +1652,7 @@ input_particles (const ::xercesc::DOMElement& e,
   }
 }
 
-void input_particles::
+void sphere::
 parse (::xsd::cxx::xml::dom::parser< char >& p,
        ::xml_schema::flags f)
 {
@@ -1550,33 +1662,280 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
 
-    // particle_file
+    // center
     //
-    if (n.name () == "particle_file" && n.namespace_ ().empty ())
+    if (n.name () == "center" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< particle_file_type > r (
-        particle_file_traits::create (i, f, this));
+      ::std::unique_ptr< center_type > r (
+        center_traits::create (i, f, this));
 
-      if (!this->particle_file_)
+      if (!center_.present ())
       {
-        this->particle_file_.set (::std::move (r));
+        this->center_.set (::std::move (r));
         continue;
       }
     }
 
-    // cuboids_file
+    // d
     //
-    if (n.name () == "cuboids_file" && n.namespace_ ().empty ())
+    if (n.name () == "d" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< cuboids_file_type > r (
-        cuboids_file_traits::create (i, f, this));
-
-      if (!this->cuboids_file_)
+      if (!d_.present ())
       {
-        this->cuboids_file_.set (::std::move (r));
+        this->d_.set (d_traits::create (i, f, this));
         continue;
       }
     }
+
+    // v
+    //
+    if (n.name () == "v" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< v_type > r (
+        v_traits::create (i, f, this));
+
+      if (!v_.present ())
+      {
+        this->v_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // m
+    //
+    if (n.name () == "m" && n.namespace_ ().empty ())
+    {
+      if (!m_.present ())
+      {
+        this->m_.set (m_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // r
+    //
+    if (n.name () == "r" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< r_type > r (
+        r_traits::create (i, f, this));
+
+      if (!r_.present ())
+      {
+        this->r_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!center_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "center",
+      "");
+  }
+
+  if (!d_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "d",
+      "");
+  }
+
+  if (!v_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "v",
+      "");
+  }
+
+  if (!m_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "m",
+      "");
+  }
+
+  if (!r_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "r",
+      "");
+  }
+}
+
+sphere* sphere::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class sphere (*this, f, c);
+}
+
+sphere& sphere::
+operator= (const sphere& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->center_ = x.center_;
+    this->d_ = x.d_;
+    this->v_ = x.v_;
+    this->m_ = x.m_;
+    this->r_ = x.r_;
+  }
+
+  return *this;
+}
+
+sphere::
+~sphere ()
+{
+}
+
+// sphere_cluster
+//
+
+sphere_cluster::
+sphere_cluster ()
+: ::xml_schema::type (),
+  sphere_ (this)
+{
+}
+
+sphere_cluster::
+sphere_cluster (const sphere_cluster& x,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  sphere_ (x.sphere_, f, this)
+{
+}
+
+sphere_cluster::
+sphere_cluster (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  sphere_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void sphere_cluster::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // sphere
+    //
+    if (n.name () == "sphere" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< sphere_type > r (
+        sphere_traits::create (i, f, this));
+
+      this->sphere_.push_back (::std::move (r));
+      continue;
+    }
+
+    break;
+  }
+}
+
+sphere_cluster* sphere_cluster::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class sphere_cluster (*this, f, c);
+}
+
+sphere_cluster& sphere_cluster::
+operator= (const sphere_cluster& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->sphere_ = x.sphere_;
+  }
+
+  return *this;
+}
+
+sphere_cluster::
+~sphere_cluster ()
+{
+}
+
+// particle_data
+//
+
+particle_data::
+particle_data (const cuboids_type& cuboids,
+               const particles_type& particles,
+               const spheres_type& spheres)
+: ::xml_schema::type (),
+  cuboids_ (cuboids, this),
+  particles_ (particles, this),
+  spheres_ (spheres, this)
+{
+}
+
+particle_data::
+particle_data (::std::unique_ptr< cuboids_type > cuboids,
+               ::std::unique_ptr< particles_type > particles,
+               ::std::unique_ptr< spheres_type > spheres)
+: ::xml_schema::type (),
+  cuboids_ (std::move (cuboids), this),
+  particles_ (std::move (particles), this),
+  spheres_ (std::move (spheres), this)
+{
+}
+
+particle_data::
+particle_data (const particle_data& x,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  cuboids_ (x.cuboids_, f, this),
+  particles_ (x.particles_, f, this),
+  spheres_ (x.spheres_, f, this)
+{
+}
+
+particle_data::
+particle_data (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  cuboids_ (this),
+  particles_ (this),
+  spheres_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void particle_data::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
 
     // cuboids
     //
@@ -1585,7 +1944,7 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< cuboids_type > r (
         cuboids_traits::create (i, f, this));
 
-      if (!this->cuboids_)
+      if (!cuboids_.present ())
       {
         this->cuboids_.set (::std::move (r));
         continue;
@@ -1599,41 +1958,75 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       ::std::unique_ptr< particles_type > r (
         particles_traits::create (i, f, this));
 
-      if (!this->particles_)
+      if (!particles_.present ())
       {
         this->particles_.set (::std::move (r));
         continue;
       }
     }
 
+    // spheres
+    //
+    if (n.name () == "spheres" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< spheres_type > r (
+        spheres_traits::create (i, f, this));
+
+      if (!spheres_.present ())
+      {
+        this->spheres_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
+  }
+
+  if (!cuboids_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "cuboids",
+      "");
+  }
+
+  if (!particles_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "particles",
+      "");
+  }
+
+  if (!spheres_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "spheres",
+      "");
   }
 }
 
-input_particles* input_particles::
+particle_data* particle_data::
 _clone (::xml_schema::flags f,
         ::xml_schema::container* c) const
 {
-  return new class input_particles (*this, f, c);
+  return new class particle_data (*this, f, c);
 }
 
-input_particles& input_particles::
-operator= (const input_particles& x)
+particle_data& particle_data::
+operator= (const particle_data& x)
 {
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
-    this->particle_file_ = x.particle_file_;
-    this->cuboids_file_ = x.cuboids_file_;
     this->cuboids_ = x.cuboids_;
     this->particles_ = x.particles_;
+    this->spheres_ = x.spheres_;
   }
 
   return *this;
 }
 
-input_particles::
-~input_particles ()
+particle_data::
+~particle_data ()
 {
 }
 
@@ -1643,13 +2036,34 @@ input_particles::
 molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
-             const filelocation_type& filelocation)
+             const domain_size_type& domain_size,
+             const cutoff_radius_type& cutoff_radius,
+             const particle_data_type& particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
   frequency_output_ (this),
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
-  filelocation_ (filelocation, this)
+  domain_size_ (domain_size, this),
+  cutoff_radius_ (cutoff_radius, this),
+  particle_data_ (particle_data, this)
+{
+}
+
+molsimInput::
+molsimInput (const delta_t_type& delta_t,
+             const t_end_type& t_end,
+             ::std::unique_ptr< domain_size_type > domain_size,
+             const cutoff_radius_type& cutoff_radius,
+             ::std::unique_ptr< particle_data_type > particle_data)
+: ::xml_schema::type (),
+  name_output_ (this),
+  frequency_output_ (this),
+  delta_t_ (delta_t, this),
+  t_end_ (t_end, this),
+  domain_size_ (std::move (domain_size), this),
+  cutoff_radius_ (cutoff_radius, this),
+  particle_data_ (std::move (particle_data), this)
 {
 }
 
@@ -1662,7 +2076,9 @@ molsimInput (const molsimInput& x,
   frequency_output_ (x.frequency_output_, f, this),
   delta_t_ (x.delta_t_, f, this),
   t_end_ (x.t_end_, f, this),
-  filelocation_ (x.filelocation_, f, this)
+  domain_size_ (x.domain_size_, f, this),
+  cutoff_radius_ (x.cutoff_radius_, f, this),
+  particle_data_ (x.particle_data_, f, this)
 {
 }
 
@@ -1675,7 +2091,9 @@ molsimInput (const ::xercesc::DOMElement& e,
   frequency_output_ (this),
   delta_t_ (this),
   t_end_ (this),
-  filelocation_ (this)
+  domain_size_ (this),
+  cutoff_radius_ (this),
+  particle_data_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1741,16 +2159,41 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // filelocation
+    // domain_size
     //
-    if (n.name () == "filelocation" && n.namespace_ ().empty ())
+    if (n.name () == "domain_size" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< filelocation_type > r (
-        filelocation_traits::create (i, f, this));
+      ::std::unique_ptr< domain_size_type > r (
+        domain_size_traits::create (i, f, this));
 
-      if (!filelocation_.present ())
+      if (!domain_size_.present ())
       {
-        this->filelocation_.set (::std::move (r));
+        this->domain_size_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // cutoff_radius
+    //
+    if (n.name () == "cutoff_radius" && n.namespace_ ().empty ())
+    {
+      if (!cutoff_radius_.present ())
+      {
+        this->cutoff_radius_.set (cutoff_radius_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // particle_data
+    //
+    if (n.name () == "particle_data" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< particle_data_type > r (
+        particle_data_traits::create (i, f, this));
+
+      if (!particle_data_.present ())
+      {
+        this->particle_data_.set (::std::move (r));
         continue;
       }
     }
@@ -1772,10 +2215,24 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!filelocation_.present ())
+  if (!domain_size_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "filelocation",
+      "domain_size",
+      "");
+  }
+
+  if (!cutoff_radius_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "cutoff_radius",
+      "");
+  }
+
+  if (!particle_data_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "particle_data",
       "");
   }
 }
@@ -1797,7 +2254,9 @@ operator= (const molsimInput& x)
     this->frequency_output_ = x.frequency_output_;
     this->delta_t_ = x.delta_t_;
     this->t_end_ = x.t_end_;
-    this->filelocation_ = x.filelocation_;
+    this->domain_size_ = x.domain_size_;
+    this->cutoff_radius_ = x.cutoff_radius_;
+    this->particle_data_ = x.particle_data_;
   }
 
   return *this;
@@ -1813,9 +2272,9 @@ molsimInput::
 #include <xsd/cxx/tree/error-handler.hxx>
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (const ::std::string& u,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (const ::std::string& u,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
@@ -1830,15 +2289,15 @@ molsimInput_ (const ::std::string& u,
   h.throw_if_failed< ::xsd::cxx::tree::parsing< char > > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (const ::std::string& u,
-              ::xml_schema::error_handler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (const ::std::string& u,
+       ::xml_schema::error_handler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
@@ -1852,15 +2311,15 @@ molsimInput_ (const ::std::string& u,
     throw ::xsd::cxx::tree::parsing< char > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (const ::std::string& u,
-              ::xercesc::DOMErrorHandler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (const ::std::string& u,
+       ::xercesc::DOMErrorHandler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
     ::xsd::cxx::xml::dom::parse< char > (
@@ -1870,91 +2329,91 @@ molsimInput_ (const ::std::string& u,
     throw ::xsd::cxx::tree::parsing< char > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
     (f & ::xml_schema::flags::keep_dom) == 0);
 
   ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::molsimInput_ (isrc, f, p);
+  return ::input (isrc, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              ::xml_schema::error_handler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       ::xml_schema::error_handler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
     (f & ::xml_schema::flags::keep_dom) == 0);
 
   ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::molsimInput_ (isrc, h, f, p);
+  return ::input (isrc, h, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              ::xercesc::DOMErrorHandler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       ::xercesc::DOMErrorHandler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::molsimInput_ (isrc, h, f, p);
+  return ::input (isrc, h, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              const ::std::string& sid,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       const ::std::string& sid,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
     (f & ::xml_schema::flags::keep_dom) == 0);
 
   ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::molsimInput_ (isrc, f, p);
+  return ::input (isrc, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              const ::std::string& sid,
-              ::xml_schema::error_handler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       const ::std::string& sid,
+       ::xml_schema::error_handler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::auto_initializer i (
     (f & ::xml_schema::flags::dont_initialize) == 0,
     (f & ::xml_schema::flags::keep_dom) == 0);
 
   ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::molsimInput_ (isrc, h, f, p);
+  return ::input (isrc, h, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::std::istream& is,
-              const ::std::string& sid,
-              ::xercesc::DOMErrorHandler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::std::istream& is,
+       const ::std::string& sid,
+       ::xercesc::DOMErrorHandler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::molsimInput_ (isrc, h, f, p);
+  return ::input (isrc, h, f, p);
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::xercesc::InputSource& i,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::xercesc::InputSource& i,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xsd::cxx::tree::error_handler< char > h;
 
@@ -1965,15 +2424,15 @@ molsimInput_ (::xercesc::InputSource& i,
   h.throw_if_failed< ::xsd::cxx::tree::parsing< char > > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::xercesc::InputSource& i,
-              ::xml_schema::error_handler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::xercesc::InputSource& i,
+       ::xml_schema::error_handler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
     ::xsd::cxx::xml::dom::parse< char > (
@@ -1983,15 +2442,15 @@ molsimInput_ (::xercesc::InputSource& i,
     throw ::xsd::cxx::tree::parsing< char > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::xercesc::InputSource& i,
-              ::xercesc::DOMErrorHandler& h,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (::xercesc::InputSource& i,
+       ::xercesc::DOMErrorHandler& h,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
     ::xsd::cxx::xml::dom::parse< char > (
@@ -2001,14 +2460,14 @@ molsimInput_ (::xercesc::InputSource& i,
     throw ::xsd::cxx::tree::parsing< char > ();
 
   return ::std::unique_ptr< ::molsimInput > (
-    ::molsimInput_ (
+    ::input (
       std::move (d), f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (const ::xercesc::DOMDocument& doc,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties& p)
+input (const ::xercesc::DOMDocument& doc,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties& p)
 {
   if (f & ::xml_schema::flags::keep_dom)
   {
@@ -2016,7 +2475,7 @@ molsimInput_ (const ::xercesc::DOMDocument& doc,
       static_cast< ::xercesc::DOMDocument* > (doc.cloneNode (true)));
 
     return ::std::unique_ptr< ::molsimInput > (
-      ::molsimInput_ (
+      ::input (
         std::move (d), f | ::xml_schema::flags::own_dom, p));
   }
 
@@ -2024,7 +2483,7 @@ molsimInput_ (const ::xercesc::DOMDocument& doc,
   const ::xsd::cxx::xml::qualified_name< char > n (
     ::xsd::cxx::xml::dom::name< char > (e));
 
-  if (n.name () == "molsimInput" &&
+  if (n.name () == "input" &&
       n.namespace_ () == "")
   {
     ::std::unique_ptr< ::molsimInput > r (
@@ -2036,14 +2495,14 @@ molsimInput_ (const ::xercesc::DOMDocument& doc,
   throw ::xsd::cxx::tree::unexpected_element < char > (
     n.name (),
     n.namespace_ (),
-    "molsimInput",
+    "input",
     "");
 }
 
 ::std::unique_ptr< ::molsimInput >
-molsimInput_ (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
-              ::xml_schema::flags f,
-              const ::xml_schema::properties&)
+input (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
+       ::xml_schema::flags f,
+       const ::xml_schema::properties&)
 {
   ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > c (
     ((f & ::xml_schema::flags::keep_dom) &&
@@ -2062,7 +2521,7 @@ molsimInput_ (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
                      (c.get () ? &c : &d),
                      0);
 
-  if (n.name () == "molsimInput" &&
+  if (n.name () == "input" &&
       n.namespace_ () == "")
   {
     ::std::unique_ptr< ::molsimInput > r (
@@ -2074,7 +2533,7 @@ molsimInput_ (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
   throw ::xsd::cxx::tree::unexpected_element < char > (
     n.name (),
     n.namespace_ (),
-    "molsimInput",
+    "input",
     "");
 }
 

@@ -7,6 +7,7 @@
 #include <vector>
 #include "ParticleContainer.h"
 #include "Cuboid.h"
+#include <xml/molsimInput.hxx>
 
 class ParticleGenerator{
 private:
@@ -24,6 +25,8 @@ public:
      * @brief Constructs ParticleGenerator with empty Cuboid vector and ParticleContainer
      */
     ParticleGenerator();
+
+    ParticleGenerator(particle_data& data);
 
     /**
      * @brief Constructs ParticleGenerator by reading Cuboid parameters from file.

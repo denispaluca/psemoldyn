@@ -4,6 +4,8 @@
     <name_output>Blub</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
-    <t_end>0.05</t_end>
-    <filelocation>../inputs/collision_task3.cuboids</filelocation>
+    <t_end>5</t_end>
+    <filelocation>
+        <cuboids_file>../inputs/collision_task3.cuboids</cuboids_file>
+        </filelocation>
 </molsimInput>
