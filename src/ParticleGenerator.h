@@ -26,14 +26,13 @@ public:
      */
     ParticleGenerator();
 
-    ParticleGenerator(particle_data& data);
 
     /**
-     * @brief Constructs ParticleGenerator by reading Cuboid parameters from file.
+     * @brief Constructs ParticleGenerator by reading the data from xml file.
      * @param filename Name of the file which will be parsed.
      * @return
      */
-    explicit ParticleGenerator(const char* filename);
+    ParticleGenerator(particle_data& data);
 
     /**
      * @brief Getter for vector of Cuboids

@@ -3,7 +3,6 @@
 //
 
 #include "ParticleContainer.h"
-#include "deprecated/FileReader.h"
 
 ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
@@ -11,11 +10,6 @@ ParticleContainer::ParticleContainer() {
 
 ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
   this->particles = particles;
-}
-
-ParticleContainer::ParticleContainer(const char *filename) {
-  FileReader fileReader;
-    fileReader.readParticles(particles, filename);
 }
 
 std::vector<Particle> &ParticleContainer::getParticles() {

@@ -25,13 +25,6 @@ public:
     ParticleContainer();
 
     /**
-     * Constructs ParticleContainer by copying particles.
-     * @param particles Particles to be copied.
-     * @return
-     */
-    ParticleContainer(std::vector<Particle> &particles);
-
-    /**
      * Constructs ParticleContainer with filename to be parsed by FileReader.
      * @param filename Name of the files which will be parsed.
      * @return
