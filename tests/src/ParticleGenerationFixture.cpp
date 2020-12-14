@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 #include "../../src/ParticleGenerator.h"
-#include "../../src/FileReader.h"
+#include "deprecated/FileReader.h"
 
 /**
  * Fixture to write tests for classes and functions used in the process of particle generation
