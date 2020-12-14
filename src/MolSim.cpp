@@ -8,6 +8,7 @@
 #include <outputWriter/VTKWriter.h>
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
+#include "LinkedCellContainer.h"
 
 /*
  * Log4cxx includes
@@ -27,6 +28,15 @@ using namespace std;
  * @return
  */
 void plotParticles(int iteration, std::vector<Particle> &particles);
+
+/**
+ * //TODO
+ * Plot the particles from cells to a vtu-file.
+ * @param iteration Iteration counter
+ * @param particles Vector of particles to be plotted
+ * @return
+ */
+void plotCells(int iteration, LinkedCellContainer &cells, int numParticles);
 
 /**
  * Output help text for calling the program.
@@ -130,34 +140,64 @@ int main(int argc, char *argsv[]) {
   int iteration = 0;
   plotParticles(0, particleContainer.getParticles());
 
+  int numParticles = particleContainer.getParticles().size();
+
+
+  ParticleContainer intoCells = ParticleContainer(particleContainer);
+  //LinkedCellContainer cells = LinkedCellContainer({180, 90, 1}, {0,0, 0}, 15, intoCells);
+  LinkedCellContainer cells = LinkedCellContainer({8, 8, 1}, {0,0, 0}, 2, intoCells);
+
+  LOG4CXX_INFO(molsimFileLogger, "Cells created");
+
   // for this loop, we assume: current x, current f and current v are known
   while (current_time < t_end) {
-    // calculate new x
-    particleContainer.iterate([](Particle &p){
-      p.calculateX();
-      p.saveOldF();
-    });
-    // calculate new f
-    particleContainer.iteratePairs(calculateLennardJones);
-    // calculate new v
-    particleContainer.iterate([](Particle &p){
-      p.calculateV();
-    });
+      /*
+      // calculate new x
+      particleContainer.iterate([](Particle &p){
+          p.calculateX();
+          p.saveOldF();
+      });
 
-    iteration++;
-    if (iteration % 10 == 0) {
-      plotParticles(iteration, particleContainer.getParticles());
-    }
+      // calculate new f
+      particleContainer.iteratePairs(calculateLennardJones);
+      
+      // calculate new v
+      particleContainer.iterate([](Particle &p){
+          p.calculateV();
+      });
+        */
+      cells.calculateIteration();
 
-    LOG4CXX_INFO(molsimFileLogger, "Iteration " << iteration << " finished.");
-    //std::cout << "Iteration " << iteration << " finished." << std::endl;
+      iteration++;
+      if (iteration % 10 == 0) {
+          //plotParticles(iteration, particleContainer.getParticles());
+          plotCells(iteration, cells, numParticles);
+      }
 
-    current_time += delta_t;
+      LOG4CXX_INFO(molsimFileLogger, "Iteration " << iteration << " finished.");
+      //std::cout << "Iteration " << iteration << " finished." << std::endl;
+
+      current_time += delta_t;
   }
 
     LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
   //std::cout << "output written. Terminating..." << std::endl;
   return 0;
+}
+
+void plotCells(int iteration, LinkedCellContainer &cells,  int numParticles) {
+    std::string out_name_vtk("MD_vtk");
+    outputWriter::VTKWriter vtkWriter;
+
+    vtkWriter.initializeOutput(numParticles);
+
+    for(auto c : cells.getCells()) {
+        for (auto &p : c.getParticles().getParticles()) {
+            vtkWriter.plotParticle(p);
+        }
+    }
+
+    vtkWriter.writeFile(out_name_vtk, iteration);
 }
 
 void plotParticles(int iteration, std::vector<Particle> &particles) {
