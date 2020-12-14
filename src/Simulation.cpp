@@ -8,7 +8,7 @@
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     particleContainer = ParticleGenerator(data.particle_data()).getParticles();
-    for(auto p : particleContainer.getParticles()){
+    for(auto& p : particleContainer.getParticles()){
         p.updateDT(data.delta_t());
     }
 }

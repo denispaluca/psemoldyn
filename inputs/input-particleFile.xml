@@ -4,7 +4,7 @@
     <name_output>Collision</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
-    <t_end>5</t_end>
+    <t_end>0.5</t_end>
     <domain_size>
         <x>10</x>
         <y>10</y>
@@ -15,9 +15,9 @@
         <cuboids>
             <cuboid>
                 <position>
-                    <x>0</x>
-                    <y>0</y>
-                    <z>0</z>
+                    <x>0.0</x>
+                    <y>0.0</y>
+                    <z>0.0</z>
                 </position>
                 <size>
                     <x>40</x>
@@ -25,19 +25,19 @@
                     <z>1</z>
                 </size>
                 <distance>1.1225</distance>
-                <mass>1</mass>
+                <mass>1.0</mass>
                 <velocity>
-                    <x>0</x>
-                    <y>0</y>
-                    <z>0</z>
+                    <x>0.0</x>
+                    <y>0.0</y>
+                    <z>0.0</z>
                 </velocity>
                 <meanv>0</meanv>
             </cuboid>
             <cuboid>
                 <position>
-                    <x>15</x>
-                    <y>15</y>
-                    <z>0</z>
+                    <x>15.0</x>
+                    <y>15.0</y>
+                    <z>0.0</z>
                 </position>
                 <size>
                     <x>8</x>
@@ -45,11 +45,11 @@
                     <z>1</z>
                 </size>
                 <distance>1.1225</distance>
-                <mass>1</mass>
+                <mass>1.0</mass>
                 <velocity>
-                    <x>0</x>
-                    <y>-10</y>
-                    <z>0</z>
+                    <x>0.0</x>
+                    <y>-10.0</y>
+                    <z>0.0</z>
                 </velocity>
                 <meanv>0</meanv>
             </cuboid>

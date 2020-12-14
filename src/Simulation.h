@@ -11,6 +11,13 @@ class Simulation {
 private:
     molsimInput& data;
     ParticleContainer particleContainer;
+
+    /**
+     * Plot the particles to a vtu-file.
+     * @param iteration Iteration counter
+     * @param particles Vector of particles to be plotted
+     * @return
+     */
     void plotParticles(int iteration);
 public:
     /**

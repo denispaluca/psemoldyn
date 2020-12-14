@@ -12,6 +12,8 @@ ParticleGenerator::ParticleGenerator() {
 }
 
 ParticleGenerator::ParticleGenerator(particle_data &data) {
+    cuboids = std::vector<Cuboid>();
+    particles = ParticleContainer();
     for(auto p : data.particles().particle()){
         particles.push(mapParticle(p));
     }
@@ -51,7 +53,7 @@ std::vector<Cuboid> ParticleGenerator::getCuboids() {
     return cuboids;
 }
 
-ParticleContainer ParticleGenerator::getParticles() {
+ParticleContainer& ParticleGenerator::getParticles() {
     return particles;
 }
 

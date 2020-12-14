@@ -45,7 +45,7 @@ public:
      * @brief Getter for ParticleContainer with generated particles
      * @return ParticleContainer
      */
-    ParticleContainer getParticles();
+    ParticleContainer& getParticles();
 
     /**
      * @brief adds Cuboid to vector and generates + adds its particles to the ParticleContainer
