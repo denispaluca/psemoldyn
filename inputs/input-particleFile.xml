@@ -4,7 +4,7 @@
     <name_output>Collision</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
-    <t_end>0.5</t_end>
+    <t_end>5</t_end>
     <domain_size>
         <x>10</x>
         <y>10</y>

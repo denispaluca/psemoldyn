@@ -21,7 +21,7 @@ Cuboid mapCuboid(cuboid& c){
         c.meanv()
     };
 }
-Particle& mapParticle(particle& p){
+Particle mapParticle(particle& p){
     auto particle = Particle (
         mapDoubleVec(p.x()),
         mapDoubleVec(p.v()),

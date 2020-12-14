@@ -4,7 +4,7 @@
 
 #include <utils/XSDMapper.h>
 #include "ParticleGenerator.h"
-#include "FileReader.h"
+#include "deprecated/FileReader.h"
 
 ParticleGenerator::ParticleGenerator() {
     cuboids = std::vector<Cuboid>();
@@ -15,7 +15,8 @@ ParticleGenerator::ParticleGenerator(particle_data &data) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
     for(auto p : data.particles().particle()){
-        particles.push(mapParticle(p));
+        auto particle = mapParticle(p);
+        particles.push(particle);
     }
 
     for(auto c : data.cuboids().cuboid()){
@@ -28,25 +29,6 @@ ParticleGenerator::ParticleGenerator(particle_data &data) {
             mapSphere(c).generate(particles);
         }
      */
-}
-
-ParticleGenerator::ParticleGenerator(const char *filename) {
-    cuboids = std::vector<Cuboid>();
-    FileReader fileReader;
-    fileReader.readCuboids(cuboids, filename);
-
-    particles = ParticleContainer();
-
-    int numberOfParticles = 0;
-    for(auto &c : cuboids){
-        auto size = c.getSize();
-        numberOfParticles += size[0] * size[1] * size[2];
-    }
-
-    particles.reserve(numberOfParticles);
-
-    for(auto &c : cuboids)
-        c.generate(particles);
 }
 
 std::vector<Cuboid> ParticleGenerator::getCuboids() {

@@ -3,7 +3,7 @@
 //
 
 #include "ParticleContainer.h"
-#include "FileReader.h"
+#include "deprecated/FileReader.h"
 
 ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
