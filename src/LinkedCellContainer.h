@@ -49,6 +49,8 @@ private:
      */
     std::vector<LinkedCell> halo;
 
+    std::vector<LinkedCell> nonEmpty;
+
 public:
 
     /**
@@ -111,6 +113,10 @@ public:
      * Calculates the forces between the particles using the Linked-Cell-Algorithm.
      */
     void linkedCellForceCalc();
+
+    void updateCells();
+
+    void calculateIteration();
 
     /**
      * Deletes all the particles located in halo cells

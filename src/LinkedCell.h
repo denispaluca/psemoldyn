@@ -24,6 +24,11 @@ private:
      */
     ParticleContainer particles;
 
+    /**
+     * The neighboring cells
+     */
+    std::vector<LinkedCell> neighbors;
+
 public:
 
     /**
@@ -61,6 +66,12 @@ public:
     ParticleContainer getParticles();
 
     /**
+     * Getter for the neighbors fiels
+     * @return a vector with the neighboring LinkedCells of this cell
+     */
+    std::vector<LinkedCell> getNeighbors();
+
+    /**
      * Setter for particles
      * @param particles a ParticleContainer to which the particles field will be set
      */
@@ -86,6 +97,12 @@ public:
      * @param particles the ParticleContainer with particles to be added
      */
     void addParticles(ParticleContainer particles);
+
+    void pullParticles(LinkedCell &other);
+
+    void addNeighbor(LinkedCell &other);
+
+    void moveParticlesFrom(ParticleContainer particles);
 
 };
 
