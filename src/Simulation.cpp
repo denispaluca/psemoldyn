@@ -13,14 +13,15 @@ Simulation::Simulation(molsimInput &data) : data(data) {
     }
 }
 
-void Simulation::start() {
+void Simulation::start(bool isPT) {
     int iteration = 0;
-    plotParticles(0);
 
     double current_time = 0;
     int freq = data.frequency_output().present() ?
             data.frequency_output().get() :
             10;
+
+    if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
         // calculate new x
@@ -36,18 +37,15 @@ void Simulation::start() {
         });
 
         iteration++;
-        if (iteration % freq == 0) {
+        if (!isPT && iteration % freq == 0) {
             plotParticles(iteration);
         }
-
-        //std::cout << "Iteration " << iteration << " finished." << std::endl;
 
         current_time += data.delta_t();
     }
 }
 
 void Simulation::plotParticles(int iteration) {
-
     /* output in xyz format */
 
 //    std::string out_name_xyz("MD_xyz");

@@ -26,10 +26,10 @@ public:
 
     /**
      * Constructs ParticleContainer with filename to be parsed by FileReader.
-     * @param filename Name of the files which will be parsed.
+     * @param particles Vector of particles.
      * @return
      */
-    ParticleContainer(const char* filename);
+    ParticleContainer(std::vector<Particle> &particles);
 
     /**
      * Getter for the vector of particles in container.

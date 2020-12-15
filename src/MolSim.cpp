@@ -1,8 +1,10 @@
 
 #include "Simulation.h"
 #include "xml/molsimInput.cxx"
+#include <chrono>
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
+#include <iostream>
 
 using namespace log4cxx;
 using namespace log4cxx::helpers;
@@ -18,12 +20,17 @@ void help();
  * @param argsv
  * @return
  */
-int xmlRoutine(char * xmlFile);
+int xmlRoutine(char * xmlFile, bool isPT = false);
 
+void startPT();
+
+void endPT();
 
 //static logger variables molsimLogger
 log4cxx::LoggerPtr molsimLogger(log4cxx::Logger::getLogger("molsim.console"));
 log4cxx::LoggerPtr molsimFileLogger(log4cxx::Logger::getLogger("molsim"));
+
+std::chrono::duration<int64_t, std::nano> ptStartTime;
 
 /**
  * Main function.
@@ -38,6 +45,10 @@ int main(int argc, char *argsv[]) {
     switch (argc) {
         case 2:
             return xmlRoutine(argsv[1]);
+        case 3:
+            if(!strcmp(argsv[2], "-pt")){
+                return xmlRoutine(argsv[1], true);
+            }
         default:
             LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
             help();
@@ -45,18 +56,39 @@ int main(int argc, char *argsv[]) {
     }
 }
 
-int xmlRoutine(char * xmlFile) {
+int xmlRoutine(char * xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
+    if(isPT) startPT();
+
     std::unique_ptr<molsimInput> ptr (input(xmlFile));
 
     auto sim = Simulation(*ptr);
-    sim.start();
+    sim.start(isPT);
 
+    if(isPT) endPT();
+    LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
     return 0;
 }
 
+void startPT(){
+    LOG4CXX_INFO(molsimLogger, "Starting performance test.");
+    auto offptr =  Level::getOff();
+    molsimFileLogger->setLevel(offptr);
+    molsimLogger->setLevel(offptr);
+    log4cxx::Logger::getLogger("particle")->setLevel(offptr);
+    log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
+    log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
+    ptStartTime = std::chrono::high_resolution_clock::now().time_since_epoch();
+}
+
+void endPT(){
+    auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
+    ptEndTime -= ptStartTime;
+    std::cout<<"Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns";
+}
+
 void help() {
-    string help = "This Program should be called as follows:\n"
+    std::string help = "This Program should be called as follows:\n"
     "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}\n"
     "---------------------------------------------------------------\n"
     "t_end:\t\t\tend time of the simulation\n"

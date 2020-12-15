@@ -22,8 +22,8 @@ private:
 public:
     /**
      * Simulation constructor.
-     * @param xmlFile
+     * @param data Input file data
      */
     Simulation(molsimInput &data);
-    void start();
+    void start(bool isPT);
 };
