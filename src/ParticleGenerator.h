@@ -20,6 +20,14 @@ private:
      * @brief ParticleContainer with all particles from all generated cuboids
      */
     ParticleContainer particles;
+    particle_data data;
+
+    /**
+     * Initialize vectors and reserve for particle size.
+     */
+    void reserve();
+
+    void generate();
 public:
     /**
      * @brief Constructs ParticleGenerator with empty Cuboid vector and ParticleContainer
@@ -51,5 +59,4 @@ public:
      * @param c the Cuboid to be added
      */
     void addCuboid(Cuboid c);
-
 };

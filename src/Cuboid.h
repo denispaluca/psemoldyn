@@ -85,4 +85,10 @@ public:
      * @return Size of cuboid
      */
     std::array<int,3>  getSize();
+
+    /**
+     * Getter for the number of particles in cuboid
+     * @return Number of particles in cuboid
+     */
+    std::size_t getNrPartilces();
 };

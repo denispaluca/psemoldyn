@@ -59,7 +59,7 @@ public:
      * @param n Minimum capacity for the particles vector.
      * @return
      */
-    void reserve(int n);
+    void reserve(std::size_t n);
 
     size_t size();
 };

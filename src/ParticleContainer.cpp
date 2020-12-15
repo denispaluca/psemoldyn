@@ -27,7 +27,7 @@ void ParticleContainer::iteratePairs(std::function<void(Particle&, Particle&)> f
       f(*i,*j);
 }
 
-void ParticleContainer::reserve(const int n){
+void ParticleContainer::reserve(const std::size_t n){
     particles.reserve(n);
 }
 
