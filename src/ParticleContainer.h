@@ -61,5 +61,9 @@ public:
      */
     void reserve(std::size_t n);
 
+    /**
+     * Returns size of particle vector.
+     * @return Size of particle vector.
+     */
     size_t size();
 };

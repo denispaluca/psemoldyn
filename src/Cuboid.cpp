@@ -60,6 +60,6 @@ std::array<int,3> Cuboid::getSize() {
     return size;
 }
 
-std::size_t Cuboid::getNrPartilces() {
+std::size_t Cuboid::getNrParticles() {
     return size[0] * size[1] * size[2];
 }

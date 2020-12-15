@@ -27,6 +27,9 @@ private:
      */
     void reserve();
 
+    /**
+     * Generate particles.
+     */
     void generate();
 public:
     /**

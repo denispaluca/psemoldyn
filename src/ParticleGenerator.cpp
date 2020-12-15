@@ -7,22 +7,9 @@
 #include "deprecated/FileReader.h"
 
 ParticleGenerator::ParticleGenerator(particle_data &data) : data(data) {
+    cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
-    for(auto p : data.particles().particle()){
-        auto particle = mapParticle(p);
-        particles.push(particle);
-    }
-
-    for(auto c : data.cuboids().cuboid()){
-        mapCuboid(c).generate(particles);
-    }
-
-    // TODO Task 4
-    /*
-     * for(auto c : data.spheres().sphere()){
-            mapSphere(c).generate(particles);
-        }
-     */
+    generate();
 }
 
 std::vector<Cuboid> ParticleGenerator::getCuboids() {
@@ -40,10 +27,10 @@ void ParticleGenerator::addCuboid(Cuboid c) {
 
 void ParticleGenerator::reserve(){
     std::size_t nrParticles = data.particles().particle().size();
-    cuboids = std::vector<Cuboid>(data.cuboids().cuboid().size());
+    cuboids.reserve(data.cuboids().cuboid().size());
     for(auto c : data.cuboids().cuboid()){
         auto cube = mapCuboid(c);
-        nrParticles += cube.getNrPartilces();
+        nrParticles += cube.getNrParticles();
         cuboids.emplace_back(cube);
     }
 
@@ -53,7 +40,7 @@ void ParticleGenerator::reserve(){
 }
 
 void ParticleGenerator::generate() {
-    this->reserve();
+    reserve();
     for(auto p: data.particles().particle()){
         auto particle = mapParticle(p);
         particles.push(particle);

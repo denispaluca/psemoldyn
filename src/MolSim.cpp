@@ -22,8 +22,14 @@ void help();
  */
 int xmlRoutine(char * xmlFile, bool isPT = false);
 
+/**
+ * Start performance test timer.
+ */
 void startPT();
 
+/**
+ * End performance test timer.
+ */
 void endPT();
 
 //static logger variables molsimLogger

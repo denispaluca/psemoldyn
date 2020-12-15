@@ -90,5 +90,5 @@ public:
      * Getter for the number of particles in cuboid
      * @return Number of particles in cuboid
      */
-    std::size_t getNrPartilces();
+    std::size_t getNrParticles();
 };

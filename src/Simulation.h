@@ -9,7 +9,14 @@
 
 class Simulation {
 private:
+    /**
+     * Input data.
+     */
     molsimInput& data;
+
+    /**
+     * Container for particles.
+     */
     ParticleContainer particleContainer;
 
     /**
@@ -25,5 +32,10 @@ public:
      * @param data Input file data
      */
     Simulation(molsimInput &data);
+
+    /**
+     * Start simulation.
+     * @param isPT Is simulation run a performance test.
+     */
     void start(bool isPT);
 };
