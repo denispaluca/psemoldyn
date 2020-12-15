@@ -8,9 +8,9 @@
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     particleContainer = ParticleGenerator(data.particle_data()).getParticles();
-    for(auto& p : particleContainer.getParticles()){
+    particleContainer.iterate([&data](Particle &p){
         p.updateDT(data.delta_t());
-    }
+    });
 }
 
 void Simulation::start(bool isPT) {
@@ -54,19 +54,17 @@ void Simulation::plotParticles(int iteration) {
 
     /* VTK output */
 
-    auto particles = particleContainer.getParticles();
-
     std::string out_name_vtk(
             data.name_output().present() ?
                 data.name_output().get().c_str() :
                 "MD_vtk");
     outputWriter::VTKWriter vtkWriter;
 
-    vtkWriter.initializeOutput(particles.size());
+    vtkWriter.initializeOutput(particleContainer.size());
 
-    for(auto &p : particles) {
+    particleContainer.iterate([&vtkWriter](Particle& p) {
         vtkWriter.plotParticle(p);
-    }
+    });
 
     vtkWriter.writeFile(out_name_vtk, iteration);
 }
