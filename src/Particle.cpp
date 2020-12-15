@@ -54,7 +54,7 @@ Particle::~Particle() {
 void Particle::updateDT(double delta_t) {
     this->delta_t = delta_t;
     dt_2m = delta_t / (2*m);
-    dtsq_2m = delta_t * delta_t / (2*m);
+    dtsq_2m = dt_2m * delta_t;
 }
 
 std::array<double, 3> &Particle::getX() { return x; }

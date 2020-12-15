@@ -24,7 +24,7 @@ FileReader::~FileReader() = default;
 //static logger variable fileReaderLogger
 log4cxx::LoggerPtr fileReaderLogger(log4cxx::Logger::getLogger("filereader"));
 
-void FileReader::readParticles(std::vector<Particle> &particles, char *filename) {
+void FileReader::readParticles(std::vector<Particle> &particles, const char *filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;
@@ -79,7 +79,7 @@ void FileReader::readParticles(std::vector<Particle> &particles, char *filename)
   }
 }
 
-void FileReader::readCuboids(std::vector<Cuboid> &cuboids, char *filename) {
+void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename) {
     std::array<double, 3> x;
     std::array<int, 3> size;
     double d;

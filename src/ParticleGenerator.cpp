@@ -2,38 +2,40 @@
 // Created by mira on 24.11.20.
 //
 
+#include <utils/XSDMapper.h>
 #include "ParticleGenerator.h"
-#include "FileReader.h"
+#include "deprecated/FileReader.h"
 
 ParticleGenerator::ParticleGenerator() {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
 }
 
-ParticleGenerator::ParticleGenerator(char *filename) {
+ParticleGenerator::ParticleGenerator(particle_data &data) {
     cuboids = std::vector<Cuboid>();
-    FileReader fileReader;
-    fileReader.readCuboids(cuboids, filename);
-
     particles = ParticleContainer();
-
-    int numberOfParticles = 0;
-    for(auto &c : cuboids){
-        auto size = c.getSize();
-        numberOfParticles += size[0] * size[1] * size[2];
+    for(auto p : data.particles().particle()){
+        auto particle = mapParticle(p);
+        particles.push(particle);
     }
 
-    particles.reserve(numberOfParticles);
+    for(auto c : data.cuboids().cuboid()){
+        mapCuboid(c).generate(particles);
+    }
 
-    for(auto &c : cuboids)
-        c.generate(particles);
+    // TODO Task 4
+    /*
+     * for(auto c : data.spheres().sphere()){
+            mapSphere(c).generate(particles);
+        }
+     */
 }
 
 std::vector<Cuboid> ParticleGenerator::getCuboids() {
     return cuboids;
 }
 
-ParticleContainer ParticleGenerator::getParticles() {
+ParticleContainer& ParticleGenerator::getParticles() {
     return particles;
 }
 
