@@ -103,8 +103,9 @@
       <!-- Set t_end -->
       <xsd:element name="t_end" type="xsd:double"/>
       <!-- domain size -->
-      <xsd:element name="domain_size" type="integer_vector"/>
+      <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
+      <xsd:element name="linked_cell" type="xsd:boolean" />
 
       <xsd:element name="particle_data" type="particle_data"/>
     </xsd:sequence>    

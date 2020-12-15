@@ -27,7 +27,7 @@ private:
     /**
      * The neighboring cells
      */
-    std::vector<LinkedCell> neighbors;
+    std::vector<LinkedCell*> neighbors;
 
 public:
 
@@ -69,7 +69,7 @@ public:
      * Getter for the neighbors fiels
      * @return a vector with the neighboring LinkedCells of this cell
      */
-    std::vector<LinkedCell> getNeighbors();
+    std::vector<LinkedCell*> getNeighbors();
 
     /**
      * Setter for particles
@@ -82,7 +82,7 @@ public:
      * @param other the other cell
      * @return true if the cells are neighbors, false otherwise
      */
-    bool isNeighbor(LinkedCell &other);
+    bool isNeighbor(LinkedCell* other);
 
     /**
      * Checks if the given particle is located within the bounds of this cell.
@@ -98,11 +98,11 @@ public:
      */
     void addParticles(ParticleContainer particles);
 
-    void pullParticles(LinkedCell &other);
-
-    void addNeighbor(LinkedCell &other);
+    void addNeighbor(LinkedCell* other);
 
     void moveParticlesFrom(ParticleContainer particles);
+
+    void removeParticles();
 
 };
 

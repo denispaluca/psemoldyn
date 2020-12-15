@@ -29,6 +29,7 @@ LinkedCellContainer::LinkedCellContainer() {
 
 LinkedCellContainer::LinkedCellContainer(std::array<double, 3> domain_size,
                                          std::array<double, 3> domain_pos, double cutoff_radius, ParticleContainer &particles) {
+    nrParticles = particles.size();
     this->domain_size = domain_size;
     this->domain_pos = domain_pos;
     this->cutoff_radius = cutoff_radius;
@@ -85,7 +86,7 @@ LinkedCellContainer::LinkedCellContainer(std::array<double, 3> domain_size,
                     neighborIndex = i + j * cellsX + k * cellsY + l;
 
                     if(neighborIndex != i && neighborIndex >= 0 && neighborIndex < cells.size()) {
-                        cells.at(i).addNeighbor(cells.at(neighborIndex));
+                        cells.at(i).addNeighbor(&cells.at(neighborIndex));
                     }
 
                 }
@@ -132,15 +133,46 @@ void LinkedCellContainer::linkedCellForceCalc() {
 
         // then calculate forces between particles of cell + neighbors
         for (auto &j : i->getNeighbors()) {
-            std::array<double, 3> xDiff = j.getPosition();
+            std::array<double, 3> xDiff = j->getPosition();
             xDiff = {xDiff[0] - i->getPosition()[0], xDiff[1] - i->getPosition()[1], xDiff[2] - i->getPosition()[2]};
             
             if(xDiff[0] > 0 || (xDiff[0] == 0 && xDiff[1] > 0) || (xDiff[0] == 0 && xDiff[1] == 0 && xDiff[2] > 0)) {
-                for (auto &pi : i->getParticles().getParticles()) {
-                    for (auto &pj : j.getParticles().getParticles()) {
+                i->getParticles().iterate([&](Particle & pi){
+                    j->getParticles().iterate([&](Particle& pj){
                         calculateLennardJones(pi, pj);
-                    }
-                }
+                    });
+                });
+//                for (auto &pi : i->getParticles().getParticles()) {
+//                    for (auto &pj : j.getParticles().getParticles()) {
+//                        calculateLennardJones(pi, pj);
+//                    }
+//                }
+            }
+        }
+    }
+}
+
+void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
+    for(LinkedCell& c: domainCells)
+        c.getParticles().iterate(f);
+}
+
+void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
+    for (auto & domainCell : domainCells) {
+        // calculate forces between particles of one cell
+        domainCell.getParticles().iteratePairs(f);
+
+        // then calculate forces between particles of cell + neighbors
+        for (auto &j : domainCell.getNeighbors()) {
+            std::array<double, 3> xDiff = j->getPosition();
+            xDiff = {xDiff[0] - domainCell.getPosition()[0], xDiff[1] - domainCell.getPosition()[1], xDiff[2] - domainCell.getPosition()[2]};
+
+            if(xDiff[0] > 0 || (xDiff[0] == 0 && xDiff[1] > 0) || (xDiff[0] == 0 && xDiff[1] == 0 && xDiff[2] > 0)) {
+                domainCell.getParticles().iterate([&](Particle & pi){
+                    j->getParticles().iterate([&](Particle& pj){
+                        f(pi, pj);
+                    });
+                });
             }
         }
     }
@@ -148,31 +180,26 @@ void LinkedCellContainer::linkedCellForceCalc() {
 
 void LinkedCellContainer::updateCells() {
     for(auto &i : cells) {
-        for (auto &j : i.getNeighbors())
-            i.pullParticles(j);
+        i.removeParticles();
     }
 }
 
 void LinkedCellContainer::calculateIteration() {
     //calculate new positions
-    for (auto &c : cells) {
-        c.getParticles().iterate([](Particle &p) {
+    iterate([](Particle &p) {
             p.calculateX();
             p.saveOldF();
-        });
-    }
-
-    //redistribute particles
-    updateCells();
+    });
 
     // calculate new f
-    linkedCellForceCalc();
+    iteratePairs(calculateLennardJones);
 
     // calculate new v
-    for(auto &c : cells) {
+    for(auto &c : domainCells) {
         c.getParticles().iterate([](Particle &p) {
             p.calculateV();
         });
+        c.removeParticles();
     }
 }
 
@@ -180,4 +207,8 @@ void LinkedCellContainer::deleteHaloParticles() {
    for(auto &i : halo) {
        i.setParticles(ParticleContainer());
    }
+}
+
+int LinkedCellContainer::size() {
+    return nrParticles;
 }

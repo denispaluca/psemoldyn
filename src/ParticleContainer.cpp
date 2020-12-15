@@ -2,13 +2,14 @@
 // Created by denis on 10.11.20.
 //
 
+#include <utils/ForceUtils.h>
 #include "ParticleContainer.h"
 
 ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
 }
 
-ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
+ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
   this->particles = particles;
 }
 
@@ -31,6 +32,27 @@ void ParticleContainer::reserve(const std::size_t n){
     particles.reserve(n);
 }
 
-std::size_t ParticleContainer::size(){
+int ParticleContainer::size(){
     return particles.size();
+}
+
+void ParticleContainer::erase(int i) {
+    particles.erase(particles.begin() + i);
+}
+
+void ParticleContainer::calculateIteration(){
+    iterate([](Particle &p){
+        p.calculateX();
+        p.saveOldF();
+    });
+    // calculate new f
+    iteratePairs(calculateLennardJones);
+    // calculate new v
+    iterate([](Particle &p){
+        p.calculateV();
+    });
+}
+
+std::vector<Particle> ParticleContainer::getParticles() {
+    return particles;
 }

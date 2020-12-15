@@ -745,6 +745,24 @@ cutoff_radius (const cutoff_radius_type& x)
   this->cutoff_radius_.set (x);
 }
 
+const molsimInput::linked_cell_type& molsimInput::
+linked_cell () const
+{
+  return this->linked_cell_.get ();
+}
+
+molsimInput::linked_cell_type& molsimInput::
+linked_cell ()
+{
+  return this->linked_cell_.get ();
+}
+
+void molsimInput::
+linked_cell (const linked_cell_type& x)
+{
+  this->linked_cell_.set (x);
+}
+
 const molsimInput::particle_data_type& molsimInput::
 particle_data () const
 {
@@ -2038,6 +2056,7 @@ molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              const domain_size_type& domain_size,
              const cutoff_radius_type& cutoff_radius,
+             const linked_cell_type& linked_cell,
              const particle_data_type& particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
@@ -2046,6 +2065,7 @@ molsimInput (const delta_t_type& delta_t,
   t_end_ (t_end, this),
   domain_size_ (domain_size, this),
   cutoff_radius_ (cutoff_radius, this),
+  linked_cell_ (linked_cell, this),
   particle_data_ (particle_data, this)
 {
 }
@@ -2055,6 +2075,7 @@ molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              ::std::unique_ptr< domain_size_type > domain_size,
              const cutoff_radius_type& cutoff_radius,
+             const linked_cell_type& linked_cell,
              ::std::unique_ptr< particle_data_type > particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
@@ -2063,6 +2084,7 @@ molsimInput (const delta_t_type& delta_t,
   t_end_ (t_end, this),
   domain_size_ (std::move (domain_size), this),
   cutoff_radius_ (cutoff_radius, this),
+  linked_cell_ (linked_cell, this),
   particle_data_ (std::move (particle_data), this)
 {
 }
@@ -2078,6 +2100,7 @@ molsimInput (const molsimInput& x,
   t_end_ (x.t_end_, f, this),
   domain_size_ (x.domain_size_, f, this),
   cutoff_radius_ (x.cutoff_radius_, f, this),
+  linked_cell_ (x.linked_cell_, f, this),
   particle_data_ (x.particle_data_, f, this)
 {
 }
@@ -2093,6 +2116,7 @@ molsimInput (const ::xercesc::DOMElement& e,
   t_end_ (this),
   domain_size_ (this),
   cutoff_radius_ (this),
+  linked_cell_ (this),
   particle_data_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -2184,6 +2208,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // linked_cell
+    //
+    if (n.name () == "linked_cell" && n.namespace_ ().empty ())
+    {
+      if (!linked_cell_.present ())
+      {
+        this->linked_cell_.set (linked_cell_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // particle_data
     //
     if (n.name () == "particle_data" && n.namespace_ ().empty ())
@@ -2229,6 +2264,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!linked_cell_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "linked_cell",
+      "");
+  }
+
   if (!particle_data_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2256,6 +2298,7 @@ operator= (const molsimInput& x)
     this->t_end_ = x.t_end_;
     this->domain_size_ = x.domain_size_;
     this->cutoff_radius_ = x.cutoff_radius_;
+    this->linked_cell_ = x.linked_cell_;
     this->particle_data_ = x.particle_data_;
   }
 

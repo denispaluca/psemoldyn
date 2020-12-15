@@ -1108,7 +1108,7 @@ class molsimInput: public ::xml_schema::type
 
   // domain_size
   //
-  typedef ::integer_vector domain_size_type;
+  typedef ::double_vector domain_size_type;
   typedef ::xsd::cxx::tree::traits< domain_size_type, char > domain_size_traits;
 
   const domain_size_type&
@@ -1137,6 +1137,20 @@ class molsimInput: public ::xml_schema::type
   void
   cutoff_radius (const cutoff_radius_type& x);
 
+  // linked_cell
+  //
+  typedef ::xml_schema::boolean linked_cell_type;
+  typedef ::xsd::cxx::tree::traits< linked_cell_type, char > linked_cell_traits;
+
+  const linked_cell_type&
+  linked_cell () const;
+
+  linked_cell_type&
+  linked_cell ();
+
+  void
+  linked_cell (const linked_cell_type& x);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1160,12 +1174,14 @@ class molsimInput: public ::xml_schema::type
                const t_end_type&,
                const domain_size_type&,
                const cutoff_radius_type&,
+               const linked_cell_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
                const t_end_type&,
                ::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
+               const linked_cell_type&,
                ::std::unique_ptr< particle_data_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
@@ -1200,6 +1216,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< t_end_type > t_end_;
   ::xsd::cxx::tree::one< domain_size_type > domain_size_;
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
+  ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

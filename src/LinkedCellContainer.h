@@ -7,7 +7,7 @@
 
 #include "LinkedCell.h"
 
-class LinkedCellContainer {
+class LinkedCellContainer : public Container {
 private:
     /**
      * The size of the domain of the cells (inner + boundary)
@@ -50,6 +50,10 @@ private:
     std::vector<LinkedCell> halo;
 
     std::vector<LinkedCell> nonEmpty;
+    /**
+     * Number of particles.
+     */
+    std::size_t nrParticles;
 
 public:
 
@@ -122,6 +126,28 @@ public:
      * Deletes all the particles located in halo cells
      */
     void deleteHaloParticles();
+
+
+
+    /**
+     * Iterate over all particles and apply function f
+     * @param f Function applied to particles
+     * @return
+     */
+    void iterate(std::function<void(Particle&)> f) override;
+
+    /**
+     * Iterate over all unique particle pairs and apply function f
+     * @param f Function that is applied to pairs
+     * @return
+     */
+    void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
+
+    /**
+     * Returns size of particle vector.
+     * @return Size of particle vector.
+     */
+    int size();
 
 };
 
