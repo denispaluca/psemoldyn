@@ -59,3 +59,7 @@ std::string Cuboid::toString() {
 std::array<int,3> Cuboid::getSize() {
     return size;
 }
+
+std::size_t Cuboid::getNrParticles() {
+    return size[0] * size[1] * size[2];
+}
