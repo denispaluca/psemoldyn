@@ -6,6 +6,8 @@
 
 #include "Particle.h"
 #include <vector>
+#include <functional>
+
 /**
  * The ParticleContainer class encapsulates particles
  * and makes it possible to iterate through them.
@@ -26,17 +28,10 @@ public:
 
     /**
      * Constructs ParticleContainer with filename to be parsed by FileReader.
-     * @param filename Name of the files which will be parsed.
+     * @param particles Vector of particles.
      * @return
      */
-    ParticleContainer(const char* filename);
-
-    /**
-     * Getter for the vector of particles in container.
-     * @return The vector of particles
-     * @param
-     */
-    std::vector<Particle> &getParticles();
+    ParticleContainer(std::vector<Particle> &particles);
 
     /**
      * Push particle at the end of the vector.
@@ -50,19 +45,25 @@ public:
      * @param f Function applied to particles
      * @return
      */
-    void iterate(void (*f)(Particle&));
+    void iterate(std::function<void(Particle&)> f);
 
     /**
      * Iterate over all unique particle pairs and apply function f
      * @param f Function that is applied to pairs
      * @return
      */
-    void iteratePairs(void (*f)(Particle&,Particle&));
+    void iteratePairs(std::function<void(Particle&, Particle&)> f);
 
     /**
      * Requests that the particles vector capacity be at least enough to contain n elements.
      * @param n Minimum capacity for the particles vector.
      * @return
      */
-    void reserve(int n);
+    void reserve(std::size_t n);
+
+    /**
+     * Returns size of particle vector.
+     * @return Size of particle vector.
+     */
+    size_t size();
 };

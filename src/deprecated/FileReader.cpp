@@ -37,12 +37,10 @@ void FileReader::readParticles(std::vector<Particle> &particles, const char *fil
 
     getline(input_file, tmp_string);
     LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-    //std::cout << "Read line: " << tmp_string << std::endl;
 
     while (tmp_string.empty() or tmp_string[0] == '#') {
       getline(input_file, tmp_string);
       LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-      //std::cout << "Read line: " << tmp_string << std::endl;
     }
 
     std::istringstream numstream(tmp_string);
@@ -53,10 +51,8 @@ void FileReader::readParticles(std::vector<Particle> &particles, const char *fil
     particles.reserve(num_particles);
 
     LOG4CXX_DEBUG(fileReaderLogger, "Reading " << num_particles << ".");
-    //std::cout << "Reading " << num_particles << "." << std::endl;
     getline(input_file, tmp_string);
     LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-    //std::cout << "Read line: " << tmp_string << std::endl;
 
     for (int i = 0; i < num_particles; i++) {
       std::istringstream datastream(tmp_string);
@@ -69,11 +65,6 @@ void FileReader::readParticles(std::vector<Particle> &particles, const char *fil
       }
       if (datastream.eof()) {
           LOG4CXX_FATAL(fileReaderLogger, "Error reading file: eof reached unexpectedly reading from line " << i);
-          /*
-        std::cout
-            << "Error reading file: eof reached unexpectedly reading from line "
-            << i << std::endl;
-            */
         exit(-1);
       }
       datastream >> m;
@@ -81,11 +72,9 @@ void FileReader::readParticles(std::vector<Particle> &particles, const char *fil
 
       getline(input_file, tmp_string);
       LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-      //std::cout << "Read line: " << tmp_string << std::endl;
     }
   } else {
     LOG4CXX_FATAL(fileReaderLogger, "Error: could not open file " << filename);
-    //std::cout << "Error: could not open file " << filename << std::endl;
     exit(-1);
   }
 }
@@ -106,12 +95,10 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
 
         getline(input_file, tmp_string);
         LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-        //std::cout << "Read line: " << tmp_string << std::endl;
 
         while (tmp_string.empty() or tmp_string[0] == '#') {
             getline(input_file, tmp_string);
             LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-            //std::cout << "Read line: " << tmp_string << std::endl;
         }
 
         std::istringstream numstream(tmp_string);
@@ -122,10 +109,8 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
         cuboids.reserve(num_cuboids);
 
         LOG4CXX_DEBUG(fileReaderLogger, "Reading " << num_cuboids << ".");
-        //std::cout << "Reading " << num_cuboids << "." << std::endl;
         getline(input_file, tmp_string);
         LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-        //std::cout << "Read line: " << tmp_string << std::endl;
 
         for (int i = 0; i < num_cuboids; i++) {
             std::istringstream datastream(tmp_string);
@@ -137,41 +122,21 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
                 datastream >> sj;
                 if(sj < 0) {
                     LOG4CXX_FATAL(fileReaderLogger, "Error reading file: negative cuboid size found in line " << i);
-                    /*
-                    std::cout
-                            << "Error reading file: negative cuboid size found in line "
-                            << i << std::endl;
-                    */
                     exit(-1);
                 }
             }
             if (datastream.eof()) {
                 LOG4CXX_FATAL(fileReaderLogger, "Error reading file: eof reached unexpectedly reading from line " << i);
-                /*
-                std::cout
-                        << "Error reading file: eof reached unexpectedly reading from line "
-                        << i << std::endl;
-                */
                 exit(-1);
             }
             datastream >> d;
             if(d < 0) {
                 LOG4CXX_FATAL(fileReaderLogger, "Error reading file: negative distance found in line " << i);
-                /*
-                std::cout
-                        << "Error reading file: negative distance found in line "
-                        << i << std::endl;
-                */
                 exit(-1);
             }
             datastream >> m;
             if(m < 0) {
                 LOG4CXX_FATAL(fileReaderLogger, "Error reading file: negative mass found in line " << i);
-                /*
-                std::cout
-                        << "Error reading file: negative mass found in line "
-                        << i << std::endl;
-                */
                 exit(-1);
             }
             for (auto &vj : v) {
@@ -181,11 +146,9 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
 
             getline(input_file, tmp_string);
             LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
-            //std::cout << "Read line: " << tmp_string << std::endl;
         }
     } else {
         LOG4CXX_FATAL(fileReaderLogger, "Error: could not open file " << filename);
-        //std::cout << "Error: could not open file " << filename << std::endl;
         exit(-1);
     }
 }

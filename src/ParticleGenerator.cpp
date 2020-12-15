@@ -6,29 +6,10 @@
 #include "ParticleGenerator.h"
 #include "deprecated/FileReader.h"
 
-ParticleGenerator::ParticleGenerator() {
+ParticleGenerator::ParticleGenerator(particle_data &data) : data(data) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
-}
-
-ParticleGenerator::ParticleGenerator(particle_data &data) {
-    cuboids = std::vector<Cuboid>();
-    particles = ParticleContainer();
-    for(auto p : data.particles().particle()){
-        auto particle = mapParticle(p);
-        particles.push(particle);
-    }
-
-    for(auto c : data.cuboids().cuboid()){
-        mapCuboid(c).generate(particles);
-    }
-
-    // TODO Task 4
-    /*
-     * for(auto c : data.spheres().sphere()){
-            mapSphere(c).generate(particles);
-        }
-     */
+    generate();
 }
 
 std::vector<Cuboid> ParticleGenerator::getCuboids() {
@@ -42,4 +23,31 @@ ParticleContainer& ParticleGenerator::getParticles() {
 void ParticleGenerator::addCuboid(Cuboid c) {
     cuboids.emplace_back(c);
     c.generate(particles);
+}
+
+void ParticleGenerator::reserve(){
+    std::size_t nrParticles = data.particles().particle().size();
+    cuboids.reserve(data.cuboids().cuboid().size());
+    for(auto c : data.cuboids().cuboid()){
+        auto cube = mapCuboid(c);
+        nrParticles += cube.getNrParticles();
+        cuboids.emplace_back(cube);
+    }
+
+    //TODO for spheres
+
+    particles.reserve(nrParticles);
+}
+
+void ParticleGenerator::generate() {
+    reserve();
+    for(auto p: data.particles().particle()){
+        auto particle = mapParticle(p);
+        particles.push(particle);
+    }
+    for(auto c: cuboids){
+        c.generate(particles);
+    }
+
+    //TODO for spheres
 }

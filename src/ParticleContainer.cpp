@@ -12,25 +12,25 @@ ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
   this->particles = particles;
 }
 
-std::vector<Particle> &ParticleContainer::getParticles() {
-  return particles;
-}
-
 void ParticleContainer::push(Particle &particle) {
   particles.emplace_back(particle);
 }
 
-void ParticleContainer::iterate(void (*f)(Particle &)) {
+void ParticleContainer::iterate(std::function<void(Particle&)> f) {
   for(auto &particle : particles)
-    (*f)(particle);
+    f(particle);
 }
 
-void ParticleContainer::iteratePairs(void (*f)(Particle &, Particle &)) {
+void ParticleContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
   for(auto i = particles.begin(); i != particles.end(); ++i)
     for(auto j = i + 1; j != particles.end(); ++j)
-      (*f)(*i,*j);
+      f(*i,*j);
 }
 
-void ParticleContainer::reserve(const int n){
+void ParticleContainer::reserve(const std::size_t n){
     particles.reserve(n);
+}
+
+std::size_t ParticleContainer::size(){
+    return particles.size();
 }

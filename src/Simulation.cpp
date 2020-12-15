@@ -8,19 +8,20 @@
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     particleContainer = ParticleGenerator(data.particle_data()).getParticles();
-    for(auto& p : particleContainer.getParticles()){
+    particleContainer.iterate([&data](Particle &p){
         p.updateDT(data.delta_t());
-    }
+    });
 }
 
-void Simulation::start() {
+void Simulation::start(bool isPT) {
     int iteration = 0;
-    plotParticles(0);
 
     double current_time = 0;
     int freq = data.frequency_output().present() ?
             data.frequency_output().get() :
             10;
+
+    if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
         // calculate new x
@@ -36,18 +37,15 @@ void Simulation::start() {
         });
 
         iteration++;
-        if (iteration % freq == 0) {
+        if (!isPT && iteration % freq == 0) {
             plotParticles(iteration);
         }
-
-        //std::cout << "Iteration " << iteration << " finished." << std::endl;
 
         current_time += data.delta_t();
     }
 }
 
 void Simulation::plotParticles(int iteration) {
-
     /* output in xyz format */
 
 //    std::string out_name_xyz("MD_xyz");
@@ -56,19 +54,17 @@ void Simulation::plotParticles(int iteration) {
 
     /* VTK output */
 
-    auto particles = particleContainer.getParticles();
-
     std::string out_name_vtk(
             data.name_output().present() ?
                 data.name_output().get().c_str() :
                 "MD_vtk");
     outputWriter::VTKWriter vtkWriter;
 
-    vtkWriter.initializeOutput(particles.size());
+    vtkWriter.initializeOutput(particleContainer.size());
 
-    for(auto &p : particles) {
+    particleContainer.iterate([&vtkWriter](Particle& p) {
         vtkWriter.plotParticle(p);
-    }
+    });
 
     vtkWriter.writeFile(out_name_vtk, iteration);
 }
