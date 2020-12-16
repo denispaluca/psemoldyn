@@ -35,6 +35,13 @@ public:
     ParticleContainer(std::vector<Particle> particles);
 
     /**
+     * Destructor of particle container.
+     * @param
+     * @return
+     */
+    virtual ~ParticleContainer();
+
+    /**
      * Push particle at the end of the vector.
      * @param particle The particle pushed in particles vector
      * @return
@@ -62,13 +69,7 @@ public:
      */
     void reserve(std::size_t n);
 
-    std::vector<Particle> getParticles();
-
-    /**
-     * Returns size of particle vector.
-     * @return Size of particle vector.
-     */
-    int size();
+    std::vector<Particle>& getParticles();
 
     /**
      * Erase particle at position i.

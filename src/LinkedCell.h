@@ -5,7 +5,9 @@
 #ifndef PSEMOLDYN_GROUPB_LINKEDCELL_H
 #define PSEMOLDYN_GROUPB_LINKEDCELL_H
 
-#include "ParticleContainer.h"
+#include <functional>
+#include "Particle.h"
+#include <vector>
 
 class LinkedCell {
 private:
@@ -19,10 +21,12 @@ private:
      */
     double cutoff;
 
+    int index;
+
     /**
      * The particles located in this cell.
      */
-    ParticleContainer particles;
+    std::vector<Particle*> particles;
 
     /**
      * The neighboring cells
@@ -45,7 +49,7 @@ public:
      * The constructor adds the particles by calling addParticles(..),
      * i.e. it is checked that the particles are actually locaed within the cell.
      */
-    LinkedCell(std::array<double, 3> position, double cutoff, ParticleContainer &particles);
+    LinkedCell(std::array<double, 3> position, double cutoff, int index);
 
     /**
      * Getter for the position field
@@ -54,28 +58,10 @@ public:
     std::array<double, 3> getPosition();
 
     /**
-     * Getter for the cutoff radius field
-     * @return the cutoff radius
-     */
-    double getCutoffRadius();
-
-    /**
-     * Getter for the particles field
-     * @return a ParticleContainer with the particles located in this cell
-     */
-    ParticleContainer getParticles();
-
-    /**
      * Getter for the neighbors fiels
      * @return a vector with the neighboring LinkedCells of this cell
      */
     std::vector<LinkedCell*> getNeighbors();
-
-    /**
-     * Setter for particles
-     * @param particles a ParticleContainer to which the particles field will be set
-     */
-    void setParticles(const ParticleContainer &particles);
 
     /**
      * Checks if another cell is a direct neighbor of the current cell.
@@ -91,18 +77,19 @@ public:
      */
     bool particleBelongs(Particle &p);
 
-    /**
-     * Adds particles from given ParticleContainer to the particles stored in this cell
-     * if they belong.
-     * @param particles the ParticleContainer with particles to be added
-     */
-    void addParticles(ParticleContainer particles);
-
     void addNeighbor(LinkedCell* other);
 
-    void moveParticlesFrom(ParticleContainer particles);
-
     void removeParticles();
+
+    void addParticle(Particle* p);
+
+    void iterate(std::function<void(Particle&)> f);
+
+    void iteratePairs(std::function<void(Particle&, Particle&)> f);
+
+    int getIndex();
+
+    std::vector<Particle*>& getParticles();
 
 };
 

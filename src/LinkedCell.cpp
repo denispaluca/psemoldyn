@@ -10,17 +10,15 @@
 LinkedCell::LinkedCell() {
     position = {0,0,0};
     cutoff = 1;
-    particles = ParticleContainer();
+    particles = std::vector<Particle*>();
     neighbors = std::vector<LinkedCell*>();
 }
 
-LinkedCell::LinkedCell(std::array<double, 3> position, double cutoff, ParticleContainer &particles) {
+LinkedCell::LinkedCell(std::array<double, 3> position, double cutoff, int index) {
     this->position = position;
     this->cutoff = cutoff;
-    this->particles = ParticleContainer();
-    
-    //addParticles(particles);
-    moveParticlesFrom(particles);
+    this->index = index;
+    this->particles = std::vector<Particle*>();
 
     //neighbors are set in constructor of LinkedCellContainer
     neighbors = std::vector<LinkedCell*>();
@@ -31,20 +29,8 @@ std::array<double, 3> LinkedCell::getPosition() {
     return position;
 }
 
-double LinkedCell::getCutoffRadius() {
-    return cutoff;
-}
-
-ParticleContainer LinkedCell::getParticles() {
-    return particles;
-}
-
 std::vector<LinkedCell*> LinkedCell::getNeighbors() {
     return neighbors;
-}
-
-void LinkedCell::setParticles(const ParticleContainer &particles) {
-    this->particles = particles;
 }
 
 bool LinkedCell::particleBelongs(Particle &p) {
@@ -60,36 +46,58 @@ bool LinkedCell::isNeighbor(LinkedCell* other) {
     return (std::abs(diff[0]) == cutoff || std::abs(diff[1]) == cutoff || std::abs(diff[2]) == cutoff);
 }
 
-//void LinkedCell::addParticles(ParticleContainer particles) {
-//    for (auto &p : particles.getParticles()) {  // TODO: change to use iterate function?
-//        if(particleBelongs(p)) this->particles.push(p);
-//    }
-//}
-
-void LinkedCell::moveParticlesFrom(ParticleContainer particles){
-    particles.iterate([&](Particle& p){
-        if(particleBelongs(p)) {
-            this->particles.push(p);
-        }
-    });
-}
-
 void LinkedCell::removeParticles(){
-    int i = 0;
-    particles.iterate([&](Particle& p){
-        if(!particleBelongs(p)) {
-            for(auto n : neighbors){
-                if(n->particleBelongs(p)){
-                    n->getParticles().push(p);
-                    break;
-                }
-            }
-            particles.erase(i);
-        }
-        i++;
-    });
+//    for(auto i = particles.begin(); i != particles.end(); ++i){
+//        auto p = *i;
+//        if(particleBelongs(*p)) continue;
+//        for(auto n : neighbors){
+//            if(n->particleBelongs(*p)){
+//                n->addParticle(p);
+//                break;
+//            }
+//        }
+//        particles.erase(i);
+//    }
+
+//    particles.erase(std::remove_if(
+//            particles.begin(), particles.end(),
+//            [&](Particle* p){
+//                if(particleBelongs(*p)) return false;
+//                for(auto n : neighbors){
+//                    if(n->particleBelongs(*p)){
+//                        n->addParticle(p);
+//                        break;
+//                    }
+//                }
+//                return true;
+//            }), particles.end());
+
+    particles.clear();
 }
 
 void LinkedCell::addNeighbor(LinkedCell* other) {
     neighbors.emplace_back(other);
+}
+
+void LinkedCell::addParticle(Particle *p) {
+    particles.emplace_back(p);
+}
+
+void LinkedCell::iterate(std::function<void(Particle&)> f) {
+    for(auto particle : particles)
+        f(*particle);
+}
+
+void LinkedCell::iteratePairs(std::function<void(Particle&, Particle&)> f) {
+    for(auto i = particles.begin(); i != particles.end(); ++i)
+        for(auto j = i + 1; j != particles.end(); ++j)
+            f(**i,**j);
+}
+
+int LinkedCell::getIndex() {
+    return index;
+}
+
+std::vector<Particle *> &LinkedCell::getParticles() {
+    return particles;
 }

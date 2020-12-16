@@ -10,21 +10,21 @@
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     auto pg = ParticleGenerator(data.particle_data());
-    size = pg.getParticles().size();
+    size = pg.getParticles().getParticles().size();
+
+    pg.getParticles().iterate([&](Particle &p) {
+        p.updateDT(data.delta_t());
+    });
+
     if(data.linked_cell()){
         container = new LinkedCellContainer(
                 mapDoubleVec(data.domain_size()),
-                {0,0,0},
                 data.cutoff_radius(),
                 pg.getParticles());
 
     } else {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
-
-    container->iterate([&data](Particle &p) {
-        p.updateDT(data.delta_t());
-    });
 }
 
 void Simulation::start(bool isPT) {
@@ -38,8 +38,6 @@ void Simulation::start(bool isPT) {
     if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
-        // calculate new x
-
         container->calculateIteration();
 
         iteration++;

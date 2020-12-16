@@ -22,12 +22,6 @@ public:
     virtual void iteratePairs(std::function<void(Particle&, Particle&)> f) = 0;
 
     /**
-     * Returns size of particle vector.
-     * @return Size of particle vector.
-     */
-    virtual int size() = 0;
-
-    /**
      * Does one iteration step with the particles.
      */
     virtual void calculateIteration() = 0;
