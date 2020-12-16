@@ -944,6 +944,20 @@ class sphere_cluster: public ::xml_schema::type
 class particle_data: public ::xml_schema::type
 {
   public:
+  // is3D
+  //
+  typedef ::xml_schema::boolean is3D_type;
+  typedef ::xsd::cxx::tree::traits< is3D_type, char > is3D_traits;
+
+  const is3D_type&
+  is3D () const;
+
+  is3D_type&
+  is3D ();
+
+  void
+  is3D (const is3D_type& x);
+
   // cuboids
   //
   typedef ::cuboid_cluster cuboids_type;
@@ -997,11 +1011,13 @@ class particle_data: public ::xml_schema::type
 
   // Constructors.
   //
-  particle_data (const cuboids_type&,
+  particle_data (const is3D_type&,
+                 const cuboids_type&,
                  const particles_type&,
                  const spheres_type&);
 
-  particle_data (::std::unique_ptr< cuboids_type >,
+  particle_data (const is3D_type&,
+                 ::std::unique_ptr< cuboids_type >,
                  ::std::unique_ptr< particles_type >,
                  ::std::unique_ptr< spheres_type >);
 
@@ -1031,6 +1047,7 @@ class particle_data: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< is3D_type > is3D_;
   ::xsd::cxx::tree::one< cuboids_type > cuboids_;
   ::xsd::cxx::tree::one< particles_type > particles_;
   ::xsd::cxx::tree::one< spheres_type > spheres_;
@@ -1108,7 +1125,7 @@ class molsimInput: public ::xml_schema::type
 
   // domain_size
   //
-  typedef ::integer_vector domain_size_type;
+  typedef ::double_vector domain_size_type;
   typedef ::xsd::cxx::tree::traits< domain_size_type, char > domain_size_traits;
 
   const domain_size_type&
@@ -1137,6 +1154,20 @@ class molsimInput: public ::xml_schema::type
   void
   cutoff_radius (const cutoff_radius_type& x);
 
+  // linked_cell
+  //
+  typedef ::xml_schema::boolean linked_cell_type;
+  typedef ::xsd::cxx::tree::traits< linked_cell_type, char > linked_cell_traits;
+
+  const linked_cell_type&
+  linked_cell () const;
+
+  linked_cell_type&
+  linked_cell ();
+
+  void
+  linked_cell (const linked_cell_type& x);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1160,12 +1191,14 @@ class molsimInput: public ::xml_schema::type
                const t_end_type&,
                const domain_size_type&,
                const cutoff_radius_type&,
+               const linked_cell_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
                const t_end_type&,
                ::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
+               const linked_cell_type&,
                ::std::unique_ptr< particle_data_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
@@ -1200,6 +1233,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< t_end_type > t_end_;
   ::xsd::cxx::tree::one< domain_size_type > domain_size_;
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
+  ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

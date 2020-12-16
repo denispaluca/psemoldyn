@@ -7,12 +7,13 @@
 #include "Particle.h"
 #include <vector>
 #include <functional>
+#include "Container.h"
 
 /**
  * The ParticleContainer class encapsulates particles
  * and makes it possible to iterate through them.
  */
-class ParticleContainer {
+class ParticleContainer : public Container {
 private:
     /**
      * Vector of particles
@@ -31,7 +32,14 @@ public:
      * @param particles Vector of particles.
      * @return
      */
-    ParticleContainer(std::vector<Particle> &particles);
+    ParticleContainer(std::vector<Particle> particles);
+
+    /**
+     * Destructor of particle container.
+     * @param
+     * @return
+     */
+    virtual ~ParticleContainer();
 
     /**
      * Push particle at the end of the vector.
@@ -45,14 +53,14 @@ public:
      * @param f Function applied to particles
      * @return
      */
-    void iterate(std::function<void(Particle&)> f);
+    void iterate(std::function<void(Particle&)> f) override;
 
     /**
      * Iterate over all unique particle pairs and apply function f
      * @param f Function that is applied to pairs
      * @return
      */
-    void iteratePairs(std::function<void(Particle&, Particle&)> f);
+    void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
 
     /**
      * Requests that the particles vector capacity be at least enough to contain n elements.
@@ -61,9 +69,15 @@ public:
      */
     void reserve(std::size_t n);
 
+    std::vector<Particle>& getParticles();
+
     /**
-     * Returns size of particle vector.
-     * @return Size of particle vector.
+     * Erase particle at position i.
+     * @param i Position
      */
-    size_t size();
+     void erase(int i);
+
+     void calculateIteration() override;
+
+     std::size_t size() override;
 };

@@ -84,6 +84,7 @@ void startPT(){
     log4cxx::Logger::getLogger("particle")->setLevel(offptr);
     log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
     log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
+    log4cxx::Logger::getLogger("linkedcellcont")->setLevel(offptr);
     ptStartTime = std::chrono::high_resolution_clock::now().time_since_epoch();
 }
 
