@@ -57,7 +57,7 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 }
 
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
-    for (auto cell : cells) {
+    for (auto& cell : cells) {
         // calculate forces between particles of one cell
         cell.iteratePairs(f);
 
