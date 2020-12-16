@@ -12,6 +12,14 @@
     </domain_size>
     <cutoff_radius>3.0</cutoff_radius>
     <linked_cell>true</linked_cell>
+    <boundary>
+        <front>false</front>
+        <back>false</back>
+        <top>false</top>
+        <bottom>false</bottom>
+        <left>false</left>
+        <right>false</right>
+    </boundary>
     <particle_data>
         <is3D>false</is3D>
         <cuboids>

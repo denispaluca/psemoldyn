@@ -235,6 +235,7 @@ class particle_cluster;
 class sphere;
 class sphere_cluster;
 class particle_data;
+class boundary_type;
 class molsimInput;
 
 #include <memory>    // ::std::unique_ptr
@@ -1053,6 +1054,136 @@ class particle_data: public ::xml_schema::type
   ::xsd::cxx::tree::one< spheres_type > spheres_;
 };
 
+class boundary_type: public ::xml_schema::type
+{
+  public:
+  // front
+  //
+  typedef ::xml_schema::boolean front_type;
+  typedef ::xsd::cxx::tree::traits< front_type, char > front_traits;
+
+  const front_type&
+  front () const;
+
+  front_type&
+  front ();
+
+  void
+  front (const front_type& x);
+
+  // back
+  //
+  typedef ::xml_schema::boolean back_type;
+  typedef ::xsd::cxx::tree::traits< back_type, char > back_traits;
+
+  const back_type&
+  back () const;
+
+  back_type&
+  back ();
+
+  void
+  back (const back_type& x);
+
+  // top
+  //
+  typedef ::xml_schema::boolean top_type;
+  typedef ::xsd::cxx::tree::traits< top_type, char > top_traits;
+
+  const top_type&
+  top () const;
+
+  top_type&
+  top ();
+
+  void
+  top (const top_type& x);
+
+  // bottom
+  //
+  typedef ::xml_schema::boolean bottom_type;
+  typedef ::xsd::cxx::tree::traits< bottom_type, char > bottom_traits;
+
+  const bottom_type&
+  bottom () const;
+
+  bottom_type&
+  bottom ();
+
+  void
+  bottom (const bottom_type& x);
+
+  // left
+  //
+  typedef ::xml_schema::boolean left_type;
+  typedef ::xsd::cxx::tree::traits< left_type, char > left_traits;
+
+  const left_type&
+  left () const;
+
+  left_type&
+  left ();
+
+  void
+  left (const left_type& x);
+
+  // right
+  //
+  typedef ::xml_schema::boolean right_type;
+  typedef ::xsd::cxx::tree::traits< right_type, char > right_traits;
+
+  const right_type&
+  right () const;
+
+  right_type&
+  right ();
+
+  void
+  right (const right_type& x);
+
+  // Constructors.
+  //
+  boundary_type (const front_type&,
+                 const back_type&,
+                 const top_type&,
+                 const bottom_type&,
+                 const left_type&,
+                 const right_type&);
+
+  boundary_type (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  boundary_type (const boundary_type& x,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  virtual boundary_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  boundary_type&
+  operator= (const boundary_type& x);
+
+  virtual 
+  ~boundary_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< front_type > front_;
+  ::xsd::cxx::tree::one< back_type > back_;
+  ::xsd::cxx::tree::one< top_type > top_;
+  ::xsd::cxx::tree::one< bottom_type > bottom_;
+  ::xsd::cxx::tree::one< left_type > left_;
+  ::xsd::cxx::tree::one< right_type > right_;
+};
+
 class molsimInput: public ::xml_schema::type
 {
   public:
@@ -1168,6 +1299,23 @@ class molsimInput: public ::xml_schema::type
   void
   linked_cell (const linked_cell_type& x);
 
+  // boundary
+  //
+  typedef ::boundary_type boundary_type;
+  typedef ::xsd::cxx::tree::traits< boundary_type, char > boundary_traits;
+
+  const boundary_type&
+  boundary () const;
+
+  boundary_type&
+  boundary ();
+
+  void
+  boundary (const boundary_type& x);
+
+  void
+  boundary (::std::unique_ptr< boundary_type > p);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1192,6 +1340,7 @@ class molsimInput: public ::xml_schema::type
                const domain_size_type&,
                const cutoff_radius_type&,
                const linked_cell_type&,
+               const boundary_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
@@ -1199,6 +1348,7 @@ class molsimInput: public ::xml_schema::type
                ::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
                const linked_cell_type&,
+               ::std::unique_ptr< boundary_type >,
                ::std::unique_ptr< particle_data_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
@@ -1234,6 +1384,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< domain_size_type > domain_size_;
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
+  ::xsd::cxx::tree::one< boundary_type > boundary_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 
