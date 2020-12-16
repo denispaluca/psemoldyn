@@ -150,3 +150,11 @@ void LinkedCellContainer::populateNeighbours() {
                         c.addNeighbor(&cells.at(neighborIndex));
                 }
 }
+
+std::vector<LinkedCell> LinkedCellContainer::getCells(){
+    return cells;
+}
+
+ParticleContainer LinkedCellContainer::getParticles() {
+    return particles;
+}

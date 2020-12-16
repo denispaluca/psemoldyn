@@ -77,6 +77,10 @@ public:
     int getIndexFromParticle(Particle& p);
 
     std::size_t size() override;
+
+    std::vector<LinkedCell> getCells();
+
+    ParticleContainer getParticles();
 };
 
 
