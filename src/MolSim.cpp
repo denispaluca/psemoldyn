@@ -46,10 +46,14 @@ std::chrono::duration<int64_t, std::nano> ptStartTime;
  */
 int main(int argc, char *argsv[]) {
     PropertyConfigurator::configure("../log4cxx.cfg");
-    LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution...");
+    LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution. This may take a while...");
 
     switch (argc) {
         case 2:
+            if (!strcmp(argsv[1], "-h") || !strcmp(argsv[1], "-help")) {
+                help();
+                return 0;
+            }
             return xmlRoutine(argsv[1]);
         case 3:
             if(!strcmp(argsv[2], "-pt")){
@@ -64,11 +68,18 @@ int main(int argc, char *argsv[]) {
 
 int xmlRoutine(char * xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
-    if(isPT) startPT();
+    if (isPT) startPT();
+    std::unique_ptr<molsimInput> inputFile;
+    try {
+        inputFile = input(xmlFile);
+    } catch (const xml_schema::exception& e) {
+        LOG4CXX_FATAL(molsimLogger, e.what() << "\nError details: " << e);
+        help();
+        return -1;
+    }
+    //std::unique_ptr<molsimInput> ptr(input(xmlFile));
 
-    std::unique_ptr<molsimInput> ptr (input(xmlFile));
-
-    auto sim = Simulation(*ptr);
+    auto sim = Simulation(*inputFile);
     sim.start(isPT);
 
     if(isPT) endPT();
@@ -80,7 +91,7 @@ void startPT(){
     LOG4CXX_INFO(molsimLogger, "Starting performance test.");
     auto offptr =  Level::getOff();
     molsimFileLogger->setLevel(offptr);
-    molsimLogger->setLevel(offptr);
+    //molsimLogger->setLevel(offptr); //can be activated because it's only called when there is a FATAL error
     log4cxx::Logger::getLogger("particle")->setLevel(offptr);
     log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
     log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
@@ -91,26 +102,17 @@ void startPT(){
 void endPT(){
     auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptEndTime -= ptStartTime;
-    std::cout<<"Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns";
+    LOG4CXX_INFO(molsimLogger, "Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns");
 }
 
 void help() {
-    std::string help = "This Program should be called as follows:\n"
-    "./MolSim t_end delta_t {-f filename | -c cuboid_number <cuboid_data>...}\n"
-    "---------------------------------------------------------------\n"
-    "t_end:\t\t\tend time of the simulation\n"
-    "delta_t:\t\tlength of time step between iterations\n"
-    "-f, --file:\t\tenables input via file. Accepted file extensions are .particles and .cuboids.\n"
-    "\t\t\t\tThe corresponding file formats are specified in the project's ReadMe.\n"
-    "-c, --cuboid:\tallows for direct input of cuboid parameters. " //no newline
-    "The data is expected to be given in the following order:\n"
-    "\t\t\t\t\t<position of cuboid> - 3 double values\n"
-    "\t\t\t\t\t<number of particles per dimension> - 3 integer values\n"
-    "\t\t\t\t\t<mesh width> - 1 double value\n"
-    "\t\t\t\t\t<mass of 1 particle> - 1 double value\n"
-    "\t\t\t\t\t<initial velocity> - 3 double values\n"
-    "\t\t\t\tdivided by blank spaces and in a single line.\n"
-    "\t\t\t\tData of multiple cuboids must also be given in a single line with a blank space in between.\n"
-    "This help text can be printed using ./MolSim -h or ./MolSim --help.\n";
+    std::string help = "This program should be called as follows:\n"
+                       "./MolSim xmlInputFile {-pt}\n"
+                       "-----------------------------------------\n"
+                       "\txmlInputFile\tpath to the xmlInputFile with scheme molsimInput.xsd\n"
+                       "\t\t\t\t\tSee molsimInput.xsd for the XML Schema Definition\n"
+                       "\t-pt\t\t\t\tRun performance test\n"
+                       "-----------------------------------------\n"
+                       "This help text can be printed using ./MolSim -h or ./MolSim -help.";
     LOG4CXX_INFO(molsimLogger, help);
 }
