@@ -13,7 +13,7 @@ using namespace log4cxx::helpers;
 /**
  * Output help text for calling the program.
  */
-void help(char * executableName);
+void help();
 
 /**
  * Execute main routine with xml input
@@ -51,7 +51,7 @@ int main(int argc, char *argsv[]) {
     switch (argc) {
         case 2:
             if (!strcmp(argsv[1], "-h") || !strcmp(argsv[1], "-help")) {
-                help(argsv[0]);
+                help();
                 return 0;
             }
             return xmlRoutine(argsv[1]);
@@ -61,7 +61,7 @@ int main(int argc, char *argsv[]) {
             }
         default:
             LOG4CXX_FATAL(molsimLogger, "Erroneous program call!");
-            help(argsv[0]);
+            help();
             return -1;
     }
 }
@@ -74,6 +74,7 @@ int xmlRoutine(char * xmlFile, bool isPT) {
         inputFile = input(xmlFile);
     } catch (const xml_schema::exception& e) {
         LOG4CXX_FATAL(molsimLogger, e.what() << "\nError details: " << e);
+        help();
         return -1;
     }
     //std::unique_ptr<molsimInput> ptr(input(xmlFile));
@@ -90,7 +91,7 @@ void startPT(){
     LOG4CXX_INFO(molsimLogger, "Starting performance test.");
     auto offptr =  Level::getOff();
     molsimFileLogger->setLevel(offptr);
-    molsimLogger->setLevel(offptr);
+    //molsimLogger->setLevel(offptr); //can be activated because it's only called when there is a FATAL error
     log4cxx::Logger::getLogger("particle")->setLevel(offptr);
     log4cxx::Logger::getLogger("filereader")->setLevel(offptr);
     log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
@@ -100,11 +101,11 @@ void startPT(){
 void endPT(){
     auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptEndTime -= ptStartTime;
-    std::cout<<"Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns";
+    LOG4CXX_INFO(molsimLogger, "Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns");
 }
 
-void help(char * executableName) {
-    std::string help = "This Program should be called as follows:\n"
+void help() {
+    std::string help = "This program should be called as follows:\n"
                        "./MolSim xmlInputFile {-pt}\n"
                        "-----------------------------------------\n"
                        "\txmlInputFile\tpath to the xmlInputFile with scheme molsimInput.xsd\n"
