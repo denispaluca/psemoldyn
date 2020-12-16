@@ -944,6 +944,20 @@ class sphere_cluster: public ::xml_schema::type
 class particle_data: public ::xml_schema::type
 {
   public:
+  // is3D
+  //
+  typedef ::xml_schema::boolean is3D_type;
+  typedef ::xsd::cxx::tree::traits< is3D_type, char > is3D_traits;
+
+  const is3D_type&
+  is3D () const;
+
+  is3D_type&
+  is3D ();
+
+  void
+  is3D (const is3D_type& x);
+
   // cuboids
   //
   typedef ::cuboid_cluster cuboids_type;
@@ -997,11 +1011,13 @@ class particle_data: public ::xml_schema::type
 
   // Constructors.
   //
-  particle_data (const cuboids_type&,
+  particle_data (const is3D_type&,
+                 const cuboids_type&,
                  const particles_type&,
                  const spheres_type&);
 
-  particle_data (::std::unique_ptr< cuboids_type >,
+  particle_data (const is3D_type&,
+                 ::std::unique_ptr< cuboids_type >,
                  ::std::unique_ptr< particles_type >,
                  ::std::unique_ptr< spheres_type >);
 
@@ -1031,6 +1047,7 @@ class particle_data: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< is3D_type > is3D_;
   ::xsd::cxx::tree::one< cuboids_type > cuboids_;
   ::xsd::cxx::tree::one< particles_type > particles_;
   ::xsd::cxx::tree::one< spheres_type > spheres_;

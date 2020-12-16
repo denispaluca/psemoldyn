@@ -22,7 +22,7 @@ ParticleContainer& ParticleGenerator::getParticles() {
 
 void ParticleGenerator::addCuboid(Cuboid c) {
     cuboids.emplace_back(c);
-    c.generate(particles);
+    c.generate(particles, data.is3D());
 }
 
 void ParticleGenerator::reserve(){
@@ -46,7 +46,7 @@ void ParticleGenerator::generate() {
         particles.push(particle);
     }
     for(auto c: cuboids){
-        c.generate(particles);
+        c.generate(particles, data.is3D());
     }
 
     //TODO for spheres

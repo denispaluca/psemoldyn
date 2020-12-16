@@ -537,6 +537,24 @@ sphere (const sphere_sequence& s)
 // particle_data
 // 
 
+const particle_data::is3D_type& particle_data::
+is3D () const
+{
+  return this->is3D_.get ();
+}
+
+particle_data::is3D_type& particle_data::
+is3D ()
+{
+  return this->is3D_.get ();
+}
+
+void particle_data::
+is3D (const is3D_type& x)
+{
+  this->is3D_.set (x);
+}
+
 const particle_data::cuboids_type& particle_data::
 cuboids () const
 {
@@ -1897,10 +1915,12 @@ sphere_cluster::
 //
 
 particle_data::
-particle_data (const cuboids_type& cuboids,
+particle_data (const is3D_type& is3D,
+               const cuboids_type& cuboids,
                const particles_type& particles,
                const spheres_type& spheres)
 : ::xml_schema::type (),
+  is3D_ (is3D, this),
   cuboids_ (cuboids, this),
   particles_ (particles, this),
   spheres_ (spheres, this)
@@ -1908,10 +1928,12 @@ particle_data (const cuboids_type& cuboids,
 }
 
 particle_data::
-particle_data (::std::unique_ptr< cuboids_type > cuboids,
+particle_data (const is3D_type& is3D,
+               ::std::unique_ptr< cuboids_type > cuboids,
                ::std::unique_ptr< particles_type > particles,
                ::std::unique_ptr< spheres_type > spheres)
 : ::xml_schema::type (),
+  is3D_ (is3D, this),
   cuboids_ (std::move (cuboids), this),
   particles_ (std::move (particles), this),
   spheres_ (std::move (spheres), this)
@@ -1923,6 +1945,7 @@ particle_data (const particle_data& x,
                ::xml_schema::flags f,
                ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
+  is3D_ (x.is3D_, f, this),
   cuboids_ (x.cuboids_, f, this),
   particles_ (x.particles_, f, this),
   spheres_ (x.spheres_, f, this)
@@ -1934,6 +1957,7 @@ particle_data (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f,
                ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  is3D_ (this),
   cuboids_ (this),
   particles_ (this),
   spheres_ (this)
@@ -1954,6 +1978,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xercesc::DOMElement& i (p.cur_element ());
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
+
+    // is3D
+    //
+    if (n.name () == "is3D" && n.namespace_ ().empty ())
+    {
+      if (!is3D_.present ())
+      {
+        this->is3D_.set (is3D_traits::create (i, f, this));
+        continue;
+      }
+    }
 
     // cuboids
     //
@@ -2000,6 +2035,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     break;
   }
 
+  if (!is3D_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "is3D",
+      "");
+  }
+
   if (!cuboids_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2035,6 +2077,7 @@ operator= (const particle_data& x)
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
+    this->is3D_ = x.is3D_;
     this->cuboids_ = x.cuboids_;
     this->particles_ = x.particles_;
     this->spheres_ = x.spheres_;

@@ -85,6 +85,7 @@
 
   <xsd:complexType name="particle_data">
     <xsd:sequence>
+      <xsd:element name="is3D" type="xsd:boolean"/>
       <xsd:element name="cuboids" type="cuboid_cluster"/>
       <xsd:element name="particles" type="particle_cluster"/>
       <xsd:element name="spheres" type="sphere_cluster"/>
