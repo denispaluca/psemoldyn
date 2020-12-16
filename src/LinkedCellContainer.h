@@ -31,6 +31,10 @@ private:
 
     ParticleContainer particles;
 
+    void clearOutflowParticles();
+
+    void populateNeighbours();
+
 public:
 
     /**

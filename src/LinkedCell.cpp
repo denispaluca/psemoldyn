@@ -53,11 +53,6 @@ void LinkedCell::addParticle(Particle *p) {
     particles.emplace_back(p);
 }
 
-void LinkedCell::iterate(std::function<void(Particle&)> f) {
-    for(auto particle : particles)
-        f(*particle);
-}
-
 void LinkedCell::iteratePairs(std::function<void(Particle&, Particle&)> f) {
     for(auto i = particles.begin(); i != particles.end(); ++i)
         for(auto j = i + 1; j != particles.end(); ++j)

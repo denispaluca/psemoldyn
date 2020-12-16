@@ -76,8 +76,6 @@ public:
 
     void addParticle(Particle* p);
 
-    void iterate(std::function<void(Particle&)> f);
-
     void iteratePairs(std::function<void(Particle&, Particle&)> f);
 
     int getIndex();
