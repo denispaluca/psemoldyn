@@ -427,22 +427,22 @@ center (::std::unique_ptr< center_type > x)
   this->center_.set (std::move (x));
 }
 
-const sphere::d_type& sphere::
-d () const
+const sphere::h_type& sphere::
+h () const
 {
-  return this->d_.get ();
+  return this->h_.get ();
 }
 
-sphere::d_type& sphere::
-d ()
+sphere::h_type& sphere::
+h ()
 {
-  return this->d_.get ();
+  return this->h_.get ();
 }
 
 void sphere::
-d (const d_type& x)
+h (const h_type& x)
 {
-  this->d_.set (x);
+  this->h_.set (x);
 }
 
 const sphere::v_type& sphere::
@@ -503,12 +503,6 @@ void sphere::
 r (const r_type& x)
 {
   this->r_.set (x);
-}
-
-void sphere::
-r (::std::unique_ptr< r_type > x)
-{
-  this->r_.set (std::move (x));
 }
 
 
@@ -1593,13 +1587,13 @@ particle_cluster::
 
 sphere::
 sphere (const center_type& center,
-        const d_type& d,
+        const h_type& h,
         const v_type& v,
         const m_type& m,
         const r_type& r)
 : ::xml_schema::type (),
   center_ (center, this),
-  d_ (d, this),
+  h_ (h, this),
   v_ (v, this),
   m_ (m, this),
   r_ (r, this)
@@ -1608,16 +1602,16 @@ sphere (const center_type& center,
 
 sphere::
 sphere (::std::unique_ptr< center_type > center,
-        const d_type& d,
+        const h_type& h,
         ::std::unique_ptr< v_type > v,
         const m_type& m,
-        ::std::unique_ptr< r_type > r)
+        const r_type& r)
 : ::xml_schema::type (),
   center_ (std::move (center), this),
-  d_ (d, this),
+  h_ (h, this),
   v_ (std::move (v), this),
   m_ (m, this),
-  r_ (std::move (r), this)
+  r_ (r, this)
 {
 }
 
@@ -1627,7 +1621,7 @@ sphere (const sphere& x,
         ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   center_ (x.center_, f, this),
-  d_ (x.d_, f, this),
+  h_ (x.h_, f, this),
   v_ (x.v_, f, this),
   m_ (x.m_, f, this),
   r_ (x.r_, f, this)
@@ -1640,7 +1634,7 @@ sphere (const ::xercesc::DOMElement& e,
         ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   center_ (this),
-  d_ (this),
+  h_ (this),
   v_ (this),
   m_ (this),
   r_ (this)
@@ -1676,13 +1670,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // d
+    // h
     //
-    if (n.name () == "d" && n.namespace_ ().empty ())
+    if (n.name () == "h" && n.namespace_ ().empty ())
     {
-      if (!d_.present ())
+      if (!h_.present ())
       {
-        this->d_.set (d_traits::create (i, f, this));
+        this->h_.set (h_traits::create (i, f, this));
         continue;
       }
     }
@@ -1716,12 +1710,9 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "r" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< r_type > r (
-        r_traits::create (i, f, this));
-
       if (!r_.present ())
       {
-        this->r_.set (::std::move (r));
+        this->r_.set (r_traits::create (i, f, this));
         continue;
       }
     }
@@ -1736,10 +1727,10 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!d_.present ())
+  if (!h_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "d",
+      "h",
       "");
   }
 
@@ -1779,7 +1770,7 @@ operator= (const sphere& x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
     this->center_ = x.center_;
-    this->d_ = x.d_;
+    this->h_ = x.h_;
     this->v_ = x.v_;
     this->m_ = x.m_;
     this->r_ = x.r_;

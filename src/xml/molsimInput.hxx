@@ -779,19 +779,19 @@ class sphere: public ::xml_schema::type
   void
   center (::std::unique_ptr< center_type > p);
 
-  // d
+  // h
   //
-  typedef ::xml_schema::double_ d_type;
-  typedef ::xsd::cxx::tree::traits< d_type, char, ::xsd::cxx::tree::schema_type::double_ > d_traits;
+  typedef ::xml_schema::double_ h_type;
+  typedef ::xsd::cxx::tree::traits< h_type, char, ::xsd::cxx::tree::schema_type::double_ > h_traits;
 
-  const d_type&
-  d () const;
+  const h_type&
+  h () const;
 
-  d_type&
-  d ();
+  h_type&
+  h ();
 
   void
-  d (const d_type& x);
+  h (const h_type& x);
 
   // v
   //
@@ -826,7 +826,7 @@ class sphere: public ::xml_schema::type
 
   // r
   //
-  typedef ::integer_vector r_type;
+  typedef ::xml_schema::int_ r_type;
   typedef ::xsd::cxx::tree::traits< r_type, char > r_traits;
 
   const r_type&
@@ -838,22 +838,19 @@ class sphere: public ::xml_schema::type
   void
   r (const r_type& x);
 
-  void
-  r (::std::unique_ptr< r_type > p);
-
   // Constructors.
   //
   sphere (const center_type&,
-          const d_type&,
+          const h_type&,
           const v_type&,
           const m_type&,
           const r_type&);
 
   sphere (::std::unique_ptr< center_type >,
-          const d_type&,
+          const h_type&,
           ::std::unique_ptr< v_type >,
           const m_type&,
-          ::std::unique_ptr< r_type >);
+          const r_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -882,7 +879,7 @@ class sphere: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< center_type > center_;
-  ::xsd::cxx::tree::one< d_type > d_;
+  ::xsd::cxx::tree::one< h_type > h_;
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
   ::xsd::cxx::tree::one< r_type > r_;
