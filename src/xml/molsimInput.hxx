@@ -236,6 +236,7 @@ class sphere;
 class sphere_cluster;
 class particle_data;
 class boundary_type;
+class domain_type;
 class molsimInput;
 
 #include <memory>    // ::std::unique_ptr
@@ -1184,6 +1185,98 @@ class boundary_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< right_type > right_;
 };
 
+class domain_type: public ::xml_schema::type
+{
+  public:
+  // domain_size
+  //
+  typedef ::double_vector domain_size_type;
+  typedef ::xsd::cxx::tree::traits< domain_size_type, char > domain_size_traits;
+
+  const domain_size_type&
+  domain_size () const;
+
+  domain_size_type&
+  domain_size ();
+
+  void
+  domain_size (const domain_size_type& x);
+
+  void
+  domain_size (::std::unique_ptr< domain_size_type > p);
+
+  // cutoff_radius
+  //
+  typedef ::xml_schema::double_ cutoff_radius_type;
+  typedef ::xsd::cxx::tree::traits< cutoff_radius_type, char, ::xsd::cxx::tree::schema_type::double_ > cutoff_radius_traits;
+
+  const cutoff_radius_type&
+  cutoff_radius () const;
+
+  cutoff_radius_type&
+  cutoff_radius ();
+
+  void
+  cutoff_radius (const cutoff_radius_type& x);
+
+  // boundary
+  //
+  typedef ::boundary_type boundary_type;
+  typedef ::xsd::cxx::tree::traits< boundary_type, char > boundary_traits;
+
+  const boundary_type&
+  boundary () const;
+
+  boundary_type&
+  boundary ();
+
+  void
+  boundary (const boundary_type& x);
+
+  void
+  boundary (::std::unique_ptr< boundary_type > p);
+
+  // Constructors.
+  //
+  domain_type (const domain_size_type&,
+               const cutoff_radius_type&,
+               const boundary_type&);
+
+  domain_type (::std::unique_ptr< domain_size_type >,
+               const cutoff_radius_type&,
+               ::std::unique_ptr< boundary_type >);
+
+  domain_type (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+  domain_type (const domain_type& x,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+  virtual domain_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  domain_type&
+  operator= (const domain_type& x);
+
+  virtual 
+  ~domain_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< domain_size_type > domain_size_;
+  ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
+  ::xsd::cxx::tree::one< boundary_type > boundary_;
+};
+
 class molsimInput: public ::xml_schema::type
 {
   public:
@@ -1254,37 +1347,6 @@ class molsimInput: public ::xml_schema::type
   void
   t_end (const t_end_type& x);
 
-  // domain_size
-  //
-  typedef ::double_vector domain_size_type;
-  typedef ::xsd::cxx::tree::traits< domain_size_type, char > domain_size_traits;
-
-  const domain_size_type&
-  domain_size () const;
-
-  domain_size_type&
-  domain_size ();
-
-  void
-  domain_size (const domain_size_type& x);
-
-  void
-  domain_size (::std::unique_ptr< domain_size_type > p);
-
-  // cutoff_radius
-  //
-  typedef ::xml_schema::double_ cutoff_radius_type;
-  typedef ::xsd::cxx::tree::traits< cutoff_radius_type, char, ::xsd::cxx::tree::schema_type::double_ > cutoff_radius_traits;
-
-  const cutoff_radius_type&
-  cutoff_radius () const;
-
-  cutoff_radius_type&
-  cutoff_radius ();
-
-  void
-  cutoff_radius (const cutoff_radius_type& x);
-
   // linked_cell
   //
   typedef ::xml_schema::boolean linked_cell_type;
@@ -1299,22 +1361,22 @@ class molsimInput: public ::xml_schema::type
   void
   linked_cell (const linked_cell_type& x);
 
-  // boundary
+  // domain
   //
-  typedef ::boundary_type boundary_type;
-  typedef ::xsd::cxx::tree::traits< boundary_type, char > boundary_traits;
+  typedef ::domain_type domain_type;
+  typedef ::xsd::cxx::tree::traits< domain_type, char > domain_traits;
 
-  const boundary_type&
-  boundary () const;
+  const domain_type&
+  domain () const;
 
-  boundary_type&
-  boundary ();
-
-  void
-  boundary (const boundary_type& x);
+  domain_type&
+  domain ();
 
   void
-  boundary (::std::unique_ptr< boundary_type > p);
+  domain (const domain_type& x);
+
+  void
+  domain (::std::unique_ptr< domain_type > p);
 
   // particle_data
   //
@@ -1337,18 +1399,14 @@ class molsimInput: public ::xml_schema::type
   //
   molsimInput (const delta_t_type&,
                const t_end_type&,
-               const domain_size_type&,
-               const cutoff_radius_type&,
                const linked_cell_type&,
-               const boundary_type&,
+               const domain_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
                const t_end_type&,
-               ::std::unique_ptr< domain_size_type >,
-               const cutoff_radius_type&,
                const linked_cell_type&,
-               ::std::unique_ptr< boundary_type >,
+               ::std::unique_ptr< domain_type >,
                ::std::unique_ptr< particle_data_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
@@ -1381,10 +1439,8 @@ class molsimInput: public ::xml_schema::type
   frequency_output_optional frequency_output_;
   ::xsd::cxx::tree::one< delta_t_type > delta_t_;
   ::xsd::cxx::tree::one< t_end_type > t_end_;
-  ::xsd::cxx::tree::one< domain_size_type > domain_size_;
-  ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
-  ::xsd::cxx::tree::one< boundary_type > boundary_;
+  ::xsd::cxx::tree::one< domain_type > domain_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

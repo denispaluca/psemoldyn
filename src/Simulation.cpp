@@ -6,7 +6,6 @@
 #include <utils/ForceUtils.h>
 #include "Simulation.h"
 #include "LinkedCellContainer.h"
-#include "utils/XSDMapper.h"
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     auto pg = ParticleGenerator(data.particle_data());
@@ -16,11 +15,7 @@ Simulation::Simulation(molsimInput &data) : data(data) {
     });
 
     if(data.linked_cell()){
-        container = new LinkedCellContainer(
-                mapDoubleVec(data.domain_size()),
-                data.cutoff_radius(),
-                pg.getParticles());
-
+        container = new LinkedCellContainer(data.domain(), pg.getParticles());
     } else {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }

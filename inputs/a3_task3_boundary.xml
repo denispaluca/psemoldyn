@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
-    <name_output>CollisionLC</name_output>
+    <name_output>SqCollision</name_output>
     <frequency_output>10</frequency_output>
-    <delta_t>0.0002</delta_t>
-    <t_end>5</t_end>
+    <delta_t>0.00005</delta_t>
+    <t_end>10</t_end>
     <linked_cell>true</linked_cell>
     <domain>
         <domain_size>
-            <x>180</x>
-            <y>90</y>
+            <x>60</x>
+            <y>50</y>
             <z>1</z>
         </domain_size>
         <cutoff_radius>3.0</cutoff_radius>
@@ -17,9 +17,9 @@
             <front>false</front>
             <back>false</back>
             <top>false</top>
-            <bottom>false</bottom>
-            <left>false</left>
-            <right>false</right>
+            <bottom>true</bottom>
+            <left>true</left>
+            <right>true</right>
         </boundary>
     </domain>
     <particle_data>
@@ -27,33 +27,13 @@
         <cuboids>
             <cuboid>
                 <position>
-                    <x>20.0</x>
-                    <y>20.0</y>
+                    <x>30.0</x>
+                    <y>10.0</y>
                     <z>0.0</z>
                 </position>
                 <size>
-                    <x>40</x>
-                    <y>8</y>
-                    <z>1</z>
-                </size>
-                <distance>1.1225</distance>
-                <mass>1.0</mass>
-                <velocity>
-                    <x>0.0</x>
-                    <y>0.0</y>
-                    <z>0.0</z>
-                </velocity>
-                <meanv>0</meanv>
-            </cuboid>
-            <cuboid>
-                <position>
-                    <x>35.0</x>
-                    <y>35.0</y>
-                    <z>0.0</z>
-                </position>
-                <size>
-                    <x>8</x>
-                    <y>8</y>
+                    <x>10</x>
+                    <y>10</y>
                     <z>1</z>
                 </size>
                 <distance>1.1225</distance>

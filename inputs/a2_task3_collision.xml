@@ -5,21 +5,23 @@
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
     <t_end>5</t_end>
-    <domain_size>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-    </domain_size>
-    <cutoff_radius>0</cutoff_radius>
     <linked_cell>false</linked_cell>
-    <boundary>
-        <front>false</front>
-        <back>false</back>
-        <top>false</top>
-        <bottom>false</bottom>
-        <left>false</left>
-        <right>false</right>
-    </boundary>
+    <domain>
+        <domain_size>
+            <x>0</x>
+            <y>0</y>
+            <z>0</z>
+        </domain_size>
+        <cutoff_radius>0</cutoff_radius>
+        <boundary>
+            <front>false</front>
+            <back>false</back>
+            <top>false</top>
+            <bottom>false</bottom>
+            <left>false</left>
+            <right>false</right>
+        </boundary>
+    </domain>
     <particle_data>
         <is3D>false</is3D>
         <cuboids>

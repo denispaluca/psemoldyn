@@ -10,25 +10,24 @@
 
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
+#include <xml/molsimInput.hxx>
+#include <utils/XSDMapper.h>
+
 using namespace log4cxx;
 using namespace log4cxx::helpers;
 
 //static logger variable linkedCellContainerLogger
 log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
 
-LinkedCellContainer::LinkedCellContainer() {
-    domain_size = {0.0, 0.0, 0.0};
-    cutoff_radius = 0.0;
-    cells = std::vector<LinkedCell>();
-}
-
-LinkedCellContainer::LinkedCellContainer(std::array<double, 3> domain_size, double cutoff_radius,
-                                         ParticleContainer &particles) {
-    this->domain_size = domain_size;
-    this->cutoff_radius = cutoff_radius;
+LinkedCellContainer::LinkedCellContainer(domain_type domain,
+                                         ParticleContainer &particles){
+    this->domain_size = mapDoubleVec(domain.domain_size());
+    this->cutoff_radius = domain.cutoff_radius();
     this->particles = particles;
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
+
+    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size);
 
     cells = std::vector<LinkedCell>();
     int nrCells = dimensions[0]*dimensions[1]*dimensions[2];
@@ -90,6 +89,7 @@ void LinkedCellContainer::calculateIteration() {
 
     // calculate new v
     iterate([&](Particle &p) {
+        boundaryHandler->applyForce(p);
         p.calculateV();
         assignParticle(p);
     });

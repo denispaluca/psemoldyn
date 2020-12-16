@@ -740,6 +740,76 @@ right (const right_type& x)
 }
 
 
+// domain_type
+// 
+
+const domain_type::domain_size_type& domain_type::
+domain_size () const
+{
+  return this->domain_size_.get ();
+}
+
+domain_type::domain_size_type& domain_type::
+domain_size ()
+{
+  return this->domain_size_.get ();
+}
+
+void domain_type::
+domain_size (const domain_size_type& x)
+{
+  this->domain_size_.set (x);
+}
+
+void domain_type::
+domain_size (::std::unique_ptr< domain_size_type > x)
+{
+  this->domain_size_.set (std::move (x));
+}
+
+const domain_type::cutoff_radius_type& domain_type::
+cutoff_radius () const
+{
+  return this->cutoff_radius_.get ();
+}
+
+domain_type::cutoff_radius_type& domain_type::
+cutoff_radius ()
+{
+  return this->cutoff_radius_.get ();
+}
+
+void domain_type::
+cutoff_radius (const cutoff_radius_type& x)
+{
+  this->cutoff_radius_.set (x);
+}
+
+const domain_type::boundary_type& domain_type::
+boundary () const
+{
+  return this->boundary_.get ();
+}
+
+domain_type::boundary_type& domain_type::
+boundary ()
+{
+  return this->boundary_.get ();
+}
+
+void domain_type::
+boundary (const boundary_type& x)
+{
+  this->boundary_.set (x);
+}
+
+void domain_type::
+boundary (::std::unique_ptr< boundary_type > x)
+{
+  this->boundary_.set (std::move (x));
+}
+
+
 // molsimInput
 // 
 
@@ -833,48 +903,6 @@ t_end (const t_end_type& x)
   this->t_end_.set (x);
 }
 
-const molsimInput::domain_size_type& molsimInput::
-domain_size () const
-{
-  return this->domain_size_.get ();
-}
-
-molsimInput::domain_size_type& molsimInput::
-domain_size ()
-{
-  return this->domain_size_.get ();
-}
-
-void molsimInput::
-domain_size (const domain_size_type& x)
-{
-  this->domain_size_.set (x);
-}
-
-void molsimInput::
-domain_size (::std::unique_ptr< domain_size_type > x)
-{
-  this->domain_size_.set (std::move (x));
-}
-
-const molsimInput::cutoff_radius_type& molsimInput::
-cutoff_radius () const
-{
-  return this->cutoff_radius_.get ();
-}
-
-molsimInput::cutoff_radius_type& molsimInput::
-cutoff_radius ()
-{
-  return this->cutoff_radius_.get ();
-}
-
-void molsimInput::
-cutoff_radius (const cutoff_radius_type& x)
-{
-  this->cutoff_radius_.set (x);
-}
-
 const molsimInput::linked_cell_type& molsimInput::
 linked_cell () const
 {
@@ -893,28 +921,28 @@ linked_cell (const linked_cell_type& x)
   this->linked_cell_.set (x);
 }
 
-const molsimInput::boundary_type& molsimInput::
-boundary () const
+const molsimInput::domain_type& molsimInput::
+domain () const
 {
-  return this->boundary_.get ();
+  return this->domain_.get ();
 }
 
-molsimInput::boundary_type& molsimInput::
-boundary ()
+molsimInput::domain_type& molsimInput::
+domain ()
 {
-  return this->boundary_.get ();
-}
-
-void molsimInput::
-boundary (const boundary_type& x)
-{
-  this->boundary_.set (x);
+  return this->domain_.get ();
 }
 
 void molsimInput::
-boundary (::std::unique_ptr< boundary_type > x)
+domain (const domain_type& x)
 {
-  this->boundary_.set (std::move (x));
+  this->domain_.set (x);
+}
+
+void molsimInput::
+domain (::std::unique_ptr< domain_type > x)
+{
+  this->domain_.set (std::move (x));
 }
 
 const molsimInput::particle_data_type& molsimInput::
@@ -2431,26 +2459,174 @@ boundary_type::
 {
 }
 
+// domain_type
+//
+
+domain_type::
+domain_type (const domain_size_type& domain_size,
+             const cutoff_radius_type& cutoff_radius,
+             const boundary_type& boundary)
+: ::xml_schema::type (),
+  domain_size_ (domain_size, this),
+  cutoff_radius_ (cutoff_radius, this),
+  boundary_ (boundary, this)
+{
+}
+
+domain_type::
+domain_type (::std::unique_ptr< domain_size_type > domain_size,
+             const cutoff_radius_type& cutoff_radius,
+             ::std::unique_ptr< boundary_type > boundary)
+: ::xml_schema::type (),
+  domain_size_ (std::move (domain_size), this),
+  cutoff_radius_ (cutoff_radius, this),
+  boundary_ (std::move (boundary), this)
+{
+}
+
+domain_type::
+domain_type (const domain_type& x,
+             ::xml_schema::flags f,
+             ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  domain_size_ (x.domain_size_, f, this),
+  cutoff_radius_ (x.cutoff_radius_, f, this),
+  boundary_ (x.boundary_, f, this)
+{
+}
+
+domain_type::
+domain_type (const ::xercesc::DOMElement& e,
+             ::xml_schema::flags f,
+             ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  domain_size_ (this),
+  cutoff_radius_ (this),
+  boundary_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void domain_type::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // domain_size
+    //
+    if (n.name () == "domain_size" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< domain_size_type > r (
+        domain_size_traits::create (i, f, this));
+
+      if (!domain_size_.present ())
+      {
+        this->domain_size_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // cutoff_radius
+    //
+    if (n.name () == "cutoff_radius" && n.namespace_ ().empty ())
+    {
+      if (!cutoff_radius_.present ())
+      {
+        this->cutoff_radius_.set (cutoff_radius_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // boundary
+    //
+    if (n.name () == "boundary" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< boundary_type > r (
+        boundary_traits::create (i, f, this));
+
+      if (!boundary_.present ())
+      {
+        this->boundary_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!domain_size_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "domain_size",
+      "");
+  }
+
+  if (!cutoff_radius_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "cutoff_radius",
+      "");
+  }
+
+  if (!boundary_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "boundary",
+      "");
+  }
+}
+
+domain_type* domain_type::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class domain_type (*this, f, c);
+}
+
+domain_type& domain_type::
+operator= (const domain_type& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->domain_size_ = x.domain_size_;
+    this->cutoff_radius_ = x.cutoff_radius_;
+    this->boundary_ = x.boundary_;
+  }
+
+  return *this;
+}
+
+domain_type::
+~domain_type ()
+{
+}
+
 // molsimInput
 //
 
 molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
-             const domain_size_type& domain_size,
-             const cutoff_radius_type& cutoff_radius,
              const linked_cell_type& linked_cell,
-             const boundary_type& boundary,
+             const domain_type& domain,
              const particle_data_type& particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
   frequency_output_ (this),
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
-  domain_size_ (domain_size, this),
-  cutoff_radius_ (cutoff_radius, this),
   linked_cell_ (linked_cell, this),
-  boundary_ (boundary, this),
+  domain_ (domain, this),
   particle_data_ (particle_data, this)
 {
 }
@@ -2458,20 +2634,16 @@ molsimInput (const delta_t_type& delta_t,
 molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
-             ::std::unique_ptr< domain_size_type > domain_size,
-             const cutoff_radius_type& cutoff_radius,
              const linked_cell_type& linked_cell,
-             ::std::unique_ptr< boundary_type > boundary,
+             ::std::unique_ptr< domain_type > domain,
              ::std::unique_ptr< particle_data_type > particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
   frequency_output_ (this),
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
-  domain_size_ (std::move (domain_size), this),
-  cutoff_radius_ (cutoff_radius, this),
   linked_cell_ (linked_cell, this),
-  boundary_ (std::move (boundary), this),
+  domain_ (std::move (domain), this),
   particle_data_ (std::move (particle_data), this)
 {
 }
@@ -2485,10 +2657,8 @@ molsimInput (const molsimInput& x,
   frequency_output_ (x.frequency_output_, f, this),
   delta_t_ (x.delta_t_, f, this),
   t_end_ (x.t_end_, f, this),
-  domain_size_ (x.domain_size_, f, this),
-  cutoff_radius_ (x.cutoff_radius_, f, this),
   linked_cell_ (x.linked_cell_, f, this),
-  boundary_ (x.boundary_, f, this),
+  domain_ (x.domain_, f, this),
   particle_data_ (x.particle_data_, f, this)
 {
 }
@@ -2502,10 +2672,8 @@ molsimInput (const ::xercesc::DOMElement& e,
   frequency_output_ (this),
   delta_t_ (this),
   t_end_ (this),
-  domain_size_ (this),
-  cutoff_radius_ (this),
   linked_cell_ (this),
-  boundary_ (this),
+  domain_ (this),
   particle_data_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -2572,31 +2740,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // domain_size
-    //
-    if (n.name () == "domain_size" && n.namespace_ ().empty ())
-    {
-      ::std::unique_ptr< domain_size_type > r (
-        domain_size_traits::create (i, f, this));
-
-      if (!domain_size_.present ())
-      {
-        this->domain_size_.set (::std::move (r));
-        continue;
-      }
-    }
-
-    // cutoff_radius
-    //
-    if (n.name () == "cutoff_radius" && n.namespace_ ().empty ())
-    {
-      if (!cutoff_radius_.present ())
-      {
-        this->cutoff_radius_.set (cutoff_radius_traits::create (i, f, this));
-        continue;
-      }
-    }
-
     // linked_cell
     //
     if (n.name () == "linked_cell" && n.namespace_ ().empty ())
@@ -2608,16 +2751,16 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // boundary
+    // domain
     //
-    if (n.name () == "boundary" && n.namespace_ ().empty ())
+    if (n.name () == "domain" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< boundary_type > r (
-        boundary_traits::create (i, f, this));
+      ::std::unique_ptr< domain_type > r (
+        domain_traits::create (i, f, this));
 
-      if (!boundary_.present ())
+      if (!domain_.present ())
       {
-        this->boundary_.set (::std::move (r));
+        this->domain_.set (::std::move (r));
         continue;
       }
     }
@@ -2653,20 +2796,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!domain_size_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "domain_size",
-      "");
-  }
-
-  if (!cutoff_radius_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "cutoff_radius",
-      "");
-  }
-
   if (!linked_cell_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2674,10 +2803,10 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!boundary_.present ())
+  if (!domain_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
-      "boundary",
+      "domain",
       "");
   }
 
@@ -2706,10 +2835,8 @@ operator= (const molsimInput& x)
     this->frequency_output_ = x.frequency_output_;
     this->delta_t_ = x.delta_t_;
     this->t_end_ = x.t_end_;
-    this->domain_size_ = x.domain_size_;
-    this->cutoff_radius_ = x.cutoff_radius_;
     this->linked_cell_ = x.linked_cell_;
-    this->boundary_ = x.boundary_;
+    this->domain_ = x.domain_;
     this->particle_data_ = x.particle_data_;
   }
 
