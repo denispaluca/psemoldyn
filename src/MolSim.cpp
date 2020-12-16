@@ -46,7 +46,7 @@ std::chrono::duration<int64_t, std::nano> ptStartTime;
  */
 int main(int argc, char *argsv[]) {
     PropertyConfigurator::configure("../log4cxx.cfg");
-    LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution...");
+    LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution. This may take a while...");
 
     switch (argc) {
         case 2:
@@ -64,11 +64,17 @@ int main(int argc, char *argsv[]) {
 
 int xmlRoutine(char * xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
-    if(isPT) startPT();
+    if (isPT) startPT();
+    std::unique_ptr<molsimInput> inputFile;
+    try {
+        inputFile = input(xmlFile);
+    } catch (const xml_schema::exception& e) {
+        LOG4CXX_FATAL(molsimLogger, e.what() << "\nError details: " << e);
+        return -1;
+    }
+    //std::unique_ptr<molsimInput> ptr(input(xmlFile));
 
-    std::unique_ptr<molsimInput> ptr (input(xmlFile));
-
-    auto sim = Simulation(*ptr);
+    auto sim = Simulation(*inputFile);
     sim.start(isPT);
 
     if(isPT) endPT();
