@@ -10,8 +10,7 @@
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     auto pg = ParticleGenerator(data.particle_data());
-    size = pg.getParticles().getParticles().size();
-
+    //Update delta_t for each particle before copying
     pg.getParticles().iterate([&](Particle &p) {
         p.updateDT(data.delta_t());
     });
@@ -64,9 +63,9 @@ void Simulation::plotParticles(int iteration) {
                 "MD_vtk");
     outputWriter::VTKWriter vtkWriter;
 
-    vtkWriter.initializeOutput(size);
+    vtkWriter.initializeOutput(container->size());
 
-    this->container->iterate([&](Particle& p) {
+    container->iterate([&](Particle& p) {
         vtkWriter.plotParticle(p);
     });
 

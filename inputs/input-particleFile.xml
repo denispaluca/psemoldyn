@@ -4,14 +4,14 @@
     <name_output>Collision</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
-    <t_end>0.5</t_end>
+    <t_end>5</t_end>
     <domain_size>
         <x>180</x>
         <y>90</y>
         <z>1</z>
     </domain_size>
     <cutoff_radius>30</cutoff_radius>
-    <linked_cell>true</linked_cell>
+    <linked_cell>false</linked_cell>
     <particle_data>
         <cuboids>
             <cuboid>

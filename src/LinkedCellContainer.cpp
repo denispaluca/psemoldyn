@@ -74,20 +74,10 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
     for (auto cell : cells) {
         // calculate forces between particles of one cell
-
-        //LOG4CXX_INFO(linkedCellContainerLogger, "INNER START");
         cell.iteratePairs(f);
-        //LOG4CXX_INFO(linkedCellContainerLogger, "INNER END");
 
         // then calculate forces between particles of cell + neighbors
-        //LOG4CXX_INFO(linkedCellContainerLogger, "OUT START");
         for (auto j : cell.getNeighbors()) {
-//            std::array<double, 3> xDiff = j->getPosition();
-//            xDiff = {xDiff[0] - cell.getPosition()[0],
-//                     xDiff[1] - cell.getPosition()[1],
-//                     xDiff[2] - cell.getPosition()[2]};
-
-//            if(xDiff[0] > 0 || (xDiff[0] == 0 && xDiff[1] > 0) || (xDiff[0] == 0 && xDiff[1] == 0 && xDiff[2] > 0)) {
             if(cell.getIndex() < j->getIndex()){
                 for(auto pi : cell.getParticles()){
                     for(auto pj : j->getParticles()){
@@ -96,7 +86,6 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
                 }
             }
         }
-        //LOG4CXX_INFO(linkedCellContainerLogger, "OUT START");
     }
 }
 
@@ -113,37 +102,37 @@ void LinkedCellContainer::calculateIteration() {
     for(auto& c:cells){
         c.removeParticles();
     }
-
+    auto& v = particles.getParticles();
+    v.erase(std::remove_if(
+            v.begin(), v.end(),
+            [&](Particle& p) {
+                int index = getIndexFromParticle(p);
+                return index < 0 || index >= cells.size();
+            }), v.end());
     // calculate new v
     iterate([&](Particle &p) {
         p.calculateV();
         assignParticle(p);
     });
-//    for(auto c : cells) {
-//        c.iterate([](Particle &p) {
-//            p.calculateV();
-//        });
-//        c.removeParticles();
-//    }
+    //LOG4CXX_INFO(linkedCellContainerLogger, "Particles outside of domain: " << i);
 }
 
 int LinkedCellContainer::getIndex(std::array<int, 3> pos) {
     return pos[0] + (pos[1]+ pos[2]*dimensions[1])*dimensions[0];
 }
 
-void LinkedCellContainer::assignParticle(Particle &p) {
-    std::array<int,3> x{};
-    for(int i = 0; i<3;i++)
-        x[i] = (int)std::floor(p.getX()[i]/cutoff_radius);
-
-    int index = getIndex(x);
-    if(index < 0 || index >= particles.getParticles().size()){
-        //LOG4CXX_INFO(linkedCellContainerLogger, "Particle outside of domain");
-        return;
-    }
+bool LinkedCellContainer::assignParticle(Particle &p) {
+    int index = getIndexFromParticle(p);
+//    if(index < 0 || index >= cells.size()){
+//        //LOG4CXX_INFO(linkedCellContainerLogger, "Particle outside of domain");
+//        return false;
+//    }
 
     cells.at(index).addParticle(&p);
+    return true;
 }
+
+
 
 std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
     int z = i / (dimensions[0] * dimensions[1]);
@@ -151,4 +140,16 @@ std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
     int y = i / dimensions[0];
     int x = i % dimensions[0];
     return { x, y, z };
+}
+
+int LinkedCellContainer::getIndexFromParticle(Particle &p) {
+    std::array<int,3> x{};
+    for(int i = 0; i<3;i++)
+        x[i] = (int)std::floor(p.getX()[i]/cutoff_radius);
+
+    return getIndex(x);
+}
+
+std::size_t LinkedCellContainer::size() {
+    return particles.size();
 }

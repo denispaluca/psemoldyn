@@ -33,11 +33,6 @@ std::vector<LinkedCell*> LinkedCell::getNeighbors() {
     return neighbors;
 }
 
-bool LinkedCell::particleBelongs(Particle &p) {
-    return (position[0] <= p.getX()[0] && position[1] <= p.getX()[1] && position[1] <= p.getX()[1] &&
-            p.getX()[0] < position[0] + cutoff  && p.getX()[1] < position[1] + cutoff && p.getX()[2] < position[2] + cutoff);
-}
-
 bool LinkedCell::isNeighbor(LinkedCell* other) {
     std::array<double, 3> diff = other->getPosition();
     diff[0] -= position[0];
@@ -47,31 +42,6 @@ bool LinkedCell::isNeighbor(LinkedCell* other) {
 }
 
 void LinkedCell::removeParticles(){
-//    for(auto i = particles.begin(); i != particles.end(); ++i){
-//        auto p = *i;
-//        if(particleBelongs(*p)) continue;
-//        for(auto n : neighbors){
-//            if(n->particleBelongs(*p)){
-//                n->addParticle(p);
-//                break;
-//            }
-//        }
-//        particles.erase(i);
-//    }
-
-//    particles.erase(std::remove_if(
-//            particles.begin(), particles.end(),
-//            [&](Particle* p){
-//                if(particleBelongs(*p)) return false;
-//                for(auto n : neighbors){
-//                    if(n->particleBelongs(*p)){
-//                        n->addParticle(p);
-//                        break;
-//                    }
-//                }
-//                return true;
-//            }), particles.end());
-
     particles.clear();
 }
 

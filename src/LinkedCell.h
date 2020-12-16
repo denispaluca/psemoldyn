@@ -58,7 +58,7 @@ public:
     std::array<double, 3> getPosition();
 
     /**
-     * Getter for the neighbors fiels
+     * Getter for the neighbors fields
      * @return a vector with the neighboring LinkedCells of this cell
      */
     std::vector<LinkedCell*> getNeighbors();
@@ -69,13 +69,6 @@ public:
      * @return true if the cells are neighbors, false otherwise
      */
     bool isNeighbor(LinkedCell* other);
-
-    /**
-     * Checks if the given particle is located within the bounds of this cell.
-     * @param p the particle in question
-     * @return true if the particle is located within this cell, false otherwise
-     */
-    bool particleBelongs(Particle &p);
 
     void addNeighbor(LinkedCell* other);
 

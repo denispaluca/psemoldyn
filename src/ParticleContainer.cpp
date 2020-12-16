@@ -64,3 +64,7 @@ std::vector<Particle>& ParticleContainer::getParticles() {
 ParticleContainer::~ParticleContainer() {
     LOG4CXX_INFO(logger, "ParticleCONTAINER destructed!");
 }
+
+std::size_t ParticleContainer::size() {
+    return particles.size();
+}

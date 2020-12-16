@@ -25,4 +25,9 @@ public:
      * Does one iteration step with the particles.
      */
     virtual void calculateIteration() = 0;
+
+    /**
+     * Size of particles vector.
+     */
+    virtual std::size_t size() = 0;
 };

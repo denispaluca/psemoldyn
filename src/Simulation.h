@@ -20,8 +20,6 @@ private:
      */
     Container *container;
 
-    int size;
-
     /**
      * Plot the particles to a vtu-file.
      * @param iteration Iteration counter

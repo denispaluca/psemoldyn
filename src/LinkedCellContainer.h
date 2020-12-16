@@ -50,7 +50,7 @@ public:
 
     void calculateIteration() override;
 
-    void assignParticle(Particle& p);
+    bool assignParticle(Particle& p);
 
     int getIndex(std::array<int, 3> pos);
 
@@ -69,6 +69,10 @@ public:
     void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
 
     std::array<int,3> indexToPos(int i);
+
+    int getIndexFromParticle(Particle& p);
+
+    std::size_t size() override;
 };
 
 

@@ -78,4 +78,6 @@ public:
      void erase(int i);
 
      void calculateIteration() override;
+
+     std::size_t size() override;
 };
