@@ -10,35 +10,30 @@
 
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
+#include <xml/molsimInput.hxx>
+#include <utils/XSDMapper.h>
+
 using namespace log4cxx;
 using namespace log4cxx::helpers;
 
 //static logger variable linkedCellContainerLogger
 log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
 
-LinkedCellContainer::LinkedCellContainer() {
-    domain_size = {0.0, 0.0, 0.0};
-    cutoff_radius = 0.0;
-    cells = std::vector<LinkedCell>();
-}
-
-LinkedCellContainer::LinkedCellContainer(std::array<double, 3> domain_size, double cutoff_radius,
-                                         ParticleContainer &particles) {
-    this->domain_size = domain_size;
-    this->cutoff_radius = cutoff_radius;
+LinkedCellContainer::LinkedCellContainer(domain_type domain,
+                                         ParticleContainer &particles){
+    this->domain_size = mapDoubleVec(domain.domain_size());
+    this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
+
+    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size);
 
     cells = std::vector<LinkedCell>();
     int nrCells = dimensions[0]*dimensions[1]*dimensions[2];
     cells.reserve(nrCells);
     for(int i = 0; i < nrCells; i++){
-        auto pos = indexToPos(i);
-        std::array<double, 3> cellPos = {pos[0] * cutoff_radius,
-                                        pos[1] * cutoff_radius,
-                                        pos[2] * cutoff_radius};
-        cells.emplace_back(LinkedCell(cellPos, cutoff_radius, i));
+        cells.emplace_back(LinkedCell(i));
     }
 
     this->particles.iterate([&](Particle& p){
@@ -57,7 +52,7 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 }
 
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
-    for (auto cell : cells) {
+    for (auto& cell : cells) {
         // calculate forces between particles of one cell
         cell.iteratePairs(f);
 
@@ -90,25 +85,32 @@ void LinkedCellContainer::calculateIteration() {
 
     // calculate new v
     iterate([&](Particle &p) {
+        boundaryHandler->applyForce(p);
         p.calculateV();
         assignParticle(p);
     });
 }
 
 int LinkedCellContainer::getIndex(std::array<int, 3> pos) {
-    return pos[0] + (pos[1]+ pos[2]*dimensions[1])*dimensions[0];
+    if(pos[0] < 0 || pos[1] < 0 || pos[2] < 0)
+        return -1;
+
+    return pos[0] + (pos[1] + pos[2]*dimensions[1])*dimensions[0];
 }
 
 bool LinkedCellContainer::assignParticle(Particle &p) {
     int index = getIndexFromParticle(p);
 
+    if(index < 0 || index > cells.size()){
+        LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+        return false;
+    }
     cells.at(index).addParticle(&p);
     return true;
 }
 
 std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
     int z = i / (dimensions[0] * dimensions[1]);
-    i -= (z * dimensions[0] * dimensions[1]);
     int y = i / dimensions[0];
     int x = i % dimensions[0];
     return { x, y, z };
@@ -131,8 +133,7 @@ void LinkedCellContainer::clearOutflowParticles() {
     v.erase(std::remove_if(
             v.begin(), v.end(),
             [&](Particle& p) {
-                int index = getIndexFromParticle(p);
-                return index < 0 || index >= cells.size();
+                return p.isOut(domain_size);
             }), v.end());
 }
 

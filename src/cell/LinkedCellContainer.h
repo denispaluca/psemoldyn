@@ -2,11 +2,12 @@
 // Created by mira on 08.12.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
-#define PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
+#pragma once
 
+#include <xml/molsimInput.hxx>
 #include "LinkedCell.h"
-#include "ParticleContainer.h"
+#include "particle/ParticleContainer.h"
+#include "BoundaryHandler.h"
 
 class LinkedCellContainer : public Container {
 private:
@@ -27,21 +28,23 @@ private:
      */
     std::vector<LinkedCell> cells;
 
-    std::vector<LinkedCell*> nonEmpty;
-
     ParticleContainer particles;
+
+    BoundaryHandler* boundaryHandler;
 
     void clearOutflowParticles();
 
     void populateNeighbours();
 
+    bool assignParticle(Particle& p);
+
+    int getIndex(std::array<int, 3> pos);
+
+    std::array<int,3> indexToPos(int i);
+
+    int getIndexFromParticle(Particle& p);
+
 public:
-
-    /**
-     * Default constructor
-     */
-    LinkedCellContainer();
-
     /**
      * Constructor for a LinkedCellContainer, creates cells automatically + assigns correct particles
      * @param domain_size the domain size
@@ -49,14 +52,10 @@ public:
      * @param cutoff_radius the cutoff radius
      * @param particles the particles
      */
-    LinkedCellContainer(std::array<double, 3> domain_size, double cutoff_radius, ParticleContainer &particles);
+    LinkedCellContainer(domain_type domain, ParticleContainer &particles);
 
 
     void calculateIteration() override;
-
-    bool assignParticle(Particle& p);
-
-    int getIndex(std::array<int, 3> pos);
 
     /**
      * Iterate over all particles and apply function f
@@ -72,12 +71,5 @@ public:
      */
     void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
 
-    std::array<int,3> indexToPos(int i);
-
-    int getIndexFromParticle(Particle& p);
-
     std::size_t size() override;
 };
-
-
-#endif //PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H

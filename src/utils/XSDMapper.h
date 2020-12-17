@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <Cuboid.h>
 #include <ParticleSphere.h>
+#include <shapes/Cuboid.h>
 #include "xml/molsimInput.hxx"
 
 std::array<int, 3> mapIntVec(integer_vector& x);

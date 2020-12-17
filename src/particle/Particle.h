@@ -187,6 +187,10 @@ public:
    * @return
    */
   void updateDT(double delta_t);
+
+  bool isOut(std::array<double, 3> domain_size);
+
+  void setM(double mass);
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

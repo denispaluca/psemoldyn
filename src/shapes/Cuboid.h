@@ -6,7 +6,7 @@
 #define MEAN_BROWNIAN 0.1
 
 #include <array>
-#include "ParticleContainer.h"
+#include "particle/ParticleContainer.h"
 
 class Cuboid{
 
