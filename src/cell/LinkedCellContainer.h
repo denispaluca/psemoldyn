@@ -2,11 +2,12 @@
 // Created by mira on 08.12.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
-#define PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
+#pragma once
 
+#include <xml/molsimInput.hxx>
 #include "LinkedCell.h"
-#include "ParticleContainer.h"
+#include "particle/ParticleContainer.h"
+#include "BoundaryHandler.h"
 
 class LinkedCellContainer : public Container {
 private:
@@ -27,21 +28,15 @@ private:
      */
     std::vector<LinkedCell> cells;
 
-    std::vector<LinkedCell*> nonEmpty;
-
     ParticleContainer particles;
+
+    BoundaryHandler* boundaryHandler;
 
     void clearOutflowParticles();
 
     void populateNeighbours();
 
 public:
-
-    /**
-     * Default constructor
-     */
-    LinkedCellContainer();
-
     /**
      * Constructor for a LinkedCellContainer, creates cells automatically + assigns correct particles
      * @param domain_size the domain size
@@ -49,7 +44,7 @@ public:
      * @param cutoff_radius the cutoff radius
      * @param particles the particles
      */
-    LinkedCellContainer(std::array<double, 3> domain_size, double cutoff_radius, ParticleContainer &particles);
+    LinkedCellContainer(domain_type domain, ParticleContainer &particles);
 
 
     void calculateIteration() override;
@@ -82,6 +77,3 @@ public:
 
     ParticleContainer getParticles();
 };
-
-
-#endif //PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H

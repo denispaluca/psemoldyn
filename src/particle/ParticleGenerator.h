@@ -6,7 +6,7 @@
 
 #include <vector>
 #include "ParticleContainer.h"
-#include "Cuboid.h"
+#include "shapes/Cuboid.h"
 #include <xml/molsimInput.hxx>
 
 class ParticleGenerator{
