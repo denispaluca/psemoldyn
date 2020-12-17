@@ -58,8 +58,9 @@ void ParticleGenerator::generate() {
     for(auto c: cuboids){
         c.generate(particles, data.is3D());
     }
-
-    //TODO for spheres
+    for(auto c: particleSpheres){
+        c.generate(particles, data.is3D());
+    }
 }
 
 ParticleGenerator::ParticleGenerator() : data(true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
