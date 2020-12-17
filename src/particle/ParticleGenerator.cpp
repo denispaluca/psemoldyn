@@ -52,7 +52,7 @@ void ParticleGenerator::generate() {
     //TODO for spheres
 }
 
-ParticleGenerator::ParticleGenerator() : data(input("dummy")->particle_data()) {
+ParticleGenerator::ParticleGenerator() : data(true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
 }

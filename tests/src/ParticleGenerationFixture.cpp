@@ -33,7 +33,8 @@ protected:
 
         // file with manually calculated input data for the particles contained in the cuboids defined above
         std::string test_file_particles = "input/test_particles.particles";
-        particle_data dummy = input("")->particle_data();
+        auto fr = new FileReader();
+        fr->readParticles(particles, const_cast<char *>(test_file_particles.c_str()));
         pc = ParticleContainer(particles);
 
         generated = ParticleContainer();
