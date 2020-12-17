@@ -112,6 +112,10 @@ bool Particle::isOut(std::array<double, 3> domain_size) {
         x[2] < 0 || x[2] > domain_size[2];
 }
 
+void Particle::setM(double mass) {
+    this->m = mass;
+}
+
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();
   return stream;

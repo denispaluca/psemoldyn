@@ -4,7 +4,7 @@
     <name_output>SqCollision</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.00005</delta_t>
-    <t_end>5</t_end>
+    <t_end>3</t_end>
     <linked_cell>true</linked_cell>
     <domain>
         <domain_size>
@@ -28,7 +28,7 @@
             <cuboid>
                 <position>
                     <x>5.0</x>
-                    <y>4.0</y>
+                    <y>2.0</y>
                     <z>0.0</z>
                 </position>
                 <size>

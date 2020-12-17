@@ -12,9 +12,11 @@ enum Boundary{
 
 class BoundaryHandler {
 private:
+    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0);
     boundary_type boundary;
     std::array<double, 3> dimensions{};
     void handleBoundary(Particle& p, Boundary b);
+    void prepareCounter(Particle& p);
 public:
     BoundaryHandler(boundary_type& boundary, std::array<double, 3> dimensions);
     void applyForce(Particle& p);
