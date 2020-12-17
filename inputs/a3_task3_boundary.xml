@@ -4,12 +4,12 @@
     <name_output>SqCollision</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.00005</delta_t>
-    <t_end>10</t_end>
+    <t_end>5</t_end>
     <linked_cell>true</linked_cell>
     <domain>
         <domain_size>
-            <x>60</x>
-            <y>50</y>
+            <x>20</x>
+            <y>15</y>
             <z>1</z>
         </domain_size>
         <cutoff_radius>3.0</cutoff_radius>
@@ -27,8 +27,8 @@
         <cuboids>
             <cuboid>
                 <position>
-                    <x>30.0</x>
-                    <y>10.0</y>
+                    <x>5.0</x>
+                    <y>4.0</y>
                     <z>0.0</z>
                 </position>
                 <size>

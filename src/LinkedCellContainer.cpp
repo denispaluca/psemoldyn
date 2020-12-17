@@ -22,7 +22,7 @@ log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedc
 LinkedCellContainer::LinkedCellContainer(domain_type domain,
                                          ParticleContainer &particles){
     this->domain_size = mapDoubleVec(domain.domain_size());
-    this->cutoff_radius = domain.cutoff_radius();
+    this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
@@ -96,7 +96,10 @@ void LinkedCellContainer::calculateIteration() {
 }
 
 int LinkedCellContainer::getIndex(std::array<int, 3> pos) {
-    return pos[0] + (pos[1]+ pos[2]*dimensions[1])*dimensions[0];
+    if(pos[0] < 0 || pos[1] < 0 || pos[2] < 0)
+        return -1;
+
+    return pos[0] + (pos[1] + pos[2]*dimensions[1])*dimensions[0];
 }
 
 bool LinkedCellContainer::assignParticle(Particle &p) {
@@ -108,7 +111,6 @@ bool LinkedCellContainer::assignParticle(Particle &p) {
 
 std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
     int z = i / (dimensions[0] * dimensions[1]);
-    i -= (z * dimensions[0] * dimensions[1]);
     int y = i / dimensions[0];
     int x = i % dimensions[0];
     return { x, y, z };
@@ -131,8 +133,7 @@ void LinkedCellContainer::clearOutflowParticles() {
     v.erase(std::remove_if(
             v.begin(), v.end(),
             [&](Particle& p) {
-                int index = getIndexFromParticle(p);
-                return index < 0 || index >= cells.size();
+                return p.isOut(domain_size);
             }), v.end());
 }
 

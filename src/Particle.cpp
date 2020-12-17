@@ -105,6 +105,13 @@ bool Particle::operator==(Particle &other) {
          (type == other.type) and (m == other.m) and (old_f == other.old_f);
 }
 
+bool Particle::isOut(std::array<double, 3> domain_size) {
+    return
+        x[0] < 0 || x[0] > domain_size[0] ||
+        x[1] < 0 || x[1] > domain_size[1] ||
+        x[2] < 0 || x[2] > domain_size[2];
+}
+
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();
   return stream;
