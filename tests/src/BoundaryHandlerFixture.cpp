@@ -68,3 +68,14 @@ TEST_F(BoundaryHandlerFixture, back){
     handler->applyForce(p);
     EXPECT_NE(p.getF()[2], 0);
 }
+
+/**
+ * Checks if forced is applied correctly at border: back.
+ */
+TEST_F(BoundaryHandlerFixture, NotOnBorder){
+    Particle p = Particle({50,50,50},{0,0,0},1,0);
+    handler->applyForce(p);
+    EXPECT_DOUBLE_EQ(p.getF()[0], 0);
+    EXPECT_DOUBLE_EQ(p.getF()[1], 0);
+    EXPECT_DOUBLE_EQ(p.getF()[2], 0);
+}
