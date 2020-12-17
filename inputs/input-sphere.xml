@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
-    <name_output>sphere</name_output>
+    <name_output>falling_drop</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.00005</delta_t>
-    <t_end>0.001</t_end>
+    <t_end>10</t_end>
     <linked_cell>true</linked_cell>
     <domain>
         <domain_size>
@@ -40,7 +40,7 @@
                     <z>0</z>
                 </v>
                 <m>1.0</m>
-                <r>6</r>
+                <r>15</r>
                 <meanv>0.1</meanv>
             </sphere>
         </spheres>
