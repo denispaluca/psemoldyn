@@ -44,15 +44,38 @@ public:
      */
     std::vector<LinkedCell*> getNeighbors();
 
+    /**
+     * Adds given LinkedCell pointer to vector of neighbors.
+     * @param other a pointer to the LinkedCell to be added
+     */
     void addNeighbor(LinkedCell* other);
 
+    /**
+     * Deletes all Particles from this LinkedCell.
+     */
     void removeParticles();
 
+    /**
+     * Adds given Particle pointer to vector of contained particles.
+     * @param p a pointer to the Particle to be added
+     */
     void addParticle(Particle* p);
 
+    /**
+     * Applies given function to all distinct particle pairs in this LinkedCell.
+     * @param f the function t be applied.
+     */
     void iteratePairs(std::function<void(Particle&, Particle&)> f);
 
+    /**
+     * The index of this LinkedCell (wrt the Container it belongs to)
+     * @return the index
+     */
     int getIndex();
 
+    /**
+     * Getter for the Particles vector.
+     * @return
+     */
     std::vector<Particle*>& getParticles();
 };
