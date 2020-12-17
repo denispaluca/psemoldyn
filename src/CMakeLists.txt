@@ -6,6 +6,7 @@ file(GLOB_RECURSE MY_SRC
         "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
         )
 
+list(REMOVE_ITEM MY_SRC ${CMAKE_CURRENT_SOURCE_DIR}/MolSim.cpp)
 add_library(libmolsim STATIC ${MY_SRC})
 
 # set cxx standard. You may raise this if you want.
