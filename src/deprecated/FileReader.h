@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "Particle.h"
-#include "Cuboid.h"
+#include "particle/Particle.h"
+#include "shapes/Cuboid.h"
 
 #include <vector>
 

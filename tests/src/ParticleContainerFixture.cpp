@@ -2,7 +2,7 @@
 // Created by denis on 22.11.20.
 //
 #include <gtest/gtest.h>
-#include "../../src/ParticleContainer.h"
+#include "particle/ParticleContainer.h"
 
 /**
  * Fixture to write tests for the ParticleContainer class.

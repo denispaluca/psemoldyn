@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <Particle.h>
+#include <particle/Particle.h>
 
 /**
  * Calculate force between 2 particles and add it
