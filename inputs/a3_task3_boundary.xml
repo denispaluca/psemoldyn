@@ -40,7 +40,7 @@
                 <mass>1.0</mass>
                 <velocity>
                     <x>0.0</x>
-                    <y>-10.0</y>
+                    <y>-20.0</y>
                     <z>0.0</z>
                 </velocity>
                 <meanv>0</meanv>

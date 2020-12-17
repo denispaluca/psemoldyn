@@ -33,11 +33,7 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     int nrCells = dimensions[0]*dimensions[1]*dimensions[2];
     cells.reserve(nrCells);
     for(int i = 0; i < nrCells; i++){
-        auto pos = indexToPos(i);
-        std::array<double, 3> cellPos = {pos[0] * cutoff_radius,
-                                        pos[1] * cutoff_radius,
-                                        pos[2] * cutoff_radius};
-        cells.emplace_back(LinkedCell(cellPos, cutoff_radius, i));
+        cells.emplace_back(LinkedCell(i));
     }
 
     this->particles.iterate([&](Particle& p){
@@ -105,6 +101,10 @@ int LinkedCellContainer::getIndex(std::array<int, 3> pos) {
 bool LinkedCellContainer::assignParticle(Particle &p) {
     int index = getIndexFromParticle(p);
 
+    if(index < 0 || index > cells.size()){
+        LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+        return false;
+    }
     cells.at(index).addParticle(&p);
     return true;
 }

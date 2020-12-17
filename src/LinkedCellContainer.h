@@ -2,8 +2,7 @@
 // Created by mira on 08.12.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
-#define PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H
+#pragma once
 
 #include <xml/molsimInput.hxx>
 #include "LinkedCell.h"
@@ -76,6 +75,3 @@ public:
 
     std::size_t size() override;
 };
-
-
-#endif //PSEMOLDYN_GROUPB_LINKEDCELLCONTAINER_H

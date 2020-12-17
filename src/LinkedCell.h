@@ -2,8 +2,7 @@
 // Created by mira on 08.12.20.
 //
 
-#ifndef PSEMOLDYN_GROUPB_LINKEDCELL_H
-#define PSEMOLDYN_GROUPB_LINKEDCELL_H
+#pragma once
 
 #include <functional>
 #include "Particle.h"
@@ -11,16 +10,6 @@
 
 class LinkedCell {
 private:
-    /**
-     * Coordinates of the lower front-left corner of ths cell.
-     */
-    std::array<double, 3> position;
-
-    /**
-     * the cutoff radius
-     */
-    double cutoff;
-
     int index;
 
     /**
@@ -42,33 +31,18 @@ public:
 
     /**
      * Constructor for a cell
-     * @param position coordinates of lower front-left corner
-     * @param cutoff the cutoff radius
      * @param particles particles to add to the cell
      *
      * The constructor adds the particles by calling addParticles(..),
      * i.e. it is checked that the particles are actually locaed within the cell.
      */
-    LinkedCell(std::array<double, 3> position, double cutoff, int index);
-
-    /**
-     * Getter for the position field
-     * @return the position
-     */
-    std::array<double, 3> getPosition();
+    LinkedCell(int index);
 
     /**
      * Getter for the neighbors fields
      * @return a vector with the neighboring LinkedCells of this cell
      */
     std::vector<LinkedCell*> getNeighbors();
-
-    /**
-     * Checks if another cell is a direct neighbor of the current cell.
-     * @param other the other cell
-     * @return true if the cells are neighbors, false otherwise
-     */
-    bool isNeighbor(LinkedCell* other);
 
     void addNeighbor(LinkedCell* other);
 
@@ -81,8 +55,4 @@ public:
     int getIndex();
 
     std::vector<Particle*>& getParticles();
-
 };
-
-
-#endif //PSEMOLDYN_GROUPB_LINKEDCELL_H
