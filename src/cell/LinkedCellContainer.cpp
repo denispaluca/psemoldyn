@@ -92,7 +92,8 @@ void LinkedCellContainer::calculateIteration() {
 }
 
 int LinkedCellContainer::getIndex(std::array<int, 3> pos) {
-    if(pos[0] < 0 || pos[1] < 0 || pos[2] < 0)
+    if(pos[0] < 0 || pos[1] < 0 || pos[2] < 0 ||
+        pos[0] >= dimensions[0] || pos[1] >= dimensions[1] || pos[2] >= dimensions[2])
         return -1;
 
     return pos[0] + (pos[1] + pos[2]*dimensions[1])*dimensions[0];
@@ -111,6 +112,7 @@ bool LinkedCellContainer::assignParticle(Particle &p) {
 
 std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
     int z = i / (dimensions[0] * dimensions[1]);
+    i -= z * (dimensions[0] * dimensions[1]);
     int y = i / dimensions[0];
     int x = i % dimensions[0];
     return { x, y, z };
@@ -158,4 +160,9 @@ std::vector<LinkedCell> LinkedCellContainer::getCells(){
 
 ParticleContainer LinkedCellContainer::getParticles() {
     return particles;
+}
+
+LinkedCellContainer::LinkedCellContainer() {
+    cutoff_radius = 0;
+    boundaryHandler = NULL;
 }

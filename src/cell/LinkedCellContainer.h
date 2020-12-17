@@ -37,6 +37,7 @@ private:
     void populateNeighbours();
 
 public:
+    LinkedCellContainer();
     /**
      * Constructor for a LinkedCellContainer, creates cells automatically + assigns correct particles
      * @param domain_size the domain size
