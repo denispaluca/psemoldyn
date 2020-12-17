@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <ParticleSphere.h>
+#include <shapes/ParticleSphere.h>
 #include <shapes/Cuboid.h>
 #include "xml/molsimInput.hxx"
 

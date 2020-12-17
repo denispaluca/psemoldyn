@@ -43,7 +43,6 @@ void ParticleGenerator::reserve(){
     particleSpheres.reserve(data.spheres().sphere().size());
     for(auto c : data.spheres().sphere()){
         auto sphere = mapParticleSphere(c);
-        nrParticles += sphere.getNrParticles();
         particleSpheres.emplace_back(sphere);
     }
 
