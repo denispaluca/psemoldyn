@@ -59,6 +59,6 @@ void ParticleGenerator::generate() {
         c.generate(particles, data.is3D());
     }
     for(auto c: particleSpheres){
-        c.generate(particles);
+        c.generate(particles, data.is3D());
     }
 }

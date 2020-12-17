@@ -82,7 +82,7 @@ public:
      * Generates the particles in the cuboid and adds them into given ParticleContainer
      * @param p the ParticleContainer in which the generated Particles shall be stored
      */
-    void generate(ParticleContainer &p);
+    void generate(ParticleContainer &p, bool is3D);
 
     /**
      * Getter for the radius of Sphere.
