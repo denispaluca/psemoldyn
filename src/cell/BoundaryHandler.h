@@ -4,7 +4,7 @@
 
 #pragma once
 #include "xml/molsimInput.hxx"
-#include "Particle.h"
+#include "particle/Particle.h"
 
 enum Boundary{
     top, bottom, front, back, left, right

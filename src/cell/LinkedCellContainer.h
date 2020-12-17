@@ -6,7 +6,7 @@
 
 #include <xml/molsimInput.hxx>
 #include "LinkedCell.h"
-#include "ParticleContainer.h"
+#include "particle/ParticleContainer.h"
 #include "BoundaryHandler.h"
 
 class LinkedCellContainer : public Container {
@@ -27,8 +27,6 @@ private:
      * A vector containing all cells
      */
     std::vector<LinkedCell> cells;
-
-    std::vector<LinkedCell*> nonEmpty;
 
     ParticleContainer particles;
 

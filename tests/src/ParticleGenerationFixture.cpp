@@ -2,7 +2,7 @@
 // Created by mira on 01.12.20.
 //
 #include <gtest/gtest.h>
-#include "../../src/ParticleGenerator.h"
+#include "particle/ParticleGenerator.h"
 #include "deprecated/FileReader.h"
 
 /**

@@ -5,7 +5,7 @@
 #pragma once
 
 #include <functional>
-#include "Particle.h"
+#include "particle/Particle.h"
 #include <vector>
 
 class LinkedCell {

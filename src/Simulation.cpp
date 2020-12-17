@@ -5,7 +5,7 @@
 #include <outputWriter/VTKWriter.h>
 #include <utils/ForceUtils.h>
 #include "Simulation.h"
-#include "LinkedCellContainer.h"
+#include "cell/LinkedCellContainer.h"
 
 Simulation::Simulation(molsimInput &data) : data(data) {
     auto pg = ParticleGenerator(data.particle_data());
