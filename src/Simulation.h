@@ -4,8 +4,8 @@
 #pragma once
 
 #include <xml/molsimInput.hxx>
-#include "ParticleContainer.h"
-#include "ParticleGenerator.h"
+#include "particle/ParticleContainer.h"
+#include "particle/ParticleGenerator.h"
 #include "Container.h"
 
 class Simulation {

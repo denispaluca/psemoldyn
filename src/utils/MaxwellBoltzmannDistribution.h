@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Particle.h"
+#include "particle/Particle.h"
 
 /**
  * Add a random velocity according to the Maxwell-Boltzmann distribution to the
