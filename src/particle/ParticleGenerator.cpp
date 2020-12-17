@@ -9,11 +9,16 @@
 ParticleGenerator::ParticleGenerator(particle_data &data) : data(data) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
+    particleSpheres = std::vector<ParticleSphere>();
     generate();
 }
 
 std::vector<Cuboid> ParticleGenerator::getCuboids() {
     return cuboids;
+}
+
+std::vector<ParticleSphere> ParticleGenerator::getParticleSpheres() {
+    return particleSpheres;
 }
 
 ParticleContainer& ParticleGenerator::getParticles() {
@@ -27,6 +32,7 @@ void ParticleGenerator::addCuboid(Cuboid c) {
 
 void ParticleGenerator::reserve(){
     std::size_t nrParticles = data.particles().particle().size();
+
     cuboids.reserve(data.cuboids().cuboid().size());
     for(auto c : data.cuboids().cuboid()){
         auto cube = mapCuboid(c);
@@ -34,7 +40,11 @@ void ParticleGenerator::reserve(){
         cuboids.emplace_back(cube);
     }
 
-    //TODO for spheres
+    particleSpheres.reserve(data.spheres().sphere().size());
+    for(auto c : data.spheres().sphere()){
+        auto sphere = mapParticleSphere(c);
+        particleSpheres.emplace_back(sphere);
+    }
 
     particles.reserve(nrParticles);
 }
@@ -48,11 +58,13 @@ void ParticleGenerator::generate() {
     for(auto c: cuboids){
         c.generate(particles, data.is3D());
     }
-
-    //TODO for spheres
+    for(auto c: particleSpheres){
+        c.generate(particles, data.is3D());
+    }
 }
 
 ParticleGenerator::ParticleGenerator() : data(true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
+    particleSpheres = std::vector<ParticleSphere>();
 }

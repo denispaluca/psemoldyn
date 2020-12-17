@@ -74,6 +74,8 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
+      <!-- mean brownian velocity -->
+      <xsd:element name="meanv" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
 

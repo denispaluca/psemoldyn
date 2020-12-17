@@ -840,19 +840,35 @@ class sphere: public ::xml_schema::type
   void
   r (const r_type& x);
 
+  // meanv
+  //
+  typedef ::xml_schema::double_ meanv_type;
+  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
+
+  const meanv_type&
+  meanv () const;
+
+  meanv_type&
+  meanv ();
+
+  void
+  meanv (const meanv_type& x);
+
   // Constructors.
   //
   sphere (const center_type&,
           const h_type&,
           const v_type&,
           const m_type&,
-          const r_type&);
+          const r_type&,
+          const meanv_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
           ::std::unique_ptr< v_type >,
           const m_type&,
-          const r_type&);
+          const r_type&,
+          const meanv_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -885,6 +901,7 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
   ::xsd::cxx::tree::one< r_type > r_;
+  ::xsd::cxx::tree::one< meanv_type > meanv_;
 };
 
 class sphere_cluster: public ::xml_schema::type

@@ -11,6 +11,17 @@ std::array<double, 3> mapDoubleVec(double_vector& x){
     return {x.x(), x.y(), x.z()};
 }
 
+ParticleSphere mapParticleSphere(sphere& c){
+    return {
+            mapDoubleVec(c.center()),
+            mapDoubleVec(c.v()),
+            c.r(),
+            c.h(),
+            c.m(),
+            c.meanv()
+    };
+}
+
 Cuboid mapCuboid(cuboid& c){
     return {
         mapDoubleVec(c.position()),

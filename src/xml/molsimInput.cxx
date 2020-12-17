@@ -505,6 +505,24 @@ r (const r_type& x)
   this->r_.set (x);
 }
 
+const sphere::meanv_type& sphere::
+meanv () const
+{
+  return this->meanv_.get ();
+}
+
+sphere::meanv_type& sphere::
+meanv ()
+{
+  return this->meanv_.get ();
+}
+
+void sphere::
+meanv (const meanv_type& x)
+{
+  this->meanv_.set (x);
+}
+
 
 // sphere_cluster
 // 
@@ -1790,13 +1808,15 @@ sphere (const center_type& center,
         const h_type& h,
         const v_type& v,
         const m_type& m,
-        const r_type& r)
+        const r_type& r,
+        const meanv_type& meanv)
 : ::xml_schema::type (),
   center_ (center, this),
   h_ (h, this),
   v_ (v, this),
   m_ (m, this),
-  r_ (r, this)
+  r_ (r, this),
+  meanv_ (meanv, this)
 {
 }
 
@@ -1805,13 +1825,15 @@ sphere (::std::unique_ptr< center_type > center,
         const h_type& h,
         ::std::unique_ptr< v_type > v,
         const m_type& m,
-        const r_type& r)
+        const r_type& r,
+        const meanv_type& meanv)
 : ::xml_schema::type (),
   center_ (std::move (center), this),
   h_ (h, this),
   v_ (std::move (v), this),
   m_ (m, this),
-  r_ (r, this)
+  r_ (r, this),
+  meanv_ (meanv, this)
 {
 }
 
@@ -1824,7 +1846,8 @@ sphere (const sphere& x,
   h_ (x.h_, f, this),
   v_ (x.v_, f, this),
   m_ (x.m_, f, this),
-  r_ (x.r_, f, this)
+  r_ (x.r_, f, this),
+  meanv_ (x.meanv_, f, this)
 {
 }
 
@@ -1837,7 +1860,8 @@ sphere (const ::xercesc::DOMElement& e,
   h_ (this),
   v_ (this),
   m_ (this),
-  r_ (this)
+  r_ (this),
+  meanv_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1917,6 +1941,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // meanv
+    //
+    if (n.name () == "meanv" && n.namespace_ ().empty ())
+    {
+      if (!meanv_.present ())
+      {
+        this->meanv_.set (meanv_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -1954,6 +1989,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "r",
       "");
   }
+
+  if (!meanv_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "meanv",
+      "");
+  }
 }
 
 sphere* sphere::
@@ -1974,6 +2016,7 @@ operator= (const sphere& x)
     this->v_ = x.v_;
     this->m_ = x.m_;
     this->r_ = x.r_;
+    this->meanv_ = x.meanv_;
   }
 
   return *this;
