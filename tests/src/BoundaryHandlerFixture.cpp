@@ -70,7 +70,7 @@ TEST_F(BoundaryHandlerFixture, back){
 }
 
 /**
- * Checks if forced is applied correctly at border: back.
+ * Checks if forced is applied correctly when not at border.
  */
 TEST_F(BoundaryHandlerFixture, NotOnBorder){
     Particle p = Particle({50,50,50},{0,0,0},1,0);
