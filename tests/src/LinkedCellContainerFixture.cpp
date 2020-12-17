@@ -178,7 +178,7 @@ TEST_F(LinkedCellContainerFixture, iterateLCCPairs){
 TEST_F(LinkedCellContainerFixture, correctIndexFromPosition){
     for(int i = 0; i < lcc.getCells().size(); i++)
         for(auto p : lcc.getCells().at(i).getParticles())
-            EXPECT_EQ(lcc.getIndexFromParticle(p), i);
+            EXPECT_EQ(lcc.getIndexFromParticle(*p), i);
 }
 
 /**
