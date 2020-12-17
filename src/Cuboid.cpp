@@ -26,7 +26,7 @@ Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumber
     this->meanV = MEAN_BROWNIAN;
 }
 
-void Cuboid::generate(ParticleContainer &particles) {
+void Cuboid::generate(ParticleContainer &particles, bool is3D) {
     std::array<double, 3> newPosition = {0., 0., 0.};
 
     for(int i = 0; i < size[0]; i++){
@@ -37,7 +37,7 @@ void Cuboid::generate(ParticleContainer &particles) {
                 newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass);
 
-                MaxwellBoltzmannDistribution(newParticle, meanV, 3);
+                MaxwellBoltzmannDistribution(newParticle, meanV, is3D ? 3 : 2);
 
                 particles.push(newParticle);
             }

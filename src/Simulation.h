@@ -6,6 +6,7 @@
 #include <xml/molsimInput.hxx>
 #include "ParticleContainer.h"
 #include "ParticleGenerator.h"
+#include "Container.h"
 
 class Simulation {
 private:
@@ -17,7 +18,7 @@ private:
     /**
      * Container for particles.
      */
-    ParticleContainer particleContainer;
+    Container *container;
 
     /**
      * Plot the particles to a vtu-file.

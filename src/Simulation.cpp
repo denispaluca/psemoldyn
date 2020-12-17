@@ -5,12 +5,25 @@
 #include <outputWriter/VTKWriter.h>
 #include <utils/ForceUtils.h>
 #include "Simulation.h"
+#include "LinkedCellContainer.h"
+#include "utils/XSDMapper.h"
 
 Simulation::Simulation(molsimInput &data) : data(data) {
-    particleContainer = ParticleGenerator(data.particle_data()).getParticles();
-    particleContainer.iterate([&data](Particle &p){
+    auto pg = ParticleGenerator(data.particle_data());
+    //Update delta_t for each particle before copying
+    pg.getParticles().iterate([&](Particle &p) {
         p.updateDT(data.delta_t());
     });
+
+    if(data.linked_cell()){
+        container = new LinkedCellContainer(
+                mapDoubleVec(data.domain_size()),
+                data.cutoff_radius(),
+                pg.getParticles());
+
+    } else {
+        container = new ParticleContainer(pg.getParticles().getParticles());
+    }
 }
 
 void Simulation::start(bool isPT) {
@@ -24,17 +37,7 @@ void Simulation::start(bool isPT) {
     if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
-        // calculate new x
-        particleContainer.iterate([](Particle &p){
-            p.calculateX();
-            p.saveOldF();
-        });
-        // calculate new f
-        particleContainer.iteratePairs(calculateLennardJones);
-        // calculate new v
-        particleContainer.iterate([](Particle &p){
-            p.calculateV();
-        });
+        container->calculateIteration();
 
         iteration++;
         if (!isPT && iteration % freq == 0) {
@@ -60,9 +63,9 @@ void Simulation::plotParticles(int iteration) {
                 "MD_vtk");
     outputWriter::VTKWriter vtkWriter;
 
-    vtkWriter.initializeOutput(particleContainer.size());
+    vtkWriter.initializeOutput(container->size());
 
-    particleContainer.iterate([&vtkWriter](Particle& p) {
+    container->iterate([&](Particle& p) {
         vtkWriter.plotParticle(p);
     });
 

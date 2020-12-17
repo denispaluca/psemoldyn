@@ -1,27 +1,29 @@
 <?xml version="1.0"?>
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
-    <name_output>Collision</name_output>
+    <name_output>BigCollisionLC</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0002</delta_t>
     <t_end>5</t_end>
     <domain_size>
-        <x>10</x>
-        <y>10</y>
-        <z>0</z>
+        <x>180</x>
+        <y>90</y>
+        <z>1</z>
     </domain_size>
-    <cutoff_radius>30</cutoff_radius>
+    <cutoff_radius>3.0</cutoff_radius>
+    <linked_cell>true</linked_cell>
     <particle_data>
+        <is3D>false</is3D>
         <cuboids>
             <cuboid>
                 <position>
-                    <x>0.0</x>
-                    <y>0.0</y>
+                    <x>20.0</x>
+                    <y>20.0</y>
                     <z>0.0</z>
                 </position>
                 <size>
-                    <x>40</x>
-                    <y>8</y>
+                    <x>100</x>
+                    <y>20</y>
                     <z>1</z>
                 </size>
                 <distance>1.1225</distance>
@@ -35,13 +37,13 @@
             </cuboid>
             <cuboid>
                 <position>
-                    <x>15.0</x>
-                    <y>15.0</y>
+                    <x>70.0</x>
+                    <y>60.0</y>
                     <z>0.0</z>
                 </position>
                 <size>
-                    <x>8</x>
-                    <y>8</y>
+                    <x>20</x>
+                    <y>20</y>
                     <z>1</z>
                 </size>
                 <distance>1.1225</distance>
