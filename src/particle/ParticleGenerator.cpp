@@ -66,4 +66,5 @@ void ParticleGenerator::generate() {
 ParticleGenerator::ParticleGenerator() : data(true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
+    particleSpheres = std::vector<ParticleSphere>();
 }
