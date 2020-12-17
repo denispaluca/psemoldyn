@@ -38,6 +38,14 @@ private:
 
     void populateNeighbours();
 
+    bool assignParticle(Particle& p);
+
+    int getIndex(std::array<int, 3> pos);
+
+    std::array<int,3> indexToPos(int i);
+
+    int getIndexFromParticle(Particle& p);
+
 public:
     /**
      * Constructor for a LinkedCellContainer, creates cells automatically + assigns correct particles
@@ -50,10 +58,6 @@ public:
 
 
     void calculateIteration() override;
-
-    bool assignParticle(Particle& p);
-
-    int getIndex(std::array<int, 3> pos);
 
     /**
      * Iterate over all particles and apply function f
@@ -68,10 +72,6 @@ public:
      * @return
      */
     void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
-
-    std::array<int,3> indexToPos(int i);
-
-    int getIndexFromParticle(Particle& p);
 
     std::size_t size() override;
 };
