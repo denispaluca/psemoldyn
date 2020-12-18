@@ -2,8 +2,8 @@
 // Created by mira on 01.12.20.
 //
 #include <gtest/gtest.h>
-#include "../../src/ParticleGenerator.h"
-#include "../../src/FileReader.h"
+#include "particle/ParticleGenerator.h"
+#include "deprecated/FileReader.h"
 
 /**
  * Fixture to write tests for classes and functions used in the process of particle generation
@@ -33,11 +33,13 @@ protected:
 
         // file with manually calculated input data for the particles contained in the cuboids defined above
         std::string test_file_particles = "input/test_particles.particles";
-        pc = ParticleContainer(const_cast<char *>(test_file_particles.c_str()));
+        auto fr = new FileReader();
+        fr->readParticles(particles, const_cast<char *>(test_file_particles.c_str()));
+        pc = ParticleContainer(particles);
 
         generated = ParticleContainer();
         for(auto &cuboid : c){
-            cuboid.generate(generated);
+            cuboid.generate(generated, true);
         }
 
         pg = ParticleGenerator();
