@@ -139,5 +139,9 @@ public:
      */
     std::array<double, 3>& getDomainSize();
 
+    /**
+     * Getter for boundary handler.
+     * @return Boundary handler
+     */
     BoundaryHandler* getBoundaryHandler();
 };
