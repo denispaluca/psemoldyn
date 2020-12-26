@@ -6,7 +6,7 @@
 #include "BoundaryHandler.h"
 #define B_EFFECT 1.1225
 
-BoundaryHandler::BoundaryHandler(boundary_type& boundary, std::array<double, 3> dimensions):
+BoundaryHandler::BoundaryHandler(boundaries_type& boundary, std::array<double, 3> dimensions):
     boundary(boundary), dimensions(dimensions){}
 
 void BoundaryHandler::applyForce(Particle &p) {

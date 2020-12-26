@@ -20,7 +20,7 @@ private:
     /**
      * The boundary condition of each boundary
      */
-    boundary_type boundary;
+    boundaries_type boundary;
 
     /**
      * The size of the bounded domain
@@ -46,6 +46,6 @@ public:
      * @param boundary contains the boundary conditions for each side
      * @param dimensions the size of the bounded domain
      */
-    BoundaryHandler(boundary_type& boundary, std::array<double, 3> dimensions);
+    BoundaryHandler(boundaries_type& boundary, std::array<double, 3> dimensions);
     void applyForce(Particle& p);
 };

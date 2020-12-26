@@ -8,7 +8,6 @@
 #include <particle/ParticleContainer.h>
 #include <cell/LinkedCellContainer.h>
 #include "xml/molsimInput.hxx"
-#include "xml/molsimInput.cxx"
 
 
 /**

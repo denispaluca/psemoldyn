@@ -8,8 +8,10 @@
 class BoundaryHandlerFixture : public testing::Test {
 protected:
     BoundaryHandler* handler;
-    boundary_type boundaries = boundary_type(true, true, true, true, true, true);
+
     void SetUp() override {
+        auto r = boundary_type::value::reflective;
+        boundaries_type boundaries = boundaries_type(r,r,r,r,r,r);
         handler = new BoundaryHandler(boundaries, {100, 100, 100});
     }
 };
