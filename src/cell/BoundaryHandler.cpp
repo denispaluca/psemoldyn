@@ -22,37 +22,39 @@ void BoundaryHandler::prepareCounter(Particle &p) {
     counter.getX()[2] = x[2];
 }
 
-void BoundaryHandler::iterateCellsAtBoundary(Boundaries b, const std::function<void(LinkedCell &)>& f) {
+void BoundaryHandler::iterateCellsAtBoundary(
+        Boundaries b,
+        const std::function<void(LinkedCell &, std::array<int,3>)>& f) {
     switch (b) {
         case left:
             for(int i = 0;i < dimensions[1]; i++)
                 for(int j = 0; j < dimensions[2]; j++)
-                    f(cells->at(getIndex({0,i,j})));
+                    f(cells->at(getIndex({0,i,j})), {0,i,j});
             return;
         case right:
             for(int i = 0;i < dimensions[1]; i++)
                 for(int j = 0; j < dimensions[2]; j++)
-                    f(cells->at(getIndex({dimensions[0]-1, i,j})));
+                    f(cells->at(getIndex({dimensions[0]-1, i,j})), {dimensions[0]-1, i,j});
             return;
         case bottom:
             for(int i = 0;i < dimensions[0]; i++)
                 for(int j = 0; j < dimensions[2]; j++)
-                    f(cells->at(getIndex({i,0,j})));
+                    f(cells->at(getIndex({i,0,j})), {i,0,j});
             return;
         case top:
             for(int i = 0;i < dimensions[0]; i++)
                 for(int j = 0; j < dimensions[2]; j++)
-                    f(cells->at(getIndex({i,dimensions[1] - 1,j})));
+                    f(cells->at(getIndex({i,dimensions[1] - 1,j})), {i,dimensions[1] - 1,j});
             return;
         case front:
             for(int i = 0;i < dimensions[0]; i++)
                 for(int j = 0; j < dimensions[1]; j++)
-                    f(cells->at(getIndex({i,j,0})));
+                    f(cells->at(getIndex({i,j,0})), {i,j,0});
             return;
         case back:
             for(int i = 0;i < dimensions[0]; i++)
                 for(int j = 0; j < dimensions[1]; j++)
-                    f(cells->at(getIndex({i,j, dimensions[2] - 1})));
+                    f(cells->at(getIndex({i,j, dimensions[2] - 1})), {i,j, dimensions[2] - 1});
             return;
     }
 }
@@ -75,7 +77,7 @@ void BoundaryHandler::handleBoundary(Boundaries boundary, boundary_type& value) 
 }
 
 void BoundaryHandler::iterateParticlesAtBoundary(Boundaries b, const std::function<void(Particle &)> &f) {
-    auto func = [&](LinkedCell &c) {
+    auto func = [&](LinkedCell &c, auto pos) {
         for (auto p : c.getParticles())
             f(*p);
     };
@@ -159,4 +161,191 @@ int BoundaryHandler::getIndex(std::array<int, 3> pos) {
         return -1;
 
     return pos[0] + (pos[1] + pos[2]*dimensions[1])*dimensions[0];
+}
+
+void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
+    this->cells = cells;
+
+    bool front = boundaries.front() == Boundary::periodic;
+    bool back = boundaries.back() == Boundary::periodic;
+    bool left = boundaries.left() == Boundary::periodic;
+    bool right = boundaries.right() == Boundary::periodic;
+    bool top = boundaries.top() == Boundary::periodic;
+    bool bottom = boundaries.bottom() == Boundary::periodic;
+
+    if(left || right){
+        auto func = [&](LinkedCell &c, std::array<int,3> pos){
+            auto x = dimensions[0] - 1;
+            for(int y = -1; y <= 1; y++)
+                for(int z = -1; z <= 1; z++){
+                    auto index = getIndex({x, pos[1] + y, pos[2] + z});
+                    if(index != -1 && index != c.getIndex()){
+                        auto& neighbour = cells->at(index);
+                        c.addNeighbor(&neighbour);
+                        neighbour.addNeighbor(&c);
+                    }
+                }
+        };
+        iterateCellsAtBoundary(Boundaries::left, func);
+    }
+
+    if(top || bottom){
+        auto func = [&](LinkedCell &c, std::array<int,3> pos){
+            auto y = dimensions[1] - 1;
+            for(int x = -1; x <= 1; x++)
+                for(int z = -1; z <= 1; z++){
+                    auto index = getIndex({pos[0] + x, y, pos[2] + z});
+                    if(index != -1 && index != c.getIndex()){
+                        auto& neighbour = cells->at(index);
+                        c.addNeighbor(&neighbour);
+                        neighbour.addNeighbor(&c);
+                    }
+                }
+        };
+        iterateCellsAtBoundary(Boundaries::bottom, func);
+    }
+
+    if(front || back){
+        auto func = [&](LinkedCell &c, std::array<int,3> pos){
+            auto z = dimensions[2] - 1;
+            for(int x = -1; x <= 1; x++)
+                for(int y = -1; y <= 1; y++){
+                    auto index = getIndex({pos[0] + x, pos[1] + y, z});
+                    if(index != -1 && index != c.getIndex()){
+                        auto& neighbour = cells->at(index);
+                        c.addNeighbor(&neighbour);
+                        neighbour.addNeighbor(&c);
+                    }
+                }
+        };
+        iterateCellsAtBoundary(Boundaries::front, func);
+    }
+
+    //SINGLE ROW NEIGHBOURS
+    if((left && bottom) || (right && top)){
+        std::array<int, 3> pos = {dimensions[0] - 1, dimensions[1] - 1, 0};
+        for(int z = 0; z < dimensions[2]; z++){
+            auto &c = cells->at(getIndex({0, 0, z}));
+            for(int i = -1; i <=1; i++){
+                pos[2] = z + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+    if((left && top) || (right && bottom)){
+        std::array<int, 3> pos = {dimensions[0] - 1, 0, 0};
+        for(int z = 0; z < dimensions[2]; z++){
+            auto &c = cells->at(getIndex({0, dimensions[1] - 1, z}));
+            for(int i = -1; i <=1; i++){
+                pos[2] = z + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+    if((front && bottom) || (back && top)){
+        std::array<int, 3> pos = {0, dimensions[1] - 1, dimensions[2] - 1};
+        for(int x = 0; x < dimensions[0]; x++){
+            auto &c = cells->at(getIndex({x, 0, 0}));
+            for(int i = -1; i <=1; i++){
+                pos[0] = x + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+    if((front && top) || (back && bottom)){
+        std::array<int, 3> pos = {0, 0, dimensions[2] - 1};
+        for(int x = 0; x < dimensions[0]; x++){
+            auto &c = cells->at(getIndex({x, dimensions[1] - 1, 0}));
+            for(int i = -1; i <=1; i++){
+                pos[0] = x + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+    if((left && front) || (right && back)){
+        std::array<int, 3> pos = {dimensions[0] -1, 0, dimensions[2] -1};
+        for(int y = 0; y < dimensions[1]; y++){
+            auto &c = cells->at(getIndex({0, y, 0}));
+            for(int i = -1; i <=1; i++){
+                pos[1] = y + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+    if((left && back) || (right && front)){
+        std::array<int, 3> pos = {dimensions[0] -1, 0, 0};
+        for(int y = 0; y < dimensions[1]; y++){
+            auto &c = cells->at(getIndex({0, y, dimensions[2] - 1}));
+            for(int i = -1; i <=1; i++){
+                pos[1] = y + i;
+                auto index = getIndex(pos);
+                if(index != -1){
+                    auto& neighbour = cells->at(index);
+                    c.addNeighbor(&neighbour);
+                    neighbour.addNeighbor(&c);
+                }
+            }
+        }
+    }
+
+
+
+    //SINGLE NEIGHBOURS or CORNERS
+    if((left && front && bottom) || (right && back && top)){
+        auto &c1 = cells->at(getIndex({0,0,0}));
+        auto &c2 = cells->at(getIndex({dimensions[0]-1,dimensions[1]-1,dimensions[2]-1}));
+        c1.addNeighbor(&c2);
+        c2.addNeighbor(&c1);
+    }
+
+    if((left && front && top) || (right && back && bottom)){
+        auto &c1 = cells->at(getIndex({0,dimensions[1]-1,0}));
+        auto &c2 = cells->at(getIndex({dimensions[0]-1, 0,dimensions[2]-1}));
+        c1.addNeighbor(&c2);
+        c2.addNeighbor(&c1);
+    }
+
+    if((left && back && bottom) || (right && front && top)){
+        auto &c1 = cells->at(getIndex({0,0,dimensions[2]-1}));
+        auto &c2 = cells->at(getIndex({dimensions[0]-1, dimensions[1]-1,0}));
+        c1.addNeighbor(&c2);
+        c2.addNeighbor(&c1);
+    }
+
+    if((left && back && top) || (right && front && bottom)){
+        auto &c1 = cells->at(getIndex({0, dimensions[1]-1, dimensions[2]-1}));
+        auto &c2 = cells->at(getIndex({dimensions[0]-1, 0, 0}));
+        c1.addNeighbor(&c2);
+        c2.addNeighbor(&c1);
+    }
 }

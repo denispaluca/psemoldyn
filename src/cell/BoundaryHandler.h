@@ -88,7 +88,9 @@ public:
      * @param b Boundary to iterate in.
      * @param f Function to be applied.
      */
-    void iterateCellsAtBoundary(Boundaries b, const std::function<void(LinkedCell&)>& f);
+    void iterateCellsAtBoundary(
+            Boundaries b,
+            const std::function<void(LinkedCell&, std::array<int,3> pos)>& f);
 
     /**
      * Handles all boundary conditions for current lcc configuration.
@@ -101,4 +103,10 @@ public:
      * @param f Function to be applied.
      */
     void iterateParticlesAtBoundary(Boundaries b, const std::function<void(Particle&)>& f);
+
+    /**
+     * Adds neighbours for periodic boundaries.
+     * @param cells
+     */
+    void addPeriodicNeighbours(std::vector<LinkedCell>* cells);
 };
