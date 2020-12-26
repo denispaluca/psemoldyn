@@ -8,6 +8,7 @@
 #pragma once
 
 #include <array>
+#include <string>
 /**
  * The particle class represents a particle and it's characteristics.
  */
