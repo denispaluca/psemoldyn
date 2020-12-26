@@ -121,12 +121,11 @@ void BoundaryHandler::reflect(Boundaries b) {
 
 void BoundaryHandler::period(Boundaries b) {
     auto func = [&](Particle& p){
-        auto x = p.getX();
+        auto& x = p.getX();
         switch (b) {
             case top:
-                if(x[2] > domainSize[2])
-                    x[2] -= domainSize[2];
-                return;
+                if(x[1] > domainSize[1])
+                    x[1] -= domainSize[1];
                 return;
             case bottom:
                 if(x[1] < 0)
@@ -139,7 +138,6 @@ void BoundaryHandler::period(Boundaries b) {
             case back:
                 if(x[2] > domainSize[2])
                     x[2] -= domainSize[2];
-                return;
                 return;
             case left:
                 if(x[0] < 0)
