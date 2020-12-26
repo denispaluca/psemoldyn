@@ -236,6 +236,7 @@ class sphere;
 class sphere_cluster;
 class particle_data;
 class boundary_type;
+class boundaries_type;
 class domain_type;
 class molsimInput;
 
@@ -1069,103 +1070,34 @@ class particle_data: public ::xml_schema::type
   ::xsd::cxx::tree::one< spheres_type > spheres_;
 };
 
-class boundary_type: public ::xml_schema::type
+class boundary_type: public ::xml_schema::string
 {
   public:
-  // front
-  //
-  typedef ::xml_schema::boolean front_type;
-  typedef ::xsd::cxx::tree::traits< front_type, char > front_traits;
+  enum value
+  {
+    outflow,
+    reflective,
+    periodic
+  };
 
-  const front_type&
-  front () const;
+  boundary_type (value v);
 
-  front_type&
-  front ();
+  boundary_type (const char* v);
 
-  void
-  front (const front_type& x);
+  boundary_type (const ::std::string& v);
 
-  // back
-  //
-  typedef ::xml_schema::boolean back_type;
-  typedef ::xsd::cxx::tree::traits< back_type, char > back_traits;
-
-  const back_type&
-  back () const;
-
-  back_type&
-  back ();
-
-  void
-  back (const back_type& x);
-
-  // top
-  //
-  typedef ::xml_schema::boolean top_type;
-  typedef ::xsd::cxx::tree::traits< top_type, char > top_traits;
-
-  const top_type&
-  top () const;
-
-  top_type&
-  top ();
-
-  void
-  top (const top_type& x);
-
-  // bottom
-  //
-  typedef ::xml_schema::boolean bottom_type;
-  typedef ::xsd::cxx::tree::traits< bottom_type, char > bottom_traits;
-
-  const bottom_type&
-  bottom () const;
-
-  bottom_type&
-  bottom ();
-
-  void
-  bottom (const bottom_type& x);
-
-  // left
-  //
-  typedef ::xml_schema::boolean left_type;
-  typedef ::xsd::cxx::tree::traits< left_type, char > left_traits;
-
-  const left_type&
-  left () const;
-
-  left_type&
-  left ();
-
-  void
-  left (const left_type& x);
-
-  // right
-  //
-  typedef ::xml_schema::boolean right_type;
-  typedef ::xsd::cxx::tree::traits< right_type, char > right_traits;
-
-  const right_type&
-  right () const;
-
-  right_type&
-  right ();
-
-  void
-  right (const right_type& x);
-
-  // Constructors.
-  //
-  boundary_type (const front_type&,
-                 const back_type&,
-                 const top_type&,
-                 const bottom_type&,
-                 const left_type&,
-                 const right_type&);
+  boundary_type (const ::xml_schema::string& v);
 
   boundary_type (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  boundary_type (const ::xercesc::DOMAttr& a,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  boundary_type (const ::std::string& s,
+                 const ::xercesc::DOMElement* e,
                  ::xml_schema::flags f = 0,
                  ::xml_schema::container* c = 0);
 
@@ -1178,10 +1110,154 @@ class boundary_type: public ::xml_schema::type
           ::xml_schema::container* c = 0) const;
 
   boundary_type&
-  operator= (const boundary_type& x);
+  operator= (value v);
+
+  virtual
+  operator value () const
+  {
+    return _xsd_boundary_type_convert ();
+  }
+
+  protected:
+  value
+  _xsd_boundary_type_convert () const;
+
+  public:
+  static const char* const _xsd_boundary_type_literals_[3];
+  static const value _xsd_boundary_type_indexes_[3];
+};
+
+class boundaries_type: public ::xml_schema::type
+{
+  public:
+  // front
+  //
+  typedef ::boundary_type front_type;
+  typedef ::xsd::cxx::tree::traits< front_type, char > front_traits;
+
+  const front_type&
+  front () const;
+
+  front_type&
+  front ();
+
+  void
+  front (const front_type& x);
+
+  void
+  front (::std::unique_ptr< front_type > p);
+
+  // back
+  //
+  typedef ::boundary_type back_type;
+  typedef ::xsd::cxx::tree::traits< back_type, char > back_traits;
+
+  const back_type&
+  back () const;
+
+  back_type&
+  back ();
+
+  void
+  back (const back_type& x);
+
+  void
+  back (::std::unique_ptr< back_type > p);
+
+  // top
+  //
+  typedef ::boundary_type top_type;
+  typedef ::xsd::cxx::tree::traits< top_type, char > top_traits;
+
+  const top_type&
+  top () const;
+
+  top_type&
+  top ();
+
+  void
+  top (const top_type& x);
+
+  void
+  top (::std::unique_ptr< top_type > p);
+
+  // bottom
+  //
+  typedef ::boundary_type bottom_type;
+  typedef ::xsd::cxx::tree::traits< bottom_type, char > bottom_traits;
+
+  const bottom_type&
+  bottom () const;
+
+  bottom_type&
+  bottom ();
+
+  void
+  bottom (const bottom_type& x);
+
+  void
+  bottom (::std::unique_ptr< bottom_type > p);
+
+  // left
+  //
+  typedef ::boundary_type left_type;
+  typedef ::xsd::cxx::tree::traits< left_type, char > left_traits;
+
+  const left_type&
+  left () const;
+
+  left_type&
+  left ();
+
+  void
+  left (const left_type& x);
+
+  void
+  left (::std::unique_ptr< left_type > p);
+
+  // right
+  //
+  typedef ::boundary_type right_type;
+  typedef ::xsd::cxx::tree::traits< right_type, char > right_traits;
+
+  const right_type&
+  right () const;
+
+  right_type&
+  right ();
+
+  void
+  right (const right_type& x);
+
+  void
+  right (::std::unique_ptr< right_type > p);
+
+  // Constructors.
+  //
+  boundaries_type (const front_type&,
+                   const back_type&,
+                   const top_type&,
+                   const bottom_type&,
+                   const left_type&,
+                   const right_type&);
+
+  boundaries_type (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  boundaries_type (const boundaries_type& x,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  virtual boundaries_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  boundaries_type&
+  operator= (const boundaries_type& x);
 
   virtual 
-  ~boundary_type ();
+  ~boundaries_type ();
 
   // Implementation.
   //
@@ -1235,7 +1311,7 @@ class domain_type: public ::xml_schema::type
 
   // boundary
   //
-  typedef ::boundary_type boundary_type;
+  typedef ::boundaries_type boundary_type;
   typedef ::xsd::cxx::tree::traits< boundary_type, char > boundary_traits;
 
   const boundary_type&
