@@ -4,7 +4,8 @@
 
 #include <utils/ForceUtils.h>
 #include "BoundaryHandler.h"
-#define B_EFFECT 1.1225
+
+constexpr double B_EFFECT = 1.1225;
 
 BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
                                  std::array<int, 3> dimensions):

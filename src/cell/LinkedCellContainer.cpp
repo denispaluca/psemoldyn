@@ -165,7 +165,7 @@ ParticleContainer& LinkedCellContainer::getParticles() {
 
 LinkedCellContainer::LinkedCellContainer() {
     cutoff_radius = 0;
-    boundaryHandler = NULL;
+    boundaryHandler = nullptr;
 }
 
 std::array<double, 3>& LinkedCellContainer::getDomainSize() {
