@@ -75,14 +75,15 @@ void LinkedCellContainer::calculateIteration() {
     });
 
     boundaryHandler->handle(&cells);
+
+    clearOutflowParticles();
+
     // calculate new f
     iteratePairs(calculateLennardJones);
 
     //reset cell particles
     for(auto& c:cells)
         c.removeParticles();
-
-    clearOutflowParticles();
 
     // calculate new v
     iterate([&](Particle &p) {
