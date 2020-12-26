@@ -27,8 +27,6 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
 
-    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size);
-
     cells = std::vector<LinkedCell>();
     int nrCells = dimensions[0]*dimensions[1]*dimensions[2];
     cells.reserve(nrCells);
@@ -39,6 +37,8 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->particles.iterate([&](Particle& p){
         assignParticle(p);
     });
+
+    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions);
 
     LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
 
@@ -74,20 +74,22 @@ void LinkedCellContainer::calculateIteration() {
             p.saveOldF();
     });
 
-    // calculate new f
-    iteratePairs(calculateLennardJones);
-
-    //reset cell particles
-    for(auto& c:cells)
-        c.removeParticles();
+    boundaryHandler->handle(&cells);
 
     clearOutflowParticles();
 
+    //reset cell particles
+    for(auto& c:cells) c.removeParticles();
+    iterate([&](Particle &p) {
+        assignParticle(p);
+    });
+
+    // calculate new f
+    iteratePairs(calculateLennardJones);
+
     // calculate new v
     iterate([&](Particle &p) {
-        boundaryHandler->applyForce(p);
         p.calculateV();
-        assignParticle(p);
     });
 }
 
@@ -152,17 +154,31 @@ void LinkedCellContainer::populateNeighbours() {
                     if(neighborIndex != i && neighborIndex >= 0 && neighborIndex < cells.size())
                         c.addNeighbor(&cells.at(neighborIndex));
                 }
+
+    boundaryHandler->addPeriodicNeighbours(&cells);
 }
 
-std::vector<LinkedCell> LinkedCellContainer::getCells(){
+std::vector<LinkedCell>& LinkedCellContainer::getCells(){
     return cells;
 }
 
-ParticleContainer LinkedCellContainer::getParticles() {
+ParticleContainer& LinkedCellContainer::getParticles() {
     return particles;
 }
 
 LinkedCellContainer::LinkedCellContainer() {
     cutoff_radius = 0;
-    boundaryHandler = NULL;
+    boundaryHandler = nullptr;
+}
+
+std::array<double, 3>& LinkedCellContainer::getDomainSize() {
+    return domain_size;
+}
+
+std::array<int, 3>& LinkedCellContainer::getDimensions() {
+    return dimensions;
+}
+
+BoundaryHandler *LinkedCellContainer::getBoundaryHandler() {
+    return this->boundaryHandler;
 }

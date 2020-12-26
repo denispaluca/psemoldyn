@@ -1,6 +1,5 @@
 
 #include "Simulation.h"
-#include "xml/molsimInput.cxx"
 #include <chrono>
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>

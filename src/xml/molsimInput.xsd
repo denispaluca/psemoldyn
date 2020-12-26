@@ -94,15 +94,23 @@
     </xsd:sequence>
   </xsd:complexType>
 
-  <!-- boundary condition of each side true = reflect -->
-  <xsd:complexType name="boundary_type">
+  
+  <xsd:simpleType name="boundary_type">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="outflow"/>
+      <xsd:enumeration value="reflective"/>
+      <xsd:enumeration value="periodic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="boundaries_type">
     <xsd:sequence>
-      <xsd:element name="front" type="xsd:boolean"/>
-      <xsd:element name="back" type="xsd:boolean"/>
-      <xsd:element name="top" type="xsd:boolean"/>
-      <xsd:element name="bottom" type="xsd:boolean"/>
-      <xsd:element name="left" type="xsd:boolean"/>
-      <xsd:element name="right" type="xsd:boolean"/>
+      <xsd:element name="front" type="boundary_type"/>
+      <xsd:element name="back" type="boundary_type"/>
+      <xsd:element name="top" type="boundary_type"/>
+      <xsd:element name="bottom" type="boundary_type"/>
+      <xsd:element name="left" type="boundary_type"/>
+      <xsd:element name="right" type="boundary_type"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -110,7 +118,7 @@
     <xsd:sequence>
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
-      <xsd:element name="boundary" type="boundary_type" />
+      <xsd:element name="boundary" type="boundaries_type" />
     </xsd:sequence>
   </xsd:complexType>
 

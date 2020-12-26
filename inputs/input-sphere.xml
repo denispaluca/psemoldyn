@@ -14,12 +14,12 @@
         </domain_size>
         <cutoff_radius>3.0</cutoff_radius>
         <boundary>
-            <front>false</front>
-            <back>false</back>
-            <top>false</top>
-            <bottom>true</bottom>
-            <left>false</left>
-            <right>false</right>
+            <front>outflow</front>
+            <back>outflow</back>
+            <top>outflow</top>
+            <bottom>reflective</bottom>
+            <left>outflow</left>
+            <right>outflow</right>
         </boundary>
     </domain>
     <particle_data>
