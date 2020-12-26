@@ -16,12 +16,12 @@
         </domain_size>
         <cutoff_radius>2.0</cutoff_radius>
         <boundary>
-            <front>false</front>
-            <back>false</back>
-            <top>false</top>
-            <bottom>false</bottom>
-            <left>false</left>
-            <right>false</right>
+            <front>outflow</front>
+            <back>outflow</back>
+            <top>outflow</top>
+            <bottom>outflow</bottom>
+            <left>outflow</left>
+            <right>outflow</right>
         </boundary>
     </domain>
     <!-- ONLY DOMAIN IMPORTANT -->
