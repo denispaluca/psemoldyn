@@ -78,4 +78,11 @@ public:
      * @return
      */
     std::vector<Particle*>& getParticles();
+
+    /**
+     * Checks if c is in the neighbour vector of the current cell.
+     * @param c Cell to be checked.
+     * @return True if it is a neighbour.
+     */
+     bool isNeighbour(LinkedCell& c);
 };

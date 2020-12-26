@@ -154,6 +154,8 @@ void LinkedCellContainer::populateNeighbours() {
                     if(neighborIndex != i && neighborIndex >= 0 && neighborIndex < cells.size())
                         c.addNeighbor(&cells.at(neighborIndex));
                 }
+
+    boundaryHandler->addPeriodicNeighbours(&cells);
 }
 
 std::vector<LinkedCell>& LinkedCellContainer::getCells(){
