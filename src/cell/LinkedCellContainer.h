@@ -119,11 +119,25 @@ public:
      * Getter for vector of LinkedCells
      * @return the LinkedCells of this container
      */
-    std::vector<LinkedCell> getCells();
+    std::vector<LinkedCell>& getCells();
 
     /**
      * Getter for ParticleContainer
      * @return the ParticleContainer containing the Particles of this cell
      */
-    ParticleContainer getParticles();
+    ParticleContainer& getParticles();
+
+    /**
+     * Getter for cell grid dimensions.
+     * @return Dimensions
+     */
+    std::array<int, 3>& getDimensions();
+
+    /**
+     * Getter for domain size.
+     * @return Domain size
+     */
+    std::array<double, 3>& getDomainSize();
+
+    BoundaryHandler* getBoundaryHandler();
 };

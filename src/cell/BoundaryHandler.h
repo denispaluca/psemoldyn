@@ -5,10 +5,14 @@
 #pragma once
 #include "xml/molsimInput.hxx"
 #include "particle/Particle.h"
+#include "LinkedCell.h"
+#include <functional>
 
-enum Boundary{
+enum Boundaries{
     top, bottom, front, back, left, right
 };
+
+typedef boundary_type::value Boundary;
 
 class BoundaryHandler {
 private:
@@ -17,35 +21,41 @@ private:
      */
     Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0);
 
-    /**
-     * The boundary condition of each boundary
-     */
-    boundaries_type boundary;
-
-    /**
-     * The size of the bounded domain
-     */
-    std::array<double, 3> dimensions{};
-
-    /**
-     * Sets counterparticle and calculates force between given particle + counterparticle if Particle is close enough to boundary.
-     * @param p the Particle to be reflected
-     * @param b the specific boundary to which the Particle is close
-     */
-    void handleBoundary(Particle& p, Boundary b);
+    std::array<double,3> domainSize;
+    std::array<int,3> dimensions;
+    std::vector<LinkedCell>* cells;
+    int getIndex(std::array<int, 3> pos);
+    boundaries_type boundaries;
 
     /**
      * Initializes counterparticle with mass and position of given particle.
      * @param p
      */
     void prepareCounter(Particle& p);
+
+    void reflect(Boundaries b);
+    void period(Boundaries b);
+    void handleBoundary(Boundaries boundary, boundary_type& value);
 public:
 
     /**
      * Constructor for BoundaryHandler
      * @param boundary contains the boundary conditions for each side
-     * @param dimensions the size of the bounded domain
+     * @param l cell container to apply condition.
      */
-    BoundaryHandler(boundaries_type& boundary, std::array<double, 3> dimensions);
-    void applyForce(Particle& p);
+    BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
+                    std::array<int, 3> dimensions);
+    /**
+     * Iterate cells at boundary b and apply function f.
+     * @param b Boundary to iterate in.
+     * @param f Function to be applied.
+     */
+    void iterateCellsAtBoundary(Boundaries b, const std::function<void(LinkedCell&)>& f);
+
+    /**
+     * Handles all boundary conditions for current lcc configuration.
+     */
+    void handle(std::vector<LinkedCell>* cells);
+
+    void iterateParticlesAtBoundary(Boundaries b, const std::function<void(Particle&)>& f);
 };
