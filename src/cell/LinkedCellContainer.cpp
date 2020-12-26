@@ -78,17 +78,18 @@ void LinkedCellContainer::calculateIteration() {
 
     clearOutflowParticles();
 
+    //reset cell particles
+    for(auto& c:cells) c.removeParticles();
+    iterate([&](Particle &p) {
+        assignParticle(p);
+    });
+
     // calculate new f
     iteratePairs(calculateLennardJones);
-
-    //reset cell particles
-    for(auto& c:cells)
-        c.removeParticles();
 
     // calculate new v
     iterate([&](Particle &p) {
         p.calculateV();
-        assignParticle(p);
     });
 }
 

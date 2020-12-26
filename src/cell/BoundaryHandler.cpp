@@ -120,7 +120,39 @@ void BoundaryHandler::reflect(Boundaries b) {
 }
 
 void BoundaryHandler::period(Boundaries b) {
-    return;
+    auto func = [&](Particle& p){
+        auto x = p.getX();
+        switch (b) {
+            case top:
+                if(x[2] > domainSize[2])
+                    x[2] -= domainSize[2];
+                return;
+                return;
+            case bottom:
+                if(x[1] < 0)
+                    x[1] += domainSize[1];
+                return;
+            case front:
+                if(x[2] < 0)
+                    x[2] += domainSize[2];
+                return;
+            case back:
+                if(x[2] > domainSize[2])
+                    x[2] -= domainSize[2];
+                return;
+                return;
+            case left:
+                if(x[0] < 0)
+                    x[0] += domainSize[0];
+                return;
+            case right:
+                if(x[0] > domainSize[0])
+                    x[0] -= domainSize[0];
+                return;
+        }
+    };
+
+    iterateParticlesAtBoundary(b,func);
 }
 
 int BoundaryHandler::getIndex(std::array<int, 3> pos) {
