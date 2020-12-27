@@ -6,7 +6,8 @@
 #include "ParticleGenerator.h"
 #include "utils/MaxwellBoltzmannDistribution.h"
 
-ParticleGenerator::ParticleGenerator(particle_data &data) : data(data) {
+ParticleGenerator::ParticleGenerator(particle_data &data, Thermostat* t = nullptr) : data(data) {
+    thermostat = t;
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
     particleSpheres = std::vector<ParticleSphere>();
@@ -62,13 +63,23 @@ void ParticleGenerator::generate() {
         c.generate(particles, data.is3D());
     }
 
-    particles.iterate([&](Particle& p){
-        MaxwellBoltzmannDistribution(p, data.meanv(), data.is3D() ? 3 : 2);
-    });
+    applyBrownianMotion();
 }
 
 ParticleGenerator::ParticleGenerator() : data(0.1,true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
     particleSpheres = std::vector<ParticleSphere>();
+    thermostat = nullptr;
+}
+
+void ParticleGenerator::applyBrownianMotion() {
+    if(thermostat == nullptr || !thermostat->changeBrownian()) {
+        auto meanv = data.meanv();
+        auto dim = data.is3D() ? 3 : 2;
+        particles.iterate([meanv,dim](Particle &p) {
+            MaxwellBoltzmannDistribution(p, meanv, dim);
+        });
+    } else
+        thermostat->applyBrownian(particles);
 }
