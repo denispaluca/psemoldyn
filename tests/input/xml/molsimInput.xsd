@@ -32,8 +32,6 @@
       <xsd:element name="mass" type="xsd:double"/>
       <!-- initial velocity -->
       <xsd:element name="velocity" type="double_vector"/>
-      <!-- mean brownian velocity -->
-      <xsd:element name="meanv" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -74,8 +72,6 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
-      <!-- mean brownian velocity -->
-      <xsd:element name="meanv" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -87,6 +83,8 @@
 
   <xsd:complexType name="particle_data">
     <xsd:sequence>
+      <!-- mean brownian velocity -->
+      <xsd:element name="meanv" type="xsd:double"/>
       <xsd:element name="is3D" type="xsd:boolean"/>
       <xsd:element name="cuboids" type="cuboid_cluster"/>
       <xsd:element name="particles" type="particle_cluster"/>
@@ -119,6 +117,7 @@
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
       <xsd:element name="boundary" type="boundaries_type" />
+      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
 

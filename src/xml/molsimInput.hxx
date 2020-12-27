@@ -500,35 +500,19 @@ class cuboid: public ::xml_schema::type
   void
   velocity (::std::unique_ptr< velocity_type > p);
 
-  // meanv
-  //
-  typedef ::xml_schema::double_ meanv_type;
-  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
-
-  const meanv_type&
-  meanv () const;
-
-  meanv_type&
-  meanv ();
-
-  void
-  meanv (const meanv_type& x);
-
   // Constructors.
   //
   cuboid (const position_type&,
           const size_type&,
           const distance_type&,
           const mass_type&,
-          const velocity_type&,
-          const meanv_type&);
+          const velocity_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
           const distance_type&,
           const mass_type&,
-          ::std::unique_ptr< velocity_type >,
-          const meanv_type&);
+          ::std::unique_ptr< velocity_type >);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -561,7 +545,6 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< velocity_type > velocity_;
-  ::xsd::cxx::tree::one< meanv_type > meanv_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -841,35 +824,19 @@ class sphere: public ::xml_schema::type
   void
   r (const r_type& x);
 
-  // meanv
-  //
-  typedef ::xml_schema::double_ meanv_type;
-  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
-
-  const meanv_type&
-  meanv () const;
-
-  meanv_type&
-  meanv ();
-
-  void
-  meanv (const meanv_type& x);
-
   // Constructors.
   //
   sphere (const center_type&,
           const h_type&,
           const v_type&,
           const m_type&,
-          const r_type&,
-          const meanv_type&);
+          const r_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
           ::std::unique_ptr< v_type >,
           const m_type&,
-          const r_type&,
-          const meanv_type&);
+          const r_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -902,7 +869,6 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
   ::xsd::cxx::tree::one< r_type > r_;
-  ::xsd::cxx::tree::one< meanv_type > meanv_;
 };
 
 class sphere_cluster: public ::xml_schema::type
@@ -961,6 +927,20 @@ class sphere_cluster: public ::xml_schema::type
 class particle_data: public ::xml_schema::type
 {
   public:
+  // meanv
+  //
+  typedef ::xml_schema::double_ meanv_type;
+  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
+
+  const meanv_type&
+  meanv () const;
+
+  meanv_type&
+  meanv ();
+
+  void
+  meanv (const meanv_type& x);
+
   // is3D
   //
   typedef ::xml_schema::boolean is3D_type;
@@ -1028,12 +1008,14 @@ class particle_data: public ::xml_schema::type
 
   // Constructors.
   //
-  particle_data (const is3D_type&,
+  particle_data (const meanv_type&,
+                 const is3D_type&,
                  const cuboids_type&,
                  const particles_type&,
                  const spheres_type&);
 
-  particle_data (const is3D_type&,
+  particle_data (const meanv_type&,
+                 const is3D_type&,
                  ::std::unique_ptr< cuboids_type >,
                  ::std::unique_ptr< particles_type >,
                  ::std::unique_ptr< spheres_type >);
@@ -1064,6 +1046,7 @@ class particle_data: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< meanv_type > meanv_;
   ::xsd::cxx::tree::one< is3D_type > is3D_;
   ::xsd::cxx::tree::one< cuboids_type > cuboids_;
   ::xsd::cxx::tree::one< particles_type > particles_;

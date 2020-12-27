@@ -23,6 +23,7 @@
         </boundary>
     </domain>
     <particle_data>
+        <meanv>0.1</meanv>
         <is3D>false</is3D>
         <cuboids>
             <cuboid>
@@ -43,7 +44,6 @@
                     <y>-20.0</y>
                     <z>0.0</z>
                 </velocity>
-                <meanv>0</meanv>
             </cuboid>
         </cuboids>
         <particles></particles>

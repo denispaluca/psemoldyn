@@ -6,7 +6,6 @@
 
 #include <array>
 #include <particle/ParticleContainer.h>
-//#include "ParticleSphere.cpp"
 
 class ParticleSphere {
 
