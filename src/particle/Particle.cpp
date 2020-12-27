@@ -116,6 +116,10 @@ void Particle::setM(double mass) {
     this->m = mass;
 }
 
+void Particle::applyGravity(double g) {
+    addF({0, m*g, 0});
+}
+
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();
   return stream;

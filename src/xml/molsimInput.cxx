@@ -902,6 +902,30 @@ boundary (::std::unique_ptr< boundary_type > x)
   this->boundary_.set (std::move (x));
 }
 
+const domain_type::gravity_optional& domain_type::
+gravity () const
+{
+  return this->gravity_;
+}
+
+domain_type::gravity_optional& domain_type::
+gravity ()
+{
+  return this->gravity_;
+}
+
+void domain_type::
+gravity (const gravity_type& x)
+{
+  this->gravity_.set (x);
+}
+
+void domain_type::
+gravity (const gravity_optional& x)
+{
+  this->gravity_ = x;
+}
+
 
 // molsimInput
 // 
@@ -2674,7 +2698,8 @@ domain_type (const domain_size_type& domain_size,
 : ::xml_schema::type (),
   domain_size_ (domain_size, this),
   cutoff_radius_ (cutoff_radius, this),
-  boundary_ (boundary, this)
+  boundary_ (boundary, this),
+  gravity_ (this)
 {
 }
 
@@ -2685,7 +2710,8 @@ domain_type (::std::unique_ptr< domain_size_type > domain_size,
 : ::xml_schema::type (),
   domain_size_ (std::move (domain_size), this),
   cutoff_radius_ (cutoff_radius, this),
-  boundary_ (std::move (boundary), this)
+  boundary_ (std::move (boundary), this),
+  gravity_ (this)
 {
 }
 
@@ -2696,7 +2722,8 @@ domain_type (const domain_type& x,
 : ::xml_schema::type (x, f, c),
   domain_size_ (x.domain_size_, f, this),
   cutoff_radius_ (x.cutoff_radius_, f, this),
-  boundary_ (x.boundary_, f, this)
+  boundary_ (x.boundary_, f, this),
+  gravity_ (x.gravity_, f, this)
 {
 }
 
@@ -2707,7 +2734,8 @@ domain_type (const ::xercesc::DOMElement& e,
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   domain_size_ (this),
   cutoff_radius_ (this),
-  boundary_ (this)
+  boundary_ (this),
+  gravity_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2765,6 +2793,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // gravity
+    //
+    if (n.name () == "gravity" && n.namespace_ ().empty ())
+    {
+      if (!this->gravity_)
+      {
+        this->gravity_.set (gravity_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2806,6 +2845,7 @@ operator= (const domain_type& x)
     this->domain_size_ = x.domain_size_;
     this->cutoff_radius_ = x.cutoff_radius_;
     this->boundary_ = x.boundary_;
+    this->gravity_ = x.gravity_;
   }
 
   return *this;

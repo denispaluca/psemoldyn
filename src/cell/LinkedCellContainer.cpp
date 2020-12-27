@@ -24,6 +24,8 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->domain_size = mapDoubleVec(domain.domain_size());
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
+    gravity = domain.gravity();
+
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
 
@@ -82,6 +84,8 @@ void LinkedCellContainer::calculateIteration() {
     for(auto& c:cells) c.removeParticles();
     iterate([&](Particle &p) {
         assignParticle(p);
+        if(gravity.present())
+            p.applyGravity(gravity.get());
     });
 
     // calculate new f
