@@ -74,4 +74,10 @@ public:
      * @return Temperature of system.
      */
     double getCurrentTemp(Container& particles) const;
+
+    /**
+     * Getter for initial temperature.
+     * @return Initial temperature.
+     */
+    double getInitTemp() const;
 };

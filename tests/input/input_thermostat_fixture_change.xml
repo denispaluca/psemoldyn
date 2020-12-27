@@ -25,7 +25,7 @@
     </domain>
     <thermostat>
         <t_init>100</t_init>
-        <change_brownian>false</change_brownian>
+        <change_brownian>true</change_brownian>
         <steps>100</steps>
     </thermostat>
     <particle_data>
@@ -47,7 +47,7 @@
                 <mass>1.0</mass>
                 <velocity>
                     <x>0.0</x>
-                    <y>-10.0</y>
+                    <y>0.0</y>
                     <z>0.0</z>
                 </velocity>
             </cuboid>
@@ -66,7 +66,7 @@
                 <mass>1.0</mass>
                 <velocity>
                     <x>0.0</x>
-                    <y>-10.0</y>
+                    <y>0.0</y>
                     <z>0.0</z>
                 </velocity>
             </cuboid>
