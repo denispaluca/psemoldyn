@@ -119,6 +119,7 @@
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
       <xsd:element name="boundary" type="boundaries_type" />
+      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
 

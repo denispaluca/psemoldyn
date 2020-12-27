@@ -1326,6 +1326,24 @@ class domain_type: public ::xml_schema::type
   void
   boundary (::std::unique_ptr< boundary_type > p);
 
+  // gravity
+  //
+  typedef ::xml_schema::double_ gravity_type;
+  typedef ::xsd::cxx::tree::optional< gravity_type > gravity_optional;
+  typedef ::xsd::cxx::tree::traits< gravity_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_traits;
+
+  const gravity_optional&
+  gravity () const;
+
+  gravity_optional&
+  gravity ();
+
+  void
+  gravity (const gravity_type& x);
+
+  void
+  gravity (const gravity_optional& x);
+
   // Constructors.
   //
   domain_type (const domain_size_type&,
@@ -1365,6 +1383,7 @@ class domain_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< domain_size_type > domain_size_;
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< boundary_type > boundary_;
+  gravity_optional gravity_;
 };
 
 class molsimInput: public ::xml_schema::type
