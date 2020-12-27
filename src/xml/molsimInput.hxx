@@ -234,6 +234,7 @@ class particle;
 class particle_cluster;
 class sphere;
 class sphere_cluster;
+class thermostat_type;
 class particle_data;
 class boundary_type;
 class boundaries_type;
@@ -924,6 +925,126 @@ class sphere_cluster: public ::xml_schema::type
   sphere_sequence sphere_;
 };
 
+class thermostat_type: public ::xml_schema::type
+{
+  public:
+  // t_init
+  //
+  typedef ::xml_schema::double_ t_init_type;
+  typedef ::xsd::cxx::tree::traits< t_init_type, char, ::xsd::cxx::tree::schema_type::double_ > t_init_traits;
+
+  const t_init_type&
+  t_init () const;
+
+  t_init_type&
+  t_init ();
+
+  void
+  t_init (const t_init_type& x);
+
+  // change_brownian
+  //
+  typedef ::xml_schema::boolean change_brownian_type;
+  typedef ::xsd::cxx::tree::traits< change_brownian_type, char > change_brownian_traits;
+
+  const change_brownian_type&
+  change_brownian () const;
+
+  change_brownian_type&
+  change_brownian ();
+
+  void
+  change_brownian (const change_brownian_type& x);
+
+  // steps
+  //
+  typedef ::xml_schema::int_ steps_type;
+  typedef ::xsd::cxx::tree::traits< steps_type, char > steps_traits;
+
+  const steps_type&
+  steps () const;
+
+  steps_type&
+  steps ();
+
+  void
+  steps (const steps_type& x);
+
+  // t_target
+  //
+  typedef ::xml_schema::double_ t_target_type;
+  typedef ::xsd::cxx::tree::optional< t_target_type > t_target_optional;
+  typedef ::xsd::cxx::tree::traits< t_target_type, char, ::xsd::cxx::tree::schema_type::double_ > t_target_traits;
+
+  const t_target_optional&
+  t_target () const;
+
+  t_target_optional&
+  t_target ();
+
+  void
+  t_target (const t_target_type& x);
+
+  void
+  t_target (const t_target_optional& x);
+
+  // temp_delta
+  //
+  typedef ::xml_schema::double_ temp_delta_type;
+  typedef ::xsd::cxx::tree::optional< temp_delta_type > temp_delta_optional;
+  typedef ::xsd::cxx::tree::traits< temp_delta_type, char, ::xsd::cxx::tree::schema_type::double_ > temp_delta_traits;
+
+  const temp_delta_optional&
+  temp_delta () const;
+
+  temp_delta_optional&
+  temp_delta ();
+
+  void
+  temp_delta (const temp_delta_type& x);
+
+  void
+  temp_delta (const temp_delta_optional& x);
+
+  // Constructors.
+  //
+  thermostat_type (const t_init_type&,
+                   const change_brownian_type&,
+                   const steps_type&);
+
+  thermostat_type (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  thermostat_type (const thermostat_type& x,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  virtual thermostat_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  thermostat_type&
+  operator= (const thermostat_type& x);
+
+  virtual 
+  ~thermostat_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< t_init_type > t_init_;
+  ::xsd::cxx::tree::one< change_brownian_type > change_brownian_;
+  ::xsd::cxx::tree::one< steps_type > steps_;
+  t_target_optional t_target_;
+  temp_delta_optional temp_delta_;
+};
+
 class particle_data: public ::xml_schema::type
 {
   public:
@@ -1470,6 +1591,27 @@ class molsimInput: public ::xml_schema::type
   void
   domain (::std::unique_ptr< domain_type > p);
 
+  // thermostat
+  //
+  typedef ::thermostat_type thermostat_type;
+  typedef ::xsd::cxx::tree::optional< thermostat_type > thermostat_optional;
+  typedef ::xsd::cxx::tree::traits< thermostat_type, char > thermostat_traits;
+
+  const thermostat_optional&
+  thermostat () const;
+
+  thermostat_optional&
+  thermostat ();
+
+  void
+  thermostat (const thermostat_type& x);
+
+  void
+  thermostat (const thermostat_optional& x);
+
+  void
+  thermostat (::std::unique_ptr< thermostat_type > p);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1533,6 +1675,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< t_end_type > t_end_;
   ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
   ::xsd::cxx::tree::one< domain_type > domain_;
+  thermostat_optional thermostat_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

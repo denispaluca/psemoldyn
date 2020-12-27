@@ -81,6 +81,16 @@
     </xsd:sequence>
   </xsd:complexType>
 
+  <xsd:complexType name="thermostat_type">
+    <xsd:sequence>
+      <xsd:element name="t_init" type="xsd:double"/>
+      <xsd:element name="change_brownian" type="xsd:boolean"/>
+      <xsd:element name="steps" type="xsd:int"/>
+      <xsd:element name="t_target" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="temp_delta" type="xsd:double" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
   <xsd:complexType name="particle_data">
     <xsd:sequence>
       <!-- mean brownian velocity -->
@@ -134,7 +144,7 @@
       <xsd:element name="t_end" type="xsd:double"/>
       <xsd:element name="linked_cell" type="xsd:boolean" />
       <xsd:element name="domain" type="domain_type" />
-
+      <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
     </xsd:sequence>    
   </xsd:complexType>
