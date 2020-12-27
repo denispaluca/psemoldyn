@@ -9,6 +9,7 @@
 #include "shapes/Cuboid.h"
 #include "shapes/ParticleSphere.h"
 #include <xml/molsimInput.hxx>
+#include <Thermostat.h>
 
 class ParticleGenerator{
 private:
@@ -26,7 +27,16 @@ private:
      * @brief ParticleContainer with all particles from all generated cuboids
      */
     ParticleContainer particles;
+
+    /**
+     * XML Input data used in particle generator.
+     */
     particle_data data;
+
+    /**
+     * Thermostat for particles.
+     */
+     Thermostat* thermostat;
 
     /**
      * Initialize vectors and reserve for particle size.
@@ -37,6 +47,11 @@ private:
      * Generate particles.
      */
     void generate();
+
+    /**
+     * Applies Brownian Motion to generated particles.
+     */
+     void applyBrownianMotion();
 public:
     /**
      * @brief Constructs ParticleGenerator with empty Cuboid vector and ParticleContainer
@@ -49,7 +64,7 @@ public:
      * @param filename Name of the file which will be parsed.
      * @return
      */
-    ParticleGenerator(particle_data& data);
+    ParticleGenerator(particle_data& data, Thermostat* thermostat);
 
     /**
      * @brief Getter for vector of Cuboids

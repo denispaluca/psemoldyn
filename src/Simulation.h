@@ -7,6 +7,7 @@
 #include "particle/ParticleContainer.h"
 #include "particle/ParticleGenerator.h"
 #include "Container.h"
+#include "Thermostat.h"
 
 class Simulation {
 private:
@@ -19,6 +20,11 @@ private:
      * Container for particles.
      */
     Container *container;
+
+    /**
+     * Thermostat for current simulation.
+     */
+    Thermostat *thermostat;
 
     /**
      * Plot the particles to a vtu-file.

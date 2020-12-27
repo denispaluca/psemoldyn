@@ -27,6 +27,7 @@
     <!-- ONLY DOMAIN IMPORTANT -->
 
     <particle_data>
+        <meanv>0.1</meanv>
         <is3D>false</is3D>
         <cuboids>
             <cuboid>
@@ -47,7 +48,6 @@
                     <y>0.0</y>
                     <z>0.0</z>
                 </velocity>
-                <meanv>0</meanv>
             </cuboid>
             <cuboid>
                 <position>
@@ -67,7 +67,6 @@
                     <y>-10.0</y>
                     <z>0.0</z>
                 </velocity>
-                <meanv>0</meanv>
             </cuboid>
         </cuboids>
         <particles></particles>

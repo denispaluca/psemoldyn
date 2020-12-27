@@ -13,20 +13,18 @@ Cuboid::Cuboid() {
     this->distance = 1;
     this->mass = 1;
     this->initialV = {0.0, 0.0, 0.0};
-    this->meanV = MEAN_BROWNIAN;
 }
 
 Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumbers, double distance, double mass,
-               std::array<double, 3> initialV, double meanV) {
+               std::array<double, 3> initialV) {
     this->position = position;
     this->size = particleNumbers;
     this->distance = distance;
     this->mass = mass;
     this->initialV = initialV;
-    this->meanV = MEAN_BROWNIAN;
 }
 
-void Cuboid::generate(ParticleContainer &particles, bool is3D) {
+void Cuboid::generate(ParticleContainer &particles) {
     std::array<double, 3> newPosition = {0., 0., 0.};
 
     for(int i = 0; i < size[0]; i++){
@@ -37,8 +35,6 @@ void Cuboid::generate(ParticleContainer &particles, bool is3D) {
                 newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass);
 
-                MaxwellBoltzmannDistribution(newParticle, meanV, is3D ? 3 : 2);
-
                 particles.push(newParticle);
             }
         }
@@ -46,7 +42,8 @@ void Cuboid::generate(ParticleContainer &particles, bool is3D) {
 }
 
 bool Cuboid::operator==(Cuboid &other) {
-    return (position == other.position) and (size == other.size) and (distance == other.distance) and (mass == other.mass) and (meanV == other.meanV);
+    return (position == other.position) and (size == other.size)
+        and (distance == other.distance) and (mass == other.mass);
 }
 
 std::string Cuboid::toString() {

@@ -6,7 +6,6 @@
 
 #include <array>
 #include <particle/ParticleContainer.h>
-//#include "ParticleSphere.cpp"
 
 class ParticleSphere {
 
@@ -36,10 +35,6 @@ private:
      */
     double mass;
 
-    /**
-     * Mean value of velocity of Brownian Motion
-     */
-    double meanV;
 public:
     /**
      * Default constructor
@@ -60,8 +55,7 @@ public:
             std::array<double, 3> initalV,
             int radius,
             double distance,
-            double mass,
-            double meanV);
+            double mass);
 
     /**
  * Operator that compares all attributes of

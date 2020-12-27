@@ -267,24 +267,6 @@ velocity (::std::unique_ptr< velocity_type > x)
   this->velocity_.set (std::move (x));
 }
 
-const cuboid::meanv_type& cuboid::
-meanv () const
-{
-  return this->meanv_.get ();
-}
-
-cuboid::meanv_type& cuboid::
-meanv ()
-{
-  return this->meanv_.get ();
-}
-
-void cuboid::
-meanv (const meanv_type& x)
-{
-  this->meanv_.set (x);
-}
-
 
 // cuboid_cluster
 // 
@@ -505,24 +487,6 @@ r (const r_type& x)
   this->r_.set (x);
 }
 
-const sphere::meanv_type& sphere::
-meanv () const
-{
-  return this->meanv_.get ();
-}
-
-sphere::meanv_type& sphere::
-meanv ()
-{
-  return this->meanv_.get ();
-}
-
-void sphere::
-meanv (const meanv_type& x)
-{
-  this->meanv_.set (x);
-}
-
 
 // sphere_cluster
 // 
@@ -546,8 +510,132 @@ sphere (const sphere_sequence& s)
 }
 
 
+// thermostat_type
+// 
+
+const thermostat_type::t_init_type& thermostat_type::
+t_init () const
+{
+  return this->t_init_.get ();
+}
+
+thermostat_type::t_init_type& thermostat_type::
+t_init ()
+{
+  return this->t_init_.get ();
+}
+
+void thermostat_type::
+t_init (const t_init_type& x)
+{
+  this->t_init_.set (x);
+}
+
+const thermostat_type::change_brownian_type& thermostat_type::
+change_brownian () const
+{
+  return this->change_brownian_.get ();
+}
+
+thermostat_type::change_brownian_type& thermostat_type::
+change_brownian ()
+{
+  return this->change_brownian_.get ();
+}
+
+void thermostat_type::
+change_brownian (const change_brownian_type& x)
+{
+  this->change_brownian_.set (x);
+}
+
+const thermostat_type::steps_type& thermostat_type::
+steps () const
+{
+  return this->steps_.get ();
+}
+
+thermostat_type::steps_type& thermostat_type::
+steps ()
+{
+  return this->steps_.get ();
+}
+
+void thermostat_type::
+steps (const steps_type& x)
+{
+  this->steps_.set (x);
+}
+
+const thermostat_type::t_target_optional& thermostat_type::
+t_target () const
+{
+  return this->t_target_;
+}
+
+thermostat_type::t_target_optional& thermostat_type::
+t_target ()
+{
+  return this->t_target_;
+}
+
+void thermostat_type::
+t_target (const t_target_type& x)
+{
+  this->t_target_.set (x);
+}
+
+void thermostat_type::
+t_target (const t_target_optional& x)
+{
+  this->t_target_ = x;
+}
+
+const thermostat_type::temp_delta_optional& thermostat_type::
+temp_delta () const
+{
+  return this->temp_delta_;
+}
+
+thermostat_type::temp_delta_optional& thermostat_type::
+temp_delta ()
+{
+  return this->temp_delta_;
+}
+
+void thermostat_type::
+temp_delta (const temp_delta_type& x)
+{
+  this->temp_delta_.set (x);
+}
+
+void thermostat_type::
+temp_delta (const temp_delta_optional& x)
+{
+  this->temp_delta_ = x;
+}
+
+
 // particle_data
 // 
+
+const particle_data::meanv_type& particle_data::
+meanv () const
+{
+  return this->meanv_.get ();
+}
+
+particle_data::meanv_type& particle_data::
+meanv ()
+{
+  return this->meanv_.get ();
+}
+
+void particle_data::
+meanv (const meanv_type& x)
+{
+  this->meanv_.set (x);
+}
 
 const particle_data::is3D_type& particle_data::
 is3D () const
@@ -1062,6 +1150,36 @@ domain (::std::unique_ptr< domain_type > x)
   this->domain_.set (std::move (x));
 }
 
+const molsimInput::thermostat_optional& molsimInput::
+thermostat () const
+{
+  return this->thermostat_;
+}
+
+molsimInput::thermostat_optional& molsimInput::
+thermostat ()
+{
+  return this->thermostat_;
+}
+
+void molsimInput::
+thermostat (const thermostat_type& x)
+{
+  this->thermostat_.set (x);
+}
+
+void molsimInput::
+thermostat (const thermostat_optional& x)
+{
+  this->thermostat_ = x;
+}
+
+void molsimInput::
+thermostat (::std::unique_ptr< thermostat_type > x)
+{
+  this->thermostat_.set (std::move (x));
+}
+
 const molsimInput::particle_data_type& molsimInput::
 particle_data () const
 {
@@ -1367,15 +1485,13 @@ cuboid (const position_type& position,
         const size_type& size,
         const distance_type& distance,
         const mass_type& mass,
-        const velocity_type& velocity,
-        const meanv_type& meanv)
+        const velocity_type& velocity)
 : ::xml_schema::type (),
   position_ (position, this),
   size_ (size, this),
   distance_ (distance, this),
   mass_ (mass, this),
-  velocity_ (velocity, this),
-  meanv_ (meanv, this)
+  velocity_ (velocity, this)
 {
 }
 
@@ -1384,15 +1500,13 @@ cuboid (::std::unique_ptr< position_type > position,
         ::std::unique_ptr< size_type > size,
         const distance_type& distance,
         const mass_type& mass,
-        ::std::unique_ptr< velocity_type > velocity,
-        const meanv_type& meanv)
+        ::std::unique_ptr< velocity_type > velocity)
 : ::xml_schema::type (),
   position_ (std::move (position), this),
   size_ (std::move (size), this),
   distance_ (distance, this),
   mass_ (mass, this),
-  velocity_ (std::move (velocity), this),
-  meanv_ (meanv, this)
+  velocity_ (std::move (velocity), this)
 {
 }
 
@@ -1405,8 +1519,7 @@ cuboid (const cuboid& x,
   size_ (x.size_, f, this),
   distance_ (x.distance_, f, this),
   mass_ (x.mass_, f, this),
-  velocity_ (x.velocity_, f, this),
-  meanv_ (x.meanv_, f, this)
+  velocity_ (x.velocity_, f, this)
 {
 }
 
@@ -1419,8 +1532,7 @@ cuboid (const ::xercesc::DOMElement& e,
   size_ (this),
   distance_ (this),
   mass_ (this),
-  velocity_ (this),
-  meanv_ (this)
+  velocity_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1503,17 +1615,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // meanv
-    //
-    if (n.name () == "meanv" && n.namespace_ ().empty ())
-    {
-      if (!meanv_.present ())
-      {
-        this->meanv_.set (meanv_traits::create (i, f, this));
-        continue;
-      }
-    }
-
     break;
   }
 
@@ -1551,13 +1652,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "velocity",
       "");
   }
-
-  if (!meanv_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "meanv",
-      "");
-  }
 }
 
 cuboid* cuboid::
@@ -1578,7 +1672,6 @@ operator= (const cuboid& x)
     this->distance_ = x.distance_;
     this->mass_ = x.mass_;
     this->velocity_ = x.velocity_;
-    this->meanv_ = x.meanv_;
   }
 
   return *this;
@@ -1913,15 +2006,13 @@ sphere (const center_type& center,
         const h_type& h,
         const v_type& v,
         const m_type& m,
-        const r_type& r,
-        const meanv_type& meanv)
+        const r_type& r)
 : ::xml_schema::type (),
   center_ (center, this),
   h_ (h, this),
   v_ (v, this),
   m_ (m, this),
-  r_ (r, this),
-  meanv_ (meanv, this)
+  r_ (r, this)
 {
 }
 
@@ -1930,15 +2021,13 @@ sphere (::std::unique_ptr< center_type > center,
         const h_type& h,
         ::std::unique_ptr< v_type > v,
         const m_type& m,
-        const r_type& r,
-        const meanv_type& meanv)
+        const r_type& r)
 : ::xml_schema::type (),
   center_ (std::move (center), this),
   h_ (h, this),
   v_ (std::move (v), this),
   m_ (m, this),
-  r_ (r, this),
-  meanv_ (meanv, this)
+  r_ (r, this)
 {
 }
 
@@ -1951,8 +2040,7 @@ sphere (const sphere& x,
   h_ (x.h_, f, this),
   v_ (x.v_, f, this),
   m_ (x.m_, f, this),
-  r_ (x.r_, f, this),
-  meanv_ (x.meanv_, f, this)
+  r_ (x.r_, f, this)
 {
 }
 
@@ -1965,8 +2053,7 @@ sphere (const ::xercesc::DOMElement& e,
   h_ (this),
   v_ (this),
   m_ (this),
-  r_ (this),
-  meanv_ (this)
+  r_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2046,17 +2133,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // meanv
-    //
-    if (n.name () == "meanv" && n.namespace_ ().empty ())
-    {
-      if (!meanv_.present ())
-      {
-        this->meanv_.set (meanv_traits::create (i, f, this));
-        continue;
-      }
-    }
-
     break;
   }
 
@@ -2094,13 +2170,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "r",
       "");
   }
-
-  if (!meanv_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "meanv",
-      "");
-  }
 }
 
 sphere* sphere::
@@ -2121,7 +2190,6 @@ operator= (const sphere& x)
     this->v_ = x.v_;
     this->m_ = x.m_;
     this->r_ = x.r_;
-    this->meanv_ = x.meanv_;
   }
 
   return *this;
@@ -2214,15 +2282,182 @@ sphere_cluster::
 {
 }
 
+// thermostat_type
+//
+
+thermostat_type::
+thermostat_type (const t_init_type& t_init,
+                 const change_brownian_type& change_brownian,
+                 const steps_type& steps)
+: ::xml_schema::type (),
+  t_init_ (t_init, this),
+  change_brownian_ (change_brownian, this),
+  steps_ (steps, this),
+  t_target_ (this),
+  temp_delta_ (this)
+{
+}
+
+thermostat_type::
+thermostat_type (const thermostat_type& x,
+                 ::xml_schema::flags f,
+                 ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  t_init_ (x.t_init_, f, this),
+  change_brownian_ (x.change_brownian_, f, this),
+  steps_ (x.steps_, f, this),
+  t_target_ (x.t_target_, f, this),
+  temp_delta_ (x.temp_delta_, f, this)
+{
+}
+
+thermostat_type::
+thermostat_type (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f,
+                 ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  t_init_ (this),
+  change_brownian_ (this),
+  steps_ (this),
+  t_target_ (this),
+  temp_delta_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void thermostat_type::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // t_init
+    //
+    if (n.name () == "t_init" && n.namespace_ ().empty ())
+    {
+      if (!t_init_.present ())
+      {
+        this->t_init_.set (t_init_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // change_brownian
+    //
+    if (n.name () == "change_brownian" && n.namespace_ ().empty ())
+    {
+      if (!change_brownian_.present ())
+      {
+        this->change_brownian_.set (change_brownian_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // steps
+    //
+    if (n.name () == "steps" && n.namespace_ ().empty ())
+    {
+      if (!steps_.present ())
+      {
+        this->steps_.set (steps_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // t_target
+    //
+    if (n.name () == "t_target" && n.namespace_ ().empty ())
+    {
+      if (!this->t_target_)
+      {
+        this->t_target_.set (t_target_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // temp_delta
+    //
+    if (n.name () == "temp_delta" && n.namespace_ ().empty ())
+    {
+      if (!this->temp_delta_)
+      {
+        this->temp_delta_.set (temp_delta_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!t_init_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "t_init",
+      "");
+  }
+
+  if (!change_brownian_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "change_brownian",
+      "");
+  }
+
+  if (!steps_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "steps",
+      "");
+  }
+}
+
+thermostat_type* thermostat_type::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class thermostat_type (*this, f, c);
+}
+
+thermostat_type& thermostat_type::
+operator= (const thermostat_type& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->t_init_ = x.t_init_;
+    this->change_brownian_ = x.change_brownian_;
+    this->steps_ = x.steps_;
+    this->t_target_ = x.t_target_;
+    this->temp_delta_ = x.temp_delta_;
+  }
+
+  return *this;
+}
+
+thermostat_type::
+~thermostat_type ()
+{
+}
+
 // particle_data
 //
 
 particle_data::
-particle_data (const is3D_type& is3D,
+particle_data (const meanv_type& meanv,
+               const is3D_type& is3D,
                const cuboids_type& cuboids,
                const particles_type& particles,
                const spheres_type& spheres)
 : ::xml_schema::type (),
+  meanv_ (meanv, this),
   is3D_ (is3D, this),
   cuboids_ (cuboids, this),
   particles_ (particles, this),
@@ -2231,11 +2466,13 @@ particle_data (const is3D_type& is3D,
 }
 
 particle_data::
-particle_data (const is3D_type& is3D,
+particle_data (const meanv_type& meanv,
+               const is3D_type& is3D,
                ::std::unique_ptr< cuboids_type > cuboids,
                ::std::unique_ptr< particles_type > particles,
                ::std::unique_ptr< spheres_type > spheres)
 : ::xml_schema::type (),
+  meanv_ (meanv, this),
   is3D_ (is3D, this),
   cuboids_ (std::move (cuboids), this),
   particles_ (std::move (particles), this),
@@ -2248,6 +2485,7 @@ particle_data (const particle_data& x,
                ::xml_schema::flags f,
                ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
+  meanv_ (x.meanv_, f, this),
   is3D_ (x.is3D_, f, this),
   cuboids_ (x.cuboids_, f, this),
   particles_ (x.particles_, f, this),
@@ -2260,6 +2498,7 @@ particle_data (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f,
                ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  meanv_ (this),
   is3D_ (this),
   cuboids_ (this),
   particles_ (this),
@@ -2281,6 +2520,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xercesc::DOMElement& i (p.cur_element ());
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
+
+    // meanv
+    //
+    if (n.name () == "meanv" && n.namespace_ ().empty ())
+    {
+      if (!meanv_.present ())
+      {
+        this->meanv_.set (meanv_traits::create (i, f, this));
+        continue;
+      }
+    }
 
     // is3D
     //
@@ -2338,6 +2588,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     break;
   }
 
+  if (!meanv_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "meanv",
+      "");
+  }
+
   if (!is3D_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2380,6 +2637,7 @@ operator= (const particle_data& x)
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
+    this->meanv_ = x.meanv_;
     this->is3D_ = x.is3D_;
     this->cuboids_ = x.cuboids_;
     this->particles_ = x.particles_;
@@ -2872,6 +3130,7 @@ molsimInput (const delta_t_type& delta_t,
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
   domain_ (domain, this),
+  thermostat_ (this),
   particle_data_ (particle_data, this)
 {
 }
@@ -2889,6 +3148,7 @@ molsimInput (const delta_t_type& delta_t,
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
   domain_ (std::move (domain), this),
+  thermostat_ (this),
   particle_data_ (std::move (particle_data), this)
 {
 }
@@ -2904,6 +3164,7 @@ molsimInput (const molsimInput& x,
   t_end_ (x.t_end_, f, this),
   linked_cell_ (x.linked_cell_, f, this),
   domain_ (x.domain_, f, this),
+  thermostat_ (x.thermostat_, f, this),
   particle_data_ (x.particle_data_, f, this)
 {
 }
@@ -2919,6 +3180,7 @@ molsimInput (const ::xercesc::DOMElement& e,
   t_end_ (this),
   linked_cell_ (this),
   domain_ (this),
+  thermostat_ (this),
   particle_data_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -3010,6 +3272,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // thermostat
+    //
+    if (n.name () == "thermostat" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostat_type > r (
+        thermostat_traits::create (i, f, this));
+
+      if (!this->thermostat_)
+      {
+        this->thermostat_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // particle_data
     //
     if (n.name () == "particle_data" && n.namespace_ ().empty ())
@@ -3082,6 +3358,7 @@ operator= (const molsimInput& x)
     this->t_end_ = x.t_end_;
     this->linked_cell_ = x.linked_cell_;
     this->domain_ = x.domain_;
+    this->thermostat_ = x.thermostat_;
     this->particle_data_ = x.particle_data_;
   }
 

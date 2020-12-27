@@ -234,6 +234,7 @@ class particle;
 class particle_cluster;
 class sphere;
 class sphere_cluster;
+class thermostat_type;
 class particle_data;
 class boundary_type;
 class boundaries_type;
@@ -500,35 +501,19 @@ class cuboid: public ::xml_schema::type
   void
   velocity (::std::unique_ptr< velocity_type > p);
 
-  // meanv
-  //
-  typedef ::xml_schema::double_ meanv_type;
-  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
-
-  const meanv_type&
-  meanv () const;
-
-  meanv_type&
-  meanv ();
-
-  void
-  meanv (const meanv_type& x);
-
   // Constructors.
   //
   cuboid (const position_type&,
           const size_type&,
           const distance_type&,
           const mass_type&,
-          const velocity_type&,
-          const meanv_type&);
+          const velocity_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
           const distance_type&,
           const mass_type&,
-          ::std::unique_ptr< velocity_type >,
-          const meanv_type&);
+          ::std::unique_ptr< velocity_type >);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -561,7 +546,6 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< velocity_type > velocity_;
-  ::xsd::cxx::tree::one< meanv_type > meanv_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -841,35 +825,19 @@ class sphere: public ::xml_schema::type
   void
   r (const r_type& x);
 
-  // meanv
-  //
-  typedef ::xml_schema::double_ meanv_type;
-  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
-
-  const meanv_type&
-  meanv () const;
-
-  meanv_type&
-  meanv ();
-
-  void
-  meanv (const meanv_type& x);
-
   // Constructors.
   //
   sphere (const center_type&,
           const h_type&,
           const v_type&,
           const m_type&,
-          const r_type&,
-          const meanv_type&);
+          const r_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
           ::std::unique_ptr< v_type >,
           const m_type&,
-          const r_type&,
-          const meanv_type&);
+          const r_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -902,7 +870,6 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
   ::xsd::cxx::tree::one< r_type > r_;
-  ::xsd::cxx::tree::one< meanv_type > meanv_;
 };
 
 class sphere_cluster: public ::xml_schema::type
@@ -958,9 +925,143 @@ class sphere_cluster: public ::xml_schema::type
   sphere_sequence sphere_;
 };
 
+class thermostat_type: public ::xml_schema::type
+{
+  public:
+  // t_init
+  //
+  typedef ::xml_schema::double_ t_init_type;
+  typedef ::xsd::cxx::tree::traits< t_init_type, char, ::xsd::cxx::tree::schema_type::double_ > t_init_traits;
+
+  const t_init_type&
+  t_init () const;
+
+  t_init_type&
+  t_init ();
+
+  void
+  t_init (const t_init_type& x);
+
+  // change_brownian
+  //
+  typedef ::xml_schema::boolean change_brownian_type;
+  typedef ::xsd::cxx::tree::traits< change_brownian_type, char > change_brownian_traits;
+
+  const change_brownian_type&
+  change_brownian () const;
+
+  change_brownian_type&
+  change_brownian ();
+
+  void
+  change_brownian (const change_brownian_type& x);
+
+  // steps
+  //
+  typedef ::xml_schema::int_ steps_type;
+  typedef ::xsd::cxx::tree::traits< steps_type, char > steps_traits;
+
+  const steps_type&
+  steps () const;
+
+  steps_type&
+  steps ();
+
+  void
+  steps (const steps_type& x);
+
+  // t_target
+  //
+  typedef ::xml_schema::double_ t_target_type;
+  typedef ::xsd::cxx::tree::optional< t_target_type > t_target_optional;
+  typedef ::xsd::cxx::tree::traits< t_target_type, char, ::xsd::cxx::tree::schema_type::double_ > t_target_traits;
+
+  const t_target_optional&
+  t_target () const;
+
+  t_target_optional&
+  t_target ();
+
+  void
+  t_target (const t_target_type& x);
+
+  void
+  t_target (const t_target_optional& x);
+
+  // temp_delta
+  //
+  typedef ::xml_schema::double_ temp_delta_type;
+  typedef ::xsd::cxx::tree::optional< temp_delta_type > temp_delta_optional;
+  typedef ::xsd::cxx::tree::traits< temp_delta_type, char, ::xsd::cxx::tree::schema_type::double_ > temp_delta_traits;
+
+  const temp_delta_optional&
+  temp_delta () const;
+
+  temp_delta_optional&
+  temp_delta ();
+
+  void
+  temp_delta (const temp_delta_type& x);
+
+  void
+  temp_delta (const temp_delta_optional& x);
+
+  // Constructors.
+  //
+  thermostat_type (const t_init_type&,
+                   const change_brownian_type&,
+                   const steps_type&);
+
+  thermostat_type (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  thermostat_type (const thermostat_type& x,
+                   ::xml_schema::flags f = 0,
+                   ::xml_schema::container* c = 0);
+
+  virtual thermostat_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  thermostat_type&
+  operator= (const thermostat_type& x);
+
+  virtual 
+  ~thermostat_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< t_init_type > t_init_;
+  ::xsd::cxx::tree::one< change_brownian_type > change_brownian_;
+  ::xsd::cxx::tree::one< steps_type > steps_;
+  t_target_optional t_target_;
+  temp_delta_optional temp_delta_;
+};
+
 class particle_data: public ::xml_schema::type
 {
   public:
+  // meanv
+  //
+  typedef ::xml_schema::double_ meanv_type;
+  typedef ::xsd::cxx::tree::traits< meanv_type, char, ::xsd::cxx::tree::schema_type::double_ > meanv_traits;
+
+  const meanv_type&
+  meanv () const;
+
+  meanv_type&
+  meanv ();
+
+  void
+  meanv (const meanv_type& x);
+
   // is3D
   //
   typedef ::xml_schema::boolean is3D_type;
@@ -1028,12 +1129,14 @@ class particle_data: public ::xml_schema::type
 
   // Constructors.
   //
-  particle_data (const is3D_type&,
+  particle_data (const meanv_type&,
+                 const is3D_type&,
                  const cuboids_type&,
                  const particles_type&,
                  const spheres_type&);
 
-  particle_data (const is3D_type&,
+  particle_data (const meanv_type&,
+                 const is3D_type&,
                  ::std::unique_ptr< cuboids_type >,
                  ::std::unique_ptr< particles_type >,
                  ::std::unique_ptr< spheres_type >);
@@ -1064,6 +1167,7 @@ class particle_data: public ::xml_schema::type
          ::xml_schema::flags);
 
   protected:
+  ::xsd::cxx::tree::one< meanv_type > meanv_;
   ::xsd::cxx::tree::one< is3D_type > is3D_;
   ::xsd::cxx::tree::one< cuboids_type > cuboids_;
   ::xsd::cxx::tree::one< particles_type > particles_;
@@ -1487,6 +1591,27 @@ class molsimInput: public ::xml_schema::type
   void
   domain (::std::unique_ptr< domain_type > p);
 
+  // thermostat
+  //
+  typedef ::thermostat_type thermostat_type;
+  typedef ::xsd::cxx::tree::optional< thermostat_type > thermostat_optional;
+  typedef ::xsd::cxx::tree::traits< thermostat_type, char > thermostat_traits;
+
+  const thermostat_optional&
+  thermostat () const;
+
+  thermostat_optional&
+  thermostat ();
+
+  void
+  thermostat (const thermostat_type& x);
+
+  void
+  thermostat (const thermostat_optional& x);
+
+  void
+  thermostat (::std::unique_ptr< thermostat_type > p);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1550,6 +1675,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< t_end_type > t_end_;
   ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
   ::xsd::cxx::tree::one< domain_type > domain_;
+  thermostat_optional thermostat_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

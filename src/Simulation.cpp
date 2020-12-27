@@ -8,7 +8,12 @@
 #include "cell/LinkedCellContainer.h"
 
 Simulation::Simulation(molsimInput &data) : data(data) {
-    auto pg = ParticleGenerator(data.particle_data());
+    thermostat = data.thermostat().present() ?
+            new Thermostat(data.thermostat().get(), data.particle_data().is3D())
+            : nullptr;
+
+    auto pg = ParticleGenerator(data.particle_data(), thermostat);
+
     //Update delta_t for each particle before copying
     pg.getParticles().iterate([&](Particle &p) {
         p.updateDT(data.delta_t());
@@ -37,6 +42,10 @@ void Simulation::start(bool isPT) {
         iteration++;
         if (!isPT && iteration % freq == 0) {
             plotParticles(iteration);
+        }
+
+        if(thermostat != nullptr && iteration != 0 && iteration % thermostat->getSteps()){
+            thermostat->scale(*container);
         }
 
         current_time += data.delta_t();
