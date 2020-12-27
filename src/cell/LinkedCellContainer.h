@@ -22,9 +22,14 @@ private:
     std::array<int, 3> dimensions{};
 
     /**
-     * THe cutoff-radius
+     * The cutoff-radius.
      */
     double cutoff_radius;
+
+    /**
+     * Optional gravity given over xml.
+     */
+    domain_type::gravity_optional gravity;
 
     /**
      * A vector containing all cells

@@ -189,9 +189,24 @@ public:
    */
   void updateDT(double delta_t);
 
+  /**
+   * Checks if particle is out of the domain.
+   * @param domain_size Size of the domain.
+   * @return True if particle is out.
+   */
   bool isOut(std::array<double, 3> domain_size);
 
+  /**
+   * Sets the mass of the particle.
+   * @param mass New mass.
+   */
   void setM(double mass);
+
+  /**
+   * Apply gravitational force on the particle.
+   * @param g Gravity to be applied.
+   */
+  void applyGravity(double g);
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);
