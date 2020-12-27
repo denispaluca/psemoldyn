@@ -38,7 +38,7 @@ void Thermostat::scale(Container &particles) {
     else
         t_new = t_target;
 
-    double scalar = sqrt(t_new/t_current);
+    double scalar = sqrt(std::abs(t_new/t_current));
 
     particles.iterate([scalar](Particle &p){
         auto &v = p.getV();
@@ -48,7 +48,7 @@ void Thermostat::scale(Container &particles) {
     });
 }
 
-bool Thermostat::changeBrownian() {
+bool Thermostat::changeBrownian() const {
     return change_brownian;
 }
 

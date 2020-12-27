@@ -27,6 +27,10 @@ private:
      * @brief ParticleContainer with all particles from all generated cuboids
      */
     ParticleContainer particles;
+
+    /**
+     * XML Input data used in particle generator.
+     */
     particle_data data;
 
     /**
