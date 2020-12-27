@@ -64,7 +64,7 @@ TEST_F(ThermostatFixture, Scales){
  */
 TEST_F(ThermostatFixture, InitTemp_SET){
     auto t_init = t2->getCurrentTemp(lcc2);
-    EXPECT_NEAR(t_init, t2->getInitTemp(), 5); //Brownian motion rand
+    EXPECT_NEAR(t_init, t2->getInitTemp(), 15); //Brownian motion rand (temp is 100)
 }
 
 
@@ -92,7 +92,7 @@ TEST_F(ThermostatFixture, Gradual_Scale){
  */
 TEST_F(ThermostatFixture, Scale_Down){
     auto t_init = t4->getCurrentTemp(lcc4);
-    EXPECT_NEAR(t_init, t4->getInitTemp(), 5); //Brownian motion rand
+    EXPECT_NEAR(t_init, t4->getInitTemp(), 15); //Brownian motion rand (Temp is 100)
     t4->scale(lcc4);
     EXPECT_NEAR(5,t4->getCurrentTemp(lcc4), 0.1);
 }
