@@ -32,13 +32,17 @@ void Thermostat::scale(Container &particles) {
 
     auto t_current = sumMNormV/(dimensions * nrParticles);
 
+    if(t_current == t_target) return;
+
     double t_new;
     if(t_delta.present() && std::abs(t_target - t_current) > std::abs(t_delta.get()))
-        t_new = t_current + std::abs(t_delta.get());
+        t_new = t_target > t_current ?
+                t_current + std::abs(t_delta.get()):
+                t_current - std::abs(t_delta.get());
     else
         t_new = t_target;
 
-    double scalar = sqrt(std::abs(t_new/t_current));
+    double scalar = sqrt(t_new/t_current);
 
     particles.iterate([scalar](Particle &p){
         auto &v = p.getV();
