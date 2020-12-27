@@ -9,7 +9,6 @@ ParticleSphere::ParticleSphere() {
     this->radius = 0.;
     this->distance = 0.;
     this->mass = 0;
-    this->meanV = 0;
 }
 
 ParticleSphere::ParticleSphere(
@@ -17,14 +16,12 @@ ParticleSphere::ParticleSphere(
         std::array<double, 3> initialV,
         int radius,
         double distance,
-        double mass,
-        double meanV) {
+        double mass) {
     this->position = position;
     this->initialV = initialV;
     this->radius = radius;
     this->distance = distance;
     this->mass = mass;
-    this->meanV = meanV;
 }
 
 void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
@@ -33,7 +30,6 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
             position,
             initialV,
             mass);
-    MaxwellBoltzmannDistribution(newParticle, meanV, is3D?3:2);
     particles.push(newParticle);
 
     int zr = radius;
@@ -50,14 +46,12 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                             {x*distance+position[0], y*distance+position[1],  is3D?z*distance+position[2]:0},
                             initialV,
                             mass);
-                    MaxwellBoltzmannDistribution(ap, meanV, is3D?3:2);
                     particles.push(ap);
                     if (y!= 0) {
                         Particle cp = Particle(
                                 {x*distance+position[0], -y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
                                 mass);
-                        MaxwellBoltzmannDistribution(cp, meanV, is3D?3:2);
                         particles.push(cp);
                     }
                     if (x!=0) {
@@ -65,7 +59,6 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 {-x*distance+position[0], y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
                                 mass);
-                        MaxwellBoltzmannDistribution(ep, meanV, is3D?3:2);
                         particles.push(ep);
                     }
                     if (x!=0 && y!= 0) {
@@ -73,7 +66,6 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 {-x*distance+position[0], -y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
                                 mass);
-                        MaxwellBoltzmannDistribution(gp, meanV, is3D?3:2);
                         particles.push(gp);
                     }
 
@@ -83,21 +75,18 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                     {-x*distance+position[0], -y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
                                     mass);
-                            MaxwellBoltzmannDistribution(hp, meanV, is3D?3:2);
                             particles.push(hp);
                         }
                         Particle bp = Particle(
                                 {x*distance+position[0], y*distance+position[1],  -z*distance+position[2]},
                                 initialV,
                                 mass);
-                        MaxwellBoltzmannDistribution(bp, meanV, is3D?3:2);
                         particles.push(bp);
                         if (y!=0) {
                             Particle dp = Particle(
                                     {x*distance+position[0], -y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
                                     mass);
-                            MaxwellBoltzmannDistribution(dp, meanV, is3D?3:2);
                             particles.push(dp);
                         }
                         if(x!=0) {
@@ -105,7 +94,6 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                     {-x*distance+position[0], y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
                                     mass);
-                            MaxwellBoltzmannDistribution(fp, meanV, is3D?3:2);
                             particles.push(fp);
                         }
                     }

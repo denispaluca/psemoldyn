@@ -17,8 +17,7 @@ ParticleSphere mapParticleSphere(sphere& c){
             mapDoubleVec(c.v()),
             c.r(),
             c.h(),
-            c.m(),
-            c.meanv()
+            c.m()
     };
 }
 
@@ -28,8 +27,7 @@ Cuboid mapCuboid(cuboid& c){
         mapIntVec(c.size()),
         c.distance(),
         c.mass(),
-        mapDoubleVec(c.velocity()),
-        c.meanv()
+        mapDoubleVec(c.velocity())
     };
 }
 Particle mapParticle(particle& p){

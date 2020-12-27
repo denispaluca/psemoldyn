@@ -3,8 +3,6 @@
 //
 #pragma once
 
-#define MEAN_BROWNIAN 0.1
-
 #include <array>
 #include "particle/ParticleContainer.h"
 
@@ -36,10 +34,6 @@ private:
      */
     std::array<double, 3> initialV{};
 
-    /**
-     * Mean value of velocity of Brownian Motion
-     */
-    double meanV;
 public:
     /**
      * Default constructor
@@ -54,10 +48,9 @@ public:
      * @param distance distance between particles/mesh width
      * @param mass mass of one particle
      * @param initalV initial velocity of the particles
-     * @param meanV mean-value of velocity of Brownian Motion (will be discarded, we use a hard-coded value instead)
      */
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
-           double distance, double mass, std::array<double, 3> initalV, double meanV);
+           double distance, double mass, std::array<double, 3> initalV);
 
         /**
      * Operator that compares all attributes of
@@ -78,7 +71,7 @@ public:
      * Generates the particles in the cuboid and adds them into given ParticleContainer
      * @param p the ParticleContainer in which the generated Particles shall be stored
      */
-    void generate(ParticleContainer &p, bool is3D);
+    void generate(ParticleContainer &p);
 
     /**
      * Getter for the size of cuboid.

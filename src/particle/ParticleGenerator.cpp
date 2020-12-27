@@ -4,7 +4,7 @@
 
 #include <utils/XSDMapper.h>
 #include "ParticleGenerator.h"
-#include "deprecated/FileReader.h"
+#include "utils/MaxwellBoltzmannDistribution.h"
 
 ParticleGenerator::ParticleGenerator(particle_data &data) : data(data) {
     cuboids = std::vector<Cuboid>();
@@ -27,7 +27,7 @@ ParticleContainer& ParticleGenerator::getParticles() {
 
 void ParticleGenerator::addCuboid(Cuboid c) {
     cuboids.emplace_back(c);
-    c.generate(particles, data.is3D());
+    c.generate(particles);
 }
 
 void ParticleGenerator::reserve(){
@@ -56,14 +56,18 @@ void ParticleGenerator::generate() {
         particles.push(particle);
     }
     for(auto c: cuboids){
-        c.generate(particles, data.is3D());
+        c.generate(particles);
     }
     for(auto c: particleSpheres){
         c.generate(particles, data.is3D());
     }
+
+    particles.iterate([&](Particle& p){
+        MaxwellBoltzmannDistribution(p, data.meanv(), data.is3D() ? 3 : 2);
+    });
 }
 
-ParticleGenerator::ParticleGenerator() : data(true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
+ParticleGenerator::ParticleGenerator() : data(0.1,true,cuboid_cluster(),particle_cluster(),sphere_cluster()) {
     cuboids = std::vector<Cuboid>();
     particles = ParticleContainer();
     particleSpheres = std::vector<ParticleSphere>();
