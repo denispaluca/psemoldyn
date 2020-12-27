@@ -67,4 +67,11 @@ public:
      * @return steps
      */
     int getSteps() const;
+
+    /**
+     * Gets temperature of system of particles.
+     * @param particles Container of the system.
+     * @return Temperature of system.
+     */
+    double getCurrentTemp(Container& particles) const;
 };

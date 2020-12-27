@@ -23,15 +23,7 @@ void Thermostat::applyBrownian(ParticleContainer &particles) {
 }
 
 void Thermostat::scale(Container &particles) {
-    int nrParticles = particles.size();
-    double sumMNormV = 0;
-    particles.iterate([&](Particle &p){
-        auto &v = p.getV();
-        sumMNormV += p.getM()*(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-    });
-
-    auto t_current = sumMNormV/(dimensions * nrParticles);
-
+    auto t_current = getCurrentTemp(particles);
     if(t_current == t_target) return;
 
     double t_new;
@@ -58,4 +50,16 @@ bool Thermostat::changeBrownian() const {
 
 int Thermostat::getSteps() const {
     return steps;
+}
+
+double Thermostat::getCurrentTemp(Container &particles) const {
+    int nrParticles = particles.size();
+    double sumMNormV = 0;
+    particles.iterate([&](Particle &p){
+        auto &v = p.getV();
+        sumMNormV += p.getM()*(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+    });
+
+    auto t_current = sumMNormV/(dimensions * nrParticles);
+    return t_current;
 }
