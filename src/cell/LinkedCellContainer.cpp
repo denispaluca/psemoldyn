@@ -89,7 +89,12 @@ void LinkedCellContainer::calculateIteration() {
     });
 
     // calculate new f
-    iteratePairs(calculateLennardJones);
+    //iteratePairs(calculateLennardJones);
+    iteratePairs([&](Particle &p1, Particle &p2){
+        double epsilon = mixedEpsilon.find({p1.getEpsilon(), p2.getEpsilon()})->second;
+        double sigma = mixedSigma.find({p1.getSigma(), p2.getSigma()})->second;
+        calculateLennardJones(p1, p2, epsilon, sigma);
+    });
 
     // calculate new v
     iterate([&](Particle &p) {
@@ -185,4 +190,22 @@ std::array<int, 3>& LinkedCellContainer::getDimensions() {
 
 BoundaryHandler *LinkedCellContainer::getBoundaryHandler() {
     return this->boundaryHandler;
+}
+
+void LinkedCellContainer::mixParameters() {
+    iteratePairs([&](Particle &p1, Particle &p2){
+        double eps1 = p1.getEpsilon();
+        double eps2 = p2.getEpsilon();
+        if(this->mixedEpsilon.find({eps1, eps2}) == this->mixedEpsilon.end()) {
+            // mix epsilons and save in map
+            this->mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({eps1, eps2}, std::sqrt(eps1*eps2)));
+        }
+
+        double sig1 = p1.getSigma();
+        double sig2 = p2.getSigma();
+        if(this->mixedSigma.find({sig1, sig2}) == this->mixedSigma.end()) {
+            // mix sigmas and save in map
+            this->mixedSigma.insert(std::pair<std::array<double, 2>, double>({sig1, sig2}, (sig1+sig2)/2));
+        }
+    });
 }
