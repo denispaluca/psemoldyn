@@ -61,6 +61,10 @@ private:
    */
   double dtsq_2m;
 
+  double epsilon;
+
+  double sigma;
+
 public:
   /**
    * Particle constructor which sets its type.
@@ -138,6 +142,10 @@ public:
    * @return type
    */
   int getType();
+
+  double getEpsilon();
+
+  double getSigma();
 
   /**
    * Operator that compares all attributes of
