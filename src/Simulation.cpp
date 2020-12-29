@@ -24,6 +24,8 @@ Simulation::Simulation(molsimInput &data) : data(data) {
     } else {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
+
+    container->mixParameters();
 }
 
 void Simulation::start(bool isPT) {
