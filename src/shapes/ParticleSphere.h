@@ -35,6 +35,10 @@ private:
      */
     double mass;
 
+    double epsilon;
+
+    double sigma;
+
 public:
     /**
      * Default constructor
@@ -55,7 +59,9 @@ public:
             std::array<double, 3> initalV,
             int radius,
             double distance,
-            double mass);
+            double mass,
+            double epsilon,
+            double sigma);
 
     /**
  * Operator that compares all attributes of

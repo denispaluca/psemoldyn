@@ -16,12 +16,16 @@ ParticleSphere::ParticleSphere(
         std::array<double, 3> initialV,
         int radius,
         double distance,
-        double mass) {
+        double mass,
+        double epsilon,
+        double sigma) {
     this->position = position;
     this->initialV = initialV;
     this->radius = radius;
     this->distance = distance;
     this->mass = mass;
+    this->epsilon = epsilon;
+    this->sigma = sigma;
 }
 
 void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
@@ -29,7 +33,9 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
     Particle newParticle = Particle(
             position,
             initialV,
-            mass);
+            mass,
+            epsilon,
+            sigma);
     particles.push(newParticle);
 
     int zr = radius;
@@ -45,27 +51,35 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                     Particle ap = Particle(
                             {x*distance+position[0], y*distance+position[1],  is3D?z*distance+position[2]:0},
                             initialV,
-                            mass);
+                            mass,
+                            epsilon,
+                            sigma);
                     particles.push(ap);
                     if (y!= 0) {
                         Particle cp = Particle(
                                 {x*distance+position[0], -y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
-                                mass);
+                                mass,
+                                epsilon,
+                                sigma);
                         particles.push(cp);
                     }
                     if (x!=0) {
                         Particle ep = Particle(
                                 {-x*distance+position[0], y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
-                                mass);
+                                mass,
+                                epsilon,
+                                sigma);
                         particles.push(ep);
                     }
                     if (x!=0 && y!= 0) {
                         Particle gp = Particle(
                                 {-x*distance+position[0], -y*distance+position[1],  is3D?z*distance+position[2]:0},
                                 initialV,
-                                mass);
+                                mass,
+                                epsilon,
+                                sigma);
                         particles.push(gp);
                     }
 
@@ -74,26 +88,34 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                             Particle hp = Particle(
                                     {-x*distance+position[0], -y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
-                                    mass);
+                                    mass,
+                                    epsilon,
+                                    sigma);
                             particles.push(hp);
                         }
                         Particle bp = Particle(
                                 {x*distance+position[0], y*distance+position[1],  -z*distance+position[2]},
                                 initialV,
-                                mass);
+                                mass,
+                                epsilon,
+                                sigma);
                         particles.push(bp);
                         if (y!=0) {
                             Particle dp = Particle(
                                     {x*distance+position[0], -y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
-                                    mass);
+                                    mass,
+                                    epsilon,
+                                    sigma);
                             particles.push(dp);
                         }
                         if(x!=0) {
                             Particle fp = Particle(
                                     {-x*distance+position[0], y*distance+position[1],  -z*distance+position[2]},
                                     initialV,
-                                    mass);
+                                    mass,
+                                    epsilon,
+                                    sigma);
                             particles.push(fp);
                         }
                     }
@@ -108,13 +130,15 @@ bool ParticleSphere::operator==(ParticleSphere &other) {
             (initialV == other.initialV) &&
             (radius == other.radius) &&
             (distance == other.distance) &&
-            (mass == other.mass);
+            (mass == other.mass) &&
+            (epsilon == other.epsilon) &&
+            (sigma == other.sigma);
 }
 
 std::string ParticleSphere::toString() {
     std::stringstream stream;
     stream << "Spere: " << position << " initialV: " << initialV << " radius: " << radius
-           << " distance: " << distance << " mass: " << mass;
+           << " distance: " << distance << " mass: " << mass << " epsilon: " << "sigma: " << sigma;
     return stream.str();
 }
 

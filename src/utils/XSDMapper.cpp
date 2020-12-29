@@ -17,7 +17,9 @@ ParticleSphere mapParticleSphere(sphere& c){
             mapDoubleVec(c.v()),
             c.r(),
             c.h(),
-            c.m()
+            c.m(),
+            c.epsilon(),
+            c.sigma()
     };
 }
 
@@ -27,14 +29,18 @@ Cuboid mapCuboid(cuboid& c){
         mapIntVec(c.size()),
         c.distance(),
         c.mass(),
-        mapDoubleVec(c.velocity())
+        mapDoubleVec(c.velocity()),
+        c.epsilon(),
+        c.sigma()
     };
 }
 Particle mapParticle(particle& p){
     auto particle = Particle (
         mapDoubleVec(p.x()),
         mapDoubleVec(p.v()),
-        p.m()
+        p.m(),
+        p.epsilon(),
+        p.sigma()
     );
 
     return particle;
