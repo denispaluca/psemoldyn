@@ -40,7 +40,7 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
         assignParticle(p);
     });
 
-    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions);
+    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions, &mixedEpsilon, &mixedSigma);
 
     LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
 

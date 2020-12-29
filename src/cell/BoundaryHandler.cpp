@@ -3,13 +3,17 @@
 //
 
 #include <utils/ForceUtils.h>
+
+#include <utility>
 #include "BoundaryHandler.h"
 
 constexpr double B_EFFECT = 1.1225;
 
 BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
-                                 std::array<int, 3> dimensions):
-                                 boundaries(boundaries),domainSize(domainSize), dimensions(dimensions){}
+                                 std::array<int, 3> dimensions,
+                                 std::map<std::array<double, 2>, double> *mixedEpsilon, std::map<std::array<double, 2>, double> *mixedSigma):
+                                 boundaries(boundaries),domainSize(domainSize), dimensions(dimensions),
+                                 mixedEpsilon(mixedEpsilon),mixedSigma(mixedSigma){}
 
 void BoundaryHandler::prepareCounter(Particle &p) {
     auto x = p.getX();
@@ -115,7 +119,13 @@ void BoundaryHandler::reflect(Boundaries b) {
                 counter.getX()[2] = 2 * domainSize[2] - x[2];
                 break;
         }
-        if(isThere) calculateLennardJones(p, counter);
+        //if(isThere) calculateLennardJones(p, counter);
+
+        if (isThere) {
+            double epsilon = mixedEpsilon->find({p.getEpsilon(), counter.getEpsilon()})->second;
+            double sigma = mixedSigma->find({p.getSigma(), counter.getSigma()})->second;
+            calculateLennardJones(p, counter, epsilon, sigma);
+        }
     };
 
     iterateParticlesAtBoundary(b,func);
