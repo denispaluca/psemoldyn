@@ -41,8 +41,8 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
   v = v_arg;
   m = m_arg;
   type = 0;
-  epsilon = epsilon;
-  sigma = sigma;
+  this->epsilon = epsilon;
+  this->sigma = sigma;
   f = {0., 0., 0.};
   old_f = {0., 0., 0.};
   delta_t = 0;

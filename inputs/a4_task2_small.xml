@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
-    <name_output>A4_TASK2_SMALL_</name_output>
+    <name_output>A4_TASK2_SMALL</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0005</delta_t>
-    <t_end>1</t_end>
+    <t_end>25</t_end>
     <linked_cell>true</linked_cell>
     <domain>
         <domain_size>
@@ -16,7 +16,7 @@
         <boundary>
             <front>outflow</front>
             <back>outflow</back>
-            <top>outflow</top>
+            <top>reflective</top>
             <bottom>reflective</bottom>
             <left>periodic</left>
             <right>periodic</right>
@@ -68,7 +68,7 @@
                 <mass>2.0</mass>
                 <velocity>
                     <x>0.0</x>
-                    <y>-10.0</y>
+                    <y>0.0</y>
                     <z>0.0</z>
                 </velocity>
                 <epsilon>1.0</epsilon>

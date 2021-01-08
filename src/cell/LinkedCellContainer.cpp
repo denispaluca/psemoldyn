@@ -90,11 +90,13 @@ void LinkedCellContainer::calculateIteration() {
 
     // calculate new f
     //iteratePairs(calculateLennardJones);
-    iteratePairs([&](Particle &p1, Particle &p2){
+    auto f = [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon.find({p1.getEpsilon(), p2.getEpsilon()})->second;
         double sigma = mixedSigma.find({p1.getSigma(), p2.getSigma()})->second;
         calculateLennardJones(p1, p2, epsilon, sigma);
-    });
+    };
+    iteratePairs(f);
+    boundaryHandler->iteratePeriodicParticles(&cells, f);
 
     // calculate new v
     iterate([&](Particle &p) {
@@ -146,7 +148,10 @@ void LinkedCellContainer::clearOutflowParticles() {
     v.erase(std::remove_if(
             v.begin(), v.end(),
             [&](Particle& p) {
-                return p.isOut(domain_size);
+                if(p.isOut(domain_size)){
+                    return true;
+                }
+                return false;
             }), v.end());
 }
 
@@ -163,8 +168,6 @@ void LinkedCellContainer::populateNeighbours() {
                     if(neighborIndex != i && neighborIndex >= 0 && neighborIndex < cells.size())
                         c.addNeighbor(&cells.at(neighborIndex));
                 }
-
-    boundaryHandler->addPeriodicNeighbours(&cells);
 }
 
 std::vector<LinkedCell>& LinkedCellContainer::getCells(){

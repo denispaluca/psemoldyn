@@ -46,7 +46,7 @@ void Simulation::start(bool isPT) {
             plotParticles(iteration);
         }
 
-        if(thermostat != nullptr && iteration != 0 && iteration % thermostat->getSteps()){
+        if(thermostat != nullptr && iteration != 0 && iteration % thermostat->getSteps() == 0){
             thermostat->scale(*container);
         }
 
