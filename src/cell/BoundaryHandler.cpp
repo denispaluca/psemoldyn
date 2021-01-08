@@ -122,9 +122,7 @@ void BoundaryHandler::reflect(Boundaries b) {
         //if(isThere) calculateLennardJones(p, counter);
 
         if (isThere) {
-            double epsilon = mixedEpsilon->find({p.getEpsilon(), counter.getEpsilon()})->second;
-            double sigma = mixedSigma->find({p.getSigma(), counter.getSigma()})->second;
-            calculateLennardJones(p, counter, epsilon, sigma);
+            calculateLennardJones(p, counter, p.getEpsilon(), p.getSigma());
         }
     };
 

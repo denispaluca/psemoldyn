@@ -19,7 +19,7 @@ private:
     /**
      * A Particle that will be used as counterparticle for the reflection force calculation.
      */
-    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0);
+    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0, 0);
 
     /**
      * Size of domain.
