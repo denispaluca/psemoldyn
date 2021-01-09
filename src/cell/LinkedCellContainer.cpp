@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <set>
 #include <utils/ForceUtils.h>
 
 #include <log4cxx/logger.h>
@@ -60,7 +61,8 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
 
         // then calculate forces between particles of cell + neighbors
         for (auto j : cell.getNeighbors()) {
-            if (cell.getIndex() >= j->getIndex()) continue;
+            if (cell.getIndex() >= j->getIndex())
+                continue;
 
             for(auto pi : cell.getParticles())
                 for(auto pj : j->getParticles())
@@ -148,10 +150,7 @@ void LinkedCellContainer::clearOutflowParticles() {
     v.erase(std::remove_if(
             v.begin(), v.end(),
             [&](Particle& p) {
-                if(p.isOut(domain_size)){
-                    return true;
-                }
-                return false;
+                return p.isOut(domain_size);
             }), v.end());
 }
 
@@ -196,19 +195,19 @@ BoundaryHandler *LinkedCellContainer::getBoundaryHandler() {
 }
 
 void LinkedCellContainer::mixParameters() {
-    iteratePairs([&](Particle &p1, Particle &p2){
-        double eps1 = p1.getEpsilon();
-        double eps2 = p2.getEpsilon();
-        if(this->mixedEpsilon.find({eps1, eps2}) == this->mixedEpsilon.end()) {
-            // mix epsilons and save in map
-            this->mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({eps1, eps2}, std::sqrt(eps1*eps2)));
-        }
-
-        double sig1 = p1.getSigma();
-        double sig2 = p2.getSigma();
-        if(this->mixedSigma.find({sig1, sig2}) == this->mixedSigma.end()) {
-            // mix sigmas and save in map
-            this->mixedSigma.insert(std::pair<std::array<double, 2>, double>({sig1, sig2}, (sig1+sig2)/2));
-        }
+    std::set<double> epsilons;
+    std::set<double> sigmas;
+    iterate([&](Particle &p1){
+       epsilons.emplace(p1.getEpsilon());
+       sigmas.emplace(p1.getSigma());
     });
+
+    for(auto &e1 :epsilons)
+        for(auto &e2 : epsilons)
+            mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({e1, e2}, std::sqrt(e1*e2)));
+
+
+    for(auto &s1 : sigmas)
+        for(auto &s2 : sigmas)
+            mixedSigma.insert(std::pair<std::array<double, 2>, double>({s1, s2}, (s1+s2)/2));
 }
