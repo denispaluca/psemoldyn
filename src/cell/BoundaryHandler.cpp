@@ -10,10 +10,8 @@
 constexpr double sqrt6of2 = 1.1225;
 
 BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
-                                 std::array<int, 3> dimensions,
-                                 std::map<std::array<double, 2>, double> *mixedEpsilon, std::map<std::array<double, 2>, double> *mixedSigma):
-                                 boundaries(boundaries),domainSize(domainSize), dimensions(dimensions),
-                                 mixedEpsilon(mixedEpsilon),mixedSigma(mixedSigma){}
+                                 std::array<int, 3> dimensions):
+                                 boundaries(boundaries),domainSize(domainSize), dimensions(dimensions){}
 
 void BoundaryHandler::prepareCounter(Particle &p) {
     auto x = p.getX();

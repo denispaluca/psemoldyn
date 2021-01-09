@@ -49,10 +49,6 @@ private:
      */
     boundaries_type boundaries;
 
-    std::map<std::array<double, 2>, double> *mixedEpsilon;
-
-    std::map<std::array<double, 2>, double> *mixedSigma;
-
     /**
      * Initializes counterparticle with mass and position of given particle.
      * @param p
@@ -86,8 +82,7 @@ public:
      * @param dimensions Dimensions of cell grid.
      */
     BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
-                    std::array<int, 3> dimensions,
-                    std::map<std::array<double, 2>, double> *mixedEpsilon, std::map<std::array<double, 2>, double> *mixedSigma);
+                    std::array<int, 3> dimensions);
     /**
      * Iterate cells at boundary b and apply function f.
      * @param b Boundary to iterate in.
