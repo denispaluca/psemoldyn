@@ -61,6 +61,10 @@ private:
    */
   double dtsq_2m;
 
+  double epsilon;
+
+  double sigma;
+
 public:
   /**
    * Particle constructor which sets its type.
@@ -90,7 +94,7 @@ public:
       // for visualization, we need always 3 coordinates
       // -> in case of 2d, we use only the first and the second
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-      double m_arg, int type = 0);
+      double m_arg, double epsilon, double sigma);
 
   /**
    * Destructor of particle
@@ -138,6 +142,10 @@ public:
    * @return type
    */
   int getType();
+
+  double getEpsilon();
+
+  double getSigma();
 
   /**
    * Operator that compares all attributes of

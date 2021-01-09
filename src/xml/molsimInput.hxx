@@ -501,19 +501,51 @@ class cuboid: public ::xml_schema::type
   void
   velocity (::std::unique_ptr< velocity_type > p);
 
+  // epsilon
+  //
+  typedef ::xml_schema::double_ epsilon_type;
+  typedef ::xsd::cxx::tree::traits< epsilon_type, char, ::xsd::cxx::tree::schema_type::double_ > epsilon_traits;
+
+  const epsilon_type&
+  epsilon () const;
+
+  epsilon_type&
+  epsilon ();
+
+  void
+  epsilon (const epsilon_type& x);
+
+  // sigma
+  //
+  typedef ::xml_schema::double_ sigma_type;
+  typedef ::xsd::cxx::tree::traits< sigma_type, char, ::xsd::cxx::tree::schema_type::double_ > sigma_traits;
+
+  const sigma_type&
+  sigma () const;
+
+  sigma_type&
+  sigma ();
+
+  void
+  sigma (const sigma_type& x);
+
   // Constructors.
   //
   cuboid (const position_type&,
           const size_type&,
           const distance_type&,
           const mass_type&,
-          const velocity_type&);
+          const velocity_type&,
+          const epsilon_type&,
+          const sigma_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
           const distance_type&,
           const mass_type&,
-          ::std::unique_ptr< velocity_type >);
+          ::std::unique_ptr< velocity_type >,
+          const epsilon_type&,
+          const sigma_type&);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -546,6 +578,8 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< velocity_type > velocity_;
+  ::xsd::cxx::tree::one< epsilon_type > epsilon_;
+  ::xsd::cxx::tree::one< sigma_type > sigma_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -652,15 +686,47 @@ class particle: public ::xml_schema::type
   void
   m (const m_type& x);
 
+  // epsilon
+  //
+  typedef ::xml_schema::double_ epsilon_type;
+  typedef ::xsd::cxx::tree::traits< epsilon_type, char, ::xsd::cxx::tree::schema_type::double_ > epsilon_traits;
+
+  const epsilon_type&
+  epsilon () const;
+
+  epsilon_type&
+  epsilon ();
+
+  void
+  epsilon (const epsilon_type& x);
+
+  // sigma
+  //
+  typedef ::xml_schema::double_ sigma_type;
+  typedef ::xsd::cxx::tree::traits< sigma_type, char, ::xsd::cxx::tree::schema_type::double_ > sigma_traits;
+
+  const sigma_type&
+  sigma () const;
+
+  sigma_type&
+  sigma ();
+
+  void
+  sigma (const sigma_type& x);
+
   // Constructors.
   //
   particle (const x_type&,
             const v_type&,
-            const m_type&);
+            const m_type&,
+            const epsilon_type&,
+            const sigma_type&);
 
   particle (::std::unique_ptr< x_type >,
             ::std::unique_ptr< v_type >,
-            const m_type&);
+            const m_type&,
+            const epsilon_type&,
+            const sigma_type&);
 
   particle (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
@@ -691,6 +757,8 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< x_type > x_;
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
+  ::xsd::cxx::tree::one< epsilon_type > epsilon_;
+  ::xsd::cxx::tree::one< sigma_type > sigma_;
 };
 
 class particle_cluster: public ::xml_schema::type
@@ -825,19 +893,51 @@ class sphere: public ::xml_schema::type
   void
   r (const r_type& x);
 
+  // epsilon
+  //
+  typedef ::xml_schema::double_ epsilon_type;
+  typedef ::xsd::cxx::tree::traits< epsilon_type, char, ::xsd::cxx::tree::schema_type::double_ > epsilon_traits;
+
+  const epsilon_type&
+  epsilon () const;
+
+  epsilon_type&
+  epsilon ();
+
+  void
+  epsilon (const epsilon_type& x);
+
+  // sigma
+  //
+  typedef ::xml_schema::double_ sigma_type;
+  typedef ::xsd::cxx::tree::traits< sigma_type, char, ::xsd::cxx::tree::schema_type::double_ > sigma_traits;
+
+  const sigma_type&
+  sigma () const;
+
+  sigma_type&
+  sigma ();
+
+  void
+  sigma (const sigma_type& x);
+
   // Constructors.
   //
   sphere (const center_type&,
           const h_type&,
           const v_type&,
           const m_type&,
-          const r_type&);
+          const r_type&,
+          const epsilon_type&,
+          const sigma_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
           ::std::unique_ptr< v_type >,
           const m_type&,
-          const r_type&);
+          const r_type&,
+          const epsilon_type&,
+          const sigma_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -870,6 +970,8 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
   ::xsd::cxx::tree::one< r_type > r_;
+  ::xsd::cxx::tree::one< epsilon_type > epsilon_;
+  ::xsd::cxx::tree::one< sigma_type > sigma_;
 };
 
 class sphere_cluster: public ::xml_schema::type

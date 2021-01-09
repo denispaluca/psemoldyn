@@ -13,15 +13,18 @@ Cuboid::Cuboid() {
     this->distance = 1;
     this->mass = 1;
     this->initialV = {0.0, 0.0, 0.0};
+    //TODO: defaultvals for eps/sigma
 }
 
 Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumbers, double distance, double mass,
-               std::array<double, 3> initialV) {
+               std::array<double, 3> initialV, double epsilon, double sigma) {
     this->position = position;
     this->size = particleNumbers;
     this->distance = distance;
     this->mass = mass;
     this->initialV = initialV;
+    this->epsilon = epsilon;
+    this->sigma = sigma;
 }
 
 void Cuboid::generate(ParticleContainer &particles) {
@@ -33,7 +36,7 @@ void Cuboid::generate(ParticleContainer &particles) {
             newPosition[1] = position[1] + j*distance; //ypos
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
-                Particle newParticle = Particle(newPosition, initialV, mass);
+                Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma);
 
                 particles.push(newParticle);
             }
@@ -43,13 +46,14 @@ void Cuboid::generate(ParticleContainer &particles) {
 
 bool Cuboid::operator==(Cuboid &other) {
     return (position == other.position) and (size == other.size)
-        and (distance == other.distance) and (mass == other.mass);
+        and (distance == other.distance) and (mass == other.mass)
+        and (epsilon == other.epsilon) and (sigma == other.sigma);
 }
 
 std::string Cuboid::toString() {
     std::stringstream stream;
     stream << "Cuboid: x:" << position << " size: " << size << " distance: " << distance
-           << " mass: " << mass << " initialV: " << initialV;
+           << " mass: " << mass << " initialV: " << initialV << " epsilon: " << epsilon << " sigma: " << sigma;
     return stream.str();
 }
 

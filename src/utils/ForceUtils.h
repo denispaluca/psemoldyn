@@ -24,4 +24,4 @@ void calculateF(Particle &p1, Particle &p2);
  * @param p2 Second Particle
  * @return
  */
-void calculateLennardJones(Particle &p1, Particle &p2);
+void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma);

@@ -6,6 +6,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <set>
 #include <utils/ForceUtils.h>
 
 #include <log4cxx/logger.h>
@@ -60,7 +61,8 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
 
         // then calculate forces between particles of cell + neighbors
         for (auto j : cell.getNeighbors()) {
-            if (cell.getIndex() >= j->getIndex()) continue;
+            if (cell.getIndex() >= j->getIndex())
+                continue;
 
             for(auto pi : cell.getParticles())
                 for(auto pj : j->getParticles())
@@ -89,7 +91,14 @@ void LinkedCellContainer::calculateIteration() {
     });
 
     // calculate new f
-    iteratePairs(calculateLennardJones);
+    //iteratePairs(calculateLennardJones);
+    auto f = [&](Particle &p1, Particle &p2){
+        double epsilon = mixedEpsilon.find({p1.getEpsilon(), p2.getEpsilon()})->second;
+        double sigma = mixedSigma.find({p1.getSigma(), p2.getSigma()})->second;
+        calculateLennardJones(p1, p2, epsilon, sigma);
+    };
+    iteratePairs(f);
+    boundaryHandler->iteratePeriodicParticles(&cells, f);
 
     // calculate new v
     iterate([&](Particle &p) {
@@ -158,8 +167,6 @@ void LinkedCellContainer::populateNeighbours() {
                     if(neighborIndex != i && neighborIndex >= 0 && neighborIndex < cells.size())
                         c.addNeighbor(&cells.at(neighborIndex));
                 }
-
-    boundaryHandler->addPeriodicNeighbours(&cells);
 }
 
 std::vector<LinkedCell>& LinkedCellContainer::getCells(){
@@ -185,4 +192,22 @@ std::array<int, 3>& LinkedCellContainer::getDimensions() {
 
 BoundaryHandler *LinkedCellContainer::getBoundaryHandler() {
     return this->boundaryHandler;
+}
+
+void LinkedCellContainer::mixParameters() {
+    std::set<double> epsilons;
+    std::set<double> sigmas;
+    iterate([&](Particle &p1){
+       epsilons.emplace(p1.getEpsilon());
+       sigmas.emplace(p1.getSigma());
+    });
+
+    for(auto &e1 :epsilons)
+        for(auto &e2 : epsilons)
+            mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({e1, e2}, std::sqrt(e1*e2)));
+
+
+    for(auto &s1 : sigmas)
+        for(auto &s2 : sigmas)
+            mixedSigma.insert(std::pair<std::array<double, 2>, double>({s1, s2}, (s1+s2)/2));
 }

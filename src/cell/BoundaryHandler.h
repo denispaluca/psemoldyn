@@ -19,7 +19,7 @@ private:
     /**
      * A Particle that will be used as counterparticle for the reflection force calculation.
      */
-    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0);
+    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0, 0);
 
     /**
      * Size of domain.
@@ -105,8 +105,8 @@ public:
     void iterateParticlesAtBoundary(Boundaries b, const std::function<void(Particle&)>& f);
 
     /**
-     * Adds neighbours for periodic boundaries.
+     * Iterates over particles of periodic neighbours.
      * @param cells
      */
-    void addPeriodicNeighbours(std::vector<LinkedCell>* cells);
+    void iteratePeriodicParticles(std::vector<LinkedCell>* cells, const std::function<void(Particle&, Particle&)>& f);
 };

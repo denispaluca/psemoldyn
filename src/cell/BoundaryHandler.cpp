@@ -3,9 +3,11 @@
 //
 
 #include <utils/ForceUtils.h>
+
+#include <utility>
 #include "BoundaryHandler.h"
 
-constexpr double B_EFFECT = 1.1225;
+constexpr double sqrt6of2 = 1.1225;
 
 BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
                                  std::array<int, 3> dimensions):
@@ -24,7 +26,8 @@ void BoundaryHandler::prepareCounter(Particle &p) {
 
 void BoundaryHandler::iterateCellsAtBoundary(
         Boundaries b,
-        const std::function<void(LinkedCell &, std::array<int,3>)>& f) {
+        const std::function<void(LinkedCell &, std::array<int,3>)>& f)
+        {
     switch (b) {
         case left:
             for(int i = 0;i < dimensions[1]; i++)
@@ -88,6 +91,8 @@ void BoundaryHandler::reflect(Boundaries b) {
     auto func = [&](Particle& p){
         bool isThere;
         auto x = p.getX();
+        auto sigma = p.getSigma();
+        auto B_EFFECT = sqrt6of2 * sigma;
         prepareCounter(p);
         switch (b) {
             case left:
@@ -115,7 +120,9 @@ void BoundaryHandler::reflect(Boundaries b) {
                 counter.getX()[2] = 2 * domainSize[2] - x[2];
                 break;
         }
-        if(isThere) calculateLennardJones(p, counter);
+
+        if (isThere)
+            calculateLennardJones(p, counter, p.getEpsilon(), sigma);
     };
 
     iterateParticlesAtBoundary(b,func);
@@ -126,7 +133,7 @@ void BoundaryHandler::period(Boundaries b) {
         auto& x = p.getX();
         switch (b) {
             case top:
-                if(x[1] > domainSize[1])
+                if(x[1] >= domainSize[1])
                     x[1] -= domainSize[1];
                 return;
             case bottom:
@@ -138,7 +145,7 @@ void BoundaryHandler::period(Boundaries b) {
                     x[2] += domainSize[2];
                 return;
             case back:
-                if(x[2] > domainSize[2])
+                if(x[2] >= domainSize[2])
                     x[2] -= domainSize[2];
                 return;
             case left:
@@ -146,7 +153,7 @@ void BoundaryHandler::period(Boundaries b) {
                     x[0] += domainSize[0];
                 return;
             case right:
-                if(x[0] > domainSize[0])
+                if(x[0] >= domainSize[0])
                     x[0] -= domainSize[0];
                 return;
         }
@@ -163,7 +170,10 @@ int BoundaryHandler::getIndex(std::array<int, 3> pos) {
     return pos[0] + (pos[1] + pos[2]*dimensions[1])*dimensions[0];
 }
 
-void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
+void BoundaryHandler::iteratePeriodicParticles(
+        std::vector<LinkedCell> *cells,
+        const std::function<void(Particle&, Particle&)>& f) {
+
     this->cells = cells;
 
     bool front = boundaries.front() == Boundary::periodic;
@@ -173,6 +183,8 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
     bool top = boundaries.top() == Boundary::periodic;
     bool bottom = boundaries.bottom() == Boundary::periodic;
 
+
+    //SURFACE NEIGHBOURS
     if(left || right){
         auto func = [&](LinkedCell &c, std::array<int,3> pos){
             auto x = dimensions[0] - 1;
@@ -181,8 +193,12 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                     auto index = getIndex({x, pos[1] + y, pos[2] + z});
                     if(index != -1 && index != c.getIndex()){
                         auto& neighbour = cells->at(index);
-                        c.addNeighbor(&neighbour);
-                        neighbour.addNeighbor(&c);
+                        for(auto &p1 :c.getParticles())
+                            for(auto &p2 : neighbour.getParticles()){
+                                p2->getX()[0] -= domainSize[0];
+                                f(*p1, *p2);
+                                p2->getX()[0] += domainSize[0];
+                            }
                     }
                 }
         };
@@ -197,8 +213,12 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                     auto index = getIndex({pos[0] + x, y, pos[2] + z});
                     if(index != -1 && index != c.getIndex()){
                         auto& neighbour = cells->at(index);
-                        c.addNeighbor(&neighbour);
-                        neighbour.addNeighbor(&c);
+                        for(auto &p1 :c.getParticles())
+                            for(auto &p2 : neighbour.getParticles()){
+                                p2->getX()[1] -= domainSize[1];
+                                f(*p1, *p2);
+                                p2->getX()[1] += domainSize[1];
+                            }
                     }
                 }
         };
@@ -213,13 +233,18 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                     auto index = getIndex({pos[0] + x, pos[1] + y, z});
                     if(index != -1 && index != c.getIndex()){
                         auto& neighbour = cells->at(index);
-                        c.addNeighbor(&neighbour);
-                        neighbour.addNeighbor(&c);
+                        for(auto &p1 :c.getParticles())
+                            for(auto &p2 : neighbour.getParticles()){
+                                p2->getX()[2] -= domainSize[2];
+                                f(*p1, *p2);
+                                p2->getX()[2] += domainSize[2];
+                            }
                     }
                 }
         };
         iterateCellsAtBoundary(Boundaries::front, func);
     }
+
 
     //SINGLE ROW NEIGHBOURS
     if((left && bottom) || (right && top)){
@@ -231,8 +256,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &x = p2->getX();
+                            x[0] -= domainSize[0];
+                            x[1] -= domainSize[1];
+                            f(*p1, *p2);
+                            x[0] += domainSize[0];
+                            x[1] += domainSize[1];
+                        }
                 }
             }
         }
@@ -247,8 +279,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &x = p2->getX();
+                            x[0] -= domainSize[0];
+                            x[1] += domainSize[1];
+                            f(*p1, *p2);
+                            x[0] += domainSize[0];
+                            x[1] -= domainSize[1];
+                        }
                 }
             }
         }
@@ -263,8 +302,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &p2x = p2->getX();
+                            p2x[2] -= domainSize[2];
+                            p2x[1] -= domainSize[1];
+                            f(*p1, *p2);
+                            p2x[2] += domainSize[2];
+                            p2x[1] += domainSize[1];
+                        }
                 }
             }
         }
@@ -279,8 +325,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &p2x = p2->getX();
+                            p2x[2] -= domainSize[2];
+                            p2x[1] += domainSize[1];
+                            f(*p1, *p2);
+                            p2x[2] += domainSize[2];
+                            p2x[1] -= domainSize[1];
+                        }
                 }
             }
         }
@@ -295,8 +348,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &x = p2->getX();
+                            x[0] -= domainSize[0];
+                            x[2] -= domainSize[2];
+                            f(*p1, *p2);
+                            x[0] += domainSize[0];
+                            x[2] += domainSize[2];
+                        }
                 }
             }
         }
@@ -311,8 +371,15 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
                 auto index = getIndex(pos);
                 if(index != -1){
                     auto& neighbour = cells->at(index);
-                    c.addNeighbor(&neighbour);
-                    neighbour.addNeighbor(&c);
+                    for(auto &p1 :c.getParticles())
+                        for(auto &p2 : neighbour.getParticles()){
+                            auto &x = p2->getX();
+                            x[0] -= domainSize[0];
+                            x[2] += domainSize[2];
+                            f(*p1, *p2);
+                            x[0] += domainSize[0];
+                            x[2] -= domainSize[2];
+                        }
                 }
             }
         }
@@ -324,28 +391,68 @@ void BoundaryHandler::addPeriodicNeighbours(std::vector<LinkedCell> *cells) {
     if((left && front && bottom) || (right && back && top)){
         auto &c1 = cells->at(getIndex({0,0,0}));
         auto &c2 = cells->at(getIndex({dimensions[0]-1,dimensions[1]-1,dimensions[2]-1}));
-        c1.addNeighbor(&c2);
-        c2.addNeighbor(&c1);
+
+        for(auto &p1 :c1.getParticles())
+            for(auto &p2 : c2.getParticles()){
+                auto &x = p2->getX();
+                x[0] -= domainSize[0];
+                x[1] -= domainSize[1];
+                x[2] -= domainSize[2];
+                f(*p1, *p2);
+                x[0] += domainSize[0];
+                x[1] += domainSize[1];
+                x[2] += domainSize[2];
+            }
     }
 
     if((left && front && top) || (right && back && bottom)){
         auto &c1 = cells->at(getIndex({0,dimensions[1]-1,0}));
         auto &c2 = cells->at(getIndex({dimensions[0]-1, 0,dimensions[2]-1}));
-        c1.addNeighbor(&c2);
-        c2.addNeighbor(&c1);
+
+        for(auto &p1 :c1.getParticles())
+            for(auto &p2 : c2.getParticles()){
+                auto &x = p2->getX();
+                x[0] -= domainSize[0];
+                x[1] += domainSize[1];
+                x[2] -= domainSize[2];
+                f(*p1, *p2);
+                x[0] += domainSize[0];
+                x[1] -= domainSize[1];
+                x[2] += domainSize[2];
+            }
     }
 
     if((left && back && bottom) || (right && front && top)){
         auto &c1 = cells->at(getIndex({0,0,dimensions[2]-1}));
         auto &c2 = cells->at(getIndex({dimensions[0]-1, dimensions[1]-1,0}));
-        c1.addNeighbor(&c2);
-        c2.addNeighbor(&c1);
+
+        for(auto &p1 :c1.getParticles())
+            for(auto &p2 : c2.getParticles()){
+                auto &x = p2->getX();
+                x[0] -= domainSize[0];
+                x[1] -= domainSize[1];
+                x[2] += domainSize[2];
+                f(*p1, *p2);
+                x[0] += domainSize[0];
+                x[1] += domainSize[1];
+                x[2] -= domainSize[2];
+            }
     }
 
     if((left && back && top) || (right && front && bottom)){
         auto &c1 = cells->at(getIndex({0, dimensions[1]-1, dimensions[2]-1}));
         auto &c2 = cells->at(getIndex({dimensions[0]-1, 0, 0}));
-        c1.addNeighbor(&c2);
-        c2.addNeighbor(&c1);
+
+        for(auto &p1 :c1.getParticles())
+            for(auto &p2 : c2.getParticles()){
+                auto &x = p2->getX();
+                x[0] -= domainSize[0];
+                x[1] += domainSize[1];
+                x[2] += domainSize[2];
+                f(*p1, *p2);
+                x[0] += domainSize[0];
+                x[1] -= domainSize[1];
+                x[2] -= domainSize[2];
+            }
     }
 }

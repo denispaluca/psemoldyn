@@ -32,6 +32,9 @@
       <xsd:element name="mass" type="xsd:double"/>
       <!-- initial velocity -->
       <xsd:element name="velocity" type="double_vector"/>
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -51,6 +54,9 @@
       <xsd:element name="v" type="double_vector"/>
       <!-- mass of particle -->
       <xsd:element name="m" type="xsd:double"/>
+      <!-- lennard jones contants of particle -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -72,6 +78,9 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
 

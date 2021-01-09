@@ -149,4 +149,6 @@ public:
      * @return Boundary handler
      */
     BoundaryHandler* getBoundaryHandler();
+
+    void mixParameters();
 };

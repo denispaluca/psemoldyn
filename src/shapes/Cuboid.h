@@ -34,6 +34,10 @@ private:
      */
     std::array<double, 3> initialV{};
 
+    double epsilon;
+
+    double sigma;
+
 public:
     /**
      * Default constructor
@@ -50,7 +54,8 @@ public:
      * @param initalV initial velocity of the particles
      */
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
-           double distance, double mass, std::array<double, 3> initalV);
+           double distance, double mass, std::array<double, 3> initalV,
+           double epsilon, double sigma);
 
         /**
      * Operator that compares all attributes of
