@@ -395,6 +395,72 @@ m (const m_type& x)
   this->m_.set (x);
 }
 
+const particle::f_type& particle::
+f () const
+{
+  return this->f_.get ();
+}
+
+particle::f_type& particle::
+f ()
+{
+  return this->f_.get ();
+}
+
+void particle::
+f (const f_type& x)
+{
+  this->f_.set (x);
+}
+
+void particle::
+f (::std::unique_ptr< f_type > x)
+{
+  this->f_.set (std::move (x));
+}
+
+const particle::old_f_type& particle::
+old_f () const
+{
+  return this->old_f_.get ();
+}
+
+particle::old_f_type& particle::
+old_f ()
+{
+  return this->old_f_.get ();
+}
+
+void particle::
+old_f (const old_f_type& x)
+{
+  this->old_f_.set (x);
+}
+
+void particle::
+old_f (::std::unique_ptr< old_f_type > x)
+{
+  this->old_f_.set (std::move (x));
+}
+
+const particle::type_type& particle::
+type () const
+{
+  return this->type_.get ();
+}
+
+particle::type_type& particle::
+type ()
+{
+  return this->type_.get ();
+}
+
+void particle::
+type (const type_type& x)
+{
+  this->type_.set (x);
+}
+
 const particle::epsilon_type& particle::
 epsilon () const
 {
@@ -1234,6 +1300,24 @@ linked_cell (const linked_cell_type& x)
   this->linked_cell_.set (x);
 }
 
+const molsimInput::checkpoint_type& molsimInput::
+checkpoint () const
+{
+  return this->checkpoint_.get ();
+}
+
+molsimInput::checkpoint_type& molsimInput::
+checkpoint ()
+{
+  return this->checkpoint_.get ();
+}
+
+void molsimInput::
+checkpoint (const checkpoint_type& x)
+{
+  this->checkpoint_.set (x);
+}
+
 const molsimInput::domain_type& molsimInput::
 domain () const
 {
@@ -1929,12 +2013,18 @@ particle::
 particle (const x_type& x,
           const v_type& v,
           const m_type& m,
+          const f_type& f,
+          const old_f_type& old_f,
+          const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma)
 : ::xml_schema::type (),
   x_ (x, this),
   v_ (v, this),
   m_ (m, this),
+  f_ (f, this),
+  old_f_ (old_f, this),
+  type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this)
 {
@@ -1944,12 +2034,18 @@ particle::
 particle (::std::unique_ptr< x_type > x,
           ::std::unique_ptr< v_type > v,
           const m_type& m,
+          ::std::unique_ptr< f_type > f,
+          ::std::unique_ptr< old_f_type > old_f,
+          const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
   v_ (std::move (v), this),
   m_ (m, this),
+  f_ (std::move (f), this),
+  old_f_ (std::move (old_f), this),
+  type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this)
 {
@@ -1963,6 +2059,9 @@ particle (const particle& x,
   x_ (x.x_, f, this),
   v_ (x.v_, f, this),
   m_ (x.m_, f, this),
+  f_ (x.f_, f, this),
+  old_f_ (x.old_f_, f, this),
+  type_ (x.type_, f, this),
   epsilon_ (x.epsilon_, f, this),
   sigma_ (x.sigma_, f, this)
 {
@@ -1976,6 +2075,9 @@ particle (const ::xercesc::DOMElement& e,
   x_ (this),
   v_ (this),
   m_ (this),
+  f_ (this),
+  old_f_ (this),
+  type_ (this),
   epsilon_ (this),
   sigma_ (this)
 {
@@ -2035,6 +2137,45 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // f
+    //
+    if (n.name () == "f" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< f_type > r (
+        f_traits::create (i, f, this));
+
+      if (!f_.present ())
+      {
+        this->f_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // old_f
+    //
+    if (n.name () == "old_f" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< old_f_type > r (
+        old_f_traits::create (i, f, this));
+
+      if (!old_f_.present ())
+      {
+        this->old_f_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // type
+    //
+    if (n.name () == "type" && n.namespace_ ().empty ())
+    {
+      if (!type_.present ())
+      {
+        this->type_.set (type_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // epsilon
     //
     if (n.name () == "epsilon" && n.namespace_ ().empty ())
@@ -2081,6 +2222,27 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!f_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "f",
+      "");
+  }
+
+  if (!old_f_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "old_f",
+      "");
+  }
+
+  if (!type_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "type",
+      "");
+  }
+
   if (!epsilon_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2112,6 +2274,9 @@ operator= (const particle& x)
     this->x_ = x.x_;
     this->v_ = x.v_;
     this->m_ = x.m_;
+    this->f_ = x.f_;
+    this->old_f_ = x.old_f_;
+    this->type_ = x.type_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
   }
@@ -3379,6 +3544,7 @@ molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              const linked_cell_type& linked_cell,
+             const checkpoint_type& checkpoint,
              const domain_type& domain,
              const particle_data_type& particle_data)
 : ::xml_schema::type (),
@@ -3387,6 +3553,7 @@ molsimInput (const delta_t_type& delta_t,
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
+  checkpoint_ (checkpoint, this),
   domain_ (domain, this),
   thermostat_ (this),
   particle_data_ (particle_data, this)
@@ -3397,6 +3564,7 @@ molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              const linked_cell_type& linked_cell,
+             const checkpoint_type& checkpoint,
              ::std::unique_ptr< domain_type > domain,
              ::std::unique_ptr< particle_data_type > particle_data)
 : ::xml_schema::type (),
@@ -3405,6 +3573,7 @@ molsimInput (const delta_t_type& delta_t,
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
+  checkpoint_ (checkpoint, this),
   domain_ (std::move (domain), this),
   thermostat_ (this),
   particle_data_ (std::move (particle_data), this)
@@ -3421,6 +3590,7 @@ molsimInput (const molsimInput& x,
   delta_t_ (x.delta_t_, f, this),
   t_end_ (x.t_end_, f, this),
   linked_cell_ (x.linked_cell_, f, this),
+  checkpoint_ (x.checkpoint_, f, this),
   domain_ (x.domain_, f, this),
   thermostat_ (x.thermostat_, f, this),
   particle_data_ (x.particle_data_, f, this)
@@ -3437,6 +3607,7 @@ molsimInput (const ::xercesc::DOMElement& e,
   delta_t_ (this),
   t_end_ (this),
   linked_cell_ (this),
+  checkpoint_ (this),
   domain_ (this),
   thermostat_ (this),
   particle_data_ (this)
@@ -3516,6 +3687,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // checkpoint
+    //
+    if (n.name () == "checkpoint" && n.namespace_ ().empty ())
+    {
+      if (!checkpoint_.present ())
+      {
+        this->checkpoint_.set (checkpoint_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // domain
     //
     if (n.name () == "domain" && n.namespace_ ().empty ())
@@ -3582,6 +3764,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!checkpoint_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "checkpoint",
+      "");
+  }
+
   if (!domain_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -3615,6 +3804,7 @@ operator= (const molsimInput& x)
     this->delta_t_ = x.delta_t_;
     this->t_end_ = x.t_end_;
     this->linked_cell_ = x.linked_cell_;
+    this->checkpoint_ = x.checkpoint_;
     this->domain_ = x.domain_;
     this->thermostat_ = x.thermostat_;
     this->particle_data_ = x.particle_data_;
@@ -3896,6 +4086,930 @@ input (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
     n.namespace_ (),
     "input",
     "");
+}
+
+#include <ostream>
+#include <xsd/cxx/tree/error-handler.hxx>
+#include <xsd/cxx/xml/dom/serialization-source.hxx>
+
+void
+operator<< (::xercesc::DOMElement& e, const double_vector& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // x
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "x",
+        e));
+
+    s << ::xml_schema::as_double(i.x ());
+  }
+
+  // y
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "y",
+        e));
+
+    s << ::xml_schema::as_double(i.y ());
+  }
+
+  // z
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "z",
+        e));
+
+    s << ::xml_schema::as_double(i.z ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const integer_vector& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // x
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "x",
+        e));
+
+    s << i.x ();
+  }
+
+  // y
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "y",
+        e));
+
+    s << i.y ();
+  }
+
+  // z
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "z",
+        e));
+
+    s << i.z ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const cuboid& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // position
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "position",
+        e));
+
+    s << i.position ();
+  }
+
+  // size
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "size",
+        e));
+
+    s << i.size ();
+  }
+
+  // distance
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "distance",
+        e));
+
+    s << ::xml_schema::as_double(i.distance ());
+  }
+
+  // mass
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "mass",
+        e));
+
+    s << ::xml_schema::as_double(i.mass ());
+  }
+
+  // velocity
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "velocity",
+        e));
+
+    s << i.velocity ();
+  }
+
+  // epsilon
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "epsilon",
+        e));
+
+    s << ::xml_schema::as_double(i.epsilon ());
+  }
+
+  // sigma
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "sigma",
+        e));
+
+    s << ::xml_schema::as_double(i.sigma ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const cuboid_cluster& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // cuboid
+  //
+  for (cuboid_cluster::cuboid_const_iterator
+       b (i.cuboid ().begin ()), n (i.cuboid ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "cuboid",
+        e));
+
+    s << *b;
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const particle& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // x
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "x",
+        e));
+
+    s << i.x ();
+  }
+
+  // v
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "v",
+        e));
+
+    s << i.v ();
+  }
+
+  // m
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "m",
+        e));
+
+    s << ::xml_schema::as_double(i.m ());
+  }
+
+  // f
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "f",
+        e));
+
+    s << i.f ();
+  }
+
+  // old_f
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "old_f",
+        e));
+
+    s << i.old_f ();
+  }
+
+  // type
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "type",
+        e));
+
+    s << i.type ();
+  }
+
+  // epsilon
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "epsilon",
+        e));
+
+    s << ::xml_schema::as_double(i.epsilon ());
+  }
+
+  // sigma
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "sigma",
+        e));
+
+    s << ::xml_schema::as_double(i.sigma ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const particle_cluster& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // particle
+  //
+  for (particle_cluster::particle_const_iterator
+       b (i.particle ().begin ()), n (i.particle ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "particle",
+        e));
+
+    s << *b;
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const sphere& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // center
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "center",
+        e));
+
+    s << i.center ();
+  }
+
+  // h
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "h",
+        e));
+
+    s << ::xml_schema::as_double(i.h ());
+  }
+
+  // v
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "v",
+        e));
+
+    s << i.v ();
+  }
+
+  // m
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "m",
+        e));
+
+    s << ::xml_schema::as_double(i.m ());
+  }
+
+  // r
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "r",
+        e));
+
+    s << i.r ();
+  }
+
+  // epsilon
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "epsilon",
+        e));
+
+    s << ::xml_schema::as_double(i.epsilon ());
+  }
+
+  // sigma
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "sigma",
+        e));
+
+    s << ::xml_schema::as_double(i.sigma ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const sphere_cluster& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // sphere
+  //
+  for (sphere_cluster::sphere_const_iterator
+       b (i.sphere ().begin ()), n (i.sphere ().end ());
+       b != n; ++b)
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "sphere",
+        e));
+
+    s << *b;
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const thermostat_type& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // t_init
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "t_init",
+        e));
+
+    s << ::xml_schema::as_double(i.t_init ());
+  }
+
+  // change_brownian
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "change_brownian",
+        e));
+
+    s << i.change_brownian ();
+  }
+
+  // steps
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "steps",
+        e));
+
+    s << i.steps ();
+  }
+
+  // t_target
+  //
+  if (i.t_target ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "t_target",
+        e));
+
+    s << ::xml_schema::as_double(*i.t_target ());
+  }
+
+  // temp_delta
+  //
+  if (i.temp_delta ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "temp_delta",
+        e));
+
+    s << ::xml_schema::as_double(*i.temp_delta ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const particle_data& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // meanv
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "meanv",
+        e));
+
+    s << ::xml_schema::as_double(i.meanv ());
+  }
+
+  // is3D
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "is3D",
+        e));
+
+    s << i.is3D ();
+  }
+
+  // cuboids
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "cuboids",
+        e));
+
+    s << i.cuboids ();
+  }
+
+  // particles
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "particles",
+        e));
+
+    s << i.particles ();
+  }
+
+  // spheres
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "spheres",
+        e));
+
+    s << i.spheres ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const boundary_type& i)
+{
+  e << static_cast< const ::xml_schema::string& > (i);
+}
+
+void
+operator<< (::xercesc::DOMAttr& a, const boundary_type& i)
+{
+  a << static_cast< const ::xml_schema::string& > (i);
+}
+
+void
+operator<< (::xml_schema::list_stream& l,
+            const boundary_type& i)
+{
+  l << static_cast< const ::xml_schema::string& > (i);
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const boundaries_type& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // front
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "front",
+        e));
+
+    s << i.front ();
+  }
+
+  // back
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "back",
+        e));
+
+    s << i.back ();
+  }
+
+  // top
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "top",
+        e));
+
+    s << i.top ();
+  }
+
+  // bottom
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "bottom",
+        e));
+
+    s << i.bottom ();
+  }
+
+  // left
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "left",
+        e));
+
+    s << i.left ();
+  }
+
+  // right
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "right",
+        e));
+
+    s << i.right ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const domain_type& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // domain_size
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "domain_size",
+        e));
+
+    s << i.domain_size ();
+  }
+
+  // cutoff_radius
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "cutoff_radius",
+        e));
+
+    s << ::xml_schema::as_double(i.cutoff_radius ());
+  }
+
+  // boundary
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "boundary",
+        e));
+
+    s << i.boundary ();
+  }
+
+  // gravity
+  //
+  if (i.gravity ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "gravity",
+        e));
+
+    s << ::xml_schema::as_double(*i.gravity ());
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const molsimInput& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // name_output
+  //
+  if (i.name_output ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "name_output",
+        e));
+
+    s << *i.name_output ();
+  }
+
+  // frequency_output
+  //
+  if (i.frequency_output ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "frequency_output",
+        e));
+
+    s << *i.frequency_output ();
+  }
+
+  // delta_t
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "delta_t",
+        e));
+
+    s << ::xml_schema::as_double(i.delta_t ());
+  }
+
+  // t_end
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "t_end",
+        e));
+
+    s << ::xml_schema::as_double(i.t_end ());
+  }
+
+  // linked_cell
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "linked_cell",
+        e));
+
+    s << i.linked_cell ();
+  }
+
+  // checkpoint
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "checkpoint",
+        e));
+
+    s << i.checkpoint ();
+  }
+
+  // domain
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "domain",
+        e));
+
+    s << i.domain ();
+  }
+
+  // thermostat
+  //
+  if (i.thermostat ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "thermostat",
+        e));
+
+    s << *i.thermostat ();
+  }
+
+  // particle_data
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "particle_data",
+        e));
+
+    s << i.particle_data ();
+  }
+}
+
+void
+input (::std::ostream& o,
+       const ::molsimInput& s,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xsd::cxx::xml::auto_initializer i (
+    (f & ::xml_schema::flags::dont_initialize) == 0);
+
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+
+  ::xsd::cxx::tree::error_handler< char > h;
+
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    h.throw_if_failed< ::xsd::cxx::tree::serialization< char > > ();
+  }
+}
+
+void
+input (::std::ostream& o,
+       const ::molsimInput& s,
+       ::xml_schema::error_handler& h,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xsd::cxx::xml::auto_initializer i (
+    (f & ::xml_schema::flags::dont_initialize) == 0);
+
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+input (::std::ostream& o,
+       const ::molsimInput& s,
+       ::xercesc::DOMErrorHandler& h,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+  ::xsd::cxx::xml::dom::ostream_format_target t (o);
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+input (::xercesc::XMLFormatTarget& t,
+       const ::molsimInput& s,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+
+  ::xsd::cxx::tree::error_handler< char > h;
+
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    h.throw_if_failed< ::xsd::cxx::tree::serialization< char > > ();
+  }
+}
+
+void
+input (::xercesc::XMLFormatTarget& t,
+       const ::molsimInput& s,
+       ::xml_schema::error_handler& h,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+input (::xercesc::XMLFormatTarget& t,
+       const ::molsimInput& s,
+       ::xercesc::DOMErrorHandler& h,
+       const ::xml_schema::namespace_infomap& m,
+       const ::std::string& e,
+       ::xml_schema::flags f)
+{
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::input (s, m, f));
+  if (!::xsd::cxx::xml::dom::serialize (t, *d, e, h, f))
+  {
+    throw ::xsd::cxx::tree::serialization< char > ();
+  }
+}
+
+void
+input (::xercesc::DOMDocument& d,
+       const ::molsimInput& s,
+       ::xml_schema::flags)
+{
+  ::xercesc::DOMElement& e (*d.getDocumentElement ());
+  const ::xsd::cxx::xml::qualified_name< char > n (
+    ::xsd::cxx::xml::dom::name< char > (e));
+
+  if (n.name () == "input" &&
+      n.namespace_ () == "")
+  {
+    e << s;
+  }
+  else
+  {
+    throw ::xsd::cxx::tree::unexpected_element < char > (
+      n.name (),
+      n.namespace_ (),
+      "input",
+      "");
+  }
+}
+
+::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument >
+input (const ::molsimInput& s,
+       const ::xml_schema::namespace_infomap& m,
+       ::xml_schema::flags f)
+{
+  ::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d (
+    ::xsd::cxx::xml::dom::serialize< char > (
+      "input",
+      "",
+      m, f));
+
+  ::input (*d, s, f);
+  return d;
 }
 
 #include <xsd/cxx/post.hxx>

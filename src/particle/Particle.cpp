@@ -127,6 +127,15 @@ void Particle::applyGravity(double g) {
     addF({0, m*g, 0});
 }
 
+Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,
+                   std::array<double, 3> old_f, int type, double epsilon, double sigma) :
+                   x(x), v(v), m(m), f(f), old_f(old_f), type(type), epsilon(epsilon), sigma(sigma)
+{
+    delta_t = 0;
+    dt_2m = 0;
+    dtsq_2m = 0;
+}
+
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();
   return stream;
