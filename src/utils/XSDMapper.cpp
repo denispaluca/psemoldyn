@@ -11,6 +11,14 @@ std::array<double, 3> mapDoubleVec(double_vector& x){
     return {x.x(), x.y(), x.z()};
 }
 
+integer_vector mapToIntVec(std::array<int, 3> x){
+    return {x[0], x[1], x[2]};
+}
+
+double_vector mapToDoubleVec(std::array<double, 3> x){
+    return {x[0], x[1], x[2]};
+}
+
 ParticleSphere mapParticleSphere(sphere& c){
     return {
             mapDoubleVec(c.center()),
@@ -45,5 +53,18 @@ Particle mapParticle(particle& p){
         p.type(),
         p.epsilon(),
         p.sigma()
+    };
+}
+
+particle mapParticleToXML(Particle &p){
+    return {
+        mapToDoubleVec(p.getX()),
+        mapToDoubleVec(p.getV()),
+        p.getM(),
+        mapToDoubleVec(p.getF()),
+        mapToDoubleVec(p.getOldF()),
+        p.getType(),
+        p.getEpsilon(),
+        p.getSigma()
     };
 }

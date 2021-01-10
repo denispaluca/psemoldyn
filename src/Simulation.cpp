@@ -52,6 +52,9 @@ void Simulation::start(bool isPT) {
 
         current_time += data.delta_t();
     }
+
+    if(data.checkpoint())
+        checkpoint();
 }
 
 void Simulation::plotParticles(int iteration) {
@@ -76,4 +79,16 @@ void Simulation::plotParticles(int iteration) {
     });
 
     vtkWriter.writeFile(out_name_vtk, iteration);
+}
+
+molsimInput &Simulation::checkpoint() {
+    data.particle_data().particles().particle().clear();
+    data.particle_data().cuboids().cuboid().clear();
+    data.particle_data().spheres().sphere().clear();
+
+    container->iterate([&](Particle &p){
+        data.particle_data().particles().particle().push_back(mapParticleToXML(p));
+    });
+
+    return data;
 }

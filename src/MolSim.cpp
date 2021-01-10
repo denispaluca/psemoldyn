@@ -4,6 +4,7 @@
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
 #include <iostream>
+#include <fstream>
 
 using namespace log4cxx;
 using namespace log4cxx::helpers;
@@ -65,7 +66,7 @@ int main(int argc, char *argsv[]) {
     }
 }
 
-int xmlRoutine(char * xmlFile, bool isPT) {
+int xmlRoutine(std::string xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
     if (isPT) startPT();
     std::unique_ptr<molsimInput> inputFile;
@@ -82,6 +83,12 @@ int xmlRoutine(char * xmlFile, bool isPT) {
     sim.start(isPT);
 
     if(isPT) endPT();
+
+    if(inputFile->checkpoint()){
+        std::ofstream ofs (xmlFile + "_checkpoint");
+        input(ofs, sim.checkpoint());
+    }
+
     LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
     return 0;
 }

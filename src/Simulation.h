@@ -8,6 +8,7 @@
 #include "particle/ParticleGenerator.h"
 #include "Container.h"
 #include "Thermostat.h"
+#include "utils/XSDMapper.h"
 
 class Simulation {
 private:
@@ -45,4 +46,9 @@ public:
      * @param isPT Is simulation run a performance test.
      */
     void start(bool isPT);
+
+    /**
+     * Generates checkpoint after simulation.
+     */
+    molsimInput &checkpoint();
 };

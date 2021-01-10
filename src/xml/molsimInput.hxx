@@ -83,6 +83,21 @@
 #include <xsd/cxx/tree/parsing/double.hxx>
 #include <xsd/cxx/tree/parsing/decimal.hxx>
 
+#include <xsd/cxx/xml/dom/serialization-header.hxx>
+#include <xsd/cxx/tree/serialization.hxx>
+#include <xsd/cxx/tree/serialization/byte.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-byte.hxx>
+#include <xsd/cxx/tree/serialization/short.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-short.hxx>
+#include <xsd/cxx/tree/serialization/int.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-int.hxx>
+#include <xsd/cxx/tree/serialization/long.hxx>
+#include <xsd/cxx/tree/serialization/unsigned-long.hxx>
+#include <xsd/cxx/tree/serialization/boolean.hxx>
+#include <xsd/cxx/tree/serialization/float.hxx>
+#include <xsd/cxx/tree/serialization/double.hxx>
+#include <xsd/cxx/tree/serialization/decimal.hxx>
+
 namespace xml_schema
 {
   // anyType and anySimpleType.
@@ -179,6 +194,16 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::entities< char, simple_type, entity > entities;
 
   typedef ::xsd::cxx::tree::content_order content_order;
+  // Namespace information and list stream. Used in
+  // serialization functions.
+  //
+  typedef ::xsd::cxx::xml::dom::namespace_info< char > namespace_info;
+  typedef ::xsd::cxx::xml::dom::namespace_infomap< char > namespace_infomap;
+  typedef ::xsd::cxx::tree::list_stream< char > list_stream;
+  typedef ::xsd::cxx::tree::as_double< double_ > as_double;
+  typedef ::xsd::cxx::tree::as_decimal< decimal > as_decimal;
+  typedef ::xsd::cxx::tree::facet facet;
+
   // Flags and properties.
   //
   typedef ::xsd::cxx::tree::flags flags;
@@ -202,6 +227,7 @@ namespace xml_schema
   typedef ::xsd::cxx::tree::unexpected_enumerator< char > unexpected_enumerator;
   typedef ::xsd::cxx::tree::expected_text_content< char > expected_text_content;
   typedef ::xsd::cxx::tree::no_prefix_mapping< char > no_prefix_mapping;
+  typedef ::xsd::cxx::tree::serialization< char > serialization;
 
   // Error handler callback interface.
   //
@@ -1953,6 +1979,131 @@ input (const ::xercesc::DOMDocument& d,
 input (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
        ::xml_schema::flags f = 0,
        const ::xml_schema::properties& p = ::xml_schema::properties ());
+
+#include <iosfwd>
+
+#include <xercesc/dom/DOMDocument.hpp>
+#include <xercesc/dom/DOMErrorHandler.hpp>
+#include <xercesc/framework/XMLFormatter.hpp>
+
+#include <xsd/cxx/xml/dom/auto-ptr.hxx>
+
+void
+operator<< (::xercesc::DOMElement&, const double_vector&);
+
+void
+operator<< (::xercesc::DOMElement&, const integer_vector&);
+
+void
+operator<< (::xercesc::DOMElement&, const cuboid&);
+
+void
+operator<< (::xercesc::DOMElement&, const cuboid_cluster&);
+
+void
+operator<< (::xercesc::DOMElement&, const particle&);
+
+void
+operator<< (::xercesc::DOMElement&, const particle_cluster&);
+
+void
+operator<< (::xercesc::DOMElement&, const sphere&);
+
+void
+operator<< (::xercesc::DOMElement&, const sphere_cluster&);
+
+void
+operator<< (::xercesc::DOMElement&, const thermostat_type&);
+
+void
+operator<< (::xercesc::DOMElement&, const particle_data&);
+
+void
+operator<< (::xercesc::DOMElement&, const boundary_type&);
+
+void
+operator<< (::xercesc::DOMAttr&, const boundary_type&);
+
+void
+operator<< (::xml_schema::list_stream&,
+            const boundary_type&);
+
+void
+operator<< (::xercesc::DOMElement&, const boundaries_type&);
+
+void
+operator<< (::xercesc::DOMElement&, const domain_type&);
+
+void
+operator<< (::xercesc::DOMElement&, const molsimInput&);
+
+// Serialize to std::ostream.
+//
+
+void
+input (::std::ostream& os,
+       const ::molsimInput& x, 
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+void
+input (::std::ostream& os,
+       const ::molsimInput& x, 
+       ::xml_schema::error_handler& eh,
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+void
+input (::std::ostream& os,
+       const ::molsimInput& x, 
+       ::xercesc::DOMErrorHandler& eh,
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+// Serialize to xercesc::XMLFormatTarget.
+//
+
+void
+input (::xercesc::XMLFormatTarget& ft,
+       const ::molsimInput& x, 
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+void
+input (::xercesc::XMLFormatTarget& ft,
+       const ::molsimInput& x, 
+       ::xml_schema::error_handler& eh,
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+void
+input (::xercesc::XMLFormatTarget& ft,
+       const ::molsimInput& x, 
+       ::xercesc::DOMErrorHandler& eh,
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       const ::std::string& e = "UTF-8",
+       ::xml_schema::flags f = 0);
+
+// Serialize to an existing xercesc::DOMDocument.
+//
+
+void
+input (::xercesc::DOMDocument& d,
+       const ::molsimInput& x,
+       ::xml_schema::flags f = 0);
+
+// Serialize to a new xercesc::DOMDocument.
+//
+
+::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument >
+input (const ::molsimInput& x, 
+       const ::xml_schema::namespace_infomap& m = ::xml_schema::namespace_infomap (),
+       ::xml_schema::flags f = 0);
 
 #include <xsd/cxx/post.hxx>
 
