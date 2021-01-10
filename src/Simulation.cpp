@@ -52,9 +52,6 @@ void Simulation::start(bool isPT) {
 
         current_time += data.delta_t();
     }
-
-    if(data.checkpoint())
-        checkpoint();
 }
 
 void Simulation::plotParticles(int iteration) {
