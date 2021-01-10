@@ -4,7 +4,7 @@
     <name_output>A4_TASK3</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0005</delta_t>
-    <t_end>15</t_end>
+    <t_end>0.5</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>true</checkpoint>
     <domain>
@@ -52,7 +52,7 @@
                     <z>0.0</z>
                 </velocity>
                 <epsilon>1.0</epsilon>
-                <sigma>1.0</sigma>
+                <sigma>1.2</sigma>
             </cuboid>
         </cuboids>
         <particles></particles>

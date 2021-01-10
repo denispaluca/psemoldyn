@@ -20,7 +20,7 @@ void help();
  * @param argsv
  * @return
  */
-int xmlRoutine(char * xmlFile, bool isPT = false);
+int xmlRoutine(std::string xmlFile, bool isPT = false);
 
 /**
  * Start performance test timer.
@@ -84,8 +84,13 @@ int xmlRoutine(std::string xmlFile, bool isPT) {
     if(isPT) endPT();
 
     if(inputFile->checkpoint()){
-        std::ofstream ofs (xmlFile + "_checkpoint");
-        input(ofs, sim.checkpoint());
+        xml_schema::namespace_infomap map;
+        map[""].name = "";
+        map[""].schema = "../src/xml/molsimInput.xsd";
+        size_t lastindex = xmlFile.find_last_of('.');
+        auto rawname = xmlFile.substr(0, lastindex);
+        std::ofstream ofs (rawname + "_checkpoint.xml");
+        input(ofs, sim.checkpoint(), map);
     }
 
     LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
