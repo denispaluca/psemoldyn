@@ -97,6 +97,22 @@ public:
       double m_arg, double epsilon, double sigma);
 
   /**
+   * Particle constructor for full particles state.
+   * @param x Position
+   * @param v Velocity
+   * @param m Mass
+   * @param f Current force
+   * @param old_f Old force
+   * @param type Type
+   * @param epsilon Epsilon
+   * @param sigma Sigma
+   */
+  Particle(
+          std::array<double, 3> x, std::array<double, 3> v,
+          double m, std::array<double, 3> f, std::array<double, 3> old_f,
+          int type, double epsilon, double sigma);
+
+  /**
    * Destructor of particle
    * @param
    * @return

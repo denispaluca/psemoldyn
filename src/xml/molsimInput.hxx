@@ -686,6 +686,54 @@ class particle: public ::xml_schema::type
   void
   m (const m_type& x);
 
+  // f
+  //
+  typedef ::double_vector f_type;
+  typedef ::xsd::cxx::tree::traits< f_type, char > f_traits;
+
+  const f_type&
+  f () const;
+
+  f_type&
+  f ();
+
+  void
+  f (const f_type& x);
+
+  void
+  f (::std::unique_ptr< f_type > p);
+
+  // old_f
+  //
+  typedef ::double_vector old_f_type;
+  typedef ::xsd::cxx::tree::traits< old_f_type, char > old_f_traits;
+
+  const old_f_type&
+  old_f () const;
+
+  old_f_type&
+  old_f ();
+
+  void
+  old_f (const old_f_type& x);
+
+  void
+  old_f (::std::unique_ptr< old_f_type > p);
+
+  // type
+  //
+  typedef ::xml_schema::int_ type_type;
+  typedef ::xsd::cxx::tree::traits< type_type, char > type_traits;
+
+  const type_type&
+  type () const;
+
+  type_type&
+  type ();
+
+  void
+  type (const type_type& x);
+
   // epsilon
   //
   typedef ::xml_schema::double_ epsilon_type;
@@ -719,12 +767,18 @@ class particle: public ::xml_schema::type
   particle (const x_type&,
             const v_type&,
             const m_type&,
+            const f_type&,
+            const old_f_type&,
+            const type_type&,
             const epsilon_type&,
             const sigma_type&);
 
   particle (::std::unique_ptr< x_type >,
             ::std::unique_ptr< v_type >,
             const m_type&,
+            ::std::unique_ptr< f_type >,
+            ::std::unique_ptr< old_f_type >,
+            const type_type&,
             const epsilon_type&,
             const sigma_type&);
 
@@ -757,6 +811,9 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< x_type > x_;
   ::xsd::cxx::tree::one< v_type > v_;
   ::xsd::cxx::tree::one< m_type > m_;
+  ::xsd::cxx::tree::one< f_type > f_;
+  ::xsd::cxx::tree::one< old_f_type > old_f_;
+  ::xsd::cxx::tree::one< type_type > type_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
 };
@@ -1676,6 +1733,20 @@ class molsimInput: public ::xml_schema::type
   void
   linked_cell (const linked_cell_type& x);
 
+  // checkpoint
+  //
+  typedef ::xml_schema::boolean checkpoint_type;
+  typedef ::xsd::cxx::tree::traits< checkpoint_type, char > checkpoint_traits;
+
+  const checkpoint_type&
+  checkpoint () const;
+
+  checkpoint_type&
+  checkpoint ();
+
+  void
+  checkpoint (const checkpoint_type& x);
+
   // domain
   //
   typedef ::domain_type domain_type;
@@ -1736,12 +1807,14 @@ class molsimInput: public ::xml_schema::type
   molsimInput (const delta_t_type&,
                const t_end_type&,
                const linked_cell_type&,
+               const checkpoint_type&,
                const domain_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
                const t_end_type&,
                const linked_cell_type&,
+               const checkpoint_type&,
                ::std::unique_ptr< domain_type >,
                ::std::unique_ptr< particle_data_type >);
 
@@ -1776,6 +1849,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< delta_t_type > delta_t_;
   ::xsd::cxx::tree::one< t_end_type > t_end_;
   ::xsd::cxx::tree::one< linked_cell_type > linked_cell_;
+  ::xsd::cxx::tree::one< checkpoint_type > checkpoint_;
   ::xsd::cxx::tree::one< domain_type > domain_;
   thermostat_optional thermostat_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;

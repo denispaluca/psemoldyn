@@ -395,6 +395,72 @@ m (const m_type& x)
   this->m_.set (x);
 }
 
+const particle::f_type& particle::
+f () const
+{
+  return this->f_.get ();
+}
+
+particle::f_type& particle::
+f ()
+{
+  return this->f_.get ();
+}
+
+void particle::
+f (const f_type& x)
+{
+  this->f_.set (x);
+}
+
+void particle::
+f (::std::unique_ptr< f_type > x)
+{
+  this->f_.set (std::move (x));
+}
+
+const particle::old_f_type& particle::
+old_f () const
+{
+  return this->old_f_.get ();
+}
+
+particle::old_f_type& particle::
+old_f ()
+{
+  return this->old_f_.get ();
+}
+
+void particle::
+old_f (const old_f_type& x)
+{
+  this->old_f_.set (x);
+}
+
+void particle::
+old_f (::std::unique_ptr< old_f_type > x)
+{
+  this->old_f_.set (std::move (x));
+}
+
+const particle::type_type& particle::
+type () const
+{
+  return this->type_.get ();
+}
+
+particle::type_type& particle::
+type ()
+{
+  return this->type_.get ();
+}
+
+void particle::
+type (const type_type& x)
+{
+  this->type_.set (x);
+}
+
 const particle::epsilon_type& particle::
 epsilon () const
 {
@@ -1234,6 +1300,24 @@ linked_cell (const linked_cell_type& x)
   this->linked_cell_.set (x);
 }
 
+const molsimInput::checkpoint_type& molsimInput::
+checkpoint () const
+{
+  return this->checkpoint_.get ();
+}
+
+molsimInput::checkpoint_type& molsimInput::
+checkpoint ()
+{
+  return this->checkpoint_.get ();
+}
+
+void molsimInput::
+checkpoint (const checkpoint_type& x)
+{
+  this->checkpoint_.set (x);
+}
+
 const molsimInput::domain_type& molsimInput::
 domain () const
 {
@@ -1929,12 +2013,18 @@ particle::
 particle (const x_type& x,
           const v_type& v,
           const m_type& m,
+          const f_type& f,
+          const old_f_type& old_f,
+          const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma)
 : ::xml_schema::type (),
   x_ (x, this),
   v_ (v, this),
   m_ (m, this),
+  f_ (f, this),
+  old_f_ (old_f, this),
+  type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this)
 {
@@ -1944,12 +2034,18 @@ particle::
 particle (::std::unique_ptr< x_type > x,
           ::std::unique_ptr< v_type > v,
           const m_type& m,
+          ::std::unique_ptr< f_type > f,
+          ::std::unique_ptr< old_f_type > old_f,
+          const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
   v_ (std::move (v), this),
   m_ (m, this),
+  f_ (std::move (f), this),
+  old_f_ (std::move (old_f), this),
+  type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this)
 {
@@ -1963,6 +2059,9 @@ particle (const particle& x,
   x_ (x.x_, f, this),
   v_ (x.v_, f, this),
   m_ (x.m_, f, this),
+  f_ (x.f_, f, this),
+  old_f_ (x.old_f_, f, this),
+  type_ (x.type_, f, this),
   epsilon_ (x.epsilon_, f, this),
   sigma_ (x.sigma_, f, this)
 {
@@ -1976,6 +2075,9 @@ particle (const ::xercesc::DOMElement& e,
   x_ (this),
   v_ (this),
   m_ (this),
+  f_ (this),
+  old_f_ (this),
+  type_ (this),
   epsilon_ (this),
   sigma_ (this)
 {
@@ -2035,6 +2137,45 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // f
+    //
+    if (n.name () == "f" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< f_type > r (
+        f_traits::create (i, f, this));
+
+      if (!f_.present ())
+      {
+        this->f_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // old_f
+    //
+    if (n.name () == "old_f" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< old_f_type > r (
+        old_f_traits::create (i, f, this));
+
+      if (!old_f_.present ())
+      {
+        this->old_f_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // type
+    //
+    if (n.name () == "type" && n.namespace_ ().empty ())
+    {
+      if (!type_.present ())
+      {
+        this->type_.set (type_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // epsilon
     //
     if (n.name () == "epsilon" && n.namespace_ ().empty ())
@@ -2081,6 +2222,27 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!f_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "f",
+      "");
+  }
+
+  if (!old_f_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "old_f",
+      "");
+  }
+
+  if (!type_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "type",
+      "");
+  }
+
   if (!epsilon_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2112,6 +2274,9 @@ operator= (const particle& x)
     this->x_ = x.x_;
     this->v_ = x.v_;
     this->m_ = x.m_;
+    this->f_ = x.f_;
+    this->old_f_ = x.old_f_;
+    this->type_ = x.type_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
   }
@@ -3379,6 +3544,7 @@ molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              const linked_cell_type& linked_cell,
+             const checkpoint_type& checkpoint,
              const domain_type& domain,
              const particle_data_type& particle_data)
 : ::xml_schema::type (),
@@ -3387,6 +3553,7 @@ molsimInput (const delta_t_type& delta_t,
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
+  checkpoint_ (checkpoint, this),
   domain_ (domain, this),
   thermostat_ (this),
   particle_data_ (particle_data, this)
@@ -3397,6 +3564,7 @@ molsimInput::
 molsimInput (const delta_t_type& delta_t,
              const t_end_type& t_end,
              const linked_cell_type& linked_cell,
+             const checkpoint_type& checkpoint,
              ::std::unique_ptr< domain_type > domain,
              ::std::unique_ptr< particle_data_type > particle_data)
 : ::xml_schema::type (),
@@ -3405,6 +3573,7 @@ molsimInput (const delta_t_type& delta_t,
   delta_t_ (delta_t, this),
   t_end_ (t_end, this),
   linked_cell_ (linked_cell, this),
+  checkpoint_ (checkpoint, this),
   domain_ (std::move (domain), this),
   thermostat_ (this),
   particle_data_ (std::move (particle_data), this)
@@ -3421,6 +3590,7 @@ molsimInput (const molsimInput& x,
   delta_t_ (x.delta_t_, f, this),
   t_end_ (x.t_end_, f, this),
   linked_cell_ (x.linked_cell_, f, this),
+  checkpoint_ (x.checkpoint_, f, this),
   domain_ (x.domain_, f, this),
   thermostat_ (x.thermostat_, f, this),
   particle_data_ (x.particle_data_, f, this)
@@ -3437,6 +3607,7 @@ molsimInput (const ::xercesc::DOMElement& e,
   delta_t_ (this),
   t_end_ (this),
   linked_cell_ (this),
+  checkpoint_ (this),
   domain_ (this),
   thermostat_ (this),
   particle_data_ (this)
@@ -3516,6 +3687,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // checkpoint
+    //
+    if (n.name () == "checkpoint" && n.namespace_ ().empty ())
+    {
+      if (!checkpoint_.present ())
+      {
+        this->checkpoint_.set (checkpoint_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // domain
     //
     if (n.name () == "domain" && n.namespace_ ().empty ())
@@ -3582,6 +3764,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!checkpoint_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "checkpoint",
+      "");
+  }
+
   if (!domain_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -3615,6 +3804,7 @@ operator= (const molsimInput& x)
     this->delta_t_ = x.delta_t_;
     this->t_end_ = x.t_end_;
     this->linked_cell_ = x.linked_cell_;
+    this->checkpoint_ = x.checkpoint_;
     this->domain_ = x.domain_;
     this->thermostat_ = x.thermostat_;
     this->particle_data_ = x.particle_data_;

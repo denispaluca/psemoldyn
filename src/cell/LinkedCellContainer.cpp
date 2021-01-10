@@ -101,7 +101,7 @@ void LinkedCellContainer::calculateIteration() {
     boundaryHandler->iteratePeriodicParticles(&cells, f);
 
     // calculate new v
-    iterate([&](Particle &p) {
+    iterate([](Particle &p) {
         p.calculateV();
     });
 }

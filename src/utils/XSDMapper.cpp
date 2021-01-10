@@ -34,14 +34,16 @@ Cuboid mapCuboid(cuboid& c){
         c.sigma()
     };
 }
+
 Particle mapParticle(particle& p){
-    auto particle = Particle (
+    return {
         mapDoubleVec(p.x()),
         mapDoubleVec(p.v()),
         p.m(),
+        mapDoubleVec(p.f()),
+        mapDoubleVec(p.old_f()),
+        p.type(),
         p.epsilon(),
         p.sigma()
-    );
-
-    return particle;
+    };
 }
