@@ -77,7 +77,6 @@ int xmlRoutine(std::string xmlFile, bool isPT) {
         help();
         return -1;
     }
-    //std::unique_ptr<molsimInput> ptr(input(xmlFile));
 
     auto sim = Simulation(*inputFile);
     sim.start(isPT);
