@@ -190,24 +190,3 @@ TEST_F(BoundaryHandlerFixture, Period_Back){
     bh->handle(&periodicContainer.getCells());
     EXPECT_DOUBLE_EQ(p.getX()[2], 1);
 }
-
-/**
- * Checks if periodic neighbours are added correctly.
- */
-TEST_F(BoundaryHandlerFixture, Periodic_Neighbours){
-    auto &cells = periodicContainer.getCells();
-    auto c000 = cells.at(0);
-    auto c222 = cells.at(periodicContainer.getIndex({2,2,2}));
-    auto c200 = cells.at(periodicContainer.getIndex({2,0,0}));
-    EXPECT_TRUE(c000.isNeighbour(c222));
-    EXPECT_TRUE(c222.isNeighbour(c000));
-    EXPECT_TRUE(c000.isNeighbour(c200));
-    EXPECT_TRUE(c200.isNeighbour(c000));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
-
-    auto c011 = cells.at(periodicContainer.getIndex({0,1,1}));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
-
-    auto c001 = cells.at(periodicContainer.getIndex({0,0,1}));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
-}
