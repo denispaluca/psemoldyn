@@ -29,7 +29,7 @@ protected:
 
         singleCellParticles = ParticleContainer();
         for(int i = 0; i < 20; i++) {
-            Particle p = Particle({0, 0, 0}, {0, 0, 0}, i, 0);
+            Particle p = Particle({0, 0, 0}, {0, 0, 0}, i, 5, 1);
             singleCellParticles.push(p);
         }
 
@@ -42,7 +42,7 @@ protected:
         containerParticles = ParticleContainer();
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 5; j++) {
-                Particle p = Particle({(double)i, (double)j, 0}, {1, 0, 0}, i*5+j, 0);
+                Particle p = Particle({(double)i, (double)j, 0}, {1, 0, 0}, i*5+j, 5, 1);
                 containerParticles.push(p);
             }
         }
