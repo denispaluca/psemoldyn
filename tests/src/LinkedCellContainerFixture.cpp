@@ -3,8 +3,11 @@
 //
 
 #include <gtest/gtest.h>
-#include "../../src/LinkedCell.h"
-#include "../../src/LinkedCellContainer.h"
+#include <particle/Particle.h>
+#include <cell/LinkedCell.h>
+#include <particle/ParticleContainer.h>
+#include <cell/LinkedCellContainer.h>
+#include "xml/molsimInput.hxx"
 
 
 /**
@@ -30,6 +33,11 @@ protected:
             singleCellParticles.push(p);
         }
 
+        //add all particles to singleCell
+        singleCellParticles.iterate([&](Particle& p){
+            singleCell.addParticle(&p);
+        });
+
         // set up for LinkedCellContainer tests
         containerParticles = ParticleContainer();
         for(int i = 0; i < 5; i++) {
@@ -39,13 +47,16 @@ protected:
             }
         }
         containerCells = std::vector<LinkedCell>();
-        for(int i = 0; i < 6; i += 2.0) {
+        domain_type data = input("input/input_linked_cell_fixture.xml")->domain();
+        lcc = LinkedCellContainer(data, containerParticles);
+        for(int i = 0; i < 6; i += 2) {
             for(int j = 0; j < 6; j += 2) {
-                LinkedCell cell = LinkedCell({(double)i, (double)j, 0}, 2, i*5+j);
-                containerCells.emplace_back(cell);
+                for(int k = 0; k < 6; k +=2){
+                    LinkedCell cell = LinkedCell(lcc.getIndex({i, j, k}));
+                    containerCells.emplace_back(cell);
+                }
             }
         }
-        lcc = LinkedCellContainer({6, 6, 6}, 2, containerParticles);
     }
 };
 
@@ -86,7 +97,7 @@ TEST_F(LinkedCellContainerFixture, iteratePairsInCell){
     });
 
     for(int i = 0; i < singleCellParticles.size(); i++){
-        EXPECT_EQ(singleCell.getParticles().at(i)->getF(), 19*20/2);
+        EXPECT_DOUBLE_EQ(singleCell.getParticles().at(i)->getF()[0], 19.0*i);
     }
 }
 
@@ -110,30 +121,6 @@ TEST_F(LinkedCellContainerFixture, cellIndex){
 }
 
 /**
- * Checks if cell positions are set correctly.
- */
-TEST_F(LinkedCellContainerFixture, cellPositions){
-    for(int i = 0; i < containerCells.size(); i++){
-        EXPECT_EQ(containerCells.at(i).getPosition(), lcc.getCells().at(i));
-    }
-}
-
-/**
- * Checks if added particles belong to their cells and are assigned correctly (assignParticle).
- */
-TEST_F(LinkedCellContainerFixture, correctParticleAssignment){
-    for(auto c : lcc.getCells()) {
-        for(auto p : c.getParticles()) {
-            std::array<double, 3> xDiff = {p->getX()[0]-c.getPosition()[0],
-                                           p->getX()[1]-c.getPosition()[1],
-                                           p->getX()[2]-c.getPosition()[2]
-                                           };
-            EXPECT_TRUE(xDiff[0] >= 0 && xDiff[0] < 2 && xDiff[1] >= 0 && xDiff[1] < 2 && xDiff[2] >= 0 && xDiff[2] < 2);
-        }
-    }
-}
-
-/**
  * Checks if all particles were distributed to cells.
  */
 TEST_F(LinkedCellContainerFixture, allParticlesAssigned){
@@ -143,54 +130,31 @@ TEST_F(LinkedCellContainerFixture, allParticlesAssigned){
     EXPECT_EQ(particlesInCells, containerParticles.size());
 }
 
-/**
- * Checks if correct neighbors were added.
- */
+///REMOVED CUS CELL CHANGE
+///**
+// * Checks if correct neighbors were added.
+// */
 TEST_F(LinkedCellContainerFixture, correctNeighbours){
     for(auto c : lcc.getCells()) {
         for(auto n : c.getNeighbors()) {
-            std::array<double, 3> xDiff = {n->getPosition()[0]-c.getPosition()[0],
-                                           n->getPosition()[1]-c.getPosition()[1],
-                                           n->getPosition()[2]-c.getPosition()[2]
-            };
-            EXPECT_TRUE(xDiff[0] == 2 || xDiff[1] == 2 || xDiff[2] == 2);
+            auto pos2 = lcc.indexToPos(n->getIndex());
+            auto pos1 = lcc.indexToPos(c.getIndex());
+            std::array<int, 3> xDiff = {pos2[0]-pos1[0],
+                                           pos2[1]-pos1[1],
+                                           pos2[2]-pos1[2]};
+
+            EXPECT_TRUE(xDiff[0] == -1 || xDiff[0] == 0 || xDiff[0] == 1);
+            EXPECT_TRUE(xDiff[1] == -1 || xDiff[1] == 0 || xDiff[1] == 1);
+            EXPECT_TRUE(xDiff[2] == -1 || xDiff[2] == 0 || xDiff[2] == 1);
         }
     }
 }
 
 /**
- * Checks if iterating particle pairs works as expected.
+ * Check if indexing works correctly.
  */
-TEST_F(LinkedCellContainerFixture, iterateLCCPairs){
-    lcc.iteratePairs([](Particle &p1, Particle &p2){
-        p1.addF({p1.getM(), 0, 0});
-        p2.addF({p2.getM(), 0, 0});
-    });
-
-    for(int i = 0; i < containerParticles.size(); i++){
-        EXPECT_EQ(lcc.getParticles().getParticles().at(i).getF(), containerParticles.size()*(containerParticles.size()+1)/2);
+TEST_F(LinkedCellContainerFixture, indexCorrect){
+    for(int i = 0; i < lcc.getCells().size(); i++){
+        EXPECT_EQ(lcc.getIndex(lcc.indexToPos(i)), i);
     }
-}
-
-/**
- * Checks if calculating corresponding cell index from a particle's position position works as expected.
- */
-TEST_F(LinkedCellContainerFixture, correctIndexFromPosition){
-    for(int i = 0; i < lcc.getCells().size(); i++)
-        for(auto p : lcc.getCells().at(i).getParticles())
-            EXPECT_EQ(lcc.getIndexFromParticle(p), i);
-}
-
-/**
- * Checks if outflow boundary condition works as expected.
- */
-TEST_F(LinkedCellContainerFixture, testOutflowHandling){
-    // current implementation: outflow particles are automatically cleared
-    lcc.iterate([](Particle &p){
-        p.updateDT(1);
-    });
-
-    lcc.calculateIteration();
-
-    EXPECT_EQ(lcc.getParticles().size(), 20);
 }

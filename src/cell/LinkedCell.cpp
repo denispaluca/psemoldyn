@@ -48,3 +48,13 @@ int LinkedCell::getIndex() {
 std::vector<Particle *> &LinkedCell::getParticles() {
     return particles;
 }
+
+bool LinkedCell::isNeighbour(LinkedCell &c) {
+    for(auto &n : neighbors){
+        if(n->getIndex() == c.getIndex()){
+            return true;
+        }
+    }
+
+    return false;
+}

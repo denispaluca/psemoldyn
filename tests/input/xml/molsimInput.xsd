@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- double vector with length 3 -->
+  <xsd:complexType name="double_vector">
+    <xsd:sequence>
+      <xsd:element name="x" type="xsd:double"/>
+      <xsd:element name="y" type="xsd:double"/>
+      <xsd:element name="z" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- integer vector with length 3 -->
+  <xsd:complexType name="integer_vector">
+    <xsd:sequence>
+      <xsd:element name="x" type="xsd:int"/>
+      <xsd:element name="y" type="xsd:int"/>
+      <xsd:element name="z" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- specification of one cuboid -->
+  <xsd:complexType name="cuboid">
+    <xsd:sequence>
+      <!-- coordinates of cuboid -->
+      <xsd:element name="position" type="double_vector"/>
+      <!-- Number of particles per dimension -->
+      <xsd:element name="size" type="integer_vector"/>
+      <!-- Mesh width/distance beween particles -->
+      <xsd:element name="distance" type="xsd:double"/>
+      <!-- mass of one particle -->
+      <xsd:element name="mass" type="xsd:double"/>
+      <!-- initial velocity -->
+      <xsd:element name="velocity" type="double_vector"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- multiple cuboids -->
+  <xsd:complexType name="cuboid_cluster">
+    <xsd:sequence>
+      <xsd:element name="cuboid" type="cuboid" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- specification of one particle -->  
+  <xsd:complexType name="particle">
+    <xsd:sequence>
+      <!-- coordinates of particle -->
+      <xsd:element name="x" type="double_vector"/>
+      <!-- initial velocity -->
+      <xsd:element name="v" type="double_vector"/>
+      <!-- mass of particle -->
+      <xsd:element name="m" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- multiple particles -->
+  <xsd:complexType name="particle_cluster">
+    <xsd:sequence>
+      <xsd:element name="particle" type="particle"  minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="sphere">
+    <xsd:sequence>
+      <xsd:element name="center" type="double_vector"/>
+      <!-- distance between particles -->
+      <xsd:element name="h" type="xsd:double"/>
+      <!-- initial velocity of all particles -->
+      <xsd:element name="v" type="double_vector" />
+      <!-- initial mass of all particles -->
+      <xsd:element name="m" type="xsd:double" />
+      <!-- radius: number of molecules along the radius -->
+      <xsd:element name="r" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="sphere_cluster">
+    <xsd:sequence>
+      <xsd:element name="sphere" type="sphere"  minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="thermostat_type">
+    <xsd:sequence>
+      <xsd:element name="t_init" type="xsd:double"/>
+      <xsd:element name="change_brownian" type="xsd:boolean"/>
+      <xsd:element name="steps" type="xsd:int"/>
+      <xsd:element name="t_target" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="temp_delta" type="xsd:double" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="particle_data">
+    <xsd:sequence>
+      <!-- mean brownian velocity -->
+      <xsd:element name="meanv" type="xsd:double"/>
+      <xsd:element name="is3D" type="xsd:boolean"/>
+      <xsd:element name="cuboids" type="cuboid_cluster"/>
+      <xsd:element name="particles" type="particle_cluster"/>
+      <xsd:element name="spheres" type="sphere_cluster"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  
+  <xsd:simpleType name="boundary_type">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="outflow"/>
+      <xsd:enumeration value="reflective"/>
+      <xsd:enumeration value="periodic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="boundaries_type">
+    <xsd:sequence>
+      <xsd:element name="front" type="boundary_type"/>
+      <xsd:element name="back" type="boundary_type"/>
+      <xsd:element name="top" type="boundary_type"/>
+      <xsd:element name="bottom" type="boundary_type"/>
+      <xsd:element name="left" type="boundary_type"/>
+      <xsd:element name="right" type="boundary_type"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="domain_type">
+    <xsd:sequence>
+      <xsd:element name="domain_size" type="double_vector"/>
+      <xsd:element name="cutoff_radius" type="xsd:double" />
+      <xsd:element name="boundary" type="boundaries_type" />
+      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- base element of the molsim input xml file -->
+  <xsd:complexType name="molsimInput">
+    <xsd:sequence>
+      <!-- Set base name of output files (optional, default name: MD_vtk) -->
+      <xsd:element name="name_output" type="xsd:string" minOccurs="0"/>
+      <!-- Set frequency of the output files (optional, default: 10) -->
+      <xsd:element name="frequency_output" type="xsd:int" minOccurs="0"/>
+      <!-- Set delta_t -->
+      <xsd:element name="delta_t" type="xsd:double"/>
+      <!-- Set t_end -->
+      <xsd:element name="t_end" type="xsd:double"/>
+      <xsd:element name="linked_cell" type="xsd:boolean" />
+      <xsd:element name="domain" type="domain_type" />
+      <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
+      <xsd:element name="particle_data" type="particle_data"/>
+    </xsd:sequence>    
+  </xsd:complexType>
+
+  <xsd:element name="input" type="molsimInput"/>
+
+</xsd:schema>

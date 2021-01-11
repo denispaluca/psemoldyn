@@ -68,7 +68,7 @@ void FileReader::readParticles(std::vector<Particle> &particles, const char *fil
         exit(-1);
       }
       datastream >> m;
-      particles.emplace_back(x, v, m);
+      particles.emplace_back(x, v, m,1,1);
 
       getline(input_file, tmp_string);
       LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);
@@ -142,7 +142,7 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
             for (auto &vj : v) {
                 datastream >> vj;
             }
-            cuboids.emplace_back(x, size, d, m, v, MEAN_BROWNIAN);
+            cuboids.emplace_back(x, size, d, m, v, 1, 1);
 
             getline(input_file, tmp_string);
             LOG4CXX_DEBUG(fileReaderLogger, "Read line: " << tmp_string);

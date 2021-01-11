@@ -77,7 +77,15 @@ public:
      */
      void erase(int i);
 
+    /**
+    * Does one iteration step with the particles.
+    */
      void calculateIteration() override;
 
+    /**
+    * Size of particles vector.
+    */
      std::size_t size() override;
+
+     void mixParameters();
 };

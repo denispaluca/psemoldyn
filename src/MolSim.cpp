@@ -1,10 +1,10 @@
 
 #include "Simulation.h"
-#include "xml/molsimInput.cxx"
 #include <chrono>
 #include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
 #include <iostream>
+#include <fstream>
 
 using namespace log4cxx;
 using namespace log4cxx::helpers;
@@ -20,7 +20,7 @@ void help();
  * @param argsv
  * @return
  */
-int xmlRoutine(char * xmlFile, bool isPT = false);
+int xmlRoutine(std::string xmlFile, bool isPT = false);
 
 /**
  * Start performance test timer.
@@ -66,7 +66,7 @@ int main(int argc, char *argsv[]) {
     }
 }
 
-int xmlRoutine(char * xmlFile, bool isPT) {
+int xmlRoutine(std::string xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
     if (isPT) startPT();
     std::unique_ptr<molsimInput> inputFile;
@@ -77,12 +77,22 @@ int xmlRoutine(char * xmlFile, bool isPT) {
         help();
         return -1;
     }
-    //std::unique_ptr<molsimInput> ptr(input(xmlFile));
 
     auto sim = Simulation(*inputFile);
     sim.start(isPT);
 
     if(isPT) endPT();
+
+    if(inputFile->checkpoint()){
+        xml_schema::namespace_infomap map;
+        map[""].name = "";
+        map[""].schema = "../src/xml/molsimInput.xsd";
+        size_t lastindex = xmlFile.find_last_of('.');
+        auto rawname = xmlFile.substr(0, lastindex);
+        std::ofstream ofs (rawname + "_checkpoint.xml");
+        input(ofs, sim.checkpoint(), map);
+    }
+
     LOG4CXX_INFO(molsimLogger, "output written. Terminating...");
     return 0;
 }

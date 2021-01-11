@@ -4,8 +4,15 @@
 
 #pragma once
 #include <functional>
+#include <map>
 #include "particle/Particle.h"
+
 class Container{
+protected:
+    std::map<std::array<double, 2>, double> mixedEpsilon;
+
+    std::map<std::array<double, 2>, double> mixedSigma;
+
 public:
     /**
      * Iterate over all particles and apply function f
@@ -30,4 +37,7 @@ public:
      * Size of particles vector.
      */
     virtual std::size_t size() = 0;
+
+
+    virtual void mixParameters() = 0;
 };

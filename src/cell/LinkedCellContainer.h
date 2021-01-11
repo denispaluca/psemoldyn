@@ -16,35 +16,48 @@ private:
      */
     std::array<double, 3> domain_size{};
 
+    /**
+     * The number of cells per dimension.
+     */
     std::array<int, 3> dimensions{};
 
     /**
-     * THe cutoff-radius
+     * The cutoff-radius.
      */
     double cutoff_radius;
+
+    /**
+     * Optional gravity given over xml.
+     */
+    domain_type::gravity_optional gravity;
 
     /**
      * A vector containing all cells
      */
     std::vector<LinkedCell> cells;
 
+    /**
+     * THe particles contained in this container
+     */
     ParticleContainer particles;
 
+    /**
+     * A pointer to this LinkedCellContainer's BoundaryHandler
+     */
     BoundaryHandler* boundaryHandler;
 
+    /**
+     * Deletes all particles outside of the container's domain
+     */
     void clearOutflowParticles();
 
+    /**
+     * Finds and adds neighbors of LinkedCells.
+     */
     void populateNeighbours();
 
-    bool assignParticle(Particle& p);
-
-    int getIndex(std::array<int, 3> pos);
-
-    std::array<int,3> indexToPos(int i);
-
-    int getIndexFromParticle(Particle& p);
-
 public:
+    LinkedCellContainer();
     /**
      * Constructor for a LinkedCellContainer, creates cells automatically + assigns correct particles
      * @param domain_size the domain size
@@ -54,8 +67,24 @@ public:
      */
     LinkedCellContainer(domain_type domain, ParticleContainer &particles);
 
-
+    /**
+    * Does one iteration step with the particles
+    */
     void calculateIteration() override;
+
+    /**
+     * Adds goven Particle to correct LinkeCell.
+     * @param p the Particle to be added
+     * @return true if Particle was added, false if Particle is outside of domain
+     */
+    bool assignParticle(Particle& p);
+
+    /**
+     * Calculates index of the LinkedCell containing the given point in space
+     * @param pos the coordinates
+     * @return the index of the LinkedCell
+     */
+    int getIndex(std::array<int, 3> pos);
 
     /**
      * Iterate over all particles and apply function f
@@ -71,10 +100,55 @@ public:
      */
     void iteratePairs(std::function<void(Particle&, Particle&)> f) override;
 
+    /**
+     * Calculates position of LinkedCell (lower front-left corner) from its index
+     * @param i
+     * @return
+     */
+    std::array<int,3> indexToPos(int i);
+
+    /**
+     * Calculates index of the LInkedCell the given particle belongs to
+     * @param p
+     * @return
+     */
+    int getIndexFromParticle(Particle& p);
+
+    /**
+     * The number of particles in this LinkedCellContainer
+     * @return
+     */
     std::size_t size() override;
 
-    std::vector<LinkedCell> getCells();
+    /**
+     * Getter for vector of LinkedCells
+     * @return the LinkedCells of this container
+     */
+    std::vector<LinkedCell>& getCells();
 
-    ParticleContainer getParticles();
+    /**
+     * Getter for ParticleContainer
+     * @return the ParticleContainer containing the Particles of this cell
+     */
+    ParticleContainer& getParticles();
+
+    /**
+     * Getter for cell grid dimensions.
+     * @return Dimensions
+     */
+    std::array<int, 3>& getDimensions();
+
+    /**
+     * Getter for domain size.
+     * @return Domain size
+     */
+    std::array<double, 3>& getDomainSize();
+
+    /**
+     * Getter for boundary handler.
+     * @return Boundary handler
+     */
+    BoundaryHandler* getBoundaryHandler();
+
+    void mixParameters();
 };
-

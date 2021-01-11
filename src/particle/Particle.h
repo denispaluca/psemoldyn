@@ -8,6 +8,7 @@
 #pragma once
 
 #include <array>
+#include <string>
 /**
  * The particle class represents a particle and it's characteristics.
  */
@@ -60,6 +61,10 @@ private:
    */
   double dtsq_2m;
 
+  double epsilon;
+
+  double sigma;
+
 public:
   /**
    * Particle constructor which sets its type.
@@ -89,7 +94,23 @@ public:
       // for visualization, we need always 3 coordinates
       // -> in case of 2d, we use only the first and the second
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-      double m_arg, int type = 0);
+      double m_arg, double epsilon, double sigma);
+
+  /**
+   * Particle constructor for full particles state.
+   * @param x Position
+   * @param v Velocity
+   * @param m Mass
+   * @param f Current force
+   * @param old_f Old force
+   * @param type Type
+   * @param epsilon Epsilon
+   * @param sigma Sigma
+   */
+  Particle(
+          std::array<double, 3> x, std::array<double, 3> v,
+          double m, std::array<double, 3> f, std::array<double, 3> old_f,
+          int type, double epsilon, double sigma);
 
   /**
    * Destructor of particle
@@ -137,6 +158,10 @@ public:
    * @return type
    */
   int getType();
+
+  double getEpsilon();
+
+  double getSigma();
 
   /**
    * Operator that compares all attributes of
@@ -188,9 +213,24 @@ public:
    */
   void updateDT(double delta_t);
 
+  /**
+   * Checks if particle is out of the domain.
+   * @param domain_size Size of the domain.
+   * @return True if particle is out.
+   */
   bool isOut(std::array<double, 3> domain_size);
 
+  /**
+   * Sets the mass of the particle.
+   * @param mass New mass.
+   */
   void setM(double mass);
+
+  /**
+   * Apply gravitational force on the particle.
+   * @param g Gravity to be applied.
+   */
+  void applyGravity(double g);
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);
