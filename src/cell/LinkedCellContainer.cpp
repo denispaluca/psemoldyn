@@ -8,11 +8,11 @@
 #include <algorithm>
 #include <set>
 #include <utils/ForceUtils.h>
-#include <log4cxx/propertyconfigurator.h>
 #include <xml/molsimInput.hxx>
 #include <utils/XSDMapper.h>
 
 #ifdef WITH_LOG4CXX
+    #include <log4cxx/propertyconfigurator.h>
     #include <log4cxx/logger.h>
 
     using namespace log4cxx;

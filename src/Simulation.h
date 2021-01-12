@@ -44,11 +44,17 @@ public:
     /**
      * Start simulation.
      * @param isPT Is simulation run a performance test.
+     * @return Number of calculated iterations
      */
-    void start(bool isPT);
+    int start(bool isPT);
 
     /**
      * Generates checkpoint after simulation.
      */
     molsimInput &checkpoint();
+
+    /**
+    * Get Number of particles
+    */
+    int getNumParticles();
 };

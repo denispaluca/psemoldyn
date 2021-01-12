@@ -31,7 +31,7 @@ void startPT();
 /**
  * End performance test timer.
  */
-void endPT();
+void endPT(int, int);
 
 #ifdef WITH_LOG4CXX
 //static logger variables molsimLogger
@@ -86,15 +86,15 @@ int xmlRoutine(std::string xmlFile, bool isPT) {
 #ifdef WITH_LOG4CXX
         LOG4CXX_FATAL(molsimLogger, e.what() << "\nError details: " << e);
 #endif
-
         help();
         return -1;
     }
 
     auto sim = Simulation(*inputFile);
-    sim.start(isPT);
+    int molecules = sim.getNumParticles();
+    int iterations = sim.start(isPT);
 
-    if(isPT) endPT();
+    if(isPT) endPT(molecules, iterations);
 
     if(inputFile->checkpoint()){
         xml_schema::namespace_infomap map;
@@ -123,17 +123,33 @@ void startPT(){
     log4cxx::Logger::getLogger("vtkWriter")->setLevel(offptr);
     log4cxx::Logger::getLogger("linkedcellcont")->setLevel(offptr);
 #else
-    std::cout << "Starting performance test.";
+    std::cout << "Starting performance test.\n";
 #endif
 
     ptStartTime = std::chrono::high_resolution_clock::now().time_since_epoch();
 }
 
-void endPT(){
+void endPT(int numParticles, int iterations){
     auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptEndTime -= ptStartTime;
+    double mups = ((long) numParticles * (long) iterations * 1000000000) / (double) ptEndTime.count();
+
 #ifdef WITH_LOG4CXX
-    LOG4CXX_INFO(molsimLogger, "Performance test ended. Elapsed time: "<< ptEndTime.count() << " ns");
+    LOG4CXX_INFO(molsimLogger, "Performance test ended.\n\tElapsed time:\t\t\t\t\t"
+        << ptEndTime.count() << " ns (" << ((double) ptEndTime.count())/1000000000 << " s)"
+        << "\n\t#Particles:\t\t\t\t\t\t" << numParticles
+        << "\n\tIterations:\t\t\t\t\t\t" << iterations
+        << "\n\t#Particles * Iterations:\t\t" << numParticles * iterations
+        << "\n\tMolecule-updates per second:\t" << mups
+        << " MUPS/s (" << mups/1000000 << " MMPUS/s)");
+#else
+    std::cout << "Performance test ended.\n\tElapsed time:\t\t\t\t\t"
+        << ptEndTime.count() << " ns (" << ((double) ptEndTime.count())/1000000000 << " s)"
+        << "\n\t#Particles:\t\t\t\t\t\t" << numParticles
+        << "\n\tIterations:\t\t\t\t\t\t" << iterations
+        << "\n\t#Particles * Iterations:\t\t" << numParticles * iterations
+        << "\n\tMolecule-updates per second:\t" << mups
+        << " MUPS/s (" << mups/1000000 << " MMPUS/s)" << std::endl;
 #endif
 }
 
@@ -149,7 +165,7 @@ void help() {
 #ifdef WITH_LOG4CXX
     LOG4CXX_INFO(molsimLogger, help);
 #else
-    std::cout << help;
+    std::cout << help << std::endl;
 #endif
 
 }

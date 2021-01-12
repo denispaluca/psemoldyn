@@ -28,7 +28,7 @@ Simulation::Simulation(molsimInput &data) : data(data) {
     container->mixParameters();
 }
 
-void Simulation::start(bool isPT) {
+int Simulation::start(bool isPT) {
     int iteration = 0;
 
     double current_time = 0;
@@ -52,6 +52,8 @@ void Simulation::start(bool isPT) {
 
         current_time += data.delta_t();
     }
+
+    return iteration;
 }
 
 void Simulation::plotParticles(int iteration) {
@@ -88,4 +90,8 @@ molsimInput &Simulation::checkpoint() {
     });
 
     return data;
+}
+
+int Simulation::getNumParticles() {
+    return container->size();
 }
