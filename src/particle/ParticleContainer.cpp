@@ -4,15 +4,18 @@
 
 #include <utils/ForceUtils.h>
 #include "ParticleContainer.h"
-#include <log4cxx/logger.h>
-#include <log4cxx/propertyconfigurator.h>
 #include <cmath>
 
-using namespace log4cxx;
-using namespace log4cxx::helpers;
+#ifdef WITH_LOG4CXX
+    #include <log4cxx/logger.h>
+    #include <log4cxx/propertyconfigurator.h>
 
+    using namespace log4cxx;
+    using namespace log4cxx::helpers;
 
-log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("molsim.console"));
+    //static logger variable molsimLogger
+    log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("molsim.console"));
+#endif
 
 ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
@@ -68,7 +71,9 @@ std::vector<Particle>& ParticleContainer::getParticles() {
 }
 
 ParticleContainer::~ParticleContainer() {
+#ifdef WITH_LOG4CXX
     LOG4CXX_INFO(logger, "ParticleCONTAINER destructed!");
+#endif
 }
 
 std::size_t ParticleContainer::size() {

@@ -8,17 +8,19 @@
 #include <algorithm>
 #include <set>
 #include <utils/ForceUtils.h>
-
-#include <log4cxx/logger.h>
 #include <log4cxx/propertyconfigurator.h>
 #include <xml/molsimInput.hxx>
 #include <utils/XSDMapper.h>
 
-using namespace log4cxx;
-using namespace log4cxx::helpers;
+#ifdef WITH_LOG4CXX
+    #include <log4cxx/logger.h>
 
-//static logger variable linkedCellContainerLogger
-log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
+    using namespace log4cxx;
+    using namespace log4cxx::helpers;
+
+    //static logger variable linkedCellContainerLogger
+    log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
+#endif
 
 LinkedCellContainer::LinkedCellContainer(domain_type domain,
                                          ParticleContainer &particles){
@@ -42,12 +44,17 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     });
 
     boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions);
-
-    LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
+    #ifdef WITH_LOG4CXX
+        LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
+    #endif
 
     populateNeighbours();
 
-    LOG4CXX_INFO(linkedCellContainerLogger, "Ended neighbor calculation");
+    #ifdef WITH_LOG4CXX
+        LOG4CXX_INFO(linkedCellContainerLogger, "Ended neighbor calculation");
+    #endif
+
+
 }
 
 void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
@@ -118,7 +125,11 @@ bool LinkedCellContainer::assignParticle(Particle &p) {
     int index = getIndexFromParticle(p);
 
     if(index < 0 || index > cells.size()){
-        LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+
+        #ifdef WITH_LOG4CXX
+            LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+        #endif
+
         return false;
     }
     cells.at(index).addParticle(&p);

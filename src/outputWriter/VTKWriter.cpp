@@ -12,14 +12,16 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <log4cxx/logger.h>
-#include <log4cxx/propertyconfigurator.h>
+#ifdef WITH_LOG4CXX
+    #include <log4cxx/logger.h>
+    #include <log4cxx/propertyconfigurator.h>
 
-using namespace log4cxx;
-using namespace log4cxx::helpers;
+    using namespace log4cxx;
+    using namespace log4cxx::helpers;
 
-//static logger variables molsimLogger
-log4cxx::LoggerPtr vtkWriterLogger(log4cxx::Logger::getLogger("vtkWriter"));
+    //static logger variable molsimLogger
+    log4cxx::LoggerPtr vtkWriterLogger(log4cxx::Logger::getLogger("vtkWriter"));
+#endif
 
 namespace outputWriter {
 
@@ -71,10 +73,14 @@ void VTKWriter::writeFile(const std::string &filename, int iteration) {
 
 void VTKWriter::plotParticle(Particle &p) {
   if (vtkFile->UnstructuredGrid().present()) {
+#ifdef WITH_LOG4CXX
       LOG4CXX_INFO(vtkWriterLogger,  "UnstructuredGrid is present");
+#endif
     //std::cout << "UnstructuredGrid is present" << std::endl;
   } else {
+#ifdef WITH_LOG4CXX
       LOG4CXX_INFO(vtkWriterLogger,  "ERROR: No UnstructuredGrid present");
+#endif
     //std::cout << "ERROR: No UnstructuredGrid present" << std::endl;
   }
 
