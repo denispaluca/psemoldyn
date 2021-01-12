@@ -28,7 +28,14 @@ target_link_libraries(libmolsim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
-        #----------- include log4cxx-----------
-        PRIVATE
-            log4cxx
         )
+
+option(CLUSTER "deactivate log4cxx on Linux Cluster" OFF)
+
+if(NOT CLUSTER)
+    target_link_libraries(libmolsim
+            #----------- include log4cxx-----------
+            PRIVATE
+                log4cxx
+            )
+endif(NOT CLUSTER)
