@@ -42,3 +42,9 @@ add_subdirectory(tests)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 include(doxygen)
+
+option(CLUSTER "deactivate log4cxx on Linux Cluster" OFF)
+
+if(NOT CLUSTER)
+    add_compile_definitions(WITH_LOG4CXX)
+endif(NOT CLUSTER)

@@ -14,7 +14,7 @@
     using namespace log4cxx::helpers;
 
     //static logger variable molsimLogger
-    log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("molsim.console"));
+    log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("particle"));
 #endif
 
 ParticleContainer::ParticleContainer() {

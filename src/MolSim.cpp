@@ -54,7 +54,6 @@ int main(int argc, char *argsv[]) {
     LOG4CXX_INFO(molsimLogger, "Hi from MolSim. Starting code execution. This may take a while...");
 #endif
 
-
     switch (argc) {
         case 2:
             if (!strcmp(argsv[1], "-h") || !strcmp(argsv[1], "-help")) {
@@ -135,21 +134,19 @@ void endPT(int numParticles, int iterations){
     double mups = ((long) numParticles * (long) iterations * 1000000000) / (double) ptEndTime.count();
 
 #ifdef WITH_LOG4CXX
-    LOG4CXX_INFO(molsimLogger, "Performance test ended.\n\tElapsed time:\t\t\t\t\t"
-        << ptEndTime.count() << " ns (" << ((double) ptEndTime.count())/1000000000 << " s)"
-        << "\n\t#Particles:\t\t\t\t\t\t" << numParticles
-        << "\n\tIterations:\t\t\t\t\t\t" << iterations
-        << "\n\t#Particles * Iterations:\t\t" << numParticles * iterations
-        << "\n\tMolecule-updates per second:\t" << mups
-        << " MUPS/s (" << mups/1000000 << " MMPUS/s)");
+    LOG4CXX_INFO(molsimLogger, "Performance test ended."
+        << "\n\tElapsed time:                " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
+        << "\n\t#Particles:                  " << numParticles
+        << "\n\tIterations:                  " << iterations
+        << "\n\t#Particles * Iterations:     " << numParticles * iterations
+        << "\n\tMolecule-updates per second: " << mups << "MUPS/s (" << mups/1000000 << "MMPUS/s)");
 #else
-    std::cout << "Performance test ended.\n\tElapsed time:\t\t\t\t\t"
-        << ptEndTime.count() << " ns (" << ((double) ptEndTime.count())/1000000000 << " s)"
-        << "\n\t#Particles:\t\t\t\t\t\t" << numParticles
-        << "\n\tIterations:\t\t\t\t\t\t" << iterations
-        << "\n\t#Particles * Iterations:\t\t" << numParticles * iterations
-        << "\n\tMolecule-updates per second:\t" << mups
-        << " MUPS/s (" << mups/1000000 << " MMPUS/s)" << std::endl;
+    std::cout << "Performance test ended."
+        << "\n\tElapsed time:                " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
+        << "\n\t#Particles:                  " << numParticles
+        << "\n\tIterations:                  " << iterations
+        << "\n\t#Particles * Iterations:     " << numParticles * iterations
+        << "\n\tMolecule-updates per second: " << mups << "MUPS/s (" << mups/1000000 << "MMPUS/s)" << std::endl;
 #endif
 }
 

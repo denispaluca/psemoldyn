@@ -30,13 +30,10 @@ target_link_libraries(libmolsim
             xerces-c
         )
 
-option(CLUSTER "deactivate log4cxx on Linux Cluster" OFF)
-
 if(NOT CLUSTER)
     target_link_libraries(libmolsim
             #----------- include log4cxx-----------
             PRIVATE
                 log4cxx
             )
-    add_compile_definitions(WITH_LOG4CXX)
 endif(NOT CLUSTER)
