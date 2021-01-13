@@ -6,6 +6,7 @@
     <delta_t>0.0002</delta_t>
     <t_end>5</t_end>
     <linked_cell>true</linked_cell>
+    <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
             <x>180</x>
@@ -44,6 +45,8 @@
                     <y>0.0</y>
                     <z>0.0</z>
                 </velocity>
+                <epsilon>5</epsilon>
+                <sigma>1</sigma>
             </cuboid>
             <cuboid>
                 <position>
@@ -63,6 +66,8 @@
                     <y>-10.0</y>
                     <z>0.0</z>
                 </velocity>
+                <epsilon>5</epsilon>
+                <sigma>1</sigma>
             </cuboid>
         </cuboids>
         <particles></particles>

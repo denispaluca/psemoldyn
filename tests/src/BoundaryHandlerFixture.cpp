@@ -14,7 +14,7 @@ protected:
         auto r = boundary_type::value::reflective;
         auto reflectiveDomain = domain_type(double_vector(9, 9, 9), 3,
                                             boundaries_type(r, r, r, r, r, r));
-        auto p = Particle({4.5,4.5,4.5},{0,0,0},1,0);
+        auto p = Particle({4.5,4.5,4.5},{0,0,0},1,5.0,1.0);
         auto pc = ParticleContainer();
         reflectiveContainer = LinkedCellContainer(reflectiveDomain, pc);
         reflectiveContainer.getParticles().push(p);
@@ -189,25 +189,4 @@ TEST_F(BoundaryHandlerFixture, Period_Back){
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
     EXPECT_DOUBLE_EQ(p.getX()[2], 1);
-}
-
-/**
- * Checks if periodic neighbours are added correctly.
- */
-TEST_F(BoundaryHandlerFixture, Periodic_Neighbours){
-    auto &cells = periodicContainer.getCells();
-    auto c000 = cells.at(0);
-    auto c222 = cells.at(periodicContainer.getIndex({2,2,2}));
-    auto c200 = cells.at(periodicContainer.getIndex({2,0,0}));
-    EXPECT_TRUE(c000.isNeighbour(c222));
-    EXPECT_TRUE(c222.isNeighbour(c000));
-    EXPECT_TRUE(c000.isNeighbour(c200));
-    EXPECT_TRUE(c200.isNeighbour(c000));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
-
-    auto c011 = cells.at(periodicContainer.getIndex({0,1,1}));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
-
-    auto c001 = cells.at(periodicContainer.getIndex({0,0,1}));
-    EXPECT_EQ(c000.getNeighbors().size(), 26);
 }

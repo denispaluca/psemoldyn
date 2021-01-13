@@ -18,7 +18,7 @@
       <xsd:element name="z" type="xsd:int"/>
     </xsd:sequence>
   </xsd:complexType>
-  
+
   <!-- specification of one cuboid -->
   <xsd:complexType name="cuboid">
     <xsd:sequence>
@@ -32,17 +32,20 @@
       <xsd:element name="mass" type="xsd:double"/>
       <!-- initial velocity -->
       <xsd:element name="velocity" type="double_vector"/>
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
-  
+
   <!-- multiple cuboids -->
   <xsd:complexType name="cuboid_cluster">
     <xsd:sequence>
       <xsd:element name="cuboid" type="cuboid" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>
-  
-  <!-- specification of one particle -->  
+
+  <!-- specification of one particle -->
   <xsd:complexType name="particle">
     <xsd:sequence>
       <!-- coordinates of particle -->
@@ -51,9 +54,16 @@
       <xsd:element name="v" type="double_vector"/>
       <!-- mass of particle -->
       <xsd:element name="m" type="xsd:double"/>
+      <!-- force -->
+      <xsd:element name="f" type="double_vector"/>
+      <xsd:element name="old_f" type="double_vector"/>
+      <xsd:element name="type" type="xsd:int"/>
+      <!-- lennard jones constants of particle -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
-  
+
   <!-- multiple particles -->
   <xsd:complexType name="particle_cluster">
     <xsd:sequence>
@@ -72,6 +82,9 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -102,7 +115,7 @@
     </xsd:sequence>
   </xsd:complexType>
 
-  
+
   <xsd:simpleType name="boundary_type">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="outflow"/>
@@ -143,10 +156,11 @@
       <!-- Set t_end -->
       <xsd:element name="t_end" type="xsd:double"/>
       <xsd:element name="linked_cell" type="xsd:boolean" />
+      <xsd:element name="checkpoint" type="xsd:boolean" />
       <xsd:element name="domain" type="domain_type" />
       <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
-    </xsd:sequence>    
+    </xsd:sequence>
   </xsd:complexType>
 
   <xsd:element name="input" type="molsimInput"/>
