@@ -5,9 +5,6 @@
 #include <cmath>
 #include "ForceUtils.h"
 
-#define EPSILON 5.0
-#define SIGMA  1.0
-
 
 /**
  * Calculate second norm cubed of array with length 3.
@@ -67,12 +64,7 @@ void calculateF(Particle &p1, Particle &p2) {
  */
 
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma) {
-    std::array<double, 3> p1_x = p1.x,
-            xDiff = {p2.x[0], p2.x[1], p2.x[2]};
-    xDiff[0] -= p1_x[0];
-    xDiff[1] -= p1_x[1];
-    xDiff[2] -= p1_x[2];
-
+    std::array<double, 3> xDiff = {p2.x[0] - p1.x[0], p2.x[1] - p1.x[1], p2.x[2] - p1.x[2]};
     double divider = squareSum(xDiff);
 
     double sigDivPow6 = pow6(sigma)/pow3(divider);
@@ -84,9 +76,9 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
     p1.f[1] += f12[1];
     p1.f[2] += f12[2];
 
-    p1.f[0] -= f12[0];
-    p1.f[1] -= f12[1];
-    p1.f[2] -= f12[2];
+    p2.f[0] -= f12[0];
+    p2.f[1] -= f12[1];
+    p2.f[2] -= f12[2];
 
     //p1.addF(f12);
     //p2.addF({-f12[0], -f12[1], -f12[2]});
