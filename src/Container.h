@@ -40,4 +40,8 @@ public:
 
 
     virtual void mixParameters() = 0;
+
+    virtual std::map<std::array<double, 2>, double> getMixedEpsilon();
+
+    virtual std::map<std::array<double, 2>, double> getMixedSigma();
 };

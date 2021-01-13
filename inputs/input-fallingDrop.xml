@@ -6,6 +6,7 @@
     <delta_t>0.00005</delta_t>
     <t_end>10</t_end>
     <linked_cell>true</linked_cell>
+    <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
             <x>120</x>
@@ -43,6 +44,8 @@
                 </v>
                 <m>1</m>
                 <r>15</r>
+                <epsilon>5</epsilon>
+                <sigma>1</sigma>
             </sphere>
         </spheres>
     </particle_data>

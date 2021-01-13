@@ -13,7 +13,7 @@ protected:
     std::vector<Particle> particles;
     void SetUp() override {
       for(int i=0;i<20;i++) {
-        auto p = Particle({0, 0, 0}, {0, 0, 0}, i, 0);
+        auto p = Particle({0, 0, 0}, {0, 0, 0}, i, 5, 1);
         auto p1 = Particle(p);
         pc.push(p);
         particles.emplace_back(p);
