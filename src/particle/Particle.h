@@ -61,10 +61,6 @@ private:
    */
   double dtsq_2m;
 
-  double epsilon;
-
-  double sigma;
-
 public:
   /**
    * Particle constructor which sets its type.
@@ -153,16 +149,17 @@ public:
    */
   double getM();
 
+
   /**
    * Getter for the type of this particle.
    * @return type
    */
   int getType();
-
+/*
   double getEpsilon();
 
   double getSigma();
-
+*/
   /**
    * Operator that compares all attributes of
    * this particle with another.
@@ -231,6 +228,10 @@ public:
    * @param g Gravity to be applied.
    */
   void applyGravity(double g);
+
+    double epsilon;
+
+    double sigma;
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

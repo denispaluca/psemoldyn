@@ -91,7 +91,7 @@ void BoundaryHandler::reflect(Boundaries b) {
     auto func = [&](Particle& p){
         bool isThere;
         auto x = p.getX();
-        auto sigma = p.getSigma();
+        auto sigma = p.sigma;
         auto B_EFFECT = sqrt6of2 * sigma;
         prepareCounter(p);
         switch (b) {
@@ -122,7 +122,7 @@ void BoundaryHandler::reflect(Boundaries b) {
         }
 
         if (isThere)
-            calculateLennardJones(p, counter, p.getEpsilon(), sigma);
+            calculateLennardJones(p, counter, p.epsilon, sigma);
     };
 
     iterateParticlesAtBoundary(b,func);

@@ -78,9 +78,11 @@ std::array<double, 3> &Particle::getF() { return f; }
 
 std::array<double, 3> &Particle::getOldF() { return old_f; }
 
+/*
 double Particle::getEpsilon() { return epsilon; }
 
 double Particle::getSigma() { return sigma; }
+*/
 
 void Particle::addF(const std::array<double, 3> &fn) {
   f[0] += fn[0];

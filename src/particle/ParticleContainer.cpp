@@ -56,8 +56,8 @@ void ParticleContainer::calculateIteration(){
     // calculate new f
     //iteratePairs(calculateLennardJones);
     iteratePairs([&](Particle &p1, Particle &p2){
-        double epsilon = mixedEpsilon.find({p1.getEpsilon(), p2.getEpsilon()})->second;
-        double sigma = mixedSigma.find({p1.getSigma(), p2.getSigma()})->second;
+        double epsilon = mixedEpsilon.find({p1.epsilon, p2.epsilon})->second;
+        double sigma = mixedSigma.find({p1.sigma, p2.sigma})->second;
         calculateLennardJones(p1, p2, epsilon, sigma);
     });
     // calculate new v
@@ -82,15 +82,15 @@ std::size_t ParticleContainer::size() {
 
 void ParticleContainer::mixParameters() {
     iteratePairs([&](Particle &p1, Particle &p2){
-        double e1 = p1.getEpsilon();
-        double e2 = p2.getEpsilon();
+        double e1 = p1.epsilon;
+        double e2 = p2.epsilon;
         if(this->mixedEpsilon.find(std::make_pair(e1, e2)) == this->mixedEpsilon.end()) {
             // mix epsilons and save in map
             mixedEpsilon.insert(std::make_pair(std::make_pair(e1, e2), std::sqrt(e1*e2)));
         }
 
-        double s1 = p1.getSigma();
-        double s2 = p2.getSigma();
+        double s1 = p1.sigma;
+        double s2 = p2.sigma;
         if(this->mixedSigma.find(std::make_pair(s1, s2)) == this->mixedSigma.end()) {
             // mix sigmas and save in map
             mixedSigma.insert(std::make_pair(std::make_pair(s1, s2), (s1+s2)/2));
