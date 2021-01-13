@@ -6,7 +6,7 @@
     <delta_t>0.0005</delta_t>
     <t_end>50</t_end>
     <linked_cell>true</linked_cell>
-    <checkpoint>true</checkpoint>
+    <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
             <x>300</x>
