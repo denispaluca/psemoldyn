@@ -14,14 +14,14 @@ BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 
                                  boundaries(boundaries),domainSize(domainSize), dimensions(dimensions){}
 
 void BoundaryHandler::prepareCounter(Particle &p) {
-    auto x = p.getX();
+    auto x = p.x;
     counter.getF()[0] = 0;
     counter.getF()[1] = 0;
     counter.getF()[2] = 0;
     counter.setM(p.getM());
-    counter.getX()[0] = x[0];
-    counter.getX()[1] = x[1];
-    counter.getX()[2] = x[2];
+    counter.x[0] = x[0];
+    counter.x[1] = x[1];
+    counter.x[2] = x[2];
 }
 
 void BoundaryHandler::iterateCellsAtBoundary(
@@ -90,34 +90,34 @@ void BoundaryHandler::iterateParticlesAtBoundary(Boundaries b, const std::functi
 void BoundaryHandler::reflect(Boundaries b) {
     auto func = [&](Particle& p){
         bool isThere;
-        auto x = p.getX();
+        auto x = p.x;
         auto sigma = p.sigma;
         auto B_EFFECT = sqrt6of2 * sigma;
         prepareCounter(p);
         switch (b) {
             case left:
                 isThere = x[0] < B_EFFECT;
-                counter.getX()[0] = -x[0];
+                counter.x[0] = -x[0];
                 break;
             case right:
                 isThere = domainSize[0] - x[0] < B_EFFECT;
-                counter.getX()[0] = 2 * domainSize[0] - x[0];
+                counter.x[0] = 2 * domainSize[0] - x[0];
                 break;
             case bottom:
                 isThere = x[1] < B_EFFECT;
-                counter.getX()[1] = -x[1];
+                counter.x[1] = -x[1];
                 break;
             case top:
                 isThere = domainSize[1] - x[1] < B_EFFECT;
-                counter.getX()[1] = 2 * domainSize[1] - x[1];
+                counter.x[1] = 2 * domainSize[1] - x[1];
                 break;
             case front:
                 isThere = x[2] < B_EFFECT;
-                counter.getX()[2] = -x[2];
+                counter.x[2] = -x[2];
                 break;
             case back:
                 isThere = domainSize[2] - x[2] < B_EFFECT;
-                counter.getX()[2] = 2 * domainSize[2] - x[2];
+                counter.x[2] = 2 * domainSize[2] - x[2];
                 break;
         }
 
@@ -130,7 +130,7 @@ void BoundaryHandler::reflect(Boundaries b) {
 
 void BoundaryHandler::period(Boundaries b) {
     auto func = [&](Particle& p){
-        auto& x = p.getX();
+        auto& x = p.x;
         switch (b) {
             case top:
                 if(x[1] >= domainSize[1])
@@ -195,9 +195,9 @@ void BoundaryHandler::iteratePeriodicParticles(
                         auto& neighbour = cells->at(index);
                         for(auto &p1 :c.getParticles())
                             for(auto &p2 : neighbour.getParticles()){
-                                p2->getX()[0] -= domainSize[0];
+                                p2->x[0] -= domainSize[0];
                                 f(*p1, *p2);
-                                p2->getX()[0] += domainSize[0];
+                                p2->x[0] += domainSize[0];
                             }
                     }
                 }
@@ -215,9 +215,9 @@ void BoundaryHandler::iteratePeriodicParticles(
                         auto& neighbour = cells->at(index);
                         for(auto &p1 :c.getParticles())
                             for(auto &p2 : neighbour.getParticles()){
-                                p2->getX()[1] -= domainSize[1];
+                                p2->x[1] -= domainSize[1];
                                 f(*p1, *p2);
-                                p2->getX()[1] += domainSize[1];
+                                p2->x[1] += domainSize[1];
                             }
                     }
                 }
@@ -235,9 +235,9 @@ void BoundaryHandler::iteratePeriodicParticles(
                         auto& neighbour = cells->at(index);
                         for(auto &p1 :c.getParticles())
                             for(auto &p2 : neighbour.getParticles()){
-                                p2->getX()[2] -= domainSize[2];
+                                p2->x[2] -= domainSize[2];
                                 f(*p1, *p2);
-                                p2->getX()[2] += domainSize[2];
+                                p2->x[2] += domainSize[2];
                             }
                     }
                 }
@@ -258,7 +258,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &x = p2->getX();
+                            auto &x = p2->x;
                             x[0] -= domainSize[0];
                             x[1] -= domainSize[1];
                             f(*p1, *p2);
@@ -281,7 +281,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &x = p2->getX();
+                            auto &x = p2->x;
                             x[0] -= domainSize[0];
                             x[1] += domainSize[1];
                             f(*p1, *p2);
@@ -304,7 +304,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &p2x = p2->getX();
+                            auto &p2x = p2->x;
                             p2x[2] -= domainSize[2];
                             p2x[1] -= domainSize[1];
                             f(*p1, *p2);
@@ -327,7 +327,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &p2x = p2->getX();
+                            auto &p2x = p2->x;
                             p2x[2] -= domainSize[2];
                             p2x[1] += domainSize[1];
                             f(*p1, *p2);
@@ -350,7 +350,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &x = p2->getX();
+                            auto &x = p2->x;
                             x[0] -= domainSize[0];
                             x[2] -= domainSize[2];
                             f(*p1, *p2);
@@ -373,7 +373,7 @@ void BoundaryHandler::iteratePeriodicParticles(
                     auto& neighbour = cells->at(index);
                     for(auto &p1 :c.getParticles())
                         for(auto &p2 : neighbour.getParticles()){
-                            auto &x = p2->getX();
+                            auto &x = p2->x;
                             x[0] -= domainSize[0];
                             x[2] += domainSize[2];
                             f(*p1, *p2);
@@ -394,7 +394,7 @@ void BoundaryHandler::iteratePeriodicParticles(
 
         for(auto &p1 :c1.getParticles())
             for(auto &p2 : c2.getParticles()){
-                auto &x = p2->getX();
+                auto &x = p2->x;
                 x[0] -= domainSize[0];
                 x[1] -= domainSize[1];
                 x[2] -= domainSize[2];
@@ -411,7 +411,7 @@ void BoundaryHandler::iteratePeriodicParticles(
 
         for(auto &p1 :c1.getParticles())
             for(auto &p2 : c2.getParticles()){
-                auto &x = p2->getX();
+                auto &x = p2->x;
                 x[0] -= domainSize[0];
                 x[1] += domainSize[1];
                 x[2] -= domainSize[2];
@@ -428,7 +428,7 @@ void BoundaryHandler::iteratePeriodicParticles(
 
         for(auto &p1 :c1.getParticles())
             for(auto &p2 : c2.getParticles()){
-                auto &x = p2->getX();
+                auto &x = p2->x;
                 x[0] -= domainSize[0];
                 x[1] -= domainSize[1];
                 x[2] += domainSize[2];
@@ -445,7 +445,7 @@ void BoundaryHandler::iteratePeriodicParticles(
 
         for(auto &p1 :c1.getParticles())
             for(auto &p2 : c2.getParticles()){
-                auto &x = p2->getX();
+                auto &x = p2->x;
                 x[0] -= domainSize[0];
                 x[1] += domainSize[1];
                 x[2] += domainSize[2];

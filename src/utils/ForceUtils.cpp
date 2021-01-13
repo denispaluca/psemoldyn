@@ -67,8 +67,8 @@ void calculateF(Particle &p1, Particle &p2) {
  */
 
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma) {
-    std::array<double, 3> p1_x = p1.getX(),
-            xDiff = p2.getX();
+    std::array<double, 3> p1_x = p1.x,
+            xDiff = {p2.x[0], p2.x[1], p2.x[2]};
     xDiff[0] -= p1_x[0];
     xDiff[1] -= p1_x[1];
     xDiff[2] -= p1_x[2];

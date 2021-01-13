@@ -147,7 +147,7 @@ std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
 int LinkedCellContainer::getIndexFromParticle(Particle &p) {
     std::array<int,3> x{};
     for(int i = 0; i<3;i++)
-        x[i] = (int)std::floor(p.getX()[i]/cutoff_radius);
+        x[i] = (int)std::floor(p.x[i]/cutoff_radius);
 
     return getIndex(x);
 }

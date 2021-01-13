@@ -16,11 +16,6 @@ class Particle {
 
 private:
   /**
-   * Position of the particle
-   */
-  std::array<double, 3> x;
-
-  /**
    * Velocity of the particle
    */
   std::array<double, 3> v;
@@ -121,7 +116,7 @@ public:
    * @return x - Position
    * @param
    */
-  std::array<double, 3> &getX();
+  //std::array<double, 3> &getX();
 
   /**
    * Getter for the force on this particle (f).
@@ -177,12 +172,13 @@ public:
   std::string toString();
     */
 
-  /**
+  /*
    * Adds force fn to current force.
    * @param fn Force to be added.
    * @return
-   */
+     */
   void addF(const std::array<double, 3> &fn);
+
 
   /**
    * Save f to old f and set f to 0.
@@ -231,9 +227,20 @@ public:
    */
   void applyGravity(double g);
 
+    /**
+    * Epsilon of the particle
+    */
     double epsilon;
 
+    /**
+    * Sigma of the particle
+    */
     double sigma;
+
+    /**
+    * Position of the particle
+    */
+    std::array<double, 3> x;
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);

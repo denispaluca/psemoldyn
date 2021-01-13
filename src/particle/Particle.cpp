@@ -72,7 +72,7 @@ void Particle::updateDT(double delta_t) {
     dtsq_2m = dt_2m * delta_t;
 }
 
-std::array<double, 3> &Particle::getX() { return x; }
+//std::array<double, 3> &Particle::getX() { return x; }
 
 std::array<double, 3> &Particle::getV() { return v; }
 
