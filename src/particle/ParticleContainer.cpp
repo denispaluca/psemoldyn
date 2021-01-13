@@ -82,18 +82,18 @@ std::size_t ParticleContainer::size() {
 
 void ParticleContainer::mixParameters() {
     iteratePairs([&](Particle &p1, Particle &p2){
-        double eps1 = p1.getEpsilon();
-        double eps2 = p2.getEpsilon();
-        if(this->mixedEpsilon.find({eps1, eps2}) == this->mixedEpsilon.end()) {
+        double e1 = p1.getEpsilon();
+        double e2 = p2.getEpsilon();
+        if(this->mixedEpsilon.find(std::make_pair(e1, e2)) == this->mixedEpsilon.end()) {
             // mix epsilons and save in map
-            this->mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({eps1, eps2}, std::sqrt(eps1*eps2)));
+            mixedEpsilon.insert(std::make_pair(std::make_pair(e1, e2), std::sqrt(e1*e2)));
         }
 
-        double sig1 = p1.getSigma();
-        double sig2 = p2.getSigma();
-        if(this->mixedSigma.find({sig1, sig2}) == this->mixedSigma.end()) {
+        double s1 = p1.getSigma();
+        double s2 = p2.getSigma();
+        if(this->mixedSigma.find(std::make_pair(s1, s2)) == this->mixedSigma.end()) {
             // mix sigmas and save in map
-            this->mixedSigma.insert(std::pair<std::array<double, 2>, double>({sig1, sig2}, (sig1+sig2)/2));
+            mixedSigma.insert(std::make_pair(std::make_pair(s1, s2), (s1+s2)/2));
         }
     });
 }

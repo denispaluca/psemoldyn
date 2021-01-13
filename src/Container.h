@@ -9,9 +9,9 @@
 
 class Container{
 protected:
-    std::map<std::array<double, 2>, double> mixedEpsilon;
+    std::map<std::pair<double, double>, double> mixedEpsilon;
 
-    std::map<std::array<double, 2>, double> mixedSigma;
+    std::map<std::pair<double, double>, double> mixedSigma;
 
 public:
     /**

@@ -100,8 +100,8 @@ void LinkedCellContainer::calculateIteration() {
     // calculate new f
     //iteratePairs(calculateLennardJones);
     auto f = [&](Particle &p1, Particle &p2){
-        double epsilon = mixedEpsilon.find({p1.getEpsilon(), p2.getEpsilon()})->second;
-        double sigma = mixedSigma.find({p1.getSigma(), p2.getSigma()})->second;
+        double epsilon = mixedEpsilon[std::make_pair(p1.getEpsilon(),p2.getEpsilon())];
+        double sigma = mixedSigma[std::make_pair(p1.getSigma(),p2.getSigma())];
         calculateLennardJones(p1, p2, epsilon, sigma);
     };
     iteratePairs(f);
@@ -215,10 +215,10 @@ void LinkedCellContainer::mixParameters() {
 
     for(auto &e1 :epsilons)
         for(auto &e2 : epsilons)
-            mixedEpsilon.insert(std::pair<std::array<double, 2>, double>({e1, e2}, std::sqrt(e1*e2)));
+            mixedEpsilon.insert(std::make_pair(std::make_pair(e1, e2), std::sqrt(e1*e2)));
 
 
     for(auto &s1 : sigmas)
         for(auto &s2 : sigmas)
-            mixedSigma.insert(std::pair<std::array<double, 2>, double>({s1, s2}, (s1+s2)/2));
+            mixedSigma.insert(std::make_pair(std::make_pair(s1, s2), (s1+s2)/2));
 }
