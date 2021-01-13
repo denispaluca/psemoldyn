@@ -62,7 +62,7 @@ protected:
  * @return true if the Particles share the same values in all fields except for the velocity, false otherwise
  */
 bool generatedSame(Particle &p1, Particle &p2){
-    return (p1.getX() == p2.getX() && p1.getF() == p2.getF() && p1.getM() == p2.getM() && p1.getType() == p2.getType());
+    return (p1.x == p2.x && p1.f == p2.f && p1.getM() == p2.getM() && p1.getType() == p2.getType());
 }
 
 /**

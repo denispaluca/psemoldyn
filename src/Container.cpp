@@ -4,10 +4,10 @@
 
 #include "Container.h"
 
-std::map<std::array<double, 2>, double> Container::getMixedEpsilon() {
+std::map<std::pair<double, double>, double> Container::getMixedEpsilon() {
     return mixedEpsilon;
 }
 
-std::map<std::array<double, 2>, double> Container::getMixedSigma() {
+std::map<std::pair<double, double>, double> Container::getMixedSigma() {
     return mixedSigma;
 }

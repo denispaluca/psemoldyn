@@ -33,11 +33,11 @@ protected:
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Left){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[0] = 1;
+    p.x[0] = 1;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[0], 0);
+    EXPECT_NE(p.f[0], 0);
 }
 
 /**
@@ -45,11 +45,11 @@ TEST_F(BoundaryHandlerFixture, Reflect_Left){
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Right){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[0] = 8;
+    p.x[0] = 8;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[0], 0);
+    EXPECT_NE(p.f[0], 0);
 }
 
 /**
@@ -57,11 +57,11 @@ TEST_F(BoundaryHandlerFixture, Reflect_Right){
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Top){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[1] = 8;
+    p.x[1] = 8;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[1], 0);
+    EXPECT_NE(p.f[1], 0);
 }
 
 /**
@@ -69,11 +69,11 @@ TEST_F(BoundaryHandlerFixture, Reflect_Top){
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Bottom){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[1] = 1;
+    p.x[1] = 1;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[1], 0);
+    EXPECT_NE(p.f[1], 0);
 }
 
 
@@ -82,11 +82,11 @@ TEST_F(BoundaryHandlerFixture, Reflect_Bottom){
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Front){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[2] = 1;
+    p.x[2] = 1;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[2], 0);
+    EXPECT_NE(p.f[2], 0);
 }
 
 /**
@@ -94,11 +94,11 @@ TEST_F(BoundaryHandlerFixture, Reflect_Front){
  */
 TEST_F(BoundaryHandlerFixture, Reflect_Back){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
-    p.getX()[2] = 8;
+    p.x[2] = 8;
     reflectiveContainer.assignParticle(p);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_NE(p.getF()[2], 0);
+    EXPECT_NE(p.f[2], 0);
 }
 
 /**
@@ -108,9 +108,9 @@ TEST_F(BoundaryHandlerFixture, NotOnBorder){
     auto &p = reflectiveContainer.getParticles().getParticles().at(0);
     auto bh = reflectiveContainer.getBoundaryHandler();
     bh->handle(&reflectiveContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getF()[0], 0);
-    EXPECT_DOUBLE_EQ(p.getF()[1], 0);
-    EXPECT_DOUBLE_EQ(p.getF()[2], 0);
+    EXPECT_DOUBLE_EQ(p.f[0], 0);
+    EXPECT_DOUBLE_EQ(p.f[1], 0);
+    EXPECT_DOUBLE_EQ(p.f[2], 0);
 }
 
 /**
@@ -118,12 +118,12 @@ TEST_F(BoundaryHandlerFixture, NotOnBorder){
  */
 TEST_F(BoundaryHandlerFixture, Period_Left){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[0] = 1;
+    p.x[0] = 1;
     periodicContainer.assignParticle(p);
-    p.getX()[0] = -1;
+    p.x[0] = -1;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[0], periodicContainer.getDomainSize()[0] - 1);
+    EXPECT_DOUBLE_EQ(p.x[0], periodicContainer.getDomainSize()[0] - 1);
 }
 
 /**
@@ -131,12 +131,12 @@ TEST_F(BoundaryHandlerFixture, Period_Left){
  */
 TEST_F(BoundaryHandlerFixture, Period_Right){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[0] = 8;
+    p.x[0] = 8;
     periodicContainer.assignParticle(p);
-    p.getX()[0] = 10;
+    p.x[0] = 10;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[0], 1);
+    EXPECT_DOUBLE_EQ(p.x[0], 1);
 }
 
 /**
@@ -144,12 +144,12 @@ TEST_F(BoundaryHandlerFixture, Period_Right){
  */
 TEST_F(BoundaryHandlerFixture, Period_Bottom){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[1] = 1;
+    p.x[1] = 1;
     periodicContainer.assignParticle(p);
-    p.getX()[1] = -1;
+    p.x[1] = -1;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[1], periodicContainer.getDomainSize()[1] - 1);
+    EXPECT_DOUBLE_EQ(p.x[1], periodicContainer.getDomainSize()[1] - 1);
 }
 
 /**
@@ -157,12 +157,12 @@ TEST_F(BoundaryHandlerFixture, Period_Bottom){
  */
 TEST_F(BoundaryHandlerFixture, Period_Top){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[1] = 8;
+    p.x[1] = 8;
     periodicContainer.assignParticle(p);
-    p.getX()[1] = 10;
+    p.x[1] = 10;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[1], 1);
+    EXPECT_DOUBLE_EQ(p.x[1], 1);
 }
 
 /**
@@ -170,12 +170,12 @@ TEST_F(BoundaryHandlerFixture, Period_Top){
  */
 TEST_F(BoundaryHandlerFixture, Period_Front){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[2] = 1;
+    p.x[2] = 1;
     periodicContainer.assignParticle(p);
-    p.getX()[2] = -1;
+    p.x[2] = -1;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[2], periodicContainer.getDomainSize()[2] - 1);
+    EXPECT_DOUBLE_EQ(p.x[2], periodicContainer.getDomainSize()[2] - 1);
 }
 
 /**
@@ -183,10 +183,10 @@ TEST_F(BoundaryHandlerFixture, Period_Front){
  */
 TEST_F(BoundaryHandlerFixture, Period_Back){
     auto &p = periodicContainer.getParticles().getParticles().at(0);
-    p.getX()[2] = 8;
+    p.x[2] = 8;
     periodicContainer.assignParticle(p);
-    p.getX()[2] = 10;
+    p.x[2] = 10;
     auto bh = periodicContainer.getBoundaryHandler();
     bh->handle(&periodicContainer.getCells());
-    EXPECT_DOUBLE_EQ(p.getX()[2], 1);
+    EXPECT_DOUBLE_EQ(p.x[2], 1);
 }

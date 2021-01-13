@@ -27,10 +27,10 @@ protected:
  */
 TEST_F(ParticleTypesFixture, mixedCorrectly){
     for (auto &i : container.getMixedEpsilon()) {
-        ASSERT_FLOAT_EQ(std::sqrt(i.first[0]*i.first[1]), i.second);
+        ASSERT_FLOAT_EQ(std::sqrt(i.first.first*i.first.second), i.second);
     }
     for (auto &i : container.getMixedSigma()) {
-        ASSERT_FLOAT_EQ((i.first[0]+i.first[1])/2, i.second);
+        ASSERT_FLOAT_EQ((i.first.first+i.first.second)/2, i.second);
     }
 }
 
@@ -39,10 +39,10 @@ TEST_F(ParticleTypesFixture, mixedCorrectly){
  */
 TEST_F(ParticleTypesFixture, mixedAll){
     container.iteratePairs([&](Particle &p1, Particle &p2){
-        ASSERT_TRUE(container.getMixedEpsilon().find({p1.getEpsilon(), p2.getEpsilon()}) != container.getMixedEpsilon().end());
-        ASSERT_TRUE(container.getMixedEpsilon().find({p2.getEpsilon(), p1.getEpsilon()}) != container.getMixedEpsilon().end());
-        ASSERT_TRUE(container.getMixedSigma().find({p1.getSigma(), p2.getSigma()}) != container.getMixedSigma().end());
-        ASSERT_TRUE(container.getMixedSigma().find({p2.getSigma(), p1.getSigma()}) != container.getMixedSigma().end());
+        ASSERT_TRUE(container.getMixedEpsilon().find({p1.epsilon, p2.epsilon}) != container.getMixedEpsilon().end());
+        ASSERT_TRUE(container.getMixedEpsilon().find({p2.epsilon, p1.epsilon}) != container.getMixedEpsilon().end());
+        ASSERT_TRUE(container.getMixedSigma().find({p1.sigma, p2.sigma}) != container.getMixedSigma().end());
+        ASSERT_TRUE(container.getMixedSigma().find({p2.sigma, p1.sigma}) != container.getMixedSigma().end());
     });
 }
 
