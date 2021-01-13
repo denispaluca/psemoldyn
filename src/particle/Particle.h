@@ -108,12 +108,13 @@ public:
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma);
 
-  /**
+  /*
    * Destructor of particle
    * @param
    * @return
-   */
+
   virtual ~Particle();
+*/
 
   /**
    * Getter for the position of the particle (x).
@@ -168,12 +169,13 @@ public:
    */
   bool operator==(Particle &other);
 
-  /**
+  /*
    * Represent this particle in string format.
    * @return String representation of this particle.
    * @param
-   */
+
   std::string toString();
+    */
 
   /**
    * Adds force fn to current force.
@@ -233,5 +235,6 @@ public:
 
     double sigma;
 };
-
+/*
 std::ostream &operator<<(std::ostream &stream, Particle &p);
+*/

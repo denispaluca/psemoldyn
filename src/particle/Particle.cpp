@@ -58,11 +58,13 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
 
 }
 
+/*
 Particle::~Particle() {
 #ifdef WITH_LOG4CXX
     LOG4CXX_INFO(particleLogger, "Particle destructed!");
 #endif
 }
+ */
 
 void Particle::updateDT(double delta_t) {
     this->delta_t = delta_t;
@@ -99,12 +101,14 @@ double Particle::getM() { return m; }
 
 int Particle::getType() { return type; }
 
+/*
 std::string Particle::toString() {
   std::stringstream stream;
   stream << "Particle: X:" << x << " v: " << v << " f: " << f
          << " old_f: " << old_f << " type: " << type;
   return stream.str();
 }
+ */
 
 void Particle::calculateV() {
     for (int i = 0; i<3; i++) {
@@ -146,8 +150,9 @@ Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, s
     dt_2m = 0;
     dtsq_2m = 0;
 }
-
+/*
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();
   return stream;
 }
+*/

@@ -47,6 +47,7 @@ static inline double pow6(const double x){
     return r*r;
 }
 
+/*
 void calculateF(Particle &p1, Particle &p2) {
     std::array<double, 3> p1_x = p1.getX(),
             xDiff = p2.getX(), f12;
@@ -63,6 +64,7 @@ void calculateF(Particle &p1, Particle &p2) {
         p2.addF({-f12[0], -f12[1], -f12[2]});
     }
 }
+ */
 
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma) {
     std::array<double, 3> p1_x = p1.getX(),
