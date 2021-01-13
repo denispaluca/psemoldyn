@@ -15,9 +15,9 @@ BoundaryHandler::BoundaryHandler(boundaries_type boundaries, std::array<double, 
 
 void BoundaryHandler::prepareCounter(Particle &p) {
     auto x = p.x;
-    counter.getF()[0] = 0;
-    counter.getF()[1] = 0;
-    counter.getF()[2] = 0;
+    counter.f[0] = 0;
+    counter.f[1] = 0;
+    counter.f[2] = 0;
     counter.setM(p.getM());
     counter.x[0] = x[0];
     counter.x[1] = x[1];

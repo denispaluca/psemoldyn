@@ -76,7 +76,7 @@ void Particle::updateDT(double delta_t) {
 
 std::array<double, 3> &Particle::getV() { return v; }
 
-std::array<double, 3> &Particle::getF() { return f; }
+//std::array<double, 3> &Particle::getF() { return f; }
 
 std::array<double, 3> &Particle::getOldF() { return old_f; }
 
@@ -85,12 +85,13 @@ double Particle::getEpsilon() { return epsilon; }
 
 double Particle::getSigma() { return sigma; }
 */
-
+/*
 void Particle::addF(const std::array<double, 3> &fn) {
   f[0] += fn[0];
   f[1] += fn[1];
   f[2] += fn[2];
 }
+*/
 
 void Particle::saveOldF() {
   old_f = f;
@@ -139,7 +140,8 @@ void Particle::setM(double mass) {
 }
 
 void Particle::applyGravity(double g) {
-    addF({0, m*g, 0});
+    f[1] += m*g;
+    //addF({0, m*g, 0});
 }
 
 Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,

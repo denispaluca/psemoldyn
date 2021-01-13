@@ -61,7 +61,7 @@ particle mapParticleToXML(Particle &p){
         mapToDoubleVec(p.x),
         mapToDoubleVec(p.getV()),
         p.getM(),
-        mapToDoubleVec(p.getF()),
+        mapToDoubleVec(p.f),
         mapToDoubleVec(p.getOldF()),
         p.getType(),
         p.epsilon,

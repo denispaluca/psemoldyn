@@ -21,11 +21,6 @@ private:
   std::array<double, 3> v;
 
   /**
-   * Force effective on this particle
-   */
-  std::array<double, 3> f;
-
-  /**
    * Force which was effective on this particle
    */
   std::array<double, 3> old_f;
@@ -118,13 +113,13 @@ public:
    */
   //std::array<double, 3> &getX();
 
-  /**
+  /*
    * Getter for the force on this particle (f).
    * @return f - Force
    * @param
-   */
-  std::array<double, 3> &getF();
 
+  std::array<double, 3> &getF();
+*/
   /**
    * Getter for the previous force on this particle (old_f)
    * @return old_f - Previous Force
@@ -176,9 +171,9 @@ public:
    * Adds force fn to current force.
    * @param fn Force to be added.
    * @return
-     */
-  void addF(const std::array<double, 3> &fn);
 
+  void addF(const std::array<double, 3> &fn);
+*/
 
   /**
    * Save f to old f and set f to 0.
@@ -241,6 +236,11 @@ public:
     * Position of the particle
     */
     std::array<double, 3> x;
+
+    /**
+     * Force effective on this particle
+     */
+    std::array<double, 3> f;
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);

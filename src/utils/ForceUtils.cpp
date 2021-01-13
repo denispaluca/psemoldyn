@@ -75,13 +75,19 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
 
     double divider = squareSum(xDiff);
 
-    if(divider) {
-        double sigDivPow6 = pow6(sigma)/pow3(divider);
-        double vf = ((24*epsilon) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
+    double sigDivPow6 = pow6(sigma)/pow3(divider);
+    double vf = ((24*epsilon) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
 
-        std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
+    std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
 
-        p1.addF(f12);
-        p2.addF({-f12[0], -f12[1], -f12[2]});
-    }
+    p1.f[0] += f12[0];
+    p1.f[1] += f12[1];
+    p1.f[2] += f12[2];
+
+    p1.f[0] -= f12[0];
+    p1.f[1] -= f12[1];
+    p1.f[2] -= f12[2];
+
+    //p1.addF(f12);
+    //p2.addF({-f12[0], -f12[1], -f12[2]});
 }
