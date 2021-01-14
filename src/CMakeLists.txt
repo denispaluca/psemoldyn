@@ -36,4 +36,5 @@ if(NOT CLUSTER)
             PRIVATE
                 log4cxx
             )
+    add_compile_definitions(WITH_LOG4CXX)
 endif(NOT CLUSTER)
