@@ -3,8 +3,8 @@
        xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
     <name_output>A4_TASK2_SMALL</name_output>
     <frequency_output>10</frequency_output>
-    <delta_t>25</delta_t>
-    <t_end>1</t_end>
+    <delta_t>0.0005</delta_t>
+    <t_end>25</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
