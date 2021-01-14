@@ -3,31 +3,36 @@ MolSim
 
 # Group B #
 Members:
-* Höbenreich, Jonas
-* Paluca, Denis
 * Trouvain, Mira
+* Paluca, Denis
+* Höbenreich, Jonas
+
+# Code #
+* Link:     https://gitlab.lrz.de/denis/psemoldyn_groupb
+* Branch:   master
+* commit:   5515b42b
 
 
 # Build and Run Instructions #
 ## Requirements
 - log4cxx
 
-## MolSim program - collision of two bodies ##
+## MolSim program ##
 
-* Compile with 
+* Compile with
 
       cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       make MolSim -j <1.5 * number of cores>
 
-* Compile on Cluster
+* run main program with parameters specified in assignment:
+
+      ./MolSim ./inputs/a4_task2_big.xml
+
+* Compile on Cluster (Deactivate log4cxx)
 
       cmake -DCMAKE_BUILD_TYPE=Release -DCLUSTER=ON -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       module load xerces-c
       cmake --build . --target MolSim -- -j 20
-      
-* run main program with parameters specified in assignment:
-
-      ./MolSim {PATH_TO_PROJECT}/inputs/a3_task2_collision_lc.xml
 
 ### General program call
 
@@ -46,7 +51,7 @@ or for performance testing:
       make Tests_run -j <1.5 * number of cores>
 
 * run
-      
+
       ctest
 
   or
@@ -66,43 +71,21 @@ see [XSD file](src/xml/molsimInput.xsd)
 
 
 # Media #
-[Video - Task 2: Collision of two bodies](https://drive.google.com/file/d/12thG13Oj26iUzEZ3my9naAB5nmuISLV6/view?usp=sharing)
-[Video - Task 4: Drop-fall](https://drive.google.com/file/d/1ahz5X56Vt4SmJJ1Fd7X0tPWC1-TSlGDy/view?usp=sharing)
-
+[a4_task2_small](https://drive.google.com/file/d/1aw64mb15kDxaAv4R7cmE2Gn9NAlWmGjA/view?usp=sharing)
+[a4_task2_big](https://drive.google.com/file/d/1kqHamMl4Mp_a6qN0-M0tA9YjbzNBlqj3/view?usp=sharing)
+[a4_task3_liquid_drop](https://drive.google.com/file/d/1uae9d61mVhXXM8lZ0S2nF4SG7qpv-i0j/view?usp=sharing)
 
 # Performance measurements
 
 The OS/hardware the measurements were made on:
 
-* OS: Ubuntu 20.04.1 LTS x86_64  
-* Kernel: 5.4.0-58-generic  
-* CPU: Intel i7-7500U (4) @ 3.500GHz  
-* GPU: Intel UHD Graphics 620  
-* GPU: NVIDIA GeForce 940MX
-* Memory: 6077MiB / 15900MiB
+* OS: Ubuntu 20.04.1 LTS x86_64
+* Kernel: 5.4.0-58-generic
+* CPU: Intel® Core™ i5-7200U CPU @ 2.50GHz × 4
+* GPU: Mesa Intel® HD Graphics 620 (KBL GT2)
+* Memory: 15,6 GiB
 
-### Results:
-
-input files: `{Project_Path}/inputs/a3_task2_comparison/`
-
-input data:
-* 2D squares of 100x10, 100x20, 100x40, 100x80 and 100x160 particles each
-* delta_t = 0.0005 and t_end = 0.1
-
-Runtimes in ns (without file/log output):
-
-Particles | direct sum | linked-cell
---- | --: | --:
-1000 | 1544680309 | 130595151
-2000 | 6493965204 | 239922982
-4000 | 24898246000 | 472800630
-8000 | 99550734283 | 931202627
-16000 | 425216887565 | 1851370202
-
-![Runtime plot (linear scaling)](media/runtime_comparison_linear.png)
-
-![Runtime plot (logarithmic scaling)](media/runtime_comparison_log.png)
-
+check /results for the performance results + gprof
 
 # Misc #
 * Compiler used: gcc 9.3.0
@@ -111,4 +94,4 @@ Particles | direct sum | linked-cell
 * modules used on cluster:
  1) admin/1.0     4) spack/staging/20.2.2   7) intel-mpi/2019-intel
  2) tempdir/1.0   5) intel/19.0.5           8) xerces-c/3.2.1
- 3) lrz/1.0       6) intel-mkl/2019         9) gcc/8.4.0 (only in some instances)
+ 3) lrz/1.0       6) intel-mkl/2019         9) gcc/8.4.0
