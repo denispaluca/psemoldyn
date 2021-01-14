@@ -5,9 +5,6 @@
 #include <cmath>
 #include "ForceUtils.h"
 
-#define EPSILON 5.0
-#define SIGMA  1.0
-
 
 /**
  * Calculate second norm cubed of array with length 3.
@@ -47,6 +44,7 @@ static inline double pow6(const double x){
     return r*r;
 }
 
+/*
 void calculateF(Particle &p1, Particle &p2) {
     std::array<double, 3> p1_x = p1.getX(),
             xDiff = p2.getX(), f12;
@@ -63,23 +61,25 @@ void calculateF(Particle &p1, Particle &p2) {
         p2.addF({-f12[0], -f12[1], -f12[2]});
     }
 }
+ */
 
-void calculateLennardJones(Particle &p1, Particle &p2) {
-    std::array<double, 3> p1_x = p1.getX(),
-            xDiff = p2.getX();
-    xDiff[0] -= p1_x[0];
-    xDiff[1] -= p1_x[1];
-    xDiff[2] -= p1_x[2];
-
+void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma) {
+    std::array<double, 3> xDiff = {p2.x[0] - p1.x[0], p2.x[1] - p1.x[1], p2.x[2] - p1.x[2]};
     double divider = squareSum(xDiff);
 
-    if(divider) {
-        double sigDivPow6 = pow6(SIGMA)/pow3(divider);
-        double vf = ((24*EPSILON) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
+    double sigDivPow6 = pow6(sigma)/pow3(divider);
+    double vf = ((24*epsilon) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
 
-        std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
+    std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
 
-        p1.addF(f12);
-        p2.addF({-f12[0], -f12[1], -f12[2]});
-    }
+    p1.f[0] += f12[0];
+    p1.f[1] += f12[1];
+    p1.f[2] += f12[2];
+
+    p2.f[0] -= f12[0];
+    p2.f[1] -= f12[1];
+    p2.f[2] -= f12[2];
+
+    //p1.addF(f12);
+    //p2.addF({-f12[0], -f12[1], -f12[2]});
 }

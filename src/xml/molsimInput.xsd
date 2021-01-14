@@ -32,8 +32,9 @@
       <xsd:element name="mass" type="xsd:double"/>
       <!-- initial velocity -->
       <xsd:element name="velocity" type="double_vector"/>
-      <!-- mean brownian velocity -->
-      <xsd:element name="meanv" type="xsd:double"/>
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -53,6 +54,13 @@
       <xsd:element name="v" type="double_vector"/>
       <!-- mass of particle -->
       <xsd:element name="m" type="xsd:double"/>
+      <!-- force -->
+      <xsd:element name="f" type="double_vector"/>
+      <xsd:element name="old_f" type="double_vector"/>
+      <xsd:element name="type" type="xsd:int"/>
+      <!-- lennard jones constants of particle -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -74,8 +82,9 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
-      <!-- mean brownian velocity -->
-      <xsd:element name="meanv" type="xsd:double"/>
+      <!-- lennard jones contants of particles -->
+      <xsd:element name="epsilon" type="xsd:double"/>
+      <xsd:element name="sigma" type="xsd:double"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -85,8 +94,20 @@
     </xsd:sequence>
   </xsd:complexType>
 
+  <xsd:complexType name="thermostat_type">
+    <xsd:sequence>
+      <xsd:element name="t_init" type="xsd:double"/>
+      <xsd:element name="change_brownian" type="xsd:boolean"/>
+      <xsd:element name="steps" type="xsd:int"/>
+      <xsd:element name="t_target" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="temp_delta" type="xsd:double" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
   <xsd:complexType name="particle_data">
     <xsd:sequence>
+      <!-- mean brownian velocity -->
+      <xsd:element name="meanv" type="xsd:double"/>
       <xsd:element name="is3D" type="xsd:boolean"/>
       <xsd:element name="cuboids" type="cuboid_cluster"/>
       <xsd:element name="particles" type="particle_cluster"/>
@@ -94,15 +115,23 @@
     </xsd:sequence>
   </xsd:complexType>
 
-  <!-- boundary condition of each side true = reflect -->
-  <xsd:complexType name="boundary_type">
+  
+  <xsd:simpleType name="boundary_type">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="outflow"/>
+      <xsd:enumeration value="reflective"/>
+      <xsd:enumeration value="periodic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="boundaries_type">
     <xsd:sequence>
-      <xsd:element name="front" type="xsd:boolean"/>
-      <xsd:element name="back" type="xsd:boolean"/>
-      <xsd:element name="top" type="xsd:boolean"/>
-      <xsd:element name="bottom" type="xsd:boolean"/>
-      <xsd:element name="left" type="xsd:boolean"/>
-      <xsd:element name="right" type="xsd:boolean"/>
+      <xsd:element name="front" type="boundary_type"/>
+      <xsd:element name="back" type="boundary_type"/>
+      <xsd:element name="top" type="boundary_type"/>
+      <xsd:element name="bottom" type="boundary_type"/>
+      <xsd:element name="left" type="boundary_type"/>
+      <xsd:element name="right" type="boundary_type"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -110,7 +139,8 @@
     <xsd:sequence>
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
-      <xsd:element name="boundary" type="boundary_type" />
+      <xsd:element name="boundary" type="boundaries_type" />
+      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -126,8 +156,9 @@
       <!-- Set t_end -->
       <xsd:element name="t_end" type="xsd:double"/>
       <xsd:element name="linked_cell" type="xsd:boolean" />
+      <xsd:element name="checkpoint" type="xsd:boolean" />
       <xsd:element name="domain" type="domain_type" />
-
+      <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
     </xsd:sequence>    
   </xsd:complexType>

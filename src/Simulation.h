@@ -7,6 +7,8 @@
 #include "particle/ParticleContainer.h"
 #include "particle/ParticleGenerator.h"
 #include "Container.h"
+#include "Thermostat.h"
+#include "utils/XSDMapper.h"
 
 class Simulation {
 private:
@@ -19,6 +21,11 @@ private:
      * Container for particles.
      */
     Container *container;
+
+    /**
+     * Thermostat for current simulation.
+     */
+    Thermostat *thermostat;
 
     /**
      * Plot the particles to a vtu-file.
@@ -37,6 +44,17 @@ public:
     /**
      * Start simulation.
      * @param isPT Is simulation run a performance test.
+     * @return Number of calculated iterations
      */
-    void start(bool isPT);
+    int start(bool isPT);
+
+    /**
+     * Generates checkpoint after simulation.
+     */
+    molsimInput &checkpoint();
+
+    /**
+    * Get Number of particles
+    */
+    int getNumParticles();
 };

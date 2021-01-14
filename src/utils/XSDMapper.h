@@ -10,6 +10,8 @@
 
 std::array<int, 3> mapIntVec(integer_vector& x);
 std::array<double, 3> mapDoubleVec(double_vector& x);
+integer_vector mapToIntVec(std::array<int, 3> x);
+double_vector mapToDoubleVec(std::array<double, 3> x);
 Cuboid mapCuboid(cuboid& c);
 
 /**
@@ -20,3 +22,5 @@ Cuboid mapCuboid(cuboid& c);
 ParticleSphere mapParticleSphere(sphere& c);
 
 Particle mapParticle(particle& p);
+
+particle mapParticleToXML(Particle &p);

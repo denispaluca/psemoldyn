@@ -6,6 +6,7 @@
     <delta_t>0.0005</delta_t>
     <t_end>0.1</t_end>
     <linked_cell>false</linked_cell>
+    <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
             <x>110</x>
@@ -14,15 +15,16 @@
         </domain_size>
         <cutoff_radius>3.0</cutoff_radius>
         <boundary>
-            <front>false</front>
-            <back>false</back>
-            <top>false</top>
-            <bottom>false</bottom>
-            <left>false</left>
-            <right>false</right>
+            <front>outflow</front>
+            <back>outflow</back>
+            <top>outflow</top>
+            <bottom>outflow</bottom>
+            <left>outflow</left>
+            <right>outflow</right>
         </boundary>
     </domain>
     <particle_data>
+        <meanv>0.1</meanv>
         <is3D>false</is3D>
         <cuboids>
             <cuboid>
@@ -43,7 +45,8 @@
                     <y>1.0</y>
                     <z>0.0</z>
                 </velocity>
-                <meanv>0</meanv>
+                <epsilon>5</epsilon>
+                <sigma>1</sigma>
             </cuboid>
         </cuboids>
         <particles></particles>

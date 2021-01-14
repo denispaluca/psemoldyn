@@ -8,7 +8,12 @@
 #include "cell/LinkedCellContainer.h"
 
 Simulation::Simulation(molsimInput &data) : data(data) {
-    auto pg = ParticleGenerator(data.particle_data());
+    thermostat = data.thermostat().present() ?
+            new Thermostat(data.thermostat().get(), data.particle_data().is3D())
+            : nullptr;
+
+    auto pg = ParticleGenerator(data.particle_data(), thermostat);
+
     //Update delta_t for each particle before copying
     pg.getParticles().iterate([&](Particle &p) {
         p.updateDT(data.delta_t());
@@ -19,9 +24,11 @@ Simulation::Simulation(molsimInput &data) : data(data) {
     } else {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
+
+    container->mixParameters();
 }
 
-void Simulation::start(bool isPT) {
+int Simulation::start(bool isPT) {
     int iteration = 0;
 
     double current_time = 0;
@@ -39,8 +46,14 @@ void Simulation::start(bool isPT) {
             plotParticles(iteration);
         }
 
+        if(thermostat != nullptr && iteration != 0 && iteration % thermostat->getSteps() == 0){
+            thermostat->scale(*container);
+        }
+
         current_time += data.delta_t();
     }
+
+    return iteration;
 }
 
 void Simulation::plotParticles(int iteration) {
@@ -65,4 +78,20 @@ void Simulation::plotParticles(int iteration) {
     });
 
     vtkWriter.writeFile(out_name_vtk, iteration);
+}
+
+molsimInput &Simulation::checkpoint() {
+    data.particle_data().particles().particle().clear();
+    data.particle_data().cuboids().cuboid().clear();
+    data.particle_data().spheres().sphere().clear();
+
+    container->iterate([&](Particle &p){
+        data.particle_data().particles().particle().push_back(mapParticleToXML(p));
+    });
+
+    return data;
+}
+
+int Simulation::getNumParticles() {
+    return container->size();
 }

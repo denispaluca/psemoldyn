@@ -13,7 +13,7 @@ protected:
     std::vector<Particle> particles;
     void SetUp() override {
       for(int i=0;i<20;i++) {
-        auto p = Particle({0, 0, 0}, {0, 0, 0}, i, 0);
+        auto p = Particle({0, 0, 0}, {0, 0, 0}, i, 5, 1);
         auto p1 = Particle(p);
         pc.push(p);
         particles.emplace_back(p);
@@ -44,12 +44,14 @@ TEST_F(ParticleContainerFixture, Equality){
 TEST_F(ParticleContainerFixture, Iterator){
   pc.iterate([](Particle& p){
       std::array<double, 3> f = {1,1,1};
-      p.addF(f);
-      EXPECT_EQ(p.getF(), f);
+      p.f[0] += f[0];
+      p.f[1] += f[1];
+      p.f[2] += f[2];
+      EXPECT_EQ(p.f, f);
   });
 
   std::array<double, 3> f = {1,1,1};
   for(auto p : pc.getParticles()){
-    EXPECT_EQ(p.getF(), f);
+    EXPECT_EQ(p.f, f);
   }
 }

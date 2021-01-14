@@ -20,11 +20,11 @@ protected:
     void SetUp() override {
 
         // Cuboids created manually
-        Cuboid cub1 = Cuboid({0.0, 0.0, 0.0}, {3, 3, 3}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
-        Cuboid cub2 = Cuboid({-2.0, -2.0, -2.0}, {1, 1, 10}, 2.0, 2.0, {0.0, 0.0, 0.0}, 0.0);
-        Cuboid cub3 = Cuboid({0.0, 5.0, 0.0}, {0, 0, 0}, 1.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
-        Cuboid cub4 = Cuboid({30.0, 0.0, -5.0}, {2, 1, 2}, 7.0, 1.0, {0.0, 0.0, 0.0}, 0.0);
-        Cuboid cub5 = Cuboid({3.0, 3.0, 3.0}, {10, 0, 2}, 5.0, 3.0, {0.0, 0.0, 0.0}, 0.0);
+        Cuboid cub1 = Cuboid({0.0, 0.0, 0.0}, {3, 3, 3}, 1.0, 1.0, {0.0, 0.0, 0.0}, 5, 1);
+        Cuboid cub2 = Cuboid({-2.0, -2.0, -2.0}, {1, 1, 10}, 2.0, 2.0, {0.0, 0.0, 0.0}, 5, 1);
+        Cuboid cub3 = Cuboid({0.0, 5.0, 0.0}, {0, 0, 0}, 1.0, 1.0, {0.0, 0.0, 0.0}, 5, 1);
+        Cuboid cub4 = Cuboid({30.0, 0.0, -5.0}, {2, 1, 2}, 7.0, 1.0, {0.0, 0.0, 0.0}, 5, 1);
+        Cuboid cub5 = Cuboid({3.0, 3.0, 3.0}, {10, 0, 2}, 5.0, 3.0, {0.0, 0.0, 0.0}, 5, 1);
         c.emplace_back(cub1);
         c.emplace_back(cub2);
         c.emplace_back(cub3);
@@ -39,7 +39,7 @@ protected:
 
         generated = ParticleContainer();
         for(auto &cuboid : c){
-            cuboid.generate(generated, true);
+            cuboid.generate(generated);
         }
 
         pg = ParticleGenerator();
@@ -62,7 +62,7 @@ protected:
  * @return true if the Particles share the same values in all fields except for the velocity, false otherwise
  */
 bool generatedSame(Particle &p1, Particle &p2){
-    return (p1.getX() == p2.getX() && p1.getF() == p2.getF() && p1.getM() == p2.getM() && p1.getType() == p2.getType());
+    return (p1.x == p2.x && p1.f == p2.f && p1.getM() == p2.getM() && p1.getType() == p2.getType());
 }
 
 /**

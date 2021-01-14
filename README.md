@@ -18,6 +18,12 @@ Members:
 
       cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       make MolSim -j <1.5 * number of cores>
+
+* Compile on Cluster
+
+      cmake -DCMAKE_BUILD_TYPE=Release -DCLUSTER=ON -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+      module load xerces-c
+      cmake --build . --target MolSim -- -j 20
       
 * run main program with parameters specified in assignment:
 
@@ -102,4 +108,7 @@ Particles | direct sum | linked-cell
 * Compiler used: gcc 9.3.0
 * CMake version: 3.16.3
 * Google Tests version: 1.10.0
-
+* modules used on cluster:
+ 1) admin/1.0     4) spack/staging/20.2.2   7) intel-mpi/2019-intel
+ 2) tempdir/1.0   5) intel/19.0.5           8) xerces-c/3.2.1
+ 3) lrz/1.0       6) intel-mkl/2019         9) gcc/8.4.0 (only in some instances)

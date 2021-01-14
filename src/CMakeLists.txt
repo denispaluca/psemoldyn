@@ -4,6 +4,9 @@ file(GLOB_RECURSE MY_SRC
         "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
         # header don't need to be included but this might be necessary for some IDEs
         "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx"
+        # header don't need to be included but this might be necessary for some IDEs
+        "${CMAKE_CURRENT_SOURCE_DIR}/*.hxx"
         )
 
 list(REMOVE_ITEM MY_SRC ${CMAKE_CURRENT_SOURCE_DIR}/MolSim.cpp)
@@ -25,7 +28,13 @@ target_link_libraries(libmolsim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
-        #----------- include log4cxx-----------
-        PRIVATE
-            log4cxx
         )
+
+if(NOT CLUSTER)
+    target_link_libraries(libmolsim
+            #----------- include log4cxx-----------
+            PRIVATE
+                log4cxx
+            )
+    add_compile_definitions(WITH_LOG4CXX)
+endif(NOT CLUSTER)

@@ -8,7 +8,6 @@
 #include <particle/ParticleContainer.h>
 #include <cell/LinkedCellContainer.h>
 #include "xml/molsimInput.hxx"
-#include "xml/molsimInput.cxx"
 
 
 /**
@@ -30,7 +29,7 @@ protected:
 
         singleCellParticles = ParticleContainer();
         for(int i = 0; i < 20; i++) {
-            Particle p = Particle({0, 0, 0}, {0, 0, 0}, i, 0);
+            Particle p = Particle({0, 0, 0}, {0, 0, 0}, i, 5, 1);
             singleCellParticles.push(p);
         }
 
@@ -43,7 +42,7 @@ protected:
         containerParticles = ParticleContainer();
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 5; j++) {
-                Particle p = Particle({(double)i, (double)j, 0}, {1, 0, 0}, i*5+j, 0);
+                Particle p = Particle({(double)i, (double)j, 0}, {1, 0, 0}, i*5+j, 5, 1);
                 containerParticles.push(p);
             }
         }
@@ -93,12 +92,12 @@ TEST_F(LinkedCellContainerFixture, addParticlesToCell){
  */
 TEST_F(LinkedCellContainerFixture, iteratePairsInCell){
     singleCell.iteratePairs([](Particle &p1, Particle &p2){
-        p1.addF({p1.getM(), 0, 0});
-        p2.addF({p2.getM(), 0, 0});
+        p1.f[0] += p1.getM();
+        p2.f[0] += p2.getM();
     });
 
     for(int i = 0; i < singleCellParticles.size(); i++){
-        EXPECT_DOUBLE_EQ(singleCell.getParticles().at(i)->getF()[0], 19.0*i);
+        EXPECT_DOUBLE_EQ(singleCell.getParticles().at(i)->f[0], 19.0*i);
     }
 }
 

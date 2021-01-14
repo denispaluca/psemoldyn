@@ -5,47 +5,108 @@
 #pragma once
 #include "xml/molsimInput.hxx"
 #include "particle/Particle.h"
+#include "LinkedCell.h"
+#include <functional>
 
-enum Boundary{
+enum Boundaries{
     top, bottom, front, back, left, right
 };
+
+typedef boundary_type::value Boundary;
 
 class BoundaryHandler {
 private:
     /**
      * A Particle that will be used as counterparticle for the reflection force calculation.
      */
-    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0);
+    Particle counter = Particle({0, 0, 0}, {0, 0, 0}, 0, 0, 0);
 
     /**
-     * The boundary condition of each boundary
+     * Size of domain.
      */
-    boundary_type boundary;
+    std::array<double,3> domainSize;
 
     /**
-     * The size of the bounded domain
+     * Dimensions of cell grid.
      */
-    std::array<double, 3> dimensions{};
+    std::array<int,3> dimensions;
 
     /**
-     * Sets counterparticle and calculates force between given particle + counterparticle if Particle is close enough to boundary.
-     * @param p the Particle to be reflected
-     * @param b the specific boundary to which the Particle is close
+     * Cell vector pointer of cells to be handled.
      */
-    void handleBoundary(Particle& p, Boundary b);
+    std::vector<LinkedCell>* cells;
+
+    /**
+     * Calculates index of the LinkedCell containing the given point in space.
+     * !!!DUPLICATE!!!
+     * @param pos the coordinates
+     * @return the index of the LinkedCell
+     */
+    int getIndex(std::array<int, 3> pos);
+
+    /**
+     * Boundaries from the xml file.
+     */
+    boundaries_type boundaries;
 
     /**
      * Initializes counterparticle with mass and position of given particle.
      * @param p
      */
     void prepareCounter(Particle& p);
+
+    /**
+     * Apply reflection on boundary b.
+     * @param b Boundary to reflect particles.
+     */
+    void reflect(Boundaries b);
+
+    /**
+     * Apply periodicity on boundary b.
+     * @param b Boundary to apply.
+     */
+    void period(Boundaries b);
+
+    /**
+     * Handles correct function on boundary, according to value.
+     * @param boundary Boundary to handle function.
+     * @param value Value which determines the function.
+     */
+    void handleBoundary(Boundaries boundary, boundary_type& value);
 public:
 
     /**
      * Constructor for BoundaryHandler
-     * @param boundary contains the boundary conditions for each side
-     * @param dimensions the size of the bounded domain
+     * @param boundaries contains the boundary conditions for each side
+     * @param domainSize Size of domain.
+     * @param dimensions Dimensions of cell grid.
      */
-    BoundaryHandler(boundary_type& boundary, std::array<double, 3> dimensions);
-    void applyForce(Particle& p);
+    BoundaryHandler(boundaries_type boundaries, std::array<double, 3> domainSize,
+                    std::array<int, 3> dimensions);
+    /**
+     * Iterate cells at boundary b and apply function f.
+     * @param b Boundary to iterate in.
+     * @param f Function to be applied.
+     */
+    void iterateCellsAtBoundary(
+            Boundaries b,
+            const std::function<void(LinkedCell&, std::array<int,3> pos)>& f);
+
+    /**
+     * Handles all boundary conditions for current lcc configuration.
+     */
+    void handle(std::vector<LinkedCell>* cells);
+
+    /**
+     * Iterate particles at boundary b and apply function f.
+     * @param b Boundary to iterate in.
+     * @param f Function to be applied.
+     */
+    void iterateParticlesAtBoundary(Boundaries b, const std::function<void(Particle&)>& f);
+
+    /**
+     * Iterates over particles of periodic neighbours.
+     * @param cells
+     */
+    void iteratePeriodicParticles(std::vector<LinkedCell>* cells, const std::function<void(Particle&, Particle&)>& f);
 };

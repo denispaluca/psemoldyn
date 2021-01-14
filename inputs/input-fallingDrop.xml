@@ -5,14 +5,29 @@
     <frequency_output>10</frequency_output>
     <delta_t>0.00005</delta_t>
     <t_end>10</t_end>
-    <domain_size>
-        <x>120</x>
-        <y>50</y>
-        <z>0</z>
-    </domain_size>
-    <cutoff_radius>3.0</cutoff_radius>
+    <linked_cell>true</linked_cell>
+    <checkpoint>false</checkpoint>
+    <domain>
+        <domain_size>
+            <x>120</x>
+            <y>50</y>
+            <z>1</z>
+        </domain_size>
+        <cutoff_radius>3.0</cutoff_radius>
+        <boundary>
+            <front>outflow</front>
+            <back>outflow</back>
+            <top>outflow</top>
+            <bottom>reflective</bottom>
+            <left>outflow</left>
+            <right>outflow</right>
+        </boundary>
+    </domain>
     <particle_data>
-        <cuboids></cuboids>
+        <meanv>0.1</meanv>
+        <is3D>false</is3D>
+        <cuboids>
+        </cuboids>
         <particles></particles>
         <spheres>
             <sphere>
@@ -29,6 +44,8 @@
                 </v>
                 <m>1</m>
                 <r>15</r>
+                <epsilon>5</epsilon>
+                <sigma>1</sigma>
             </sphere>
         </spheres>
     </particle_data>

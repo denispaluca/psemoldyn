@@ -86,4 +86,6 @@ public:
     * Size of particles vector.
     */
      std::size_t size() override;
+
+     void mixParameters();
 };

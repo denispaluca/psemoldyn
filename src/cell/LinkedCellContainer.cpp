@@ -6,28 +6,31 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <set>
 #include <utils/ForceUtils.h>
-
-#include <log4cxx/logger.h>
-#include <log4cxx/propertyconfigurator.h>
 #include <xml/molsimInput.hxx>
 #include <utils/XSDMapper.h>
 
-using namespace log4cxx;
-using namespace log4cxx::helpers;
+#ifdef WITH_LOG4CXX
+    #include <log4cxx/propertyconfigurator.h>
+    #include <log4cxx/logger.h>
 
-//static logger variable linkedCellContainerLogger
-log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
+    using namespace log4cxx;
+    using namespace log4cxx::helpers;
+
+    //static logger variable linkedCellContainerLogger
+    log4cxx::LoggerPtr linkedCellContainerLogger(log4cxx::Logger::getLogger("linkedcellcont"));
+#endif
 
 LinkedCellContainer::LinkedCellContainer(domain_type domain,
                                          ParticleContainer &particles){
     this->domain_size = mapDoubleVec(domain.domain_size());
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
+    gravity = domain.gravity();
+
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
-
-    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size);
 
     cells = std::vector<LinkedCell>();
     int nrCells = dimensions[0]*dimensions[1]*dimensions[2];
@@ -40,11 +43,18 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
         assignParticle(p);
     });
 
-    LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
+    boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions);
+    #ifdef WITH_LOG4CXX
+        LOG4CXX_INFO(linkedCellContainerLogger, "Starting neighbor calculation");
+    #endif
 
     populateNeighbours();
 
-    LOG4CXX_INFO(linkedCellContainerLogger, "Ended neighbor calculation");
+    #ifdef WITH_LOG4CXX
+        LOG4CXX_INFO(linkedCellContainerLogger, "Ended neighbor calculation");
+    #endif
+
+
 }
 
 void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
@@ -58,7 +68,8 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
 
         // then calculate forces between particles of cell + neighbors
         for (auto j : cell.getNeighbors()) {
-            if (cell.getIndex() >= j->getIndex()) continue;
+            if (cell.getIndex() >= j->getIndex())
+                continue;
 
             for(auto pi : cell.getParticles())
                 for(auto pj : j->getParticles())
@@ -74,20 +85,31 @@ void LinkedCellContainer::calculateIteration() {
             p.saveOldF();
     });
 
-    // calculate new f
-    iteratePairs(calculateLennardJones);
-
-    //reset cell particles
-    for(auto& c:cells)
-        c.removeParticles();
+    boundaryHandler->handle(&cells);
 
     clearOutflowParticles();
 
-    // calculate new v
+    //reset cell particles
+    for(auto& c:cells) c.removeParticles();
     iterate([&](Particle &p) {
-        boundaryHandler->applyForce(p);
-        p.calculateV();
         assignParticle(p);
+        if(gravity.present())
+            p.applyGravity(gravity.get());
+    });
+
+    // calculate new f
+    //iteratePairs(calculateLennardJones);
+    auto f = [&](Particle &p1, Particle &p2){
+        double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
+        double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
+        calculateLennardJones(p1, p2, epsilon, sigma);
+    };
+    iteratePairs(f);
+    boundaryHandler->iteratePeriodicParticles(&cells, f);
+
+    // calculate new v
+    iterate([](Particle &p) {
+        p.calculateV();
     });
 }
 
@@ -103,7 +125,11 @@ bool LinkedCellContainer::assignParticle(Particle &p) {
     int index = getIndexFromParticle(p);
 
     if(index < 0 || index > cells.size()){
-        LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+
+        #ifdef WITH_LOG4CXX
+            LOG4CXX_ERROR(linkedCellContainerLogger, "Particle out of domain was not deleted!");
+        #endif
+
         return false;
     }
     cells.at(index).addParticle(&p);
@@ -121,7 +147,7 @@ std::array<int, 3> LinkedCellContainer::indexToPos(int i) {
 int LinkedCellContainer::getIndexFromParticle(Particle &p) {
     std::array<int,3> x{};
     for(int i = 0; i<3;i++)
-        x[i] = (int)std::floor(p.getX()[i]/cutoff_radius);
+        x[i] = (int)std::floor(p.x[i]/cutoff_radius);
 
     return getIndex(x);
 }
@@ -154,15 +180,45 @@ void LinkedCellContainer::populateNeighbours() {
                 }
 }
 
-std::vector<LinkedCell> LinkedCellContainer::getCells(){
+std::vector<LinkedCell>& LinkedCellContainer::getCells(){
     return cells;
 }
 
-ParticleContainer LinkedCellContainer::getParticles() {
+ParticleContainer& LinkedCellContainer::getParticles() {
     return particles;
 }
 
 LinkedCellContainer::LinkedCellContainer() {
     cutoff_radius = 0;
-    boundaryHandler = NULL;
+    boundaryHandler = nullptr;
+}
+
+std::array<double, 3>& LinkedCellContainer::getDomainSize() {
+    return domain_size;
+}
+
+std::array<int, 3>& LinkedCellContainer::getDimensions() {
+    return dimensions;
+}
+
+BoundaryHandler *LinkedCellContainer::getBoundaryHandler() {
+    return this->boundaryHandler;
+}
+
+void LinkedCellContainer::mixParameters() {
+    std::set<double> epsilons;
+    std::set<double> sigmas;
+    iterate([&](Particle &p1){
+       epsilons.emplace(p1.epsilon);
+       sigmas.emplace(p1.sigma);
+    });
+
+    for(auto &e1 :epsilons)
+        for(auto &e2 : epsilons)
+            mixedEpsilon.insert(std::make_pair(std::make_pair(e1, e2), std::sqrt(e1*e2)));
+
+
+    for(auto &s1 : sigmas)
+        for(auto &s2 : sigmas)
+            mixedSigma.insert(std::make_pair(std::make_pair(s1, s2), (s1+s2)/2));
 }
