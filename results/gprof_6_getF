@@ -1,0 +1,1542 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 47.69      2.69     2.69 254241178     0.00     0.00  std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&)
+ 35.70      4.70     2.01 254342563     0.00     0.00  calculateLennardJones(Particle&, Particle&, double, double)
+  4.53      4.95     0.26     1000     0.00     0.01  LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>)
+  2.84      5.11     0.16  9920161     0.00     0.00  std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_invoke(std::_Any_data const&, Particle&)
+  1.42      5.19     0.08  9920424     0.00     0.00  Particle::calculateX()
+  1.42      5.27     0.08                             ParticleSphere::toString[abi:cxx11]()
+  1.24      5.34     0.07  9920161     0.00     0.00  Particle::calculateV()
+  1.07      5.40     0.06 27492600     0.00     0.00  LinkedCell::getIndex()
+  0.53      5.43     0.03  1800000     0.00     0.00  LinkedCell::iteratePairs(std::function<void (Particle&, Particle&)>)
+  0.53      5.46     0.03     3006     0.00     0.00  ParticleContainer::iterate(std::function<void (Particle&)>)
+  0.44      5.49     0.03    10000     0.00     0.00  std::_Function_handler<void (Particle&), LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.36      5.51     0.02 46736135     0.00     0.00  LinkedCell::getParticles()
+  0.36      5.53     0.02  9930161     0.00     0.00  LinkedCell::addParticle(Particle*)
+  0.36      5.55     0.02  9920424     0.00     0.00  Particle::isOut(std::array<double, 3ul>)
+  0.36      5.57     0.02  9920424     0.00     0.00  std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.36      5.59     0.02   236000     0.00     0.00  std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&)
+  0.27      5.60     0.02  9920161     0.00     0.00  std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.18      5.61     0.01  9920161     0.00     0.00  Particle::applyGravity(double)
+  0.18      5.62     0.01  1800000     0.00     0.00  LinkedCell::getNeighbors()
+  0.09      5.63     0.01  3602000     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}> const&, std::_Manager_operation)
+  0.09      5.63     0.01     3000     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}> const&, std::_Manager_operation)
+  0.00      5.63     0.00  9920424     0.00     0.00  Particle::saveOldF()
+  0.00      5.63     0.00  1800000     0.00     0.00  LinkedCell::removeParticles()
+  0.00      5.63     0.00   408118     0.00     0.00  Particle::getM()
+  0.00      5.63     0.00   388381     0.00     0.00  Particle::setM(double)
+  0.00      5.63     0.00   388381     0.00     0.00  std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00   207289     0.00     0.00  std::_Function_handler<void (Particle&), BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00    29474     0.00     0.00  Particle::getV()
+  0.00      5.63     0.00    20000     0.00     0.00  Particle::Particle(Particle const&)
+  0.00      5.63     0.00    20000     0.00     0.00  std::pair<std::_Rb_tree_iterator<double>, bool> std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_emplace_unique<double&>(double&)
+  0.00      5.63     0.00    18000     0.00     0.00  std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&)
+  0.00      5.63     0.00    16006     0.00     0.00  boundary_type::_xsd_boundary_type_convert() const
+  0.00      5.63     0.00    13696     0.00     0.00  LinkedCell::addNeighbor(LinkedCell*)
+  0.00      5.63     0.00    11000     0.00     0.00  molsimInput::delta_t()
+  0.00      5.63     0.00    10001     0.00     0.00  Particle::Particle(std::array<double, 3ul>, std::array<double, 3ul>, double, double, double)
+  0.00      5.63     0.00    10000     0.00     0.00  MaxwellBoltzmannDistribution(Particle&, double, int)
+  0.00      5.63     0.00    10000     0.00     0.00  ParticleContainer::push(Particle&)
+  0.00      5.63     0.00    10000     0.00     0.00  Particle::updateDT(double)
+  0.00      5.63     0.00    10000     0.00     0.00  std::_Function_handler<void (Particle&), Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00    10000     0.00     0.00  std::_Function_handler<void (Particle&), Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00    10000     0.00     0.00  std::_Function_handler<void (Particle&), LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00     9737     0.00     0.00  std::_Function_handler<void (Particle&), Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00     9737     0.00     0.00  std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  0.00      5.63     0.00     5000     0.00     0.00  BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&)
+  0.00      5.63     0.00     4000     0.00     0.00  std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00     3003     0.00     0.00  LinkedCellContainer::iterate(std::function<void (Particle&)>)
+  0.00      5.63     0.00     3000     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}> const&, std::_Manager_operation)
+  0.00      5.63     0.00     3000     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00     2000     0.00     0.00  BoundaryHandler::period(Boundaries)
+  0.00      5.63     0.00     2000     0.00     0.00  BoundaryHandler::reflect(Boundaries)
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::top()
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::back()
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::left()
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::front()
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::right()
+  0.00      5.63     0.00     2000     0.00     0.00  boundaries_type::bottom()
+  0.00      5.63     0.00     2000     0.00     0.00  std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00     2000     0.00     0.00  std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00     1800     0.00     0.00  LinkedCell::LinkedCell(int)
+  0.00      5.63     0.00     1001     0.00     0.00  molsimInput::t_end()
+  0.00      5.63     0.00     1000     0.00     0.00  BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)
+  0.00      5.63     0.00     1000     0.00     0.00  BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*)
+  0.00      5.63     0.00     1000     0.00     0.00  ParticleContainer::getParticles()
+  0.00      5.63     0.00     1000     0.00     0.01  LinkedCellContainer::calculateIteration()
+  0.00      5.63     0.00     1000     0.00     0.00  LinkedCellContainer::clearOutflowParticles()
+  0.00      5.63     0.00     1000     0.00     0.00  Thermostat::getSteps() const
+  0.00      5.63     0.00     1000     0.00     0.00  std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00      113     0.00     0.00  xsd::cxx::xml::char_utf8_transcoder<char>::to[abi:cxx11](char16_t const*, unsigned long)
+  0.00      5.63     0.00       99     0.00     0.00  mapParticleToXML(Particle&)
+  0.00      5.63     0.00       68     0.00     0.00  xsd::cxx::tree::_type::_container(xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       65     0.00     0.00  xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&)
+  0.00      5.63     0.00       65     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::xml::transcode<char>(char16_t const*)
+  0.00      5.63     0.00       64     0.00     0.00  xsd::cxx::xml::qualified_name<char>::~qualified_name()
+  0.00      5.63     0.00       48     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&)
+  0.00      5.63     0.00       44     0.00     0.00  xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       41     0.00     0.00  xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&)
+  0.00      5.63     0.00       29     0.00     0.00  xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       29     0.00     0.00  xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMElement const*, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       24     0.00     0.00  xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       18     0.00     0.00  boundary_type::~boundary_type()
+  0.00      5.63     0.00       18     0.00     0.00  xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00       10     0.00     0.00  xsd::cxx::tree::_type::~_type()
+  0.00      5.63     0.00        9     0.00     0.00  domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        9     0.00     0.00  xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        6     0.00     0.00  double_vector::~double_vector()
+  0.00      5.63     0.00        6     0.00     0.00  xsd::cxx::tree::one<boundary_type, false>::set(std::unique_ptr<boundary_type, std::default_delete<boundary_type> >)
+  0.00      5.63     0.00        5     0.00     0.00  double_vector::x()
+  0.00      5.63     0.00        5     0.00     0.00  double_vector::y()
+  0.00      5.63     0.00        5     0.00     0.00  double_vector::z()
+  0.00      5.63     0.00        5     0.00     0.00  double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        5     0.00     0.00  xsd::cxx::tree::one<double_vector, false>::set(std::unique_ptr<double_vector, std::default_delete<double_vector> >)
+  0.00      5.63     0.00        5     0.00     0.00  xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        5     0.00     0.00  xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        5     0.00     0.00  std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::_M_get_insert_unique_pos(std::pair<double, double> const&)
+  0.00      5.63     0.00        4     0.00     0.00  input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        4     0.00     0.00  cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        4     0.00     0.00  cuboid::~cuboid()
+  0.00      5.63     0.00        4     0.00     0.00  std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::operator=(std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > > const&)
+  0.00      5.63     0.00        3     0.00     0.00  boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        3     0.00     0.00  boundaries_type::~boundaries_type()
+  0.00      5.63     0.00        3     0.00     0.00  ParticleContainer::size()
+  0.00      5.63     0.00        3     0.00     0.00  ParticleContainer::ParticleContainer()
+  0.00      5.63     0.00        3     0.00     0.00  LinkedCellContainer::size()
+  0.00      5.63     0.00        3     0.00     0.00  xsd::cxx::tree::sequence_common::sequence_common(xsd::cxx::tree::sequence_common const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        3     0.00     0.00  std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        3     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        3     0.00     0.00  std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        3     0.00     0.00  std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_erase(std::_Rb_tree_node<double>*)
+  0.00      5.63     0.00        2     0.00     0.00  mapCuboid(cuboid&)
+  0.00      5.63     0.00        2     0.00     0.00  molsimInput::thermostat()
+  0.00      5.63     0.00        2     0.00     0.00  molsimInput::particle_data()
+  0.00      5.63     0.00        2     0.00     0.00  molsimInput::frequency_output()
+  0.00      5.63     0.00        2     0.00     0.00  particle_data::cuboids()
+  0.00      5.63     0.00        2     0.00     0.00  particle_data::spheres()
+  0.00      5.63     0.00        2     0.00     0.00  particle_data::particles()
+  0.00      5.63     0.00        2     0.00     0.00  particle_data::~particle_data()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid_cluster::cuboid()
+  0.00      5.63     0.00        2     0.00     0.00  integer_vector::x()
+  0.00      5.63     0.00        2     0.00     0.00  integer_vector::y()
+  0.00      5.63     0.00        2     0.00     0.00  integer_vector::z()
+  0.00      5.63     0.00        2     0.00     0.00  integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        2     0.00     0.00  sphere_cluster::sphere()
+  0.00      5.63     0.00        2     0.00     0.00  particle_cluster::particle()
+  0.00      5.63     0.00        2     0.00     0.00  ParticleContainer::~ParticleContainer()
+  0.00      5.63     0.00        2     0.00     0.00  ParticleGenerator::getParticles()
+  0.00      5.63     0.00        2     0.00     0.00  Cuboid::getNrParticles()
+  0.00      5.63     0.00        2     0.00     0.00  Cuboid::generate(ParticleContainer&)
+  0.00      5.63     0.00        2     0.00     0.00  Cuboid::Cuboid(std::array<double, 3ul>, std::array<int, 3ul>, double, double, std::array<double, 3ul>, double, double)
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::mass()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::size()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::sigma()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::epsilon()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::distance()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::position()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::velocity()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::~cuboid()
+  0.00      5.63     0.00        2     0.00     0.00  cuboid::_clone(xsd::cxx::tree::flags, xsd::cxx::tree::_type*) const
+  0.00      5.63     0.00        2     0.00     0.00  std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&)
+  0.00      5.63     0.00        2     0.00     0.00  void std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> >::_M_realloc_insert<xsd::cxx::tree::sequence_common::ptr>(__gnu_cxx::__normal_iterator<xsd::cxx::tree::sequence_common::ptr*, std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> > >, xsd::cxx::tree::sequence_common::ptr&&)
+  0.00      5.63     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN12outputWriter9VTKWriterC2Ev
+  0.00      5.63     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN15DataArrayList_tC2Ev
+  0.00      5.63     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN8ParticleC2ERKS_
+  0.00      5.63     0.00        1     0.00     0.00  _GLOBAL__sub_I_ptStartTime
+  0.00      5.63     0.00        1     0.00     0.00  mapDoubleVec(double_vector&)
+  0.00      5.63     0.00        1     0.00     0.00  endPT(int, int)
+  0.00      5.63     0.00        1     0.00     0.00  input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&)
+  0.00      5.63     0.00        1     0.00     0.00  input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&)
+  0.00      5.63     0.00        1     0.00     0.00  Simulation::getNumParticles()
+  0.00      5.63     0.00        1     0.00     5.55  Simulation::start(bool)
+  0.00      5.63     0.00        1     0.00     0.00  Simulation::Simulation(molsimInput&)
+  0.00      5.63     0.00        1     0.00     0.00  Thermostat::applyBrownian(ParticleContainer&)
+  0.00      5.63     0.00        1     0.00     0.00  Thermostat::scale(Container&)
+  0.00      5.63     0.00        1     0.00     0.00  Thermostat::Thermostat(thermostat_type, bool)
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::domain_size()
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::cutoff_radius()
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::gravity()
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::boundary()
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  domain_type::~domain_type()
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::checkpoint()
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::linked_cell()
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::domain()
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::~molsimInput()
+  0.00      5.63     0.00        1     0.00     0.00  molsimInput::~molsimInput()
+  0.00      5.63     0.00        1     0.00     0.00  particle_data::is3D()
+  0.00      5.63     0.00        1     0.00     0.00  particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  sphere_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  BoundaryHandler::BoundaryHandler(boundaries_type, std::array<double, 3ul>, std::array<int, 3ul>)
+  0.00      5.63     0.00        1     0.00     0.00  boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::temp_delta()
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::change_brownian()
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::steps()
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::t_init()
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::t_target()
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::thermostat_type(thermostat_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  thermostat_type::~thermostat_type()
+  0.00      5.63     0.00        1     0.00     0.00  particle_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+  0.00      5.63     0.00        1     0.00     0.00  particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  ParticleContainer::reserve(unsigned long)
+  0.00      5.63     0.00        1     0.00     0.00  ParticleGenerator::applyBrownianMotion()
+  0.00      5.63     0.00        1     0.00     0.00  ParticleGenerator::reserve()
+  0.00      5.63     0.00        1     0.00     0.00  ParticleGenerator::generate()
+  0.00      5.63     0.00        1     0.00     0.00  ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*)
+  0.00      5.63     0.00        1     0.00     0.00  LinkedCellContainer::mixParameters()
+  0.00      5.63     0.00        1     0.00     0.00  LinkedCellContainer::populateNeighbours()
+  0.00      5.63     0.00        1     0.00     0.00  LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::xml::char_utf8_transcoder<char>::from(char const*, unsigned long)
+  0.00      5.63     0.00        1     0.00     0.00  std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> > xsd::cxx::xml::dom::parse<char>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMErrorHandler&, xsd::cxx::xml::properties<char> const&, unsigned long)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::one<domain_type, false>::set(std::unique_ptr<domain_type, std::default_delete<domain_type> >)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::one<cuboid_cluster, false>::set(std::unique_ptr<cuboid_cluster, std::default_delete<cuboid_cluster> >)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::one<sphere_cluster, false>::set(std::unique_ptr<sphere_cluster, std::default_delete<sphere_cluster> >)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::one<particle_cluster, false>::set(std::unique_ptr<particle_cluster, std::default_delete<particle_cluster> >)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  0.00      5.63     0.00        1     0.00     0.00  xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::~string()
+  0.00      5.63     0.00        1     0.00     0.00  Thermostat::changeBrownian() const
+  0.00      5.63     0.00        1     0.00     0.00  Thermostat::getCurrentTemp(Container&) const
+  0.00      5.63     0.00        1     0.00     0.00  std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        1     0.00     0.00  std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        1     0.00     0.00  std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  0.00      5.63     0.00        1     0.00     0.00  std::vector<LinkedCell, std::allocator<LinkedCell> >::reserve(unsigned long)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.18% of 5.63 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     98.6    0.00    5.55                 xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+                0.00    5.55       1/1           Simulation::start(bool) [2]
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+                0.00    0.00       1/1           input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [167]
+                0.00    0.00       1/1           Simulation::getNumParticles() [169]
+                0.00    0.00       1/1           endPT(int, int) [166]
+                0.00    0.00       1/1           molsimInput::checkpoint() [178]
+                0.00    0.00       1/1           molsimInput::~molsimInput() [183]
+-----------------------------------------------
+                0.00    5.55       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[2]     98.6    0.00    5.55       1         Simulation::start(bool) [2]
+                0.00    5.55    1000/1000        LinkedCellContainer::calculateIteration() [3]
+                0.00    0.00       1/1           Thermostat::scale(Container&) [34]
+                0.00    0.00    1001/1001        molsimInput::t_end() [83]
+                0.00    0.00    1000/11000       molsimInput::delta_t() [61]
+                0.00    0.00    1000/1000        Thermostat::getSteps() const [85]
+                0.00    0.00       2/2           molsimInput::frequency_output() [131]
+-----------------------------------------------
+                0.00    5.55    1000/1000        Simulation::start(bool) [2]
+[3]     98.6    0.00    5.55    1000         LinkedCellContainer::calculateIteration() [3]
+                0.26    4.78    1000/1000        LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+                0.00    0.43    3000/3003        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+                0.00    0.03    1000/1000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.02    1000/1000        LinkedCellContainer::clearOutflowParticles() [26]
+                0.00    0.01    1000/2000        BoundaryHandler::period(Boundaries) [20]
+                0.00    0.01    1000/1000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+                0.00    0.00    1000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}> const&, std::_Manager_operation) [32]
+                0.00    0.00    2000/3602000     std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}> const&, std::_Manager_operation) [31]
+                0.00    0.00 1800000/1800000     LinkedCell::removeParticles() [51]
+                0.00    0.00    1000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [73]
+                0.00    0.00    1000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}> const&, std::_Manager_operation) [72]
+-----------------------------------------------
+                0.26    4.78    1000/1000        LinkedCellContainer::calculateIteration() [3]
+[4]     89.5    0.26    4.78    1000         LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+                2.37    1.78 224693515/254241178     std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&) [5]
+                0.03    0.51 1800000/1800000     LinkedCell::iteratePairs(std::function<void (Particle&, Particle&)>) [7]
+                0.06    0.00 27392000/27492600     LinkedCell::getIndex() [15]
+                0.02    0.00 46159794/46736135     LinkedCell::getParticles() [23]
+                0.01    0.00 1800000/1800000     LinkedCell::getNeighbors() [30]
+                0.00    0.00 3600000/3602000     std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}> const&, std::_Manager_operation) [31]
+-----------------------------------------------
+                0.02    0.01 1849982/254241178     std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [17]
+                0.29    0.22 27697681/254241178     LinkedCell::iteratePairs(std::function<void (Particle&, Particle&)>) [7]
+                2.37    1.78 224693515/254241178     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[5]     83.4    2.69    2.01 254241178         std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&) [5]
+                2.01    0.00 254241178/254342563     calculateLennardJones(Particle&, Particle&, double, double) [6]
+-----------------------------------------------
+                0.00    0.00  101385/254342563     std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+                2.01    0.00 254241178/254342563     std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&) [5]
+[6]     35.7    2.01    0.00 254342563         calculateLennardJones(Particle&, Particle&, double, double) [6]
+-----------------------------------------------
+                0.03    0.51 1800000/1800000     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[7]      9.6    0.03    0.51 1800000         LinkedCell::iteratePairs(std::function<void (Particle&, Particle&)>) [7]
+                0.29    0.22 27697681/254241178     std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&) [5]
+-----------------------------------------------
+                0.00    0.00       1/3003        Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       1/3003        Thermostat::scale(Container&) [34]
+                0.00    0.00       1/3003        LinkedCellContainer::mixParameters() [36]
+                0.00    0.43    3000/3003        LinkedCellContainer::calculateIteration() [3]
+[8]      7.7    0.00    0.43    3003         LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+                0.03    0.40    3003/3006        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.00    0.00    2000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}> const&, std::_Manager_operation) [32]
+                0.00    0.00    2000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}> const&, std::_Manager_operation) [72]
+                0.00    0.00    2000/3000        std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [73]
+                0.00    0.00       2/3           std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [124]
+                0.00    0.00       2/3           std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}> const&, std::_Manager_operation) [126]
+                0.00    0.00       2/3           std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [125]
+-----------------------------------------------
+                0.00    0.00       1/3006        Simulation::Simulation(molsimInput&) [33]
+                0.00    0.00       1/3006        Thermostat::applyBrownian(ParticleContainer&) [38]
+                0.00    0.00       1/3006        LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.03    0.40    3003/3006        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[9]      7.6    0.03    0.40    3006         ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.16    0.02 9920161/9920161     std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_invoke(std::_Any_data const&, Particle&) [10]
+                0.02    0.08 9920424/9920424     std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [11]
+                0.07    0.00 9920161/9920161     Particle::calculateV() [14]
+                0.03    0.00   10000/10000       std::_Function_handler<void (Particle&), LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [19]
+                0.02    0.00 9920161/9920161     std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_invoke(std::_Any_data const&, Particle&) [27]
+                0.01    0.00 9920161/9920161     Particle::applyGravity(double) [29]
+                0.00    0.00   10000/9930161     LinkedCell::addParticle(Particle*) [24]
+                0.00    0.00 9920424/9920424     Particle::saveOldF() [50]
+                0.00    0.00   10000/20000       std::pair<std::_Rb_tree_iterator<double>, bool> std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_emplace_unique<double&>(double&) [58]
+                0.00    0.00   10000/10000       std::_Function_handler<void (Particle&), LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [68]
+                0.00    0.00   10000/10000       Particle::updateDT(double) [65]
+                0.00    0.00   10000/10000       std::_Function_handler<void (Particle&), Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [66]
+                0.00    0.00   10000/10000       MaxwellBoltzmannDistribution(Particle&, double, int) [63]
+                0.00    0.00   10000/10000       std::_Function_handler<void (Particle&), Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [67]
+                0.00    0.00    9737/9737        std::_Function_handler<void (Particle&), Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [69]
+                0.00    0.00    9737/9737        std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [70]
+-----------------------------------------------
+                0.16    0.02 9920161/9920161     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[10]     3.2    0.16    0.02 9920161         std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_invoke(std::_Any_data const&, Particle&) [10]
+                0.02    0.00 9920161/9930161     LinkedCell::addParticle(Particle*) [24]
+-----------------------------------------------
+                0.02    0.08 9920424/9920424     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[11]     1.8    0.02    0.08 9920424         std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [11]
+                0.08    0.00 9920424/9920424     Particle::calculateX() [12]
+-----------------------------------------------
+                0.08    0.00 9920424/9920424     std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [11]
+[12]     1.4    0.08    0.00 9920424         Particle::calculateX() [12]
+-----------------------------------------------
+                                                 <spontaneous>
+[13]     1.4    0.08    0.00                 ParticleSphere::toString[abi:cxx11]() [13]
+-----------------------------------------------
+                0.07    0.00 9920161/9920161     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[14]     1.2    0.07    0.00 9920161         Particle::calculateV() [14]
+-----------------------------------------------
+                0.00    0.00   48600/27492600     LinkedCellContainer::populateNeighbours() [42]
+                0.00    0.00   52000/27492600     std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [17]
+                0.06    0.00 27392000/27492600     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[15]     1.1    0.06    0.00 27492600         LinkedCell::getIndex() [15]
+-----------------------------------------------
+                0.00    0.01    1000/5000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+                0.00    0.02    2000/5000        BoundaryHandler::reflect(Boundaries) [21]
+                0.00    0.02    2000/5000        BoundaryHandler::period(Boundaries) [20]
+[16]     1.0    0.00    0.06    5000         BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+                0.00    0.03   18000/18000       std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [17]
+                0.02    0.00  236000/236000      std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+-----------------------------------------------
+                0.00    0.03   18000/18000       BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+[17]     0.6    0.00    0.03   18000         std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [17]
+                0.02    0.01 1849982/254241178     std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&) [5]
+                0.00    0.00  340341/46736135     LinkedCell::getParticles() [23]
+                0.00    0.00   52000/27492600     LinkedCell::getIndex() [15]
+-----------------------------------------------
+                0.00    0.03    1000/1000        LinkedCellContainer::calculateIteration() [3]
+[18]     0.6    0.00    0.03    1000         BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.02    2000/2000        BoundaryHandler::reflect(Boundaries) [21]
+                0.00    0.01    1000/2000        BoundaryHandler::period(Boundaries) [20]
+                0.00    0.00   10000/16006       boundary_type::_xsd_boundary_type_convert() const [59]
+                0.00    0.00    1000/2000        boundaries_type::top() [74]
+                0.00    0.00    1000/2000        boundaries_type::bottom() [79]
+                0.00    0.00    1000/2000        boundaries_type::front() [77]
+                0.00    0.00    1000/2000        boundaries_type::back() [75]
+                0.00    0.00    1000/2000        boundaries_type::left() [76]
+                0.00    0.00    1000/2000        boundaries_type::right() [78]
+-----------------------------------------------
+                0.03    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[19]     0.4    0.03    0.00   10000         std::_Function_handler<void (Particle&), LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [19]
+                0.00    0.00   10000/20000       std::pair<std::_Rb_tree_iterator<double>, bool> std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_emplace_unique<double&>(double&) [58]
+-----------------------------------------------
+                0.00    0.01    1000/2000        LinkedCellContainer::calculateIteration() [3]
+                0.00    0.01    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+[20]     0.4    0.00    0.02    2000         BoundaryHandler::period(Boundaries) [20]
+                0.00    0.02    2000/5000        BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+                0.00    0.00    2000/4000        std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}> const&, std::_Manager_operation) [71]
+                0.00    0.00    2000/2000        std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [80]
+-----------------------------------------------
+                0.00    0.02    2000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+[21]     0.4    0.00    0.02    2000         BoundaryHandler::reflect(Boundaries) [21]
+                0.00    0.02    2000/5000        BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+                0.00    0.00    2000/4000        std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}> const&, std::_Manager_operation) [71]
+                0.00    0.00    2000/2000        std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [81]
+-----------------------------------------------
+                0.02    0.00  236000/236000      BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+[22]     0.4    0.02    0.00  236000         std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+                0.00    0.00  101385/254342563     calculateLennardJones(Particle&, Particle&, double, double) [6]
+                0.00    0.00  236000/46736135     LinkedCell::getParticles() [23]
+                0.00    0.00  388381/388381      std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [54]
+                0.00    0.00  207289/207289      std::_Function_handler<void (Particle&), BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [55]
+-----------------------------------------------
+                0.00    0.00  236000/46736135     std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+                0.00    0.00  340341/46736135     std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [17]
+                0.02    0.00 46159794/46736135     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[23]     0.4    0.02    0.00 46736135         LinkedCell::getParticles() [23]
+-----------------------------------------------
+                0.00    0.00   10000/9930161     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.02    0.00 9920161/9930161     std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_invoke(std::_Any_data const&, Particle&) [10]
+[24]     0.4    0.02    0.00 9930161         LinkedCell::addParticle(Particle*) [24]
+-----------------------------------------------
+                0.02    0.00 9920424/9920424     LinkedCellContainer::clearOutflowParticles() [26]
+[25]     0.4    0.02    0.00 9920424         Particle::isOut(std::array<double, 3ul>) [25]
+-----------------------------------------------
+                0.00    0.02    1000/1000        LinkedCellContainer::calculateIteration() [3]
+[26]     0.4    0.00    0.02    1000         LinkedCellContainer::clearOutflowParticles() [26]
+                0.02    0.00 9920424/9920424     Particle::isOut(std::array<double, 3ul>) [25]
+                0.00    0.00    1000/1000        ParticleContainer::getParticles() [84]
+-----------------------------------------------
+                0.02    0.00 9920161/9920161     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[27]     0.3    0.02    0.00 9920161         std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_invoke(std::_Any_data const&, Particle&) [27]
+-----------------------------------------------
+                0.00    0.01    1000/1000        LinkedCellContainer::calculateIteration() [3]
+[28]     0.2    0.00    0.01    1000         BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+                0.00    0.01    1000/5000        BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [16]
+                0.00    0.00    6000/16006       boundary_type::_xsd_boundary_type_convert() const [59]
+                0.00    0.00    1000/2000        boundaries_type::front() [77]
+                0.00    0.00    1000/2000        boundaries_type::back() [75]
+                0.00    0.00    1000/2000        boundaries_type::left() [76]
+                0.00    0.00    1000/2000        boundaries_type::right() [78]
+                0.00    0.00    1000/2000        boundaries_type::top() [74]
+                0.00    0.00    1000/2000        boundaries_type::bottom() [79]
+                0.00    0.00    1000/1000        std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}> const&, std::_Manager_operation) [86]
+-----------------------------------------------
+                0.01    0.00 9920161/9920161     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[29]     0.2    0.01    0.00 9920161         Particle::applyGravity(double) [29]
+-----------------------------------------------
+                0.01    0.00 1800000/1800000     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[30]     0.2    0.01    0.00 1800000         LinkedCell::getNeighbors() [30]
+-----------------------------------------------
+                0.00    0.00    2000/3602000     LinkedCellContainer::calculateIteration() [3]
+                0.00    0.00 3600000/3602000     LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [4]
+[31]     0.1    0.01    0.00 3602000         std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}> const&, std::_Manager_operation) [31]
+-----------------------------------------------
+                0.00    0.00    1000/3000        LinkedCellContainer::calculateIteration() [3]
+                0.00    0.00    2000/3000        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[32]     0.1    0.01    0.00    3000         std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}> const&, std::_Manager_operation) [32]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[33]     0.0    0.00    0.00       1         Simulation::Simulation(molsimInput&) [33]
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       1/1           LinkedCellContainer::mixParameters() [36]
+                0.00    0.00       1/1           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+                0.00    0.00       1/3006        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.00    0.00       2/2           molsimInput::thermostat() [129]
+                0.00    0.00       2/2           molsimInput::particle_data() [130]
+                0.00    0.00       2/2           ParticleGenerator::getParticles() [144]
+                0.00    0.00       1/1           thermostat_type::thermostat_type(thermostat_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [201]
+                0.00    0.00       1/1           particle_data::is3D() [185]
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+                0.00    0.00       1/1           thermostat_type::~thermostat_type() [202]
+                0.00    0.00       1/1           molsimInput::linked_cell() [179]
+                0.00    0.00       1/1           std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [216]
+                0.00    0.00       1/1           molsimInput::domain() [181]
+                0.00    0.00       1/1           domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [176]
+                0.00    0.00       1/1           domain_type::~domain_type() [177]
+                0.00    0.00       1/2           particle_data::~particle_data() [135]
+                0.00    0.00       1/2           ParticleContainer::~ParticleContainer() [143]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::start(bool) [2]
+[34]     0.0    0.00    0.00       1         Thermostat::scale(Container&) [34]
+                0.00    0.00       1/1           Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       1/3003        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+                0.00    0.00       1/3           ParticleContainer::size() [120]
+                0.00    0.00       1/3           LinkedCellContainer::size() [122]
+                0.00    0.00       1/3           std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [124]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[35]     0.0    0.00    0.00       1         LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       1/3006        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.00    0.00       1/1           LinkedCellContainer::populateNeighbours() [42]
+                0.00    0.00    1800/1800        LinkedCell::LinkedCell(int) [82]
+                0.00    0.00       2/4           std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::operator=(std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > > const&) [117]
+                0.00    0.00       2/3           boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [118]
+                0.00    0.00       1/1           domain_type::domain_size() [171]
+                0.00    0.00       1/3           ParticleContainer::ParticleContainer() [121]
+                0.00    0.00       1/1           mapDoubleVec(double_vector&) [165]
+                0.00    0.00       1/1           domain_type::cutoff_radius() [172]
+                0.00    0.00       1/1           domain_type::gravity() [174]
+                0.00    0.00       1/2           std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&) [159]
+                0.00    0.00       1/1           std::vector<LinkedCell, std::allocator<LinkedCell> >::reserve(unsigned long) [219]
+                0.00    0.00       1/1           domain_type::boundary() [175]
+                0.00    0.00       1/1           std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [218]
+                0.00    0.00       1/1           BoundaryHandler::BoundaryHandler(boundaries_type, std::array<double, 3ul>, std::array<int, 3ul>) [192]
+                0.00    0.00       1/3           boundaries_type::~boundaries_type() [119]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[36]     0.0    0.00    0.00       1         LinkedCellContainer::mixParameters() [36]
+                0.00    0.00       1/3003        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+                0.00    0.00       5/5           std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::_M_get_insert_unique_pos(std::pair<double, double> const&) [113]
+                0.00    0.00       3/3           std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_erase(std::_Rb_tree_node<double>*) [127]
+                0.00    0.00       1/3           std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [125]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::scale(Container&) [34]
+[37]     0.0    0.00    0.00       1         Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       1/3003        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+                0.00    0.00       1/3           ParticleContainer::size() [120]
+                0.00    0.00       1/3           LinkedCellContainer::size() [122]
+                0.00    0.00       1/3           std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}> const&, std::_Manager_operation) [126]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::applyBrownianMotion() [39]
+[38]     0.0    0.00    0.00       1         Thermostat::applyBrownian(ParticleContainer&) [38]
+                0.00    0.00       1/3006        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+                0.00    0.00       1/1           std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [217]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::generate() [40]
+[39]     0.0    0.00    0.00       1         ParticleGenerator::applyBrownianMotion() [39]
+                0.00    0.00       1/1           Thermostat::applyBrownian(ParticleContainer&) [38]
+                0.00    0.00       1/1           Thermostat::changeBrownian() const [215]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[40]     0.0    0.00    0.00       1         ParticleGenerator::generate() [40]
+                0.00    0.00       1/1           ParticleGenerator::applyBrownianMotion() [39]
+                0.00    0.00       2/2           Cuboid::generate(ParticleContainer&) [146]
+                0.00    0.00       1/2           particle_data::particles() [134]
+                0.00    0.00       1/1           ParticleGenerator::reserve() [206]
+                0.00    0.00       1/2           particle_cluster::particle() [142]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[41]     0.0    0.00    0.00       1         ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+                0.00    0.00       1/1           ParticleGenerator::generate() [40]
+                0.00    0.00       2/3           ParticleContainer::ParticleContainer() [121]
+                0.00    0.00       2/4           std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::operator=(std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > > const&) [117]
+                0.00    0.00       1/1           particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [187]
+                0.00    0.00       1/2           std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&) [159]
+                0.00    0.00       1/2           ParticleContainer::~ParticleContainer() [143]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[42]     0.0    0.00    0.00       1         LinkedCellContainer::populateNeighbours() [42]
+                0.00    0.00   48600/27492600     LinkedCell::getIndex() [15]
+                0.00    0.00   13696/13696       LinkedCell::addNeighbor(LinkedCell*) [60]
+-----------------------------------------------
+                0.00    0.00 9920424/9920424     ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[50]     0.0    0.00    0.00 9920424         Particle::saveOldF() [50]
+-----------------------------------------------
+                0.00    0.00 1800000/1800000     LinkedCellContainer::calculateIteration() [3]
+[51]     0.0    0.00    0.00 1800000         LinkedCell::removeParticles() [51]
+-----------------------------------------------
+                0.00    0.00    9737/408118      std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [70]
+                0.00    0.00   10000/408118      std::_Function_handler<void (Particle&), Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [67]
+                0.00    0.00  388381/408118      std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [54]
+[52]     0.0    0.00    0.00  408118         Particle::getM() [52]
+-----------------------------------------------
+                0.00    0.00  388381/388381      std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [54]
+[53]     0.0    0.00    0.00  388381         Particle::setM(double) [53]
+-----------------------------------------------
+                0.00    0.00  388381/388381      std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+[54]     0.0    0.00    0.00  388381         std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [54]
+                0.00    0.00  388381/408118      Particle::getM() [52]
+                0.00    0.00  388381/388381      Particle::setM(double) [53]
+-----------------------------------------------
+                0.00    0.00  207289/207289      std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&) [22]
+[55]     0.0    0.00    0.00  207289         std::_Function_handler<void (Particle&), BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [55]
+-----------------------------------------------
+                0.00    0.00    9737/29474       std::_Function_handler<void (Particle&), Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [69]
+                0.00    0.00    9737/29474       std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [70]
+                0.00    0.00   10000/29474       MaxwellBoltzmannDistribution(Particle&, double, int) [63]
+[56]     0.0    0.00    0.00   29474         Particle::getV() [56]
+-----------------------------------------------
+                0.00    0.00   10000/20000       std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&) [159]
+                0.00    0.00   10000/20000       ParticleContainer::push(Particle&) [64]
+[57]     0.0    0.00    0.00   20000         Particle::Particle(Particle const&) [57]
+-----------------------------------------------
+                0.00    0.00   10000/20000       std::_Function_handler<void (Particle&), LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [19]
+                0.00    0.00   10000/20000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[58]     0.0    0.00    0.00   20000         std::pair<std::_Rb_tree_iterator<double>, bool> std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_emplace_unique<double&>(double&) [58]
+-----------------------------------------------
+                0.00    0.00       1/16006       boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       5/16006       xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [111]
+                0.00    0.00    6000/16006       BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+                0.00    0.00   10000/16006       BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+[59]     0.0    0.00    0.00   16006         boundary_type::_xsd_boundary_type_convert() const [59]
+-----------------------------------------------
+                0.00    0.00   13696/13696       LinkedCellContainer::populateNeighbours() [42]
+[60]     0.0    0.00    0.00   13696         LinkedCell::addNeighbor(LinkedCell*) [60]
+-----------------------------------------------
+                0.00    0.00    1000/11000       Simulation::start(bool) [2]
+                0.00    0.00   10000/11000       std::_Function_handler<void (Particle&), Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [66]
+[61]     0.0    0.00    0.00   11000         molsimInput::delta_t() [61]
+-----------------------------------------------
+                0.00    0.00       1/10001       BoundaryHandler::BoundaryHandler(boundaries_type, std::array<double, 3ul>, std::array<int, 3ul>) [192]
+                0.00    0.00   10000/10001       Cuboid::generate(ParticleContainer&) [146]
+[62]     0.0    0.00    0.00   10001         Particle::Particle(std::array<double, 3ul>, std::array<double, 3ul>, double, double, double) [62]
+-----------------------------------------------
+                0.00    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[63]     0.0    0.00    0.00   10000         MaxwellBoltzmannDistribution(Particle&, double, int) [63]
+                0.00    0.00   10000/29474       Particle::getV() [56]
+-----------------------------------------------
+                0.00    0.00   10000/10000       Cuboid::generate(ParticleContainer&) [146]
+[64]     0.0    0.00    0.00   10000         ParticleContainer::push(Particle&) [64]
+                0.00    0.00   10000/20000       Particle::Particle(Particle const&) [57]
+-----------------------------------------------
+                0.00    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[65]     0.0    0.00    0.00   10000         Particle::updateDT(double) [65]
+-----------------------------------------------
+                0.00    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[66]     0.0    0.00    0.00   10000         std::_Function_handler<void (Particle&), Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [66]
+                0.00    0.00   10000/11000       molsimInput::delta_t() [61]
+-----------------------------------------------
+                0.00    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[67]     0.0    0.00    0.00   10000         std::_Function_handler<void (Particle&), Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [67]
+                0.00    0.00   10000/408118      Particle::getM() [52]
+-----------------------------------------------
+                0.00    0.00   10000/10000       ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[68]     0.0    0.00    0.00   10000         std::_Function_handler<void (Particle&), LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [68]
+-----------------------------------------------
+                0.00    0.00    9737/9737        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[69]     0.0    0.00    0.00    9737         std::_Function_handler<void (Particle&), Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [69]
+                0.00    0.00    9737/29474       Particle::getV() [56]
+-----------------------------------------------
+                0.00    0.00    9737/9737        ParticleContainer::iterate(std::function<void (Particle&)>) [9]
+[70]     0.0    0.00    0.00    9737         std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&) [70]
+                0.00    0.00    9737/29474       Particle::getV() [56]
+                0.00    0.00    9737/408118      Particle::getM() [52]
+-----------------------------------------------
+                0.00    0.00    2000/4000        BoundaryHandler::reflect(Boundaries) [21]
+                0.00    0.00    2000/4000        BoundaryHandler::period(Boundaries) [20]
+[71]     0.0    0.00    0.00    4000         std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}> const&, std::_Manager_operation) [71]
+-----------------------------------------------
+                0.00    0.00    1000/3000        LinkedCellContainer::calculateIteration() [3]
+                0.00    0.00    2000/3000        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[72]     0.0    0.00    0.00    3000         std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}> const&, std::_Manager_operation) [72]
+-----------------------------------------------
+                0.00    0.00    1000/3000        LinkedCellContainer::calculateIteration() [3]
+                0.00    0.00    2000/3000        LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[73]     0.0    0.00    0.00    3000         std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [73]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[74]     0.0    0.00    0.00    2000         boundaries_type::top() [74]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[75]     0.0    0.00    0.00    2000         boundaries_type::back() [75]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[76]     0.0    0.00    0.00    2000         boundaries_type::left() [76]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[77]     0.0    0.00    0.00    2000         boundaries_type::front() [77]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[78]     0.0    0.00    0.00    2000         boundaries_type::right() [78]
+-----------------------------------------------
+                0.00    0.00    1000/2000        BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [18]
+                0.00    0.00    1000/2000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[79]     0.0    0.00    0.00    2000         boundaries_type::bottom() [79]
+-----------------------------------------------
+                0.00    0.00    2000/2000        BoundaryHandler::period(Boundaries) [20]
+[80]     0.0    0.00    0.00    2000         std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [80]
+-----------------------------------------------
+                0.00    0.00    2000/2000        BoundaryHandler::reflect(Boundaries) [21]
+[81]     0.0    0.00    0.00    2000         std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [81]
+-----------------------------------------------
+                0.00    0.00    1800/1800        LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[82]     0.0    0.00    0.00    1800         LinkedCell::LinkedCell(int) [82]
+-----------------------------------------------
+                0.00    0.00    1001/1001        Simulation::start(bool) [2]
+[83]     0.0    0.00    0.00    1001         molsimInput::t_end() [83]
+-----------------------------------------------
+                0.00    0.00    1000/1000        LinkedCellContainer::clearOutflowParticles() [26]
+[84]     0.0    0.00    0.00    1000         ParticleContainer::getParticles() [84]
+-----------------------------------------------
+                0.00    0.00    1000/1000        Simulation::start(bool) [2]
+[85]     0.0    0.00    0.00    1000         Thermostat::getSteps() const [85]
+-----------------------------------------------
+                0.00    0.00    1000/1000        BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [28]
+[86]     0.0    0.00    0.00    1000         std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}> const&, std::_Manager_operation) [86]
+-----------------------------------------------
+                0.00    0.00      48/113         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00      65/113         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::xml::transcode<char>(char16_t const*) [91]
+[87]     0.0    0.00    0.00     113         xsd::cxx::xml::char_utf8_transcoder<char>::to[abi:cxx11](char16_t const*, unsigned long) [87]
+-----------------------------------------------
+                0.00    0.00       1/99          boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [194]
+                0.00    0.00       1/99          domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       1/99          cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [190]
+                0.00    0.00       1/99          particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [204]
+                0.00    0.00       1/99          particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [188]
+                0.00    0.00       1/99          molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [182]
+                0.00    0.00       2/99          cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [156]
+                0.00    0.00       2/99          cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+                0.00    0.00       3/99          thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       4/99          domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       5/99          xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+                0.00    0.00       6/99          boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       6/99          integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+                0.00    0.00       6/99          particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00      10/99          molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00      15/99          double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+                0.00    0.00      16/99          cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00      18/99          xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [100]
+[88]     0.0    0.00    0.00      99         mapParticleToXML(Particle&) [88]
+-----------------------------------------------
+                0.00    0.00       3/68          xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(char const*) [583]
+                0.00    0.00      65/68          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+[89]     0.0    0.00    0.00      68         xsd::cxx::tree::_type::_container(xsd::cxx::tree::_type*) [89]
+-----------------------------------------------
+                0.00    0.00       1/65          input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [168]
+                0.00    0.00       2/65          cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+                0.00    0.00       3/65          thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       4/65          domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       5/65          particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       6/65          boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       6/65          integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+                0.00    0.00       9/65          molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00      14/65          cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00      15/65          double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+[90]     0.0    0.00    0.00      65         xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00      65/65          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::xml::transcode<char>(char16_t const*) [91]
+                0.00    0.00      65/68          xsd::cxx::tree::_type::_container(xsd::cxx::tree::_type*) [89]
+-----------------------------------------------
+                0.00    0.00      65/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+[91]     0.0    0.00    0.00      65         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::xml::transcode<char>(char16_t const*) [91]
+                0.00    0.00      65/113         xsd::cxx::xml::char_utf8_transcoder<char>::to[abi:cxx11](char16_t const*, unsigned long) [87]
+-----------------------------------------------
+                0.00    0.00       2/64          cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+                0.00    0.00       3/64          thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       4/64          domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       5/64          particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       6/64          boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       6/64          integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+                0.00    0.00       9/64          molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00      14/64          cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00      15/64          double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+[92]     0.0    0.00    0.00      64         xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+-----------------------------------------------
+                0.00    0.00       1/48          boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       1/48          xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [213]
+                0.00    0.00       4/48          input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       5/48          xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [111]
+                0.00    0.00       8/48          domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00      29/48          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+[93]     0.0    0.00    0.00      48         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00      48/113         xsd::cxx::xml::char_utf8_transcoder<char>::to[abi:cxx11](char16_t const*, unsigned long) [87]
+-----------------------------------------------
+                0.00    0.00       1/44          thermostat_type::thermostat_type(thermostat_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [201]
+                0.00    0.00       1/44          domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [176]
+                0.00    0.00       3/44          boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [118]
+                0.00    0.00       4/44          particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [187]
+                0.00    0.00       8/44          cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115]
+                0.00    0.00       9/44          xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [103]
+                0.00    0.00      18/44          xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [100]
+[94]     0.0    0.00    0.00      44         xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+-----------------------------------------------
+                0.00    0.00       4/41          input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       8/41          domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00      29/41          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMElement const*, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [97]
+[95]     0.0    0.00    0.00      41         xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&) [95]
+-----------------------------------------------
+                0.00    0.00       1/29          thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       1/29          particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       2/29          domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       2/29          molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00       8/29          cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00      15/29          double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+[96]     0.0    0.00    0.00      29         xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00      29/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00      29/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMElement const*, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [97]
+-----------------------------------------------
+                0.00    0.00      29/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+[97]     0.0    0.00    0.00      29         xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMElement const*, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [97]
+                0.00    0.00      29/41          xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&) [95]
+-----------------------------------------------
+                0.00    0.00       1/24          boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       1/24          boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [194]
+                0.00    0.00       1/24          domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       1/24          cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [190]
+                0.00    0.00       1/24          particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [204]
+                0.00    0.00       1/24          particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       1/24          particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [188]
+                0.00    0.00       1/24          molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00       1/24          molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [182]
+                0.00    0.00       1/24          xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [213]
+                0.00    0.00       2/24          cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00       2/24          cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [156]
+                0.00    0.00       5/24          xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [111]
+                0.00    0.00       5/24          xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+[98]     0.0    0.00    0.00      24         xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+-----------------------------------------------
+                0.00    0.00      18/18          boundaries_type::~boundaries_type() [119]
+[99]     0.0    0.00    0.00      18         boundary_type::~boundary_type() [99]
+-----------------------------------------------
+                0.00    0.00      18/18          boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [118]
+[100]    0.0    0.00    0.00      18         xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [100]
+                0.00    0.00      18/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+                0.00    0.00      18/99          mapParticleToXML(Particle&) [88]
+-----------------------------------------------
+                0.00    0.00       2/10          cuboid::~cuboid() [157]
+                0.00    0.00       2/10          molsimInput::~molsimInput() [184]
+                0.00    0.00       6/10          particle_data::~particle_data() [135]
+[101]    0.0    0.00    0.00      10         xsd::cxx::tree::_type::~_type() [101]
+-----------------------------------------------
+                                   8             domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       1/9           thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       2/9           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00       6/9           integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+[102]    0.0    0.00    0.00       9+8       domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       8/41          xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&) [95]
+                0.00    0.00       8/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                                   8             domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+-----------------------------------------------
+                0.00    0.00       1/9           domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [176]
+                0.00    0.00       8/9           cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115]
+[103]    0.0    0.00    0.00       9         xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [103]
+                0.00    0.00       9/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+-----------------------------------------------
+                0.00    0.00       1/6           domain_type::~domain_type() [177]
+                0.00    0.00       1/6           molsimInput::~molsimInput() [184]
+                0.00    0.00       4/6           cuboid::~cuboid() [157]
+[104]    0.0    0.00    0.00       6         double_vector::~double_vector() [104]
+-----------------------------------------------
+                0.00    0.00       6/6           boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+[105]    0.0    0.00    0.00       6         xsd::cxx::tree::one<boundary_type, false>::set(std::unique_ptr<boundary_type, std::default_delete<boundary_type> >) [105]
+-----------------------------------------------
+                0.00    0.00       1/5           mapDoubleVec(double_vector&) [165]
+                0.00    0.00       4/5           mapCuboid(cuboid&) [128]
+[106]    0.0    0.00    0.00       5         double_vector::x() [106]
+-----------------------------------------------
+                0.00    0.00       1/5           mapDoubleVec(double_vector&) [165]
+                0.00    0.00       4/5           mapCuboid(cuboid&) [128]
+[107]    0.0    0.00    0.00       5         double_vector::y() [107]
+-----------------------------------------------
+                0.00    0.00       1/5           mapDoubleVec(double_vector&) [165]
+                0.00    0.00       4/5           mapCuboid(cuboid&) [128]
+[108]    0.0    0.00    0.00       5         double_vector::z() [108]
+-----------------------------------------------
+                0.00    0.00       5/5           xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+[109]    0.0    0.00    0.00       5         double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+                0.00    0.00      15/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00      15/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00      15/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00      15/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+-----------------------------------------------
+                0.00    0.00       1/5           domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       4/5           cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+[110]    0.0    0.00    0.00       5         xsd::cxx::tree::one<double_vector, false>::set(std::unique_ptr<double_vector, std::default_delete<double_vector> >) [110]
+-----------------------------------------------
+                0.00    0.00       5/5           boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+[111]    0.0    0.00    0.00       5         xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [111]
+                0.00    0.00       5/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       5/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00       5/16006       boundary_type::_xsd_boundary_type_convert() const [59]
+-----------------------------------------------
+                0.00    0.00       1/5           domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       4/5           cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+[112]    0.0    0.00    0.00       5         xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+                0.00    0.00       5/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       5/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       5/5           double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [109]
+-----------------------------------------------
+                0.00    0.00       5/5           LinkedCellContainer::mixParameters() [36]
+[113]    0.0    0.00    0.00       5         std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::_M_get_insert_unique_pos(std::pair<double, double> const&) [113]
+-----------------------------------------------
+                0.00    0.00       1/4           thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       1/4           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       2/4           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+[114]    0.0    0.00    0.00       4         input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       4/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00       4/41          xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&) [95]
+-----------------------------------------------
+                0.00    0.00       2/4           ParticleGenerator::reserve() [206]
+                0.00    0.00       2/4           cuboid::_clone(xsd::cxx::tree::flags, xsd::cxx::tree::_type*) const [158]
+[115]    0.0    0.00    0.00       4         cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115]
+                0.00    0.00       8/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+                0.00    0.00       8/9           xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [103]
+-----------------------------------------------
+                0.00    0.00       4/4           particle_data::~particle_data() [135]
+[116]    0.0    0.00    0.00       4         cuboid::~cuboid() [116]
+-----------------------------------------------
+                0.00    0.00       2/4           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       2/4           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[117]    0.0    0.00    0.00       4         std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::operator=(std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > > const&) [117]
+-----------------------------------------------
+                0.00    0.00       1/3           domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [176]
+                0.00    0.00       2/3           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[118]    0.0    0.00    0.00       3         boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [118]
+                0.00    0.00      18/18          xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [100]
+                0.00    0.00       3/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+-----------------------------------------------
+                0.00    0.00       1/3           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       1/3           domain_type::~domain_type() [177]
+                0.00    0.00       1/3           molsimInput::~molsimInput() [184]
+[119]    0.0    0.00    0.00       3         boundaries_type::~boundaries_type() [119]
+                0.00    0.00      18/18          boundary_type::~boundary_type() [99]
+-----------------------------------------------
+                0.00    0.00       1/3           Simulation::getNumParticles() [169]
+                0.00    0.00       1/3           Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       1/3           Thermostat::scale(Container&) [34]
+[120]    0.0    0.00    0.00       3         ParticleContainer::size() [120]
+-----------------------------------------------
+                0.00    0.00       1/3           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       2/3           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[121]    0.0    0.00    0.00       3         ParticleContainer::ParticleContainer() [121]
+-----------------------------------------------
+                0.00    0.00       1/3           Simulation::getNumParticles() [169]
+                0.00    0.00       1/3           Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       1/3           Thermostat::scale(Container&) [34]
+[122]    0.0    0.00    0.00       3         LinkedCellContainer::size() [122]
+-----------------------------------------------
+                0.00    0.00       3/3           particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [187]
+[123]    0.0    0.00    0.00       3         xsd::cxx::tree::sequence_common::sequence_common(xsd::cxx::tree::sequence_common const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [123]
+                0.00    0.00       2/2           cuboid::_clone(xsd::cxx::tree::flags, xsd::cxx::tree::_type*) const [158]
+-----------------------------------------------
+                0.00    0.00       1/3           Thermostat::scale(Container&) [34]
+                0.00    0.00       2/3           LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[124]    0.0    0.00    0.00       3         std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [124]
+-----------------------------------------------
+                0.00    0.00       1/3           LinkedCellContainer::mixParameters() [36]
+                0.00    0.00       2/3           LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[125]    0.0    0.00    0.00       3         std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}> const&, std::_Manager_operation) [125]
+-----------------------------------------------
+                0.00    0.00       1/3           Thermostat::getCurrentTemp(Container&) const [37]
+                0.00    0.00       2/3           LinkedCellContainer::iterate(std::function<void (Particle&)>) [8]
+[126]    0.0    0.00    0.00       3         std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}> const&, std::_Manager_operation) [126]
+-----------------------------------------------
+                0.00    0.00       3/3           LinkedCellContainer::mixParameters() [36]
+[127]    0.0    0.00    0.00       3         std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_erase(std::_Rb_tree_node<double>*) [127]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[128]    0.0    0.00    0.00       2         mapCuboid(cuboid&) [128]
+                0.00    0.00       4/5           double_vector::x() [106]
+                0.00    0.00       4/5           double_vector::y() [107]
+                0.00    0.00       4/5           double_vector::z() [108]
+                0.00    0.00       2/2           cuboid::position() [154]
+                0.00    0.00       2/2           cuboid::size() [149]
+                0.00    0.00       2/2           integer_vector::y() [138]
+                0.00    0.00       2/2           integer_vector::x() [137]
+                0.00    0.00       2/2           integer_vector::z() [139]
+                0.00    0.00       2/2           cuboid::distance() [153]
+                0.00    0.00       2/2           cuboid::mass() [148]
+                0.00    0.00       2/2           cuboid::velocity() [155]
+                0.00    0.00       2/2           cuboid::epsilon() [152]
+                0.00    0.00       2/2           cuboid::sigma() [151]
+                0.00    0.00       2/2           Cuboid::Cuboid(std::array<double, 3ul>, std::array<int, 3ul>, double, double, std::array<double, 3ul>, double, double) [147]
+-----------------------------------------------
+                0.00    0.00       2/2           Simulation::Simulation(molsimInput&) [33]
+[129]    0.0    0.00    0.00       2         molsimInput::thermostat() [129]
+-----------------------------------------------
+                0.00    0.00       2/2           Simulation::Simulation(molsimInput&) [33]
+[130]    0.0    0.00    0.00       2         molsimInput::particle_data() [130]
+-----------------------------------------------
+                0.00    0.00       2/2           Simulation::start(bool) [2]
+[131]    0.0    0.00    0.00       2         molsimInput::frequency_output() [131]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[132]    0.0    0.00    0.00       2         particle_data::cuboids() [132]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[133]    0.0    0.00    0.00       2         particle_data::spheres() [133]
+-----------------------------------------------
+                0.00    0.00       1/2           ParticleGenerator::reserve() [206]
+                0.00    0.00       1/2           ParticleGenerator::generate() [40]
+[134]    0.0    0.00    0.00       2         particle_data::particles() [134]
+-----------------------------------------------
+                0.00    0.00       1/2           Simulation::Simulation(molsimInput&) [33]
+                0.00    0.00       1/2           molsimInput::~molsimInput() [184]
+[135]    0.0    0.00    0.00       2         particle_data::~particle_data() [135]
+                0.00    0.00       6/10          xsd::cxx::tree::_type::~_type() [101]
+                0.00    0.00       4/4           cuboid::~cuboid() [116]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[136]    0.0    0.00    0.00       2         cuboid_cluster::cuboid() [136]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[137]    0.0    0.00    0.00       2         integer_vector::x() [137]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[138]    0.0    0.00    0.00       2         integer_vector::y() [138]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[139]    0.0    0.00    0.00       2         integer_vector::z() [139]
+-----------------------------------------------
+                0.00    0.00       2/2           cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+[140]    0.0    0.00    0.00       2         integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+                0.00    0.00       6/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       6/9           domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       6/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       6/99          mapParticleToXML(Particle&) [88]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[141]    0.0    0.00    0.00       2         sphere_cluster::sphere() [141]
+-----------------------------------------------
+                0.00    0.00       1/2           ParticleGenerator::reserve() [206]
+                0.00    0.00       1/2           ParticleGenerator::generate() [40]
+[142]    0.0    0.00    0.00       2         particle_cluster::particle() [142]
+-----------------------------------------------
+                0.00    0.00       1/2           Simulation::Simulation(molsimInput&) [33]
+                0.00    0.00       1/2           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[143]    0.0    0.00    0.00       2         ParticleContainer::~ParticleContainer() [143]
+-----------------------------------------------
+                0.00    0.00       2/2           Simulation::Simulation(molsimInput&) [33]
+[144]    0.0    0.00    0.00       2         ParticleGenerator::getParticles() [144]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[145]    0.0    0.00    0.00       2         Cuboid::getNrParticles() [145]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::generate() [40]
+[146]    0.0    0.00    0.00       2         Cuboid::generate(ParticleContainer&) [146]
+                0.00    0.00   10000/10001       Particle::Particle(std::array<double, 3ul>, std::array<double, 3ul>, double, double, double) [62]
+                0.00    0.00   10000/10000       ParticleContainer::push(Particle&) [64]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[147]    0.0    0.00    0.00       2         Cuboid::Cuboid(std::array<double, 3ul>, std::array<int, 3ul>, double, double, std::array<double, 3ul>, double, double) [147]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[148]    0.0    0.00    0.00       2         cuboid::mass() [148]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[149]    0.0    0.00    0.00       2         cuboid::size() [149]
+-----------------------------------------------
+                0.00    0.00       2/2           cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [156]
+[150]    0.0    0.00    0.00       2         cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+                0.00    0.00      16/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00      14/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00      14/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       8/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00       4/5           xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+                0.00    0.00       4/5           xsd::cxx::tree::one<double_vector, false>::set(std::unique_ptr<double_vector, std::default_delete<double_vector> >) [110]
+                0.00    0.00       2/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       2/2           integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [140]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[151]    0.0    0.00    0.00       2         cuboid::sigma() [151]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[152]    0.0    0.00    0.00       2         cuboid::epsilon() [152]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[153]    0.0    0.00    0.00       2         cuboid::distance() [153]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[154]    0.0    0.00    0.00       2         cuboid::position() [154]
+-----------------------------------------------
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+[155]    0.0    0.00    0.00       2         cuboid::velocity() [155]
+-----------------------------------------------
+                0.00    0.00       2/2           cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+[156]    0.0    0.00    0.00       2         cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [156]
+                0.00    0.00       2/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       2/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       2/2           cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [150]
+-----------------------------------------------
+                0.00    0.00       2/2           ParticleGenerator::reserve() [206]
+[157]    0.0    0.00    0.00       2         cuboid::~cuboid() [157]
+                0.00    0.00       4/6           double_vector::~double_vector() [104]
+                0.00    0.00       2/10          xsd::cxx::tree::_type::~_type() [101]
+-----------------------------------------------
+                0.00    0.00       2/2           xsd::cxx::tree::sequence_common::sequence_common(xsd::cxx::tree::sequence_common const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [123]
+[158]    0.0    0.00    0.00       2         cuboid::_clone(xsd::cxx::tree::flags, xsd::cxx::tree::_type*) const [158]
+                0.00    0.00       2/4           cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115]
+-----------------------------------------------
+                0.00    0.00       1/2           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+                0.00    0.00       1/2           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[159]    0.0    0.00    0.00       2         std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&) [159]
+                0.00    0.00   10000/20000       Particle::Particle(Particle const&) [57]
+-----------------------------------------------
+                0.00    0.00       2/2           cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+[160]    0.0    0.00    0.00       2         void std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> >::_M_realloc_insert<xsd::cxx::tree::sequence_common::ptr>(__gnu_cxx::__normal_iterator<xsd::cxx::tree::sequence_common::ptr*, std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> > >, xsd::cxx::tree::sequence_common::ptr&&) [160]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [970]
+[161]    0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN12outputWriter9VTKWriterC2Ev [161]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [970]
+[162]    0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN15DataArrayList_tC2Ev [162]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [970]
+[163]    0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN8ParticleC2ERKS_ [163]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [970]
+[164]    0.0    0.00    0.00       1         _GLOBAL__sub_I_ptStartTime [164]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[165]    0.0    0.00    0.00       1         mapDoubleVec(double_vector&) [165]
+                0.00    0.00       1/5           double_vector::x() [106]
+                0.00    0.00       1/5           double_vector::y() [107]
+                0.00    0.00       1/5           double_vector::z() [108]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[166]    0.0    0.00    0.00       1         endPT(int, int) [166]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[167]    0.0    0.00    0.00       1         input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [167]
+                0.00    0.00       1/1           std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> > xsd::cxx::xml::dom::parse<char>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMErrorHandler&, xsd::cxx::xml::properties<char> const&, unsigned long) [208]
+                0.00    0.00       1/1           input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [168]
+-----------------------------------------------
+                0.00    0.00       1/1           input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [167]
+[168]    0.0    0.00    0.00       1         input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [168]
+                0.00    0.00       1/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       1/1           molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [182]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[169]    0.0    0.00    0.00       1         Simulation::getNumParticles() [169]
+                0.00    0.00       1/3           ParticleContainer::size() [120]
+                0.00    0.00       1/3           LinkedCellContainer::size() [122]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[170]    0.0    0.00    0.00       1         Thermostat::Thermostat(thermostat_type, bool) [170]
+                0.00    0.00       1/1           thermostat_type::change_brownian() [196]
+                0.00    0.00       1/1           thermostat_type::steps() [198]
+                0.00    0.00       1/1           thermostat_type::t_init() [199]
+                0.00    0.00       1/1           thermostat_type::t_target() [200]
+                0.00    0.00       1/1           thermostat_type::temp_delta() [195]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[171]    0.0    0.00    0.00       1         domain_type::domain_size() [171]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[172]    0.0    0.00    0.00       1         domain_type::cutoff_radius() [172]
+-----------------------------------------------
+                0.00    0.00       1/1           domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+[173]    0.0    0.00    0.00       1         domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+                0.00    0.00       4/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       4/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       4/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       2/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00       1/1           boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [194]
+                0.00    0.00       1/5           xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [112]
+                0.00    0.00       1/5           xsd::cxx::tree::one<double_vector, false>::set(std::unique_ptr<double_vector, std::default_delete<double_vector> >) [110]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[174]    0.0    0.00    0.00       1         domain_type::gravity() [174]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[175]    0.0    0.00    0.00       1         domain_type::boundary() [175]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[176]    0.0    0.00    0.00       1         domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [176]
+                0.00    0.00       1/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+                0.00    0.00       1/9           xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [103]
+                0.00    0.00       1/3           boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [118]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[177]    0.0    0.00    0.00       1         domain_type::~domain_type() [177]
+                0.00    0.00       1/3           boundaries_type::~boundaries_type() [119]
+                0.00    0.00       1/6           double_vector::~double_vector() [104]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[178]    0.0    0.00    0.00       1         molsimInput::checkpoint() [178]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[179]    0.0    0.00    0.00       1         molsimInput::linked_cell() [179]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [182]
+[180]    0.0    0.00    0.00       1         molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+                0.00    0.00      10/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       9/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       9/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       2/9           domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+                0.00    0.00       2/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00       2/4           input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       1/1           particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [188]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/1           xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [213]
+                0.00    0.00       1/1           thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       1/1           xsd::cxx::tree::one<domain_type, false>::set(std::unique_ptr<domain_type, std::default_delete<domain_type> >) [209]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[181]    0.0    0.00    0.00       1         molsimInput::domain() [181]
+-----------------------------------------------
+                0.00    0.00       1/1           input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [168]
+[182]    0.0    0.00    0.00       1         molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [182]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+-----------------------------------------------
+                0.00    0.00       1/1           xmlRoutine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool) [1]
+[183]    0.0    0.00    0.00       1         molsimInput::~molsimInput() [183]
+                0.00    0.00       1/1           molsimInput::~molsimInput() [184]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::~molsimInput() [183]
+[184]    0.0    0.00    0.00       1         molsimInput::~molsimInput() [184]
+                0.00    0.00       2/10          xsd::cxx::tree::_type::~_type() [101]
+                0.00    0.00       1/2           particle_data::~particle_data() [135]
+                0.00    0.00       1/3           boundaries_type::~boundaries_type() [119]
+                0.00    0.00       1/6           double_vector::~double_vector() [104]
+                0.00    0.00       1/1           xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::~string() [214]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[185]    0.0    0.00    0.00       1         particle_data::is3D() [185]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [188]
+[186]    0.0    0.00    0.00       1         particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+                0.00    0.00       6/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       5/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       5/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00       1/4           input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       1/1           cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [190]
+                0.00    0.00       1/1           particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [204]
+                0.00    0.00       1/1           sphere_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [191]
+                0.00    0.00       1/1           xsd::cxx::tree::one<sphere_cluster, false>::set(std::unique_ptr<sphere_cluster, std::default_delete<sphere_cluster> >) [211]
+                0.00    0.00       1/1           xsd::cxx::tree::one<cuboid_cluster, false>::set(std::unique_ptr<cuboid_cluster, std::default_delete<cuboid_cluster> >) [210]
+                0.00    0.00       1/1           xsd::cxx::tree::one<particle_cluster, false>::set(std::unique_ptr<particle_cluster, std::default_delete<particle_cluster> >) [212]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [41]
+[187]    0.0    0.00    0.00       1         particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [187]
+                0.00    0.00       4/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+                0.00    0.00       3/3           xsd::cxx::tree::sequence_common::sequence_common(xsd::cxx::tree::sequence_common const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [123]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+[188]    0.0    0.00    0.00       1         particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [188]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+-----------------------------------------------
+                0.00    0.00       1/1           cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [190]
+[189]    0.0    0.00    0.00       1         cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+                0.00    0.00       2/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       2/2           cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [156]
+                0.00    0.00       2/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       2/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       2/2           void std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> >::_M_realloc_insert<xsd::cxx::tree::sequence_common::ptr>(__gnu_cxx::__normal_iterator<xsd::cxx::tree::sequence_common::ptr*, std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> > >, xsd::cxx::tree::sequence_common::ptr&&) [160]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[190]    0.0    0.00    0.00       1         cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [190]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [189]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[191]    0.0    0.00    0.00       1         sphere_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [191]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[192]    0.0    0.00    0.00       1         BoundaryHandler::BoundaryHandler(boundaries_type, std::array<double, 3ul>, std::array<int, 3ul>) [192]
+                0.00    0.00       1/10001       Particle::Particle(std::array<double, 3ul>, std::array<double, 3ul>, double, double, double) [62]
+-----------------------------------------------
+                0.00    0.00       1/1           boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [194]
+[193]    0.0    0.00    0.00       1         boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+                0.00    0.00       6/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       6/6           xsd::cxx::tree::one<boundary_type, false>::set(std::unique_ptr<boundary_type, std::default_delete<boundary_type> >) [105]
+                0.00    0.00       6/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       6/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       5/5           xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [111]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+                0.00    0.00       1/16006       boundary_type::_xsd_boundary_type_convert() const [59]
+-----------------------------------------------
+                0.00    0.00       1/1           domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [173]
+[194]    0.0    0.00    0.00       1         boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [194]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [193]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+[195]    0.0    0.00    0.00       1         thermostat_type::temp_delta() [195]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+[196]    0.0    0.00    0.00       1         thermostat_type::change_brownian() [196]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+[197]    0.0    0.00    0.00       1         thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [197]
+                0.00    0.00       3/65          xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [90]
+                0.00    0.00       3/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       3/64          xsd::cxx::xml::qualified_name<char>::~qualified_name() [92]
+                0.00    0.00       1/29          xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [96]
+                0.00    0.00       1/4           input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [114]
+                0.00    0.00       1/9           domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [102]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+[198]    0.0    0.00    0.00       1         thermostat_type::steps() [198]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+[199]    0.0    0.00    0.00       1         thermostat_type::t_init() [199]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::Thermostat(thermostat_type, bool) [170]
+[200]    0.0    0.00    0.00       1         thermostat_type::t_target() [200]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[201]    0.0    0.00    0.00       1         thermostat_type::thermostat_type(thermostat_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [201]
+                0.00    0.00       1/44          xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [94]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[202]    0.0    0.00    0.00       1         thermostat_type::~thermostat_type() [202]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [204]
+[203]    0.0    0.00    0.00       1         particle_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [203]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[204]    0.0    0.00    0.00       1         particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [204]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/99          mapParticleToXML(Particle&) [88]
+                0.00    0.00       1/1           particle_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [203]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::reserve() [206]
+[205]    0.0    0.00    0.00       1         ParticleContainer::reserve(unsigned long) [205]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::generate() [40]
+[206]    0.0    0.00    0.00       1         ParticleGenerator::reserve() [206]
+                0.00    0.00       2/2           particle_data::cuboids() [132]
+                0.00    0.00       2/2           cuboid_cluster::cuboid() [136]
+                0.00    0.00       2/2           cuboid::~cuboid() [157]
+                0.00    0.00       2/4           cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115]
+                0.00    0.00       2/2           Cuboid::getNrParticles() [145]
+                0.00    0.00       2/2           mapCuboid(cuboid&) [128]
+                0.00    0.00       2/2           sphere_cluster::sphere() [141]
+                0.00    0.00       2/2           particle_data::spheres() [133]
+                0.00    0.00       1/2           particle_cluster::particle() [142]
+                0.00    0.00       1/2           particle_data::particles() [134]
+                0.00    0.00       1/1           ParticleContainer::reserve(unsigned long) [205]
+-----------------------------------------------
+                0.00    0.00       1/1           std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> > xsd::cxx::xml::dom::parse<char>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMErrorHandler&, xsd::cxx::xml::properties<char> const&, unsigned long) [208]
+[207]    0.0    0.00    0.00       1         xsd::cxx::xml::char_utf8_transcoder<char>::from(char const*, unsigned long) [207]
+-----------------------------------------------
+                0.00    0.00       1/1           input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [167]
+[208]    0.0    0.00    0.00       1         std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> > xsd::cxx::xml::dom::parse<char>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMErrorHandler&, xsd::cxx::xml::properties<char> const&, unsigned long) [208]
+                0.00    0.00       1/1           xsd::cxx::xml::char_utf8_transcoder<char>::from(char const*, unsigned long) [207]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+[209]    0.0    0.00    0.00       1         xsd::cxx::tree::one<domain_type, false>::set(std::unique_ptr<domain_type, std::default_delete<domain_type> >) [209]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[210]    0.0    0.00    0.00       1         xsd::cxx::tree::one<cuboid_cluster, false>::set(std::unique_ptr<cuboid_cluster, std::default_delete<cuboid_cluster> >) [210]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[211]    0.0    0.00    0.00       1         xsd::cxx::tree::one<sphere_cluster, false>::set(std::unique_ptr<sphere_cluster, std::default_delete<sphere_cluster> >) [211]
+-----------------------------------------------
+                0.00    0.00       1/1           particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [186]
+[212]    0.0    0.00    0.00       1         xsd::cxx::tree::one<particle_cluster, false>::set(std::unique_ptr<particle_cluster, std::default_delete<particle_cluster> >) [212]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [180]
+[213]    0.0    0.00    0.00       1         xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [213]
+                0.00    0.00       1/24          xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98]
+                0.00    0.00       1/48          std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [93]
+-----------------------------------------------
+                0.00    0.00       1/1           molsimInput::~molsimInput() [184]
+[214]    0.0    0.00    0.00       1         xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::~string() [214]
+-----------------------------------------------
+                0.00    0.00       1/1           ParticleGenerator::applyBrownianMotion() [39]
+[215]    0.0    0.00    0.00       1         Thermostat::changeBrownian() const [215]
+-----------------------------------------------
+                0.00    0.00       1/1           Simulation::Simulation(molsimInput&) [33]
+[216]    0.0    0.00    0.00       1         std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [216]
+-----------------------------------------------
+                0.00    0.00       1/1           Thermostat::applyBrownian(ParticleContainer&) [38]
+[217]    0.0    0.00    0.00       1         std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [217]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[218]    0.0    0.00    0.00       1         std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation) [218]
+-----------------------------------------------
+                0.00    0.00       1/1           LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [35]
+[219]    0.0    0.00    0.00       1         std::vector<LinkedCell, std::allocator<LinkedCell> >::reserve(unsigned long) [219]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+
+Index by function name
+
+ [161] _GLOBAL__sub_I__ZN12outputWriter9VTKWriterC2Ev [16] BoundaryHandler::iterateCellsAtBoundary(Boundaries, std::function<void (LinkedCell&, std::array<int, 3ul>)> const&) [96] xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+ [162] _GLOBAL__sub_I__ZN15DataArrayList_tC2Ev [28] BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&) [97] xsd::cxx::tree::traits<double, char, (xsd::cxx::tree::schema_type::value)1>::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMElement const*, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+ [163] _GLOBAL__sub_I__ZN8ParticleC2ERKS_ [18] BoundaryHandler::handle(std::vector<LinkedCell, std::allocator<LinkedCell> >*) [95] xsd::cxx::ro_string<char>::size_type xsd::cxx::trim<char>(xsd::cxx::ro_string<char>&)
+ [164] _GLOBAL__sub_I_ptStartTime [20] BoundaryHandler::period(Boundaries) [145] Cuboid::getNrParticles()
+ [165] mapDoubleVec(double_vector&) [21] BoundaryHandler::reflect(Boundaries) [146] Cuboid::generate(ParticleContainer&)
+  [88] mapParticleToXML(Particle&) [192] BoundaryHandler::BoundaryHandler(boundaries_type, std::array<double, 3ul>, std::array<int, 3ul>) [147] Cuboid::Cuboid(std::array<double, 3ul>, std::array<int, 3ul>, double, double, std::array<double, 3ul>, double, double)
+   [6] calculateLennardJones(Particle&, Particle&, double, double) [74] boundaries_type::top() [148] cuboid::mass()
+  [63] MaxwellBoltzmannDistribution(Particle&, double, int) [75] boundaries_type::back() [149] cuboid::size()
+ [166] endPT(int, int)        [76] boundaries_type::left() [150] cuboid::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags)
+ [167] input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [77] boundaries_type::front() [151] cuboid::sigma()
+ [114] input(xercesc_3_2::DOMDocument&, molsimInput const&, xsd::cxx::tree::flags) [193] boundaries_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [152] cuboid::epsilon()
+ [168] input(std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> >, xsd::cxx::tree::flags, xsd::cxx::tree::properties<char> const&) [78] boundaries_type::right() [153] cuboid::distance()
+ [128] mapCuboid(cuboid&)     [79] boundaries_type::bottom() [154] cuboid::position()
+  [60] LinkedCell::addNeighbor(LinkedCell*) [194] boundaries_type::boundaries_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [155] cuboid::velocity()
+  [24] LinkedCell::addParticle(Particle*) [118] boundaries_type::boundaries_type(boundaries_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [115] cuboid::cuboid(cuboid const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  [30] LinkedCell::getNeighbors() [119] boundaries_type::~boundaries_type() [156] cuboid::cuboid(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+  [23] LinkedCell::getParticles() [195] thermostat_type::temp_delta() [116] cuboid::~cuboid()
+   [7] LinkedCell::iteratePairs(std::function<void (Particle&, Particle&)>) [196] thermostat_type::change_brownian() [157] cuboid::~cuboid()
+  [51] LinkedCell::removeParticles() [197] thermostat_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [14] Particle::calculateV()
+  [15] LinkedCell::getIndex() [198] thermostat_type::steps() [12] Particle::calculateX()
+  [82] LinkedCell::LinkedCell(int) [199] thermostat_type::t_init() [29] Particle::applyGravity(double)
+ [169] Simulation::getNumParticles() [200] thermostat_type::t_target() [52] Particle::getM()
+   [2] Simulation::start(bool) [201] thermostat_type::thermostat_type(thermostat_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [56] Particle::getV()
+  [33] Simulation::Simulation(molsimInput&) [202] thermostat_type::~thermostat_type() [53] Particle::setM(double)
+  [38] Thermostat::applyBrownian(ParticleContainer&) [203] particle_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [25] Particle::isOut(std::array<double, 3ul>)
+  [34] Thermostat::scale(Container&) [142] particle_cluster::particle() [50] Particle::saveOldF()
+ [170] Thermostat::Thermostat(thermostat_type, bool) [204] particle_cluster::particle_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [65] Particle::updateDT(double)
+ [171] domain_type::domain_size() [84] ParticleContainer::getParticles() [57] Particle::Particle(Particle const&)
+ [172] domain_type::cutoff_radius() [64] ParticleContainer::push(Particle&) [62] Particle::Particle(std::array<double, 3ul>, std::array<double, 3ul>, double, double, double)
+ [173] domain_type::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [120] ParticleContainer::size() [215] Thermostat::changeBrownian() const
+ [174] domain_type::gravity()  [9] ParticleContainer::iterate(std::function<void (Particle&)>) [37] Thermostat::getCurrentTemp(Container&) const
+ [175] domain_type::boundary() [205] ParticleContainer::reserve(unsigned long) [85] Thermostat::getSteps() const
+ [102] domain_type::domain_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [121] ParticleContainer::ParticleContainer() [59] boundary_type::_xsd_boundary_type_convert() const
+ [176] domain_type::domain_type(domain_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [143] ParticleContainer::~ParticleContainer() [158] cuboid::_clone(xsd::cxx::tree::flags, xsd::cxx::tree::_type*) const
+ [177] domain_type::~domain_type() [144] ParticleGenerator::getParticles() [216] std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [178] molsimInput::checkpoint() [39] ParticleGenerator::applyBrownianMotion() [217] std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [129] molsimInput::thermostat() [206] ParticleGenerator::reserve() [124] std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::scale(Container&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [179] molsimInput::linked_cell() [40] ParticleGenerator::generate() [86] std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}> const&, std::_Manager_operation)
+ [130] molsimInput::particle_data() [41] ParticleGenerator::ParticleGenerator(particle_data&, Thermostat*) [71] std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}> const&, std::_Manager_operation)
+ [131] molsimInput::frequency_output() [4] LinkedCellContainer::iteratePairs(std::function<void (Particle&, Particle&)>) [80] std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [180] molsimInput::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [36] LinkedCellContainer::mixParameters() [81] std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  [83] molsimInput::t_end()    [3] LinkedCellContainer::calculateIteration() [125] std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [181] molsimInput::domain()  [42] LinkedCellContainer::populateNeighbours() [32] std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}> const&, std::_Manager_operation)
+  [61] molsimInput::delta_t() [26] LinkedCellContainer::clearOutflowParticles() [72] std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}> const&, std::_Manager_operation)
+ [182] molsimInput::molsimInput(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [122] LinkedCellContainer::size() [73] std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [183] molsimInput::~molsimInput() [8] LinkedCellContainer::iterate(std::function<void (Particle&)>) [31] std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}> const&, std::_Manager_operation)
+ [184] molsimInput::~molsimInput() [35] LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&) [218] std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+  [99] boundary_type::~boundary_type() [92] xsd::cxx::xml::qualified_name<char>::~qualified_name() [126] std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_manager(std::_Any_data&, std::_Function_base::_Base_manager<Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}> const&, std::_Manager_operation)
+ [106] double_vector::x()     [87] xsd::cxx::xml::char_utf8_transcoder<char>::to[abi:cxx11](char16_t const*, unsigned long) [17] std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iteratePeriodicParticles(std::vector<LinkedCell, std::allocator<LinkedCell> >*, std::function<void (Particle&, Particle&)> const&)::{lambda(LinkedCell&, std::array<int, 3ul>)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&)
+ [107] double_vector::y()    [207] xsd::cxx::xml::char_utf8_transcoder<char>::from(char const*, unsigned long) [22] std::_Function_handler<void (LinkedCell&, std::array<int, 3ul>), BoundaryHandler::iterateParticlesAtBoundary(Boundaries, std::function<void (Particle&)> const&)::{lambda(LinkedCell&, auto:1)#1}>::_M_invoke(std::_Any_data const&, LinkedCell&, std::array<int, 3ul>&&)
+ [108] double_vector::z()     [90] xsd::cxx::xml::qualified_name<char> xsd::cxx::xml::dom::name<char>(xercesc_3_2::DOMElement const&) [66] std::_Function_handler<void (Particle&), Simulation::Simulation(molsimInput&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [109] double_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [208] std::unique_ptr<xercesc_3_2::DOMDocument, xsd::cxx::xml::dom::deleter<xercesc_3_2::DOMDocument> > xsd::cxx::xml::dom::parse<char>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, xercesc_3_2::DOMErrorHandler&, xsd::cxx::xml::properties<char> const&, unsigned long) [67] std::_Function_handler<void (Particle&), Thermostat::applyBrownian(ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [104] double_vector::~double_vector() [91] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::xml::transcode<char>(char16_t const*) [69] std::_Function_handler<void (Particle&), Thermostat::scale(Container&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [185] particle_data::is3D()  [93] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > xsd::cxx::tree::text_content<char>(xercesc_3_2::DOMElement const&) [55] std::_Function_handler<void (Particle&), BoundaryHandler::period(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [186] particle_data::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [123] xsd::cxx::tree::sequence_common::sequence_common(xsd::cxx::tree::sequence_common const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [54] std::_Function_handler<void (Particle&), BoundaryHandler::reflect(Boundaries)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [132] particle_data::cuboids() [209] xsd::cxx::tree::one<domain_type, false>::set(std::unique_ptr<domain_type, std::default_delete<domain_type> >) [19] std::_Function_handler<void (Particle&), LinkedCellContainer::mixParameters()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [133] particle_data::spheres() [105] xsd::cxx::tree::one<boundary_type, false>::set(std::unique_ptr<boundary_type, std::default_delete<boundary_type> >) [10] std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#2}>::_M_invoke(std::_Any_data const&, Particle&)
+ [134] particle_data::particles() [100] xsd::cxx::tree::one<boundary_type, false>::one(xsd::cxx::tree::one<boundary_type, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [27] std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#4}>::_M_invoke(std::_Any_data const&, Particle&)
+ [187] particle_data::particle_data(particle_data const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [110] xsd::cxx::tree::one<double_vector, false>::set(std::unique_ptr<double_vector, std::default_delete<double_vector> >) [11] std::_Function_handler<void (Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [188] particle_data::particle_data(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [103] xsd::cxx::tree::one<double_vector, false>::one(xsd::cxx::tree::one<double_vector, false> const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [68] std::_Function_handler<void (Particle&), LinkedCellContainer::LinkedCellContainer(domain_type, ParticleContainer&)::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+ [135] particle_data::~particle_data() [210] xsd::cxx::tree::one<cuboid_cluster, false>::set(std::unique_ptr<cuboid_cluster, std::default_delete<cuboid_cluster> >) [70] std::_Function_handler<void (Particle&), Thermostat::getCurrentTemp(Container&) const::{lambda(Particle&)#1}>::_M_invoke(std::_Any_data const&, Particle&)
+  [13] ParticleSphere::toString[abi:cxx11]() [211] xsd::cxx::tree::one<sphere_cluster, false>::set(std::unique_ptr<sphere_cluster, std::default_delete<sphere_cluster> >) [5] std::_Function_handler<void (Particle&, Particle&), LinkedCellContainer::calculateIteration()::{lambda(Particle&, Particle&)#3}>::_M_invoke(std::_Any_data const&, Particle&, Particle&)
+ [189] cuboid_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [212] xsd::cxx::tree::one<particle_cluster, false>::set(std::unique_ptr<particle_cluster, std::default_delete<particle_cluster> >) [219] std::vector<LinkedCell, std::allocator<LinkedCell> >::reserve(unsigned long)
+ [136] cuboid_cluster::cuboid() [89] xsd::cxx::tree::_type::_container(xsd::cxx::tree::_type*) [159] std::vector<Particle, std::allocator<Particle> >::operator=(std::vector<Particle, std::allocator<Particle> > const&)
+ [190] cuboid_cluster::cuboid_cluster(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [98] xsd::cxx::tree::_type::_type(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [160] void std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> >::_M_realloc_insert<xsd::cxx::tree::sequence_common::ptr>(__gnu_cxx::__normal_iterator<xsd::cxx::tree::sequence_common::ptr*, std::vector<xsd::cxx::tree::sequence_common::ptr, std::allocator<xsd::cxx::tree::sequence_common::ptr> > >, xsd::cxx::tree::sequence_common::ptr&&)
+ [137] integer_vector::x()    [94] xsd::cxx::tree::_type::_type(xsd::cxx::tree::_type const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [113] std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::_M_get_insert_unique_pos(std::pair<double, double> const&)
+ [138] integer_vector::y()   [101] xsd::cxx::tree::_type::~_type() [117] std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > >::operator=(std::_Rb_tree<std::pair<double, double>, std::pair<std::pair<double, double> const, double>, std::_Select1st<std::pair<std::pair<double, double> const, double> >, std::less<std::pair<double, double> >, std::allocator<std::pair<std::pair<double, double> const, double> > > const&)
+ [139] integer_vector::z()   [213] xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::string(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*) [58] std::pair<std::_Rb_tree_iterator<double>, bool> std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_emplace_unique<double&>(double&)
+ [140] integer_vector::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [214] xsd::cxx::tree::string<char, xsd::cxx::tree::simple_type<char, xsd::cxx::tree::_type> >::~string() [127] std::_Rb_tree<double, double, std::_Identity<double>, std::less<double>, std::allocator<double> >::_M_erase(std::_Rb_tree_node<double>*)
+ [191] sphere_cluster::parse(xsd::cxx::xml::dom::parser<char>&, xsd::cxx::tree::flags) [111] xsd::cxx::tree::traits<boundary_type, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+ [141] sphere_cluster::sphere() [112] xsd::cxx::tree::traits<double_vector, char, (xsd::cxx::tree::schema_type::value)0>::create(xercesc_3_2::DOMElement const&, xsd::cxx::tree::flags, xsd::cxx::tree::_type*)
+

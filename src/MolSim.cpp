@@ -140,9 +140,9 @@ void startPT(){
 }
 
 void endPT(int numParticles, int iterations){
+    auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     auto ptMolSim = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptMolSim -= ptStartMolSim;
-    auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptEndTime -= ptStartTime;
     double mups = ((long) numParticles * (long) iterations * 1000000000) / (double) ptEndTime.count();
 
