@@ -24,6 +24,11 @@ void help();
 int xmlRoutine(std::string xmlFile, bool isPT = false);
 
 /**
+ * Start performance test for complete MolSim
+ */
+void startPTMolSim();
+
+/**
  * Start performance test timer.
  */
 void startPT();
@@ -41,6 +46,7 @@ log4cxx::LoggerPtr molsimFileLogger(log4cxx::Logger::getLogger("molsim"));
 
 
 std::chrono::duration<int64_t, std::nano> ptStartTime;
+std::chrono::duration<int64_t, std::nano> ptStartMolSim;
 
 /**
  * Main function.
@@ -63,6 +69,7 @@ int main(int argc, char *argsv[]) {
             return xmlRoutine(argsv[1]);
         case 3:
             if(!strcmp(argsv[2], "-pt")){
+                startPTMolSim();
                 return xmlRoutine(argsv[1], true);
             }
         default:
@@ -77,7 +84,7 @@ int main(int argc, char *argsv[]) {
 
 int xmlRoutine(std::string xmlFile, bool isPT) {
     //LOG4CXX_DEBUG(molsimLogger, "Reading EndTime:\t"<<xmlReader.getEndTime());
-    if (isPT) startPT();
+
     std::unique_ptr<molsimInput> inputFile;
     try {
         inputFile = input(xmlFile);
@@ -91,6 +98,7 @@ int xmlRoutine(std::string xmlFile, bool isPT) {
 
     auto sim = Simulation(*inputFile);
     int molecules = sim.getNumParticles();
+    if (isPT) startPT();
     int iterations = sim.start(isPT);
 
     if(isPT) endPT(molecules, iterations);
@@ -109,6 +117,9 @@ int xmlRoutine(std::string xmlFile, bool isPT) {
 #endif
 
     return 0;
+}
+void startPTMolSim(){
+    ptStartMolSim = std::chrono::high_resolution_clock::now().time_since_epoch();
 }
 
 void startPT(){
@@ -129,20 +140,24 @@ void startPT(){
 }
 
 void endPT(int numParticles, int iterations){
+    auto ptMolSim = std::chrono::high_resolution_clock::now().time_since_epoch();
+    ptMolSim -= ptStartMolSim;
     auto ptEndTime = std::chrono::high_resolution_clock::now().time_since_epoch();
     ptEndTime -= ptStartTime;
     double mups = ((long) numParticles * (long) iterations * 1000000000) / (double) ptEndTime.count();
 
 #ifdef WITH_LOG4CXX
     LOG4CXX_INFO(molsimLogger, "Performance test ended."
-        << "\n\tElapsed time:                " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
+        << "\n\tTotal elapsed time:          " << ptMolSim.count() << "ns (" << ((double) ptMolSim.count())/1000000000 << "s)"
+        << "\n\tElapsed time main loop:      " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
         << "\n\t#Particles:                  " << numParticles
         << "\n\tIterations:                  " << iterations
         << "\n\t#Particles * Iterations:     " << numParticles * iterations
         << "\n\tMolecule-updates per second: " << mups << "MUPS/s (" << mups/1000000 << "MMPUS/s)");
 #else
     std::cout << "Performance test ended."
-        << "\n\tElapsed time:                " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
+        << "\n\tTotal elapsed time:          " << ptMolSim.count() << "ns (" << ((double) ptMolSim.count())/1000000000 << "s)"
+        << "\n\tElapsed time main loop:      " << ptEndTime.count() << "ns (" << ((double) ptEndTime.count())/1000000000 << "s)"
         << "\n\t#Particles:                  " << numParticles
         << "\n\tIterations:                  " << iterations
         << "\n\t#Particles * Iterations:     " << numParticles * iterations
