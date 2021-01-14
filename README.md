@@ -18,6 +18,12 @@ Members:
 
       cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       make MolSim -j <1.5 * number of cores>
+
+* Compile on Cluster
+
+      cmake -DCMAKE_BUILD_TYPE=Release -DCLUSTER=ON -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+      module load xerces-c
+      cmake --build . --target MolSim -- -j 20
       
 * run main program with parameters specified in assignment:
 
