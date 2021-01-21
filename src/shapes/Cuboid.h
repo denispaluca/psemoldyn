@@ -38,6 +38,8 @@ private:
 
     double sigma;
 
+    bool fixed;
+
 public:
     /**
      * Default constructor
@@ -56,6 +58,17 @@ public:
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
            double distance, double mass, std::array<double, 3> initalV,
            double epsilon, double sigma);
+    /**
+     * Constructs Cuboid with given parameters
+     * @param position coordinates of the lower left front-side corner
+     * @param size size of the Cuboid, given in number of particles per dimension
+     * @param distance distance between particles/mesh width
+     * @param mass mass of one particle
+     * @param initalV initial velocity of the particles
+     */
+    Cuboid(std::array<double, 3> position, std::array<int, 3> size,
+           double distance, double mass, std::array<double, 3> initalV,
+           double epsilon, double sigma, bool fixed);
 
         /**
      * Operator that compares all attributes of

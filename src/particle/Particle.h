@@ -82,6 +82,21 @@ public:
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
       double m_arg, double epsilon, double sigma);
 
+    /**
+    * Particle constructor that takes all attributes
+    * of the particle as input.
+    * @param x_arg Position
+    * @param v_arg Velocity
+    * @param m_arg Mass
+    * @param type Type of particle
+    * @return
+    */
+    Particle(
+            // for visualization, we need always 3 coordinates
+            // -> in case of 2d, we use only the first and the second
+            std::array<double, 3> x_arg, std::array<double, 3> v_arg,
+            double m_arg, double epsilon, double sigma, bool fixed);
+
   /**
    * Particle constructor for full particles state.
    * @param x Position
@@ -97,6 +112,24 @@ public:
           std::array<double, 3> x, std::array<double, 3> v,
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma);
+
+  bool fixed;
+
+  /**
+   * Particle constructor for full particles state.
+   * @param x Position
+   * @param v Velocity
+   * @param m Mass
+   * @param f Current force
+   * @param old_f Old force
+   * @param type Type
+   * @param epsilon Epsilon
+   * @param sigma Sigma
+   */
+  Particle(
+          std::array<double, 3> x, std::array<double, 3> v,
+          double m, std::array<double, 3> f, std::array<double, 3> old_f,
+          int type, double epsilon, double sigma, bool fixed);
 
   /*
    * Destructor of particle

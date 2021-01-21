@@ -303,6 +303,24 @@ sigma (const sigma_type& x)
   this->sigma_.set (x);
 }
 
+const cuboid::fixed_type& cuboid::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+cuboid::fixed_type& cuboid::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void cuboid::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
+}
+
 
 // cuboid_cluster
 // 
@@ -497,6 +515,24 @@ sigma (const sigma_type& x)
   this->sigma_.set (x);
 }
 
+const particle::fixed_type& particle::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+particle::fixed_type& particle::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void particle::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
+}
+
 
 // particle_cluster
 // 
@@ -659,6 +695,24 @@ void sphere::
 sigma (const sigma_type& x)
 {
   this->sigma_.set (x);
+}
+
+const sphere::fixed_type& sphere::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+sphere::fixed_type& sphere::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void sphere::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
 }
 
 
@@ -1679,7 +1733,8 @@ cuboid (const position_type& position,
         const mass_type& mass,
         const velocity_type& velocity,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   position_ (position, this),
   size_ (size, this),
@@ -1687,7 +1742,8 @@ cuboid (const position_type& position,
   mass_ (mass, this),
   velocity_ (velocity, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -1698,7 +1754,8 @@ cuboid (::std::unique_ptr< position_type > position,
         const mass_type& mass,
         ::std::unique_ptr< velocity_type > velocity,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   position_ (std::move (position), this),
   size_ (std::move (size), this),
@@ -1706,7 +1763,8 @@ cuboid (::std::unique_ptr< position_type > position,
   mass_ (mass, this),
   velocity_ (std::move (velocity), this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -1721,7 +1779,8 @@ cuboid (const cuboid& x,
   mass_ (x.mass_, f, this),
   velocity_ (x.velocity_, f, this),
   epsilon_ (x.epsilon_, f, this),
-  sigma_ (x.sigma_, f, this)
+  sigma_ (x.sigma_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -1736,7 +1795,8 @@ cuboid (const ::xercesc::DOMElement& e,
   mass_ (this),
   velocity_ (this),
   epsilon_ (this),
-  sigma_ (this)
+  sigma_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1841,6 +1901,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -1892,6 +1963,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "sigma",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 cuboid* cuboid::
@@ -1914,6 +1992,7 @@ operator= (const cuboid& x)
     this->velocity_ = x.velocity_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;
@@ -2017,7 +2096,8 @@ particle (const x_type& x,
           const old_f_type& old_f,
           const type_type& type,
           const epsilon_type& epsilon,
-          const sigma_type& sigma)
+          const sigma_type& sigma,
+          const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (x, this),
   v_ (v, this),
@@ -2026,7 +2106,8 @@ particle (const x_type& x,
   old_f_ (old_f, this),
   type_ (type, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2038,7 +2119,8 @@ particle (::std::unique_ptr< x_type > x,
           ::std::unique_ptr< old_f_type > old_f,
           const type_type& type,
           const epsilon_type& epsilon,
-          const sigma_type& sigma)
+          const sigma_type& sigma,
+          const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
   v_ (std::move (v), this),
@@ -2047,7 +2129,8 @@ particle (::std::unique_ptr< x_type > x,
   old_f_ (std::move (old_f), this),
   type_ (type, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2063,7 +2146,8 @@ particle (const particle& x,
   old_f_ (x.old_f_, f, this),
   type_ (x.type_, f, this),
   epsilon_ (x.epsilon_, f, this),
-  sigma_ (x.sigma_, f, this)
+  sigma_ (x.sigma_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -2079,7 +2163,8 @@ particle (const ::xercesc::DOMElement& e,
   old_f_ (this),
   type_ (this),
   epsilon_ (this),
-  sigma_ (this)
+  sigma_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2198,6 +2283,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2256,6 +2352,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "sigma",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 particle* particle::
@@ -2279,6 +2382,7 @@ operator= (const particle& x)
     this->type_ = x.type_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;
@@ -2381,7 +2485,8 @@ sphere (const center_type& center,
         const m_type& m,
         const r_type& r,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   center_ (center, this),
   h_ (h, this),
@@ -2389,7 +2494,8 @@ sphere (const center_type& center,
   m_ (m, this),
   r_ (r, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2400,7 +2506,8 @@ sphere (::std::unique_ptr< center_type > center,
         const m_type& m,
         const r_type& r,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   center_ (std::move (center), this),
   h_ (h, this),
@@ -2408,7 +2515,8 @@ sphere (::std::unique_ptr< center_type > center,
   m_ (m, this),
   r_ (r, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2423,7 +2531,8 @@ sphere (const sphere& x,
   m_ (x.m_, f, this),
   r_ (x.r_, f, this),
   epsilon_ (x.epsilon_, f, this),
-  sigma_ (x.sigma_, f, this)
+  sigma_ (x.sigma_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -2438,7 +2547,8 @@ sphere (const ::xercesc::DOMElement& e,
   m_ (this),
   r_ (this),
   epsilon_ (this),
-  sigma_ (this)
+  sigma_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2540,6 +2650,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2591,6 +2712,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "sigma",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 sphere* sphere::
@@ -2613,6 +2741,7 @@ operator= (const sphere& x)
     this->r_ = x.r_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;

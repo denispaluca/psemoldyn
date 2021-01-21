@@ -555,6 +555,20 @@ class cuboid: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   cuboid (const position_type&,
@@ -563,7 +577,8 @@ class cuboid: public ::xml_schema::type
           const mass_type&,
           const velocity_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
@@ -571,7 +586,8 @@ class cuboid: public ::xml_schema::type
           const mass_type&,
           ::std::unique_ptr< velocity_type >,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -606,6 +622,7 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< velocity_type > velocity_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -788,6 +805,20 @@ class particle: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   particle (const x_type&,
@@ -797,7 +828,8 @@ class particle: public ::xml_schema::type
             const old_f_type&,
             const type_type&,
             const epsilon_type&,
-            const sigma_type&);
+            const sigma_type&,
+            const fixed_type&);
 
   particle (::std::unique_ptr< x_type >,
             ::std::unique_ptr< v_type >,
@@ -806,7 +838,8 @@ class particle: public ::xml_schema::type
             ::std::unique_ptr< old_f_type >,
             const type_type&,
             const epsilon_type&,
-            const sigma_type&);
+            const sigma_type&,
+            const fixed_type&);
 
   particle (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
@@ -842,6 +875,7 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< type_type > type_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class particle_cluster: public ::xml_schema::type
@@ -1004,6 +1038,20 @@ class sphere: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   sphere (const center_type&,
@@ -1012,7 +1060,8 @@ class sphere: public ::xml_schema::type
           const m_type&,
           const r_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
@@ -1020,7 +1069,8 @@ class sphere: public ::xml_schema::type
           const m_type&,
           const r_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -1055,6 +1105,7 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< r_type > r_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class sphere_cluster: public ::xml_schema::type

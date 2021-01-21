@@ -39,6 +39,8 @@ private:
 
     double sigma;
 
+    bool fixed;
+
 public:
     /**
      * Default constructor
@@ -61,7 +63,8 @@ public:
             double distance,
             double mass,
             double epsilon,
-            double sigma);
+            double sigma,
+            bool fixed);
 
     /**
  * Operator that compares all attributes of
