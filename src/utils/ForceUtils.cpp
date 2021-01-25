@@ -72,14 +72,25 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
 
     std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
 
-    p1.f[0] += f12[0];
-    p1.f[1] += f12[1];
-    p1.f[2] += f12[2];
-
-    p2.f[0] -= f12[0];
-    p2.f[1] -= f12[1];
-    p2.f[2] -= f12[2];
-
-    //p1.addF(f12);
-    //p2.addF({-f12[0], -f12[1], -f12[2]});
+//#ifdef _OPENMP
+//    p1.setLock();
+//#endif
+//    p1.f[0] += f12[0];
+//    p1.f[1] += f12[1];
+//    p1.f[2] += f12[2];
+//#ifdef _OPENMP
+//    p1.unlock();
+//#endif
+//
+//#ifdef _OPENMP
+//    p2.setLock();
+//#endif
+//    p2.f[0] -= f12[0];
+//    p2.f[1] -= f12[1];
+//    p2.f[2] -= f12[2];
+//#ifdef _OPENMP
+//    p2.unlock();
+//#endif
+    p1.addF(f12);
+    p2.addF({-f12[0], -f12[1], -f12[2]});
 }

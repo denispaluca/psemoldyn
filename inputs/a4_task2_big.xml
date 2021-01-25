@@ -4,7 +4,7 @@
     <name_output>A4_TASK2_BIG</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0005</delta_t>
-    <t_end>50</t_end>
+    <t_end>0.5</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
