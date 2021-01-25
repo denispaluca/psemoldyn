@@ -74,7 +74,7 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
         // then calculate forces between particles of cell + neighbors
         auto &neighbours = cell.getNeighbors();
         auto &cellParticles = cell.getParticles();
-#pragma omp parallel for
+//#pragma omp parallel for
         for (int j = 0; j < neighbours.size(); j++) {
             if (cell.getIndex() >= neighbours[j]->getIndex())
                 continue;
