@@ -85,11 +85,6 @@ double Particle::getEpsilon() { return epsilon; }
 
 double Particle::getSigma() { return sigma; }
 */
-void Particle::addF(const std::array<double, 3> fn) {
-  int i = omp_get_thread_num()*8;
-  for(int j = 0; j < 3; j++)
-    threadForces[i+j] += fn[j];
-}
 
 
 void Particle::saveOldF() {
@@ -151,6 +146,7 @@ Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, s
     dtsq_2m = 0;
 }
 
+#ifdef _OPENMP
 void Particle::setLock() {
     omp_set_lock(&lock);
 }
@@ -176,6 +172,13 @@ void Particle::consolidateForces() {
         }
     }
 }
+
+void Particle::addF(std::array<double, 3> fn) {
+    int i = omp_get_thread_num()*8;
+    for(int j = 0; j < 3; j++)
+        threadForces[i+j] += fn[j];
+}
+#endif
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
   stream << p.toString();

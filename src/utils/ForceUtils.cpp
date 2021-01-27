@@ -62,7 +62,7 @@ void calculateF(Particle &p1, Particle &p2) {
     }
 }
  */
-
+#ifdef _OPENMP
 void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks) {
     std::array<double, 3> xDiff = {p2.x[0] - p1.x[0], p2.x[1] - p1.x[1], p2.x[2] - p1.x[2]};
     double divider = squareSum(xDiff);
@@ -82,11 +82,24 @@ void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool 
         for(int i = 0; i < 3; ++i)
             p2.f[i] -= f12[i];
         p2.unlock();
+//#pragma omp atomic
+//        p1.f[0] += f12[0];
+//#pragma omp atomic
+//        p1.f[1] += f12[1];
+//#pragma omp atomic
+//        p1.f[2] += f12[2];
+//#pragma omp atomic
+//        p2.f[0] -= f12[0];
+//#pragma omp atomic
+//        p2.f[1] -= f12[1];
+//#pragma omp atomic
+//        p2.f[2] -= f12[2];
     } else {
         p1.addF(f12);
         p2.addF({-f12[0],-f12[1],-f12[2]});
     }
 }
+#endif
 
 
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma){

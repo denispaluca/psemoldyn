@@ -14,7 +14,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 #openmp
 
-SET(OPENMP TRUE)
+option(OPENMP ON)
 
 if(OPENMP)
     find_package(OpenMP)

@@ -71,7 +71,7 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
     //auto size = cells.size();
 #ifdef _OPENMP
-#pragma omp parallel for default(none) shared(cells, f) schedule(dynamic)
+#pragma omp parallel for
 #endif
     for (int i = 0; i < cells.size(); i++) {
         auto cell = cells[i];
@@ -134,10 +134,12 @@ void LinkedCellContainer::calculateIteration() {
 
 
     // calculate new v
-    iterate([useLocks = useLocks](Particle &p) {
 #ifdef _OPENMP
+    iterate([useLocks = useLocks](Particle &p) {
         if(!useLocks)
             p.consolidateForces();
+#else
+    iterate([](Particle &p) {
 #endif
         p.calculateV();
     });
