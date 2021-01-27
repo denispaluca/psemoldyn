@@ -1188,6 +1188,24 @@ gravity (const gravity_optional& x)
   this->gravity_ = x;
 }
 
+const domain_type::useLocks_type& domain_type::
+useLocks () const
+{
+  return this->useLocks_.get ();
+}
+
+domain_type::useLocks_type& domain_type::
+useLocks ()
+{
+  return this->useLocks_.get ();
+}
+
+void domain_type::
+useLocks (const useLocks_type& x)
+{
+  this->useLocks_.set (x);
+}
+
 
 // molsimInput
 // 
@@ -3375,24 +3393,28 @@ boundaries_type::
 domain_type::
 domain_type (const domain_size_type& domain_size,
              const cutoff_radius_type& cutoff_radius,
-             const boundary_type& boundary)
+             const boundary_type& boundary,
+             const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (domain_size, this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (boundary, this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (useLocks, this)
 {
 }
 
 domain_type::
 domain_type (::std::unique_ptr< domain_size_type > domain_size,
              const cutoff_radius_type& cutoff_radius,
-             ::std::unique_ptr< boundary_type > boundary)
+             ::std::unique_ptr< boundary_type > boundary,
+             const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (std::move (domain_size), this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (std::move (boundary), this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (useLocks, this)
 {
 }
 
@@ -3404,7 +3426,8 @@ domain_type (const domain_type& x,
   domain_size_ (x.domain_size_, f, this),
   cutoff_radius_ (x.cutoff_radius_, f, this),
   boundary_ (x.boundary_, f, this),
-  gravity_ (x.gravity_, f, this)
+  gravity_ (x.gravity_, f, this),
+  useLocks_ (x.useLocks_, f, this)
 {
 }
 
@@ -3416,7 +3439,8 @@ domain_type (const ::xercesc::DOMElement& e,
   domain_size_ (this),
   cutoff_radius_ (this),
   boundary_ (this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3485,6 +3509,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // useLocks
+    //
+    if (n.name () == "useLocks" && n.namespace_ ().empty ())
+    {
+      if (!useLocks_.present ())
+      {
+        this->useLocks_.set (useLocks_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -3508,6 +3543,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "boundary",
       "");
   }
+
+  if (!useLocks_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "useLocks",
+      "");
+  }
 }
 
 domain_type* domain_type::
@@ -3527,6 +3569,7 @@ operator= (const domain_type& x)
     this->cutoff_radius_ = x.cutoff_radius_;
     this->boundary_ = x.boundary_;
     this->gravity_ = x.gravity_;
+    this->useLocks_ = x.useLocks_;
   }
 
   return *this;
@@ -4753,6 +4796,17 @@ operator<< (::xercesc::DOMElement& e, const domain_type& i)
         e));
 
     s << ::xml_schema::as_double(*i.gravity ());
+  }
+
+  // useLocks
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "useLocks",
+        e));
+
+    s << i.useLocks ();
   }
 }
 

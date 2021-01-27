@@ -71,7 +71,7 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
     //auto size = cells.size();
 #ifdef _OPENMP
-#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for default(none) shared(cells, f) schedule(dynamic)
 #endif
     for (int i = 0; i < cells.size(); i++) {
         auto cell = cells[i];
@@ -121,7 +121,7 @@ void LinkedCellContainer::calculateIteration() {
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
 #ifdef _OPENMP
-        cljParallel(p1, p2, epsilon, sigma, false);
+        cljParallel(p1, p2, epsilon, sigma, useLocks);
 #else
         calculateLennardJones(p1, p2, epsilon, sigma);
 #endif
