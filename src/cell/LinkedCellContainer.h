@@ -56,6 +56,10 @@ private:
      */
     void populateNeighbours();
 
+#ifdef _OPENMP
+    bool useLocks;
+#endif
+
 public:
     LinkedCellContainer();
     /**

@@ -86,10 +86,9 @@ double Particle::getEpsilon() { return epsilon; }
 double Particle::getSigma() { return sigma; }
 */
 void Particle::addF(const std::array<double, 3> fn) {
-  auto &force = threadForces[omp_get_thread_num()];
-  force[0] += fn[0];
-  force[1] += fn[1];
-  force[2] += fn[2];
+  int i = omp_get_thread_num()*8;
+  for(int j = 0; j < 3; j++)
+    threadForces[i+j] += fn[j];
 }
 
 
@@ -141,7 +140,6 @@ void Particle::setM(double mass) {
 
 void Particle::applyGravity(double g) {
     f[1] += m*g;
-    //addF({0, m*g, 0});
 }
 
 Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,
@@ -170,11 +168,12 @@ void Particle::unlock() {
 }
 
 void Particle::consolidateForces() {
-    for(auto &force : threadForces){
-        f[0] += force[0];
-        f[1] += force[1];
-        f[2] += force[2];
-        force = {0};
+    for(int i = 0; i < omp_get_num_threads(); i++){
+        int j = i*8;
+        for(int k = 0; k < 3; k++){
+            f[k] += threadForces[k+j];
+            threadForces[k+j] = 0;
+        }
     }
 }
 /*

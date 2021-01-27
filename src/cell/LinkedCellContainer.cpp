@@ -10,6 +10,7 @@
 #include <utils/ForceUtils.h>
 #include <xml/molsimInput.hxx>
 #include <utils/XSDMapper.h>
+#include <iostream>
 
 #ifdef WITH_LOG4CXX
     #include <log4cxx/propertyconfigurator.h>
@@ -28,7 +29,9 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
     gravity = domain.gravity();
-
+#ifdef _OPENMP
+    useLocks = domain.useLocks();
+#endif
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
 
@@ -42,7 +45,8 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->particles.iterate([&](Particle& p){
         assignParticle(p);
 #ifdef _OPENMP
-        p.initLock();
+        if(useLocks)
+            p.initLock();
 #endif
     });
 
@@ -65,26 +69,29 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 }
 
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
-#pragma omp parallel for
+    //auto size = cells.size();
+#ifdef _OPENMP
+#pragma omp parallel for schedule(dynamic)
+#endif
     for (int i = 0; i < cells.size(); i++) {
-        auto &cell = cells[i];
+        auto cell = cells[i];
+        auto &cellParticles = cell.getParticles();
+        if(cellParticles.empty()) continue;
         // calculate forces between particles of one cell
         cell.iteratePairs(f);
 
         // then calculate forces between particles of cell + neighbors
-        auto &neighbours = cell.getNeighbors();
-        auto &cellParticles = cell.getParticles();
-//#pragma omp parallel for
-        for (int j = 0; j < neighbours.size(); j++) {
-            if (cell.getIndex() >= neighbours[j]->getIndex())
+        for (auto & neighbour : cell.getNeighbors()) {
+            if (i >= neighbour->getIndex())
                 continue;
 
-            auto &neighbourParticles = neighbours[j]->getParticles();
-//#pragma omp parallel for
-            for(int k = 0; k < cellParticles.size(); k++){
-//#pragma omp parallel for
-                for(int l = 0; l < neighbourParticles.size(); l++)
-                    f(*cellParticles[k], *neighbourParticles[l]);
+            auto &neighbourParticles = neighbour->getParticles();
+            if(neighbourParticles.empty()) continue;
+
+            for(auto & cellParticle : cellParticles) {
+                auto &p1 = *cellParticle;
+                for (auto &neighbourParticle : neighbourParticles)
+                    f(p1, *neighbourParticle);
             }
         }
     }
@@ -110,18 +117,28 @@ void LinkedCellContainer::calculateIteration() {
     });
 
     // calculate new f
-    //iteratePairs(calculateLennardJones);
-    auto f = [&](Particle &p1, Particle &p2){
+    iteratePairs([&](Particle &p1, Particle &p2){
+        double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
+        double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
+#ifdef _OPENMP
+        cljParallel(p1, p2, epsilon, sigma, false);
+#else
+        calculateLennardJones(p1, p2, epsilon, sigma);
+#endif
+    });
+    boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
         calculateLennardJones(p1, p2, epsilon, sigma);
-    };
-    iteratePairs(f);
-    boundaryHandler->iteratePeriodicParticles(&cells, f);
+    });
+
 
     // calculate new v
-    iterate([](Particle &p) {
-        p.consolidateForces();
+    iterate([useLocks = useLocks](Particle &p) {
+#ifdef _OPENMP
+        if(!useLocks)
+            p.consolidateForces();
+#endif
         p.calculateV();
     });
 }

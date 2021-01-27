@@ -9,6 +9,7 @@
 
 #include <array>
 #include <string>
+#include <vector>
 
 #ifdef _OPENMP
 #include <omp.h>
@@ -60,7 +61,7 @@ private:
      * Particle lock for parallelization.
      */
     omp_lock_t lock;
-    std::array<std::array<double,3>, 28> threadForces = {{{0}}};
+    alignas(64) std::array<double,224> threadForces = {0};
 #endif
 public:
   /**
