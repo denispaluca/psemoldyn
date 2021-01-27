@@ -168,7 +168,7 @@ void Particle::unlock() {
 }
 
 void Particle::consolidateForces() {
-    for(int i = 0; i < omp_get_num_threads(); i++){
+    for(int i = 0; i < omp_get_max_threads(); i++){
         int j = i*8;
         for(int k = 0; k < 3; k++){
             f[k] += threadForces[k+j];

@@ -23,6 +23,7 @@
             <right>periodic</right>
         </boundary>
         <gravity>-12.44</gravity>
+        <useLocks>false</useLocks>
     </domain>
     <thermostat>
         <t_init>40</t_init>
