@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "ForceUtils.h"
+#include "ArrayUtils.h"
 
 
 /**
@@ -64,39 +65,31 @@ void calculateF(Particle &p1, Particle &p2) {
  */
 #ifdef _OPENMP
 void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks) {
-    std::array<double, 3> xDiff = {p2.x[0] - p1.x[0], p2.x[1] - p1.x[1], p2.x[2] - p1.x[2]};
+    std::array<double, 3> xDiff;
+    for(int i = 0; i < 3; i++)
+        xDiff[i] = p2.x[i] - p1.x[i];
+
     double divider = squareSum(xDiff);
 
     double sigDivPow6 = pow6(sigma)/pow3(divider);
     double vf = ((24*epsilon) / divider) * (sigDivPow6 - 2*sigDivPow6*sigDivPow6);
 
-    std::array<double, 3> f12 = {vf*xDiff[0], vf*xDiff[1], vf*xDiff[2]};
+    for(int i = 0; i < 3; i++)
+        xDiff[i] *= vf;
 
     if(useLocks){
         p1.setLock();
         for(int i = 0; i < 3; ++i)
-            p1.f[i] += f12[i];
+            p1.f[i] += xDiff[i];
         p1.unlock();
 
         p2.setLock();
         for(int i = 0; i < 3; ++i)
-            p2.f[i] -= f12[i];
+            p2.f[i] -= xDiff[i];
         p2.unlock();
-//#pragma omp atomic
-//        p1.f[0] += f12[0];
-//#pragma omp atomic
-//        p1.f[1] += f12[1];
-//#pragma omp atomic
-//        p1.f[2] += f12[2];
-//#pragma omp atomic
-//        p2.f[0] -= f12[0];
-//#pragma omp atomic
-//        p2.f[1] -= f12[1];
-//#pragma omp atomic
-//        p2.f[2] -= f12[2];
     } else {
-        p1.addF(f12);
-        p2.addF({-f12[0],-f12[1],-f12[2]});
+        p1.addF(xDiff);
+        p2.addF({-xDiff[0],-xDiff[1],-xDiff[2]});
     }
 }
 #endif

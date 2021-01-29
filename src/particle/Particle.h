@@ -61,7 +61,7 @@ private:
      * Particle lock for parallelization.
      */
     omp_lock_t lock;
-    alignas(64) std::array<double,224> threadForces = {0};
+    std::array<std::array<double,8>,28>* threadForces;
 #endif
 public:
   /**

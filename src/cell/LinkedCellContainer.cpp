@@ -10,7 +10,6 @@
 #include <utils/ForceUtils.h>
 #include <xml/molsimInput.hxx>
 #include <utils/XSDMapper.h>
-#include <iostream>
 
 #ifdef WITH_LOG4CXX
     #include <log4cxx/propertyconfigurator.h>
