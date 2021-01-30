@@ -8,6 +8,7 @@
 #include "particle/ParticleGenerator.h"
 #include "Container.h"
 #include "Thermostat.h"
+#include "Profiler.h"
 #include "utils/XSDMapper.h"
 
 class Simulation {
@@ -26,6 +27,12 @@ private:
      * Thermostat for current simulation.
      */
     Thermostat *thermostat;
+
+    bool profiling;
+
+    Profiler *profiler;
+
+    int profiling_freq;
 
     /**
      * Plot the particles to a vtu-file.
