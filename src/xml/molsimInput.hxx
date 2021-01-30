@@ -265,6 +265,7 @@ class particle_data;
 class boundary_type;
 class boundaries_type;
 class domain_type;
+class profiler_type;
 class molsimInput;
 
 #include <memory>    // ::std::unique_ptr
@@ -1726,6 +1727,110 @@ class domain_type: public ::xml_schema::type
   gravity_optional gravity_;
 };
 
+class profiler_type: public ::xml_schema::type
+{
+  public:
+  // profiling_bins
+  //
+  typedef ::xml_schema::int_ profiling_bins_type;
+  typedef ::xsd::cxx::tree::traits< profiling_bins_type, char > profiling_bins_traits;
+
+  const profiling_bins_type&
+  profiling_bins () const;
+
+  profiling_bins_type&
+  profiling_bins ();
+
+  void
+  profiling_bins (const profiling_bins_type& x);
+
+  // profiling_frequency
+  //
+  typedef ::xml_schema::int_ profiling_frequency_type;
+  typedef ::xsd::cxx::tree::traits< profiling_frequency_type, char > profiling_frequency_traits;
+
+  const profiling_frequency_type&
+  profiling_frequency () const;
+
+  profiling_frequency_type&
+  profiling_frequency ();
+
+  void
+  profiling_frequency (const profiling_frequency_type& x);
+
+  // velocity_profile_path
+  //
+  typedef ::xml_schema::string velocity_profile_path_type;
+  typedef ::xsd::cxx::tree::traits< velocity_profile_path_type, char > velocity_profile_path_traits;
+
+  const velocity_profile_path_type&
+  velocity_profile_path () const;
+
+  velocity_profile_path_type&
+  velocity_profile_path ();
+
+  void
+  velocity_profile_path (const velocity_profile_path_type& x);
+
+  void
+  velocity_profile_path (::std::unique_ptr< velocity_profile_path_type > p);
+
+  // density_profile_path
+  //
+  typedef ::xml_schema::string density_profile_path_type;
+  typedef ::xsd::cxx::tree::traits< density_profile_path_type, char > density_profile_path_traits;
+
+  const density_profile_path_type&
+  density_profile_path () const;
+
+  density_profile_path_type&
+  density_profile_path ();
+
+  void
+  density_profile_path (const density_profile_path_type& x);
+
+  void
+  density_profile_path (::std::unique_ptr< density_profile_path_type > p);
+
+  // Constructors.
+  //
+  profiler_type (const profiling_bins_type&,
+                 const profiling_frequency_type&,
+                 const velocity_profile_path_type&,
+                 const density_profile_path_type&);
+
+  profiler_type (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  profiler_type (const profiler_type& x,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  virtual profiler_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  profiler_type&
+  operator= (const profiler_type& x);
+
+  virtual 
+  ~profiler_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< profiling_bins_type > profiling_bins_;
+  ::xsd::cxx::tree::one< profiling_frequency_type > profiling_frequency_;
+  ::xsd::cxx::tree::one< velocity_profile_path_type > velocity_profile_path_;
+  ::xsd::cxx::tree::one< density_profile_path_type > density_profile_path_;
+};
+
 class molsimInput: public ::xml_schema::type
 {
   public:
@@ -1862,6 +1967,41 @@ class molsimInput: public ::xml_schema::type
   void
   thermostat (::std::unique_ptr< thermostat_type > p);
 
+  // profiling
+  //
+  typedef ::xml_schema::boolean profiling_type;
+  typedef ::xsd::cxx::tree::traits< profiling_type, char > profiling_traits;
+
+  const profiling_type&
+  profiling () const;
+
+  profiling_type&
+  profiling ();
+
+  void
+  profiling (const profiling_type& x);
+
+  // profiler
+  //
+  typedef ::profiler_type profiler_type;
+  typedef ::xsd::cxx::tree::optional< profiler_type > profiler_optional;
+  typedef ::xsd::cxx::tree::traits< profiler_type, char > profiler_traits;
+
+  const profiler_optional&
+  profiler () const;
+
+  profiler_optional&
+  profiler ();
+
+  void
+  profiler (const profiler_type& x);
+
+  void
+  profiler (const profiler_optional& x);
+
+  void
+  profiler (::std::unique_ptr< profiler_type > p);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -1886,6 +2026,7 @@ class molsimInput: public ::xml_schema::type
                const linked_cell_type&,
                const checkpoint_type&,
                const domain_type&,
+               const profiling_type&,
                const particle_data_type&);
 
   molsimInput (const delta_t_type&,
@@ -1893,6 +2034,7 @@ class molsimInput: public ::xml_schema::type
                const linked_cell_type&,
                const checkpoint_type&,
                ::std::unique_ptr< domain_type >,
+               const profiling_type&,
                ::std::unique_ptr< particle_data_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
@@ -1929,6 +2071,8 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< checkpoint_type > checkpoint_;
   ::xsd::cxx::tree::one< domain_type > domain_;
   thermostat_optional thermostat_;
+  ::xsd::cxx::tree::one< profiling_type > profiling_;
+  profiler_optional profiler_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
 };
 

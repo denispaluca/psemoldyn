@@ -1243,6 +1243,94 @@ gravity (const gravity_optional& x)
 }
 
 
+// profiler_type
+// 
+
+const profiler_type::profiling_bins_type& profiler_type::
+profiling_bins () const
+{
+  return this->profiling_bins_.get ();
+}
+
+profiler_type::profiling_bins_type& profiler_type::
+profiling_bins ()
+{
+  return this->profiling_bins_.get ();
+}
+
+void profiler_type::
+profiling_bins (const profiling_bins_type& x)
+{
+  this->profiling_bins_.set (x);
+}
+
+const profiler_type::profiling_frequency_type& profiler_type::
+profiling_frequency () const
+{
+  return this->profiling_frequency_.get ();
+}
+
+profiler_type::profiling_frequency_type& profiler_type::
+profiling_frequency ()
+{
+  return this->profiling_frequency_.get ();
+}
+
+void profiler_type::
+profiling_frequency (const profiling_frequency_type& x)
+{
+  this->profiling_frequency_.set (x);
+}
+
+const profiler_type::velocity_profile_path_type& profiler_type::
+velocity_profile_path () const
+{
+  return this->velocity_profile_path_.get ();
+}
+
+profiler_type::velocity_profile_path_type& profiler_type::
+velocity_profile_path ()
+{
+  return this->velocity_profile_path_.get ();
+}
+
+void profiler_type::
+velocity_profile_path (const velocity_profile_path_type& x)
+{
+  this->velocity_profile_path_.set (x);
+}
+
+void profiler_type::
+velocity_profile_path (::std::unique_ptr< velocity_profile_path_type > x)
+{
+  this->velocity_profile_path_.set (std::move (x));
+}
+
+const profiler_type::density_profile_path_type& profiler_type::
+density_profile_path () const
+{
+  return this->density_profile_path_.get ();
+}
+
+profiler_type::density_profile_path_type& profiler_type::
+density_profile_path ()
+{
+  return this->density_profile_path_.get ();
+}
+
+void profiler_type::
+density_profile_path (const density_profile_path_type& x)
+{
+  this->density_profile_path_.set (x);
+}
+
+void profiler_type::
+density_profile_path (::std::unique_ptr< density_profile_path_type > x)
+{
+  this->density_profile_path_.set (std::move (x));
+}
+
+
 // molsimInput
 // 
 
@@ -1424,6 +1512,54 @@ void molsimInput::
 thermostat (::std::unique_ptr< thermostat_type > x)
 {
   this->thermostat_.set (std::move (x));
+}
+
+const molsimInput::profiling_type& molsimInput::
+profiling () const
+{
+  return this->profiling_.get ();
+}
+
+molsimInput::profiling_type& molsimInput::
+profiling ()
+{
+  return this->profiling_.get ();
+}
+
+void molsimInput::
+profiling (const profiling_type& x)
+{
+  this->profiling_.set (x);
+}
+
+const molsimInput::profiler_optional& molsimInput::
+profiler () const
+{
+  return this->profiler_;
+}
+
+molsimInput::profiler_optional& molsimInput::
+profiler ()
+{
+  return this->profiler_;
+}
+
+void molsimInput::
+profiler (const profiler_type& x)
+{
+  this->profiler_.set (x);
+}
+
+void molsimInput::
+profiler (const profiler_optional& x)
+{
+  this->profiler_ = x;
+}
+
+void molsimInput::
+profiler (::std::unique_ptr< profiler_type > x)
+{
+  this->profiler_.set (std::move (x));
 }
 
 const molsimInput::particle_data_type& molsimInput::
@@ -3666,6 +3802,170 @@ domain_type::
 {
 }
 
+// profiler_type
+//
+
+profiler_type::
+profiler_type (const profiling_bins_type& profiling_bins,
+               const profiling_frequency_type& profiling_frequency,
+               const velocity_profile_path_type& velocity_profile_path,
+               const density_profile_path_type& density_profile_path)
+: ::xml_schema::type (),
+  profiling_bins_ (profiling_bins, this),
+  profiling_frequency_ (profiling_frequency, this),
+  velocity_profile_path_ (velocity_profile_path, this),
+  density_profile_path_ (density_profile_path, this)
+{
+}
+
+profiler_type::
+profiler_type (const profiler_type& x,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  profiling_bins_ (x.profiling_bins_, f, this),
+  profiling_frequency_ (x.profiling_frequency_, f, this),
+  velocity_profile_path_ (x.velocity_profile_path_, f, this),
+  density_profile_path_ (x.density_profile_path_, f, this)
+{
+}
+
+profiler_type::
+profiler_type (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  profiling_bins_ (this),
+  profiling_frequency_ (this),
+  velocity_profile_path_ (this),
+  density_profile_path_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void profiler_type::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // profiling_bins
+    //
+    if (n.name () == "profiling_bins" && n.namespace_ ().empty ())
+    {
+      if (!profiling_bins_.present ())
+      {
+        this->profiling_bins_.set (profiling_bins_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // profiling_frequency
+    //
+    if (n.name () == "profiling_frequency" && n.namespace_ ().empty ())
+    {
+      if (!profiling_frequency_.present ())
+      {
+        this->profiling_frequency_.set (profiling_frequency_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // velocity_profile_path
+    //
+    if (n.name () == "velocity_profile_path" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< velocity_profile_path_type > r (
+        velocity_profile_path_traits::create (i, f, this));
+
+      if (!velocity_profile_path_.present ())
+      {
+        this->velocity_profile_path_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // density_profile_path
+    //
+    if (n.name () == "density_profile_path" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< density_profile_path_type > r (
+        density_profile_path_traits::create (i, f, this));
+
+      if (!density_profile_path_.present ())
+      {
+        this->density_profile_path_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!profiling_bins_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling_bins",
+      "");
+  }
+
+  if (!profiling_frequency_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling_frequency",
+      "");
+  }
+
+  if (!velocity_profile_path_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "velocity_profile_path",
+      "");
+  }
+
+  if (!density_profile_path_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "density_profile_path",
+      "");
+  }
+}
+
+profiler_type* profiler_type::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class profiler_type (*this, f, c);
+}
+
+profiler_type& profiler_type::
+operator= (const profiler_type& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->profiling_bins_ = x.profiling_bins_;
+    this->profiling_frequency_ = x.profiling_frequency_;
+    this->velocity_profile_path_ = x.velocity_profile_path_;
+    this->density_profile_path_ = x.density_profile_path_;
+  }
+
+  return *this;
+}
+
+profiler_type::
+~profiler_type ()
+{
+}
+
 // molsimInput
 //
 
@@ -3675,6 +3975,7 @@ molsimInput (const delta_t_type& delta_t,
              const linked_cell_type& linked_cell,
              const checkpoint_type& checkpoint,
              const domain_type& domain,
+             const profiling_type& profiling,
              const particle_data_type& particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
@@ -3685,6 +3986,8 @@ molsimInput (const delta_t_type& delta_t,
   checkpoint_ (checkpoint, this),
   domain_ (domain, this),
   thermostat_ (this),
+  profiling_ (profiling, this),
+  profiler_ (this),
   particle_data_ (particle_data, this)
 {
 }
@@ -3695,6 +3998,7 @@ molsimInput (const delta_t_type& delta_t,
              const linked_cell_type& linked_cell,
              const checkpoint_type& checkpoint,
              ::std::unique_ptr< domain_type > domain,
+             const profiling_type& profiling,
              ::std::unique_ptr< particle_data_type > particle_data)
 : ::xml_schema::type (),
   name_output_ (this),
@@ -3705,6 +4009,8 @@ molsimInput (const delta_t_type& delta_t,
   checkpoint_ (checkpoint, this),
   domain_ (std::move (domain), this),
   thermostat_ (this),
+  profiling_ (profiling, this),
+  profiler_ (this),
   particle_data_ (std::move (particle_data), this)
 {
 }
@@ -3722,6 +4028,8 @@ molsimInput (const molsimInput& x,
   checkpoint_ (x.checkpoint_, f, this),
   domain_ (x.domain_, f, this),
   thermostat_ (x.thermostat_, f, this),
+  profiling_ (x.profiling_, f, this),
+  profiler_ (x.profiler_, f, this),
   particle_data_ (x.particle_data_, f, this)
 {
 }
@@ -3739,6 +4047,8 @@ molsimInput (const ::xercesc::DOMElement& e,
   checkpoint_ (this),
   domain_ (this),
   thermostat_ (this),
+  profiling_ (this),
+  profiler_ (this),
   particle_data_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -3855,6 +4165,31 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // profiling
+    //
+    if (n.name () == "profiling" && n.namespace_ ().empty ())
+    {
+      if (!profiling_.present ())
+      {
+        this->profiling_.set (profiling_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // profiler
+    //
+    if (n.name () == "profiler" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< profiler_type > r (
+        profiler_traits::create (i, f, this));
+
+      if (!this->profiler_)
+      {
+        this->profiler_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // particle_data
     //
     if (n.name () == "particle_data" && n.namespace_ ().empty ())
@@ -3907,6 +4242,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!profiling_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling",
+      "");
+  }
+
   if (!particle_data_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -3936,6 +4278,8 @@ operator= (const molsimInput& x)
     this->checkpoint_ = x.checkpoint_;
     this->domain_ = x.domain_;
     this->thermostat_ = x.thermostat_;
+    this->profiling_ = x.profiling_;
+    this->profiler_ = x.profiler_;
     this->particle_data_ = x.particle_data_;
   }
 

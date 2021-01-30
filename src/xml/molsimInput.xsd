@@ -147,6 +147,15 @@
     </xsd:sequence>
   </xsd:complexType>
 
+  <xsd:complexType name="profiler_type">
+    <xsd:sequence>
+      <xsd:element name="profiling_bins" type="xsd:int"/>
+      <xsd:element name="profiling_frequency" type="xsd:int"/>
+      <xsd:element name="velocity_profile_path" type="xsd:string"/>
+      <xsd:element name="density_profile_path" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
   <!-- base element of the molsim input xml file -->
   <xsd:complexType name="molsimInput">
     <xsd:sequence>
@@ -162,6 +171,8 @@
       <xsd:element name="checkpoint" type="xsd:boolean" />
       <xsd:element name="domain" type="domain_type" />
       <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
+      <xsd:element name="profiling" type="xsd:boolean"/>
+      <xsd:element name="profiler" type="profiler_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
     </xsd:sequence>    
   </xsd:complexType>
