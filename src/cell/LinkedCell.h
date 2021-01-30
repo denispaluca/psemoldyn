@@ -42,7 +42,7 @@ public:
      * Getter for the neighbors fields
      * @return a vector with the neighboring LinkedCells of this cell
      */
-    std::vector<LinkedCell*> getNeighbors();
+    std::vector<LinkedCell*> &getNeighbors();
 
     /**
      * Adds given LinkedCell pointer to vector of neighbors.

@@ -26,3 +26,7 @@ void calculateF(Particle &p1, Particle &p2);
  * @return
  */
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma);
+
+#ifdef _OPENMP
+void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks);
+#endif

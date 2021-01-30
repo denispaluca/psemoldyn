@@ -141,6 +141,8 @@
       <xsd:element name="cutoff_radius" type="xsd:double" />
       <xsd:element name="boundary" type="boundaries_type" />
       <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
+      <!-- True for particle lock strategy and false for Thread force strategy -->
+      <xsd:element name="useLocks" type="xsd:boolean" />
     </xsd:sequence>
   </xsd:complexType>
 
