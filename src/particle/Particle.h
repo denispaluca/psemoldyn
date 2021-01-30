@@ -9,6 +9,11 @@
 
 #include <array>
 #include <string>
+#include <vector>
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 /**
  * The particle class represents a particle and it's characteristics.
  */
@@ -51,6 +56,13 @@ private:
    */
   double dtsq_2m;
 
+#ifdef _OPENMP
+    /**
+     * Particle lock for parallelization.
+     */
+    omp_lock_t lock;
+    std::array<std::array<double,8>,28>* threadForces;
+#endif
 public:
   /**
    * Particle constructor which sets its type.
@@ -204,9 +216,9 @@ public:
    * Adds force fn to current force.
    * @param fn Force to be added.
    * @return
+ */
+  void addF(std::array<double, 3> fn);
 
-  void addF(const std::array<double, 3> &fn);
-*/
 
   /**
    * Save f to old f and set f to 0.
@@ -274,6 +286,14 @@ public:
      * Force effective on this particle
      */
     std::array<double, 3> f;
+
+#ifdef _OPENMP
+    void initLock();
+    void destroyLock();
+    void setLock();
+    void unlock();
+    void consolidateForces();
+#endif
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);

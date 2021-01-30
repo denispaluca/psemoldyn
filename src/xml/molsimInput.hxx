@@ -1685,15 +1685,31 @@ class domain_type: public ::xml_schema::type
   void
   gravity (const gravity_optional& x);
 
+  // useLocks
+  //
+  typedef ::xml_schema::boolean useLocks_type;
+  typedef ::xsd::cxx::tree::traits< useLocks_type, char > useLocks_traits;
+
+  const useLocks_type&
+  useLocks () const;
+
+  useLocks_type&
+  useLocks ();
+
+  void
+  useLocks (const useLocks_type& x);
+
   // Constructors.
   //
   domain_type (const domain_size_type&,
                const cutoff_radius_type&,
-               const boundary_type&);
+               const boundary_type&,
+               const useLocks_type&);
 
   domain_type (::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
-               ::std::unique_ptr< boundary_type >);
+               ::std::unique_ptr< boundary_type >,
+               const useLocks_type&);
 
   domain_type (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f = 0,
@@ -1725,6 +1741,7 @@ class domain_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< boundary_type > boundary_;
   gravity_optional gravity_;
+  ::xsd::cxx::tree::one< useLocks_type > useLocks_;
 };
 
 class profiler_type: public ::xml_schema::type
