@@ -125,8 +125,6 @@ public:
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma);
 
-  bool fixed;
-
   /**
    * Particle constructor for full particles state.
    * @param x Position
@@ -286,6 +284,11 @@ public:
      * Force effective on this particle
      */
     std::array<double, 3> f;
+
+    /**
+     * Stores whether Particle position is fixed
+     */
+    bool fixed;
 
 #ifdef _OPENMP
     void initLock();

@@ -28,10 +28,19 @@ private:
      */
     Thermostat *thermostat;
 
+    /**
+     * Stores whether velocity + density profiling is enabled
+     */
     bool profiling;
 
+    /**
+     * Pointer to Profiler instance
+     */
     Profiler *profiler;
 
+    /**
+     * Frequency in which profiles are created (# of time steps)
+     */
     int profiling_freq;
 
     /**

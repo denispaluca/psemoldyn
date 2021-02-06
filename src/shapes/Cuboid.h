@@ -34,10 +34,19 @@ private:
      */
     std::array<double, 3> initialV{};
 
+    /**
+     * Epsilon of the particles
+     */
     double epsilon;
 
+    /**
+     * Sigma of the particles
+     */
     double sigma;
 
+    /**
+     * Stores whether Cuboid particles are fixed
+     */
     bool fixed;
 
 public:

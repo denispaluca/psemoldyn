@@ -58,6 +58,7 @@ void Profiler::createProfile() {
         binParticles.emplace_back(0);
     }
 
+    // sum up velocities/densities/pacrticle numbers
     container->iterate([&](Particle &p){
         int bin = p.x[0] / bin_size[0];
         std::array<double, 3> velo = velocities.at(bin);
