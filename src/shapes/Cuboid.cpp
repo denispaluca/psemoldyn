@@ -34,16 +34,7 @@ Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumber
 
 void Cuboid::generate(ParticleContainer &particles) {
     std::array<double, 3> newPosition = {0., 0., 0.};
-/*
-    if (isMembrane) {
-        std::vector<std::vector<Particle>> temp (size[0]);
-        membrane = temp;
 
-        for (auto i: membrane) {
-            i.reserve(size[2]);
-        }
-    }
-*/
     int length = particles.size();
 
     int uid = 0;

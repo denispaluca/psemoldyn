@@ -32,7 +32,7 @@ public:
      * @param particles Vector of particles.
      * @return
      */
-    ParticleContainer(std::vector<Particle> particles);
+    ParticleContainer(std::vector<Particle> &particles);
 
     /**
      * Destructor of particle container.
@@ -78,14 +78,16 @@ public:
      void erase(int i);
 
     /**
-    * Does one iteration step with the particles.
-    */
-     void calculateIteration() override;
-
-    /**
     * Size of particles vector.
     */
      std::size_t size() override;
 
+     //TODO
      void mixParameters();
+
+    //void calculateIteration();
+
+    void calculateIteration(int d);
+
+    void setNeighbours(int pos, int length, int x);
 };

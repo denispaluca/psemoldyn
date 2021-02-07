@@ -39,20 +39,25 @@ Cuboid mapCuboid(cuboid& c){
         c.mass(),
         mapDoubleVec(c.velocity()),
         c.epsilon(),
-        c.sigma()
+        c.sigma(),
+        c.membrane(),
+        c.r0(),
+        c.k()
     };
 }
 
 Particle mapParticle(particle& p){
     return {
-        mapDoubleVec(p.x()),
-        mapDoubleVec(p.v()),
-        p.m(),
-        mapDoubleVec(p.f()),
-        mapDoubleVec(p.old_f()),
-        p.type(),
-        p.epsilon(),
-        p.sigma()
+            mapDoubleVec(p.x()),
+            mapDoubleVec(p.v()),
+            p.m(),
+            mapDoubleVec(p.f()),
+            mapDoubleVec(p.old_f()),
+            p.type(),
+            p.epsilon(),
+            p.sigma(),
+            p.r0(),
+            p.km()
     };
 }
 
@@ -65,6 +70,22 @@ particle mapParticleToXML(Particle &p){
         mapToDoubleVec(p.getOldF()),
         p.getType(),
         p.epsilon,
-        p.sigma
+        p.sigma,
+        p.r0,
+        p.km
     };
 }
+
+std::pair<int, std::array<double, 3>> mapExtraForce(extra_force& p) {
+    return {
+            std::make_pair(p.index(), mapDoubleVec(p.f_vector()))
+    };
+}
+
+/*
+std::vector<std::pair<int, std::array<double, 3>>> mapExtraForces(extra_force& p) {
+    return {
+            std::make_vector(
+    }
+}
+ */
