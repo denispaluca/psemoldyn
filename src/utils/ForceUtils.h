@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <vector>
 
 #include <particle/Particle.h>
 
@@ -26,3 +27,27 @@ void calculateF(Particle &p1, Particle &p2);
  * @return
  */
 void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double sigma);
+
+/**
+ * TODO
+ * @param p1
+ * @param p2
+ */
+void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x);
+
+/**
+ * TODO
+ * @param p1
+ * @param p2
+ * @param particles
+ */
+void calculateMembrane(Particle &p1, Particle &p2, double epsilon, double sigma);
+
+/**
+ * TODO
+ * @param particles
+ * @param pos
+ * @param length
+ * @param x
+ */
+void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x);

@@ -3,8 +3,8 @@
 //
 
 #include <cmath>
+#include <particle/ParticleContainer.h>
 #include "ForceUtils.h"
-
 
 /**
  * Calculate second norm cubed of array with length 3.
@@ -82,4 +82,93 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
 
     //p1.addF(f12);
     //p2.addF({-f12[0], -f12[1], -f12[2]});
+}
+
+void calculateMembrane(Particle &p1, Particle &p2, double epsilon, double sigma) {
+    /*
+    if (p1.uid >= p2.uid) {
+        return;
+    }
+     */
+
+    double t = ((p1.x[0]-p2.x[0])*(p1.x[0]-p2.x[0]))
+               +((p1.x[1]-p2.x[1])*(p1.x[1]-p2.x[1]))
+               +((p1.x[2]-p2.x[2])*(p1.x[2]-p2.x[2]));
+    double abstand = sqrt(t);
+
+    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid) {
+        calculateMembraneForce(p1, p2, false, abstand);
+    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid) {
+        calculateMembraneForce(p1, p2, true, abstand);
+    } else if (p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
+        calculateMembraneForce(p1, p2, false, abstand);
+    } else if (p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
+        calculateMembraneForce(p1, p2, true, abstand);
+    } else  { //(abstand < 1.12246 * sigma)
+        calculateLennardJones(p1, p2, epsilon, sigma);
+    }
+}
+
+void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x) {
+    p1.debug ++;
+    p2.debug ++;
+
+    std::array<double, 3> f12 = {0.0, 0.0, 0.0};
+
+    if (diagonal) {
+        x -= (1.414213562 * p1.r0);
+    } else {
+        x -= p1.r0;
+    }
+
+    x *= p1.km;
+
+    f12[0] = x * (p2.x[0]-p1.x[0]);
+    f12[1] = x * (p2.x[1]-p1.x[1]);
+    f12[2] = x * (p2.x[2]-p1.x[2]);
+
+    /*
+    if (f12[0] > 100 || f12[1] > 100 || f12[2] > 100) {
+        bool gzcdu = false;
+    }
+     */
+
+    p1.f[0] += f12[0];
+    p1.f[1] += f12[1];
+    p1.f[2] += f12[2];
+
+    p2.f[0] -= f12[0];
+    p2.f[1] -= f12[1];
+    p2.f[2] -= f12[2];
+}
+
+void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x) {
+    int a, b, c, d;
+    for (int i = pos; i<pos+length; i++) {
+        if (((i-pos)+1)%x > 0 && i+1 < pos+length) {
+            a = i+1;
+            particles.at(i).laterMembraneParticles.at(0) = particles.at(a).uid;
+        } else {
+            particles.at(i).laterMembraneParticles.at(0) = -1;
+        }
+        if ((i-pos)+x-1 < pos+length && (i-pos)%x -1 >= 0) {
+            b = i+x-1;
+            particles.at(i).laterMembraneParticles.at(1) = particles.at(b).uid;
+        } else {
+            particles.at(i).laterMembraneParticles.at(1) = -1;
+        }
+        if ((i-pos)+x < pos+length) {
+            c = i+x;
+            particles.at(i).laterMembraneParticles.at(2) = particles.at(c).uid;
+        } else {
+            particles.at(i).laterMembraneParticles.at(2) = -1;
+        }
+        if (((i-pos)+1)%x > 0 && i+x+1 < pos+length) {
+            d = i+x+1;
+            particles.at(i).laterMembraneParticles.at(3) = particles.at(d).uid;
+        } else {
+            particles.at(i).laterMembraneParticles.at(3) = -1;
+        }
+    }
+    return;
 }
