@@ -31,7 +31,7 @@ public:
     /**
      * Does one iteration step with the particles.
      */
-    virtual void calculateIteration() = 0;
+    virtual void calculateIteration(int d) = 0;
 
     /**
      * Size of particles vector.

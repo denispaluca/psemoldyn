@@ -70,7 +70,7 @@ public:
     /**
     * Does one iteration step with the particles
     */
-    void calculateIteration() override;
+    void calculateIteration(int d);
 
     /**
      * Adds goven Particle to correct LinkeCell.
@@ -151,4 +151,9 @@ public:
     BoundaryHandler* getBoundaryHandler();
 
     void mixParameters();
+
+    /*
+     * Apply additional forces to specific particles by index
+     */
+    std::vector<std::pair<int, std::array<double, 3>>> extraForces;
 };

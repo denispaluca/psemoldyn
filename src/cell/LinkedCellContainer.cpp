@@ -78,9 +78,10 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
     }
 }
 
-void LinkedCellContainer::calculateIteration() {
+void LinkedCellContainer::calculateIteration(int d) {
     //calculate new positions
     iterate([](Particle &p) {
+            p.debug = 0;
             p.calculateX();
             p.saveOldF();
     });
@@ -102,9 +103,22 @@ void LinkedCellContainer::calculateIteration() {
     auto f = [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
-        calculateLennardJones(p1, p2, epsilon, sigma);
+
+        calculateMembrane(p1, p2, epsilon, sigma);
+        //calculateLennardJones(p1, p2, epsilon, sigma);
     };
+    //TODO
     iteratePairs(f);
+    //this->particles.iteratePairs(f);
+
+    if (d <= 15000) {
+        //particles.getParticles().at(3).f[2] += 0.8;
+        particles.getParticles().at(824).f[2] += 0.8;
+        particles.getParticles().at(825).f[2] += 0.8;
+        particles.getParticles().at(874).f[2] += 0.8;
+        particles.getParticles().at(875).f[2] += 0.8;
+
+    }
     boundaryHandler->iteratePeriodicParticles(&cells, f);
 
     // calculate new v
