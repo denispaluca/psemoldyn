@@ -39,10 +39,11 @@ int Simulation::start(bool isPT) {
     if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
-        container->calculateIteration();
+        container->calculateIteration(iteration);
 
         iteration++;
         if (!isPT && iteration % freq == 0) {
+
             plotParticles(iteration);
         }
 
