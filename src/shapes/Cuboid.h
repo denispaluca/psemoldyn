@@ -38,6 +38,12 @@ private:
 
     double sigma;
 
+    bool isMembrane;
+
+    double r0;
+
+    double km;
+
 public:
     /**
      * Default constructor
@@ -52,10 +58,13 @@ public:
      * @param distance distance between particles/mesh width
      * @param mass mass of one particle
      * @param initalV initial velocity of the particles
+     * @param epsilon epsilon of the particles
+     * @param sigma sigma of the particles
+     * @param membrane if cuboid is a membrane
      */
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
            double distance, double mass, std::array<double, 3> initalV,
-           double epsilon, double sigma);
+           double epsilon, double sigma, bool membrane, double r0, double k);
 
         /**
      * Operator that compares all attributes of
@@ -89,4 +98,9 @@ public:
      * @return Number of particles in cuboid
      */
     std::size_t getNrParticles();
+
+    /**
+     * Store a membrane in 2d vector
+     */
+    //std::vector<std::vector<Particle>> membrane;
 };

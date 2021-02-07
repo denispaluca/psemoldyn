@@ -6,6 +6,7 @@
 #include "utils/MaxwellBoltzmannDistribution.h"
 #include <sstream>
 #include "utils/ArrayUtils.h"
+#include <utils/ForceUtils.h>
 
 Cuboid::Cuboid() {
     this->position = {0.0,0.0,0.0};
@@ -13,11 +14,12 @@ Cuboid::Cuboid() {
     this->distance = 1;
     this->mass = 1;
     this->initialV = {0.0, 0.0, 0.0};
+    this->isMembrane = false;
     //TODO: defaultvals for eps/sigma
 }
 
 Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumbers, double distance, double mass,
-               std::array<double, 3> initialV, double epsilon, double sigma) {
+               std::array<double, 3> initialV, double epsilon, double sigma, bool isMembrane, double r0, double k) {
     this->position = position;
     this->size = particleNumbers;
     this->distance = distance;
@@ -25,10 +27,26 @@ Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumber
     this->initialV = initialV;
     this->epsilon = epsilon;
     this->sigma = sigma;
+    this->isMembrane = isMembrane;
+    this->r0 = r0;
+    this->km = k;
 }
 
 void Cuboid::generate(ParticleContainer &particles) {
     std::array<double, 3> newPosition = {0., 0., 0.};
+/*
+    if (isMembrane) {
+        std::vector<std::vector<Particle>> temp (size[0]);
+        membrane = temp;
+
+        for (auto i: membrane) {
+            i.reserve(size[2]);
+        }
+    }
+*/
+    int length = particles.size();
+
+    int uid = 0;
 
     for(int i = 0; i < size[0]; i++){
         newPosition[0] = position[0] + i*distance; //xpos
@@ -36,12 +54,18 @@ void Cuboid::generate(ParticleContainer &particles) {
             newPosition[1] = position[1] + j*distance; //ypos
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
-                Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma);
+                Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, r0, km);
+                newParticle.uid = uid++;
+                newParticle.debug = 0;
 
                 particles.push(newParticle);
             }
         }
     }
+    if (isMembrane) {
+        setNeighbours(particles.getParticles(), length, size[0]*size[1], size[0]);
+    }
+    return;
 }
 
 bool Cuboid::operator==(Cuboid &other) {
