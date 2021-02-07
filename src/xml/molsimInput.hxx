@@ -253,6 +253,8 @@ namespace xml_schema
 // Forward declarations.
 //
 class double_vector;
+class extra_forces;
+class extra_force;
 class integer_vector;
 class cuboid;
 class cuboid_cluster;
@@ -361,6 +363,131 @@ class double_vector: public ::xml_schema::type
   ::xsd::cxx::tree::one< x_type > x_;
   ::xsd::cxx::tree::one< y_type > y_;
   ::xsd::cxx::tree::one< z_type > z_;
+};
+
+class extra_forces: public ::xml_schema::type
+{
+  public:
+  // extra_force
+  //
+  typedef ::extra_force extra_force_type;
+  typedef ::xsd::cxx::tree::sequence< extra_force_type > extra_force_sequence;
+  typedef extra_force_sequence::iterator extra_force_iterator;
+  typedef extra_force_sequence::const_iterator extra_force_const_iterator;
+  typedef ::xsd::cxx::tree::traits< extra_force_type, char > extra_force_traits;
+
+  const extra_force_sequence&
+  extra_force () const;
+
+  extra_force_sequence&
+  extra_force ();
+
+  void
+  extra_force (const extra_force_sequence& s);
+
+  // Constructors.
+  //
+  extra_forces ();
+
+  extra_forces (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  extra_forces (const extra_forces& x,
+                ::xml_schema::flags f = 0,
+                ::xml_schema::container* c = 0);
+
+  virtual extra_forces*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  extra_forces&
+  operator= (const extra_forces& x);
+
+  virtual 
+  ~extra_forces ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  extra_force_sequence extra_force_;
+};
+
+class extra_force: public ::xml_schema::type
+{
+  public:
+  // index
+  //
+  typedef ::xml_schema::int_ index_type;
+  typedef ::xsd::cxx::tree::traits< index_type, char > index_traits;
+
+  const index_type&
+  index () const;
+
+  index_type&
+  index ();
+
+  void
+  index (const index_type& x);
+
+  // f_vector
+  //
+  typedef ::double_vector f_vector_type;
+  typedef ::xsd::cxx::tree::traits< f_vector_type, char > f_vector_traits;
+
+  const f_vector_type&
+  f_vector () const;
+
+  f_vector_type&
+  f_vector ();
+
+  void
+  f_vector (const f_vector_type& x);
+
+  void
+  f_vector (::std::unique_ptr< f_vector_type > p);
+
+  // Constructors.
+  //
+  extra_force (const index_type&,
+               const f_vector_type&);
+
+  extra_force (const index_type&,
+               ::std::unique_ptr< f_vector_type >);
+
+  extra_force (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+  extra_force (const extra_force& x,
+               ::xml_schema::flags f = 0,
+               ::xml_schema::container* c = 0);
+
+  virtual extra_force*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  extra_force&
+  operator= (const extra_force& x);
+
+  virtual 
+  ~extra_force ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< index_type > index_;
+  ::xsd::cxx::tree::one< f_vector_type > f_vector_;
 };
 
 class integer_vector: public ::xml_schema::type
@@ -555,6 +682,48 @@ class cuboid: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // membrane
+  //
+  typedef ::xml_schema::boolean membrane_type;
+  typedef ::xsd::cxx::tree::traits< membrane_type, char > membrane_traits;
+
+  const membrane_type&
+  membrane () const;
+
+  membrane_type&
+  membrane ();
+
+  void
+  membrane (const membrane_type& x);
+
+  // r0
+  //
+  typedef ::xml_schema::double_ r0_type;
+  typedef ::xsd::cxx::tree::traits< r0_type, char, ::xsd::cxx::tree::schema_type::double_ > r0_traits;
+
+  const r0_type&
+  r0 () const;
+
+  r0_type&
+  r0 ();
+
+  void
+  r0 (const r0_type& x);
+
+  // k
+  //
+  typedef ::xml_schema::double_ k_type;
+  typedef ::xsd::cxx::tree::traits< k_type, char, ::xsd::cxx::tree::schema_type::double_ > k_traits;
+
+  const k_type&
+  k () const;
+
+  k_type&
+  k ();
+
+  void
+  k (const k_type& x);
+
   // Constructors.
   //
   cuboid (const position_type&,
@@ -563,7 +732,10 @@ class cuboid: public ::xml_schema::type
           const mass_type&,
           const velocity_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const membrane_type&,
+          const r0_type&,
+          const k_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
@@ -571,7 +743,10 @@ class cuboid: public ::xml_schema::type
           const mass_type&,
           ::std::unique_ptr< velocity_type >,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const membrane_type&,
+          const r0_type&,
+          const k_type&);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -606,6 +781,9 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< velocity_type > velocity_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< membrane_type > membrane_;
+  ::xsd::cxx::tree::one< r0_type > r0_;
+  ::xsd::cxx::tree::one< k_type > k_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -788,6 +966,34 @@ class particle: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // r0
+  //
+  typedef ::xml_schema::double_ r0_type;
+  typedef ::xsd::cxx::tree::traits< r0_type, char, ::xsd::cxx::tree::schema_type::double_ > r0_traits;
+
+  const r0_type&
+  r0 () const;
+
+  r0_type&
+  r0 ();
+
+  void
+  r0 (const r0_type& x);
+
+  // km
+  //
+  typedef ::xml_schema::double_ km_type;
+  typedef ::xsd::cxx::tree::traits< km_type, char, ::xsd::cxx::tree::schema_type::double_ > km_traits;
+
+  const km_type&
+  km () const;
+
+  km_type&
+  km ();
+
+  void
+  km (const km_type& x);
+
   // Constructors.
   //
   particle (const x_type&,
@@ -797,7 +1003,9 @@ class particle: public ::xml_schema::type
             const old_f_type&,
             const type_type&,
             const epsilon_type&,
-            const sigma_type&);
+            const sigma_type&,
+            const r0_type&,
+            const km_type&);
 
   particle (::std::unique_ptr< x_type >,
             ::std::unique_ptr< v_type >,
@@ -806,7 +1014,9 @@ class particle: public ::xml_schema::type
             ::std::unique_ptr< old_f_type >,
             const type_type&,
             const epsilon_type&,
-            const sigma_type&);
+            const sigma_type&,
+            const r0_type&,
+            const km_type&);
 
   particle (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
@@ -842,6 +1052,8 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< type_type > type_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< r0_type > r0_;
+  ::xsd::cxx::tree::one< km_type > km_;
 };
 
 class particle_cluster: public ::xml_schema::type
@@ -1828,6 +2040,23 @@ class molsimInput: public ::xml_schema::type
   void
   particle_data (::std::unique_ptr< particle_data_type > p);
 
+  // extra_forces
+  //
+  typedef ::extra_forces extra_forces_type;
+  typedef ::xsd::cxx::tree::traits< extra_forces_type, char > extra_forces_traits;
+
+  const extra_forces_type&
+  extra_forces () const;
+
+  extra_forces_type&
+  extra_forces ();
+
+  void
+  extra_forces (const extra_forces_type& x);
+
+  void
+  extra_forces (::std::unique_ptr< extra_forces_type > p);
+
   // Constructors.
   //
   molsimInput (const delta_t_type&,
@@ -1835,14 +2064,16 @@ class molsimInput: public ::xml_schema::type
                const linked_cell_type&,
                const checkpoint_type&,
                const domain_type&,
-               const particle_data_type&);
+               const particle_data_type&,
+               const extra_forces_type&);
 
   molsimInput (const delta_t_type&,
                const t_end_type&,
                const linked_cell_type&,
                const checkpoint_type&,
                ::std::unique_ptr< domain_type >,
-               ::std::unique_ptr< particle_data_type >);
+               ::std::unique_ptr< particle_data_type >,
+               ::std::unique_ptr< extra_forces_type >);
 
   molsimInput (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f = 0,
@@ -1879,6 +2110,7 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< domain_type > domain_;
   thermostat_optional thermostat_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
+  ::xsd::cxx::tree::one< extra_forces_type > extra_forces_;
 };
 
 #include <iosfwd>
@@ -1990,6 +2222,12 @@ input (::xml_schema::dom::unique_ptr< ::xercesc::DOMDocument > d,
 
 void
 operator<< (::xercesc::DOMElement&, const double_vector&);
+
+void
+operator<< (::xercesc::DOMElement&, const extra_forces&);
+
+void
+operator<< (::xercesc::DOMElement&, const extra_force&);
 
 void
 operator<< (::xercesc::DOMElement&, const integer_vector&);
