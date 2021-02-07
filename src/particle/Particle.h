@@ -15,7 +15,8 @@
 class Particle {
 
 private:
-  /**
+
+/**
    * Velocity of the particle
    */
   std::array<double, 3> v;
@@ -97,6 +98,25 @@ public:
           std::array<double, 3> x, std::array<double, 3> v,
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma);
+
+    /**
+   * Particle constructor for full particles state.
+   * @param x Position
+   * @param v Velocity
+   * @param m Mass
+   * @param f Current force
+   * @param old_f Old force
+   * @param type Type
+   * @param epsilon Epsilon
+   * @param sigma Sigma
+     * @param r0 r0
+     * @param km km
+   */
+    Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
+             double r0, double km);
+
+    Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,
+                       std::array<double, 3> old_f, int type, double epsilon, double sigma, double r0, double km);
 
   /*
    * Destructor of particle
@@ -241,6 +261,37 @@ public:
      * Force effective on this particle
      */
     std::array<double, 3> f;
+
+    /**
+    * Neighbours
+    */
+    std::array<int, 4> laterMembraneParticles;
+
+
+    /**
+    * Neighbours
+    */
+    //std::array<Particle*, 4> laterMembraneParticles;
+
+    /**
+     * Unique ID
+     */
+     double uid;
+
+    /**
+     * k
+     */
+     double km;
+
+     /**
+      * r0
+      */
+      double r0;
+
+      /**
+       * Debug Information
+       */
+      int debug;
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);
