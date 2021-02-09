@@ -92,6 +92,44 @@ void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool 
         p2.addF({-xDiff[0],-xDiff[1],-xDiff[2]});
     }
 }
+
+void membraneParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks) {
+    double t = ((p1.x[0]-p2.x[0])*(p1.x[0]-p2.x[0]))
+               +((p1.x[1]-p2.x[1])*(p1.x[1]-p2.x[1]))
+               +((p1.x[2]-p2.x[2])*(p1.x[2]-p2.x[2]));
+    double abstand = sqrt(t);
+    std::array<double, 3> f12;
+    bool neighbours = false;
+
+    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid
+        || p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
+        f12 = calculateMembraneForce(p1, p2, false, abstand);
+        neighbours = true;
+    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid
+               || p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
+        neighbours = true;
+        f12 = calculateMembraneForce(p1, p2, true, abstand);
+    }
+
+    if(neighbours){
+        if(useLocks){
+            p1.setLock();
+            for(int i = 0; i < 3; ++i)
+                p1.f[i] += f12[i];
+            p1.unlock();
+
+            p2.setLock();
+            for(int i = 0; i < 3; ++i)
+                p2.f[i] -= f12[i];
+            p2.unlock();
+        } else {
+            p1.addF(f12);
+            p2.addF({-f12[0],-f12[1],-f12[2]});
+        }
+    } else if (abstand < 1.12246 * sigma) {
+        cljParallel(p1, p2, epsilon, sigma, useLocks);
+    }
+}
 #endif
 
 
@@ -117,31 +155,37 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
 }
 
 void calculateMembrane(Particle &p1, Particle &p2, double epsilon, double sigma) {
-    /*
-    if (p1.uid >= p2.uid) {
-        return;
-    }
-     */
-
     double t = ((p1.x[0]-p2.x[0])*(p1.x[0]-p2.x[0]))
                +((p1.x[1]-p2.x[1])*(p1.x[1]-p2.x[1]))
                +((p1.x[2]-p2.x[2])*(p1.x[2]-p2.x[2]));
     double abstand = sqrt(t);
+    std::array<double, 3> f12;
+    bool neighbours = false;
 
-    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid) {
-        calculateMembraneForce(p1, p2, false, abstand);
-    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid) {
-        calculateMembraneForce(p1, p2, true, abstand);
-    } else if (p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
-        calculateMembraneForce(p1, p2, false, abstand);
-    } else if (p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
-        calculateMembraneForce(p1, p2, true, abstand);
-    } else  { //(abstand < 1.12246 * sigma)
+    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid
+        || p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
+        f12 = calculateMembraneForce(p1, p2, false, abstand);
+        neighbours = true;
+    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid
+               || p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
+        neighbours = true;
+        f12 = calculateMembraneForce(p1, p2, true, abstand);
+    } else if (abstand < 1.12246 * sigma) {
         calculateLennardJones(p1, p2, epsilon, sigma);
+    }
+
+    if(neighbours){
+        p1.f[0] += f12[0];
+        p1.f[1] += f12[1];
+        p1.f[2] += f12[2];
+
+        p2.f[0] -= f12[0];
+        p2.f[1] -= f12[1];
+        p2.f[2] -= f12[2];
     }
 }
 
-void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x) {
+std::array<double, 3> calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x) {
     p1.debug ++;
     p2.debug ++;
 
@@ -159,12 +203,14 @@ void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x)
     f12[1] = x * (p2.x[1]-p1.x[1]);
     f12[2] = x * (p2.x[2]-p1.x[2]);
 
+    return f12;
+
     /*
     if (f12[0] > 100 || f12[1] > 100 || f12[2] > 100) {
         bool gzcdu = false;
     }
      */
-
+/*
     p1.f[0] += f12[0];
     p1.f[1] += f12[1];
     p1.f[2] += f12[2];
@@ -172,6 +218,7 @@ void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x)
     p2.f[0] -= f12[0];
     p2.f[1] -= f12[1];
     p2.f[2] -= f12[2];
+    */
 }
 
 void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x) {

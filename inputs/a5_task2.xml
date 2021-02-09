@@ -30,6 +30,7 @@
         <change_brownian>true</change_brownian>
         <steps>1000</steps>
     </thermostat>
+    <profiling>false</profiling>
     <particle_data>
         <meanv>0.1</meanv>
         <is3D>true</is3D>
@@ -54,6 +55,10 @@
                 </velocity>
                 <epsilon>2.0</epsilon>
                 <sigma>1.15</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
             <cuboid>
                 <position>
@@ -75,6 +80,10 @@
                 </velocity>
                 <epsilon>2.0</epsilon>
                 <sigma>1.15</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
         </cuboids>
         <particles></particles>

@@ -2,9 +2,9 @@
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
     <name_output>A5_TASK1_GROSS</name_output>
-    <frequency_output>70</frequency_output>
+    <frequency_output>25</frequency_output>
     <delta_t>0.01</delta_t>
-    <t_end>50</t_end>
+    <t_end>5</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
@@ -23,7 +23,9 @@
             <right>outflow</right>
         </boundary>
         <gravity>-0.001</gravity>
+        <useLocks>true</useLocks>
     </domain>
+    <profiling>false</profiling>
     <particle_data>
         <meanv>0</meanv>
         <is3D>true</is3D>
@@ -51,6 +53,7 @@
                 <membrane>true</membrane>
                 <r0>2.2</r0>
                 <k>300</k>
+                <fixed>false</fixed>
             </cuboid>
         </cuboids>
         <particles></particles>

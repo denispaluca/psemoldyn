@@ -93,7 +93,7 @@ public:
       // for visualization, we need always 3 coordinates
       // -> in case of 2d, we use only the first and the second
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-      double m_arg, double epsilon, double sigma);
+      double m_arg, double epsilon, double sigma, bool fixed);
 
     /**
     * Particle constructor that takes all attributes
@@ -108,7 +108,7 @@ public:
             // for visualization, we need always 3 coordinates
             // -> in case of 2d, we use only the first and the second
             std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-            double m_arg, double epsilon, double sigma, bool fixed);
+            double m_arg, double epsilon, double sigma);
 
   /**
    * Particle constructor for full particles state.
@@ -124,7 +124,7 @@ public:
   Particle(
           std::array<double, 3> x, std::array<double, 3> v,
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
-          int type, double epsilon, double sigma);
+          int type, double epsilon, double sigma, bool fixed);
 
    /**
    * Particle constructor for full particles state.
@@ -291,7 +291,7 @@ public:
     std::array<double, 3> f;
 
     /**
-    * Neighbours
+    * Neighbours (if membrane)
     */
     std::array<int, 4> laterMembraneParticles;
 
@@ -312,9 +312,9 @@ public:
      double km;
 
      /**
-      * r0
+      * r0 of membrane
       */
-      double r0;
+      double r0 = -1;
 
       /**
        * Debug Information
@@ -333,7 +333,6 @@ public:
     void unlock();
     void consolidateForces();
 #endif
->>>>>>> dev
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);

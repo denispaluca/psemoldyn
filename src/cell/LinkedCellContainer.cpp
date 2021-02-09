@@ -121,9 +121,18 @@ void LinkedCellContainer::calculateIteration(int d) {
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
 #ifdef _OPENMP
-        cljParallel(p1, p2, epsilon, sigma, useLocks);
+        if (p1.r0 != -1 && p2.r0 != -1) {
+            membraneParallel(p1, p2, epsilon, sigma, useLocks);
+        } else {
+            cljParallel(p1, p2, epsilon, sigma, useLocks);
+        }
 #else
-        calculateLennardJones(p1, p2, epsilon, sigma);
+        //TODO
+        if (p1.r0 != -1 && p2.r0 != -1) {
+            calculateMembrane(p1, p2, epsilon, sigma);
+        } else {
+            calculateLennardJones(p1, p2, epsilon, sigma);
+        }
 #endif
     });
     boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){

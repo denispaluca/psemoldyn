@@ -33,7 +33,7 @@ void calculateLennardJones(Particle &p1, Particle &p2, double epsilon, double si
  * @param p1
  * @param p2
  */
-void calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x);
+std::array<double, 3> calculateMembraneForce(Particle &p1, Particle &p2, bool diagonal, double x);
 
 /**
  * TODO
@@ -54,4 +54,5 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
 
 #ifdef _OPENMP
 void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks);
+void membraneParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool locks);
 #endif
