@@ -51,3 +51,7 @@ void calculateMembrane(Particle &p1, Particle &p2, double epsilon, double sigma)
  * @param x
  */
 void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x);
+
+#ifdef _OPENMP
+void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks);
+#endif

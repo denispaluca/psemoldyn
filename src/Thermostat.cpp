@@ -18,7 +18,7 @@ Thermostat::Thermostat(thermostat_type data, bool is3D) {
 void Thermostat::applyBrownian(ParticleContainer &particles) {
     particles.iterate([&](Particle &p){
         auto factor = sqrt(t_init/p.getM());
-        MaxwellBoltzmannDistribution(p, factor, dimensions);
+        if (!p.fixed) MaxwellBoltzmannDistribution(p, factor, dimensions);
     });
 }
 
@@ -38,10 +38,12 @@ void Thermostat::scale(Container &particles) {
     double scalar = sqrt(t_new/t_current);
 
     particles.iterate([scalar](Particle &p){
-        auto &v = p.getV();
-        v[0] *= scalar;
-        v[1] *= scalar;
-        v[2] *= scalar;
+        if(!p.fixed) {
+            auto &v = p.getV();
+            v[0] *= scalar;
+            //v[1] *= scalar;
+            v[2] *= scalar;
+        }
     });
 }
 
@@ -57,10 +59,16 @@ double Thermostat::getCurrentTemp(Container &particles) const {
     int nrParticles = particles.size();
     if(nrParticles == 0) return 0;
 
+    double meanYV = 0;
+    particles.iterate([&](Particle &p){
+        meanYV += p.getV()[1];
+    });
+    meanYV /= nrParticles;
+
     double sumMNormV = 0;
     particles.iterate([&](Particle &p){
         auto &v = p.getV();
-        sumMNormV += p.getM()*(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+        sumMNormV += p.getM()*(v[0]*v[0] + (v[1] - meanYV)*(v[1] - meanYV) + v[2]*v[2]);
     });
 
     auto t_current = sumMNormV/(dimensions * nrParticles);

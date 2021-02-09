@@ -425,6 +425,24 @@ k (const k_type& x)
   this->k_.set (x);
 }
 
+const cuboid::fixed_type& cuboid::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+cuboid::fixed_type& cuboid::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void cuboid::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
+}
+
 
 // cuboid_cluster
 // 
@@ -655,6 +673,24 @@ km (const km_type& x)
   this->km_.set (x);
 }
 
+const particle::fixed_type& particle::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+particle::fixed_type& particle::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void particle::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
+}
+
 
 // particle_cluster
 // 
@@ -817,6 +853,24 @@ void sphere::
 sigma (const sigma_type& x)
 {
   this->sigma_.set (x);
+}
+
+const sphere::fixed_type& sphere::
+fixed () const
+{
+  return this->fixed_.get ();
+}
+
+sphere::fixed_type& sphere::
+fixed ()
+{
+  return this->fixed_.get ();
+}
+
+void sphere::
+fixed (const fixed_type& x)
+{
+  this->fixed_.set (x);
 }
 
 
@@ -1346,6 +1400,112 @@ gravity (const gravity_optional& x)
   this->gravity_ = x;
 }
 
+const domain_type::useLocks_type& domain_type::
+useLocks () const
+{
+  return this->useLocks_.get ();
+}
+
+domain_type::useLocks_type& domain_type::
+useLocks ()
+{
+  return this->useLocks_.get ();
+}
+
+void domain_type::
+useLocks (const useLocks_type& x)
+{
+  this->useLocks_.set (x);
+}
+
+
+// profiler_type
+// 
+
+const profiler_type::profiling_bins_type& profiler_type::
+profiling_bins () const
+{
+  return this->profiling_bins_.get ();
+}
+
+profiler_type::profiling_bins_type& profiler_type::
+profiling_bins ()
+{
+  return this->profiling_bins_.get ();
+}
+
+void profiler_type::
+profiling_bins (const profiling_bins_type& x)
+{
+  this->profiling_bins_.set (x);
+}
+
+const profiler_type::profiling_frequency_type& profiler_type::
+profiling_frequency () const
+{
+  return this->profiling_frequency_.get ();
+}
+
+profiler_type::profiling_frequency_type& profiler_type::
+profiling_frequency ()
+{
+  return this->profiling_frequency_.get ();
+}
+
+void profiler_type::
+profiling_frequency (const profiling_frequency_type& x)
+{
+  this->profiling_frequency_.set (x);
+}
+
+const profiler_type::velocity_profile_path_type& profiler_type::
+velocity_profile_path () const
+{
+  return this->velocity_profile_path_.get ();
+}
+
+profiler_type::velocity_profile_path_type& profiler_type::
+velocity_profile_path ()
+{
+  return this->velocity_profile_path_.get ();
+}
+
+void profiler_type::
+velocity_profile_path (const velocity_profile_path_type& x)
+{
+  this->velocity_profile_path_.set (x);
+}
+
+void profiler_type::
+velocity_profile_path (::std::unique_ptr< velocity_profile_path_type > x)
+{
+  this->velocity_profile_path_.set (std::move (x));
+}
+
+const profiler_type::density_profile_path_type& profiler_type::
+density_profile_path () const
+{
+  return this->density_profile_path_.get ();
+}
+
+profiler_type::density_profile_path_type& profiler_type::
+density_profile_path ()
+{
+  return this->density_profile_path_.get ();
+}
+
+void profiler_type::
+density_profile_path (const density_profile_path_type& x)
+{
+  this->density_profile_path_.set (x);
+}
+
+void profiler_type::
+density_profile_path (::std::unique_ptr< density_profile_path_type > x)
+{
+  this->density_profile_path_.set (std::move (x));
+}
+
 
 // molsimInput
 // 
@@ -1528,6 +1688,54 @@ void molsimInput::
 thermostat (::std::unique_ptr< thermostat_type > x)
 {
   this->thermostat_.set (std::move (x));
+}
+
+const molsimInput::profiling_type& molsimInput::
+profiling () const
+{
+  return this->profiling_.get ();
+}
+
+molsimInput::profiling_type& molsimInput::
+profiling ()
+{
+  return this->profiling_.get ();
+}
+
+void molsimInput::
+profiling (const profiling_type& x)
+{
+  this->profiling_.set (x);
+}
+
+const molsimInput::profiler_optional& molsimInput::
+profiler () const
+{
+  return this->profiler_;
+}
+
+molsimInput::profiler_optional& molsimInput::
+profiler ()
+{
+  return this->profiler_;
+}
+
+void molsimInput::
+profiler (const profiler_type& x)
+{
+  this->profiler_.set (x);
+}
+
+void molsimInput::
+profiler (const profiler_optional& x)
+{
+  this->profiler_ = x;
+}
+
+void molsimInput::
+profiler (::std::unique_ptr< profiler_type > x)
+{
+  this->profiler_.set (std::move (x));
 }
 
 const molsimInput::particle_data_type& molsimInput::
@@ -2070,7 +2278,8 @@ cuboid (const position_type& position,
         const sigma_type& sigma,
         const membrane_type& membrane,
         const r0_type& r0,
-        const k_type& k)
+        const k_type& k,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   position_ (position, this),
   size_ (size, this),
@@ -2081,7 +2290,8 @@ cuboid (const position_type& position,
   sigma_ (sigma, this),
   membrane_ (membrane, this),
   r0_ (r0, this),
-  k_ (k, this)
+  k_ (k, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2095,7 +2305,8 @@ cuboid (::std::unique_ptr< position_type > position,
         const sigma_type& sigma,
         const membrane_type& membrane,
         const r0_type& r0,
-        const k_type& k)
+        const k_type& k,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   position_ (std::move (position), this),
   size_ (std::move (size), this),
@@ -2106,7 +2317,8 @@ cuboid (::std::unique_ptr< position_type > position,
   sigma_ (sigma, this),
   membrane_ (membrane, this),
   r0_ (r0, this),
-  k_ (k, this)
+  k_ (k, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2124,7 +2336,8 @@ cuboid (const cuboid& x,
   sigma_ (x.sigma_, f, this),
   membrane_ (x.membrane_, f, this),
   r0_ (x.r0_, f, this),
-  k_ (x.k_, f, this)
+  k_ (x.k_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -2142,7 +2355,8 @@ cuboid (const ::xercesc::DOMElement& e,
   sigma_ (this),
   membrane_ (this),
   r0_ (this),
-  k_ (this)
+  k_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2280,6 +2494,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2352,6 +2577,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "k",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 cuboid* cuboid::
@@ -2377,6 +2609,7 @@ operator= (const cuboid& x)
     this->membrane_ = x.membrane_;
     this->r0_ = x.r0_;
     this->k_ = x.k_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;
@@ -2482,7 +2715,8 @@ particle (const x_type& x,
           const epsilon_type& epsilon,
           const sigma_type& sigma,
           const r0_type& r0,
-          const km_type& km)
+          const km_type& km,
+          const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (x, this),
   v_ (v, this),
@@ -2493,7 +2727,8 @@ particle (const x_type& x,
   epsilon_ (epsilon, this),
   sigma_ (sigma, this),
   r0_ (r0, this),
-  km_ (km, this)
+  km_ (km, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2507,7 +2742,8 @@ particle (::std::unique_ptr< x_type > x,
           const epsilon_type& epsilon,
           const sigma_type& sigma,
           const r0_type& r0,
-          const km_type& km)
+          const km_type& km,
+          const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
   v_ (std::move (v), this),
@@ -2518,7 +2754,8 @@ particle (::std::unique_ptr< x_type > x,
   epsilon_ (epsilon, this),
   sigma_ (sigma, this),
   r0_ (r0, this),
-  km_ (km, this)
+  km_ (km, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2536,7 +2773,8 @@ particle (const particle& x,
   epsilon_ (x.epsilon_, f, this),
   sigma_ (x.sigma_, f, this),
   r0_ (x.r0_, f, this),
-  km_ (x.km_, f, this)
+  km_ (x.km_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -2554,7 +2792,8 @@ particle (const ::xercesc::DOMElement& e,
   epsilon_ (this),
   sigma_ (this),
   r0_ (this),
-  km_ (this)
+  km_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2695,6 +2934,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2767,6 +3017,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "km",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 particle* particle::
@@ -2792,6 +3049,7 @@ operator= (const particle& x)
     this->sigma_ = x.sigma_;
     this->r0_ = x.r0_;
     this->km_ = x.km_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;
@@ -2894,7 +3152,8 @@ sphere (const center_type& center,
         const m_type& m,
         const r_type& r,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   center_ (center, this),
   h_ (h, this),
@@ -2902,7 +3161,8 @@ sphere (const center_type& center,
   m_ (m, this),
   r_ (r, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2913,7 +3173,8 @@ sphere (::std::unique_ptr< center_type > center,
         const m_type& m,
         const r_type& r,
         const epsilon_type& epsilon,
-        const sigma_type& sigma)
+        const sigma_type& sigma,
+        const fixed_type& fixed)
 : ::xml_schema::type (),
   center_ (std::move (center), this),
   h_ (h, this),
@@ -2921,7 +3182,8 @@ sphere (::std::unique_ptr< center_type > center,
   m_ (m, this),
   r_ (r, this),
   epsilon_ (epsilon, this),
-  sigma_ (sigma, this)
+  sigma_ (sigma, this),
+  fixed_ (fixed, this)
 {
 }
 
@@ -2936,7 +3198,8 @@ sphere (const sphere& x,
   m_ (x.m_, f, this),
   r_ (x.r_, f, this),
   epsilon_ (x.epsilon_, f, this),
-  sigma_ (x.sigma_, f, this)
+  sigma_ (x.sigma_, f, this),
+  fixed_ (x.fixed_, f, this)
 {
 }
 
@@ -2951,7 +3214,8 @@ sphere (const ::xercesc::DOMElement& e,
   m_ (this),
   r_ (this),
   epsilon_ (this),
-  sigma_ (this)
+  sigma_ (this),
+  fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3053,6 +3317,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // fixed
+    //
+    if (n.name () == "fixed" && n.namespace_ ().empty ())
+    {
+      if (!fixed_.present ())
+      {
+        this->fixed_.set (fixed_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -3104,6 +3379,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "sigma",
       "");
   }
+
+  if (!fixed_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "fixed",
+      "");
+  }
 }
 
 sphere* sphere::
@@ -3126,6 +3408,7 @@ operator= (const sphere& x)
     this->r_ = x.r_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
+    this->fixed_ = x.fixed_;
   }
 
   return *this;
@@ -3888,24 +4171,28 @@ boundaries_type::
 domain_type::
 domain_type (const domain_size_type& domain_size,
              const cutoff_radius_type& cutoff_radius,
-             const boundary_type& boundary)
+             const boundary_type& boundary,
+             const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (domain_size, this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (boundary, this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (useLocks, this)
 {
 }
 
 domain_type::
 domain_type (::std::unique_ptr< domain_size_type > domain_size,
              const cutoff_radius_type& cutoff_radius,
-             ::std::unique_ptr< boundary_type > boundary)
+             ::std::unique_ptr< boundary_type > boundary,
+             const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (std::move (domain_size), this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (std::move (boundary), this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (useLocks, this)
 {
 }
 
@@ -3917,7 +4204,8 @@ domain_type (const domain_type& x,
   domain_size_ (x.domain_size_, f, this),
   cutoff_radius_ (x.cutoff_radius_, f, this),
   boundary_ (x.boundary_, f, this),
-  gravity_ (x.gravity_, f, this)
+  gravity_ (x.gravity_, f, this),
+  useLocks_ (x.useLocks_, f, this)
 {
 }
 
@@ -3929,7 +4217,8 @@ domain_type (const ::xercesc::DOMElement& e,
   domain_size_ (this),
   cutoff_radius_ (this),
   boundary_ (this),
-  gravity_ (this)
+  gravity_ (this),
+  useLocks_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3998,6 +4287,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // useLocks
+    //
+    if (n.name () == "useLocks" && n.namespace_ ().empty ())
+    {
+      if (!useLocks_.present ())
+      {
+        this->useLocks_.set (useLocks_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -4021,6 +4321,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "boundary",
       "");
   }
+
+  if (!useLocks_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "useLocks",
+      "");
+  }
 }
 
 domain_type* domain_type::
@@ -4040,6 +4347,7 @@ operator= (const domain_type& x)
     this->cutoff_radius_ = x.cutoff_radius_;
     this->boundary_ = x.boundary_;
     this->gravity_ = x.gravity_;
+    this->useLocks_ = x.useLocks_;
   }
 
   return *this;
@@ -4047,6 +4355,170 @@ operator= (const domain_type& x)
 
 domain_type::
 ~domain_type ()
+{
+}
+
+// profiler_type
+//
+
+profiler_type::
+profiler_type (const profiling_bins_type& profiling_bins,
+               const profiling_frequency_type& profiling_frequency,
+               const velocity_profile_path_type& velocity_profile_path,
+               const density_profile_path_type& density_profile_path)
+: ::xml_schema::type (),
+  profiling_bins_ (profiling_bins, this),
+  profiling_frequency_ (profiling_frequency, this),
+  velocity_profile_path_ (velocity_profile_path, this),
+  density_profile_path_ (density_profile_path, this)
+{
+}
+
+profiler_type::
+profiler_type (const profiler_type& x,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  profiling_bins_ (x.profiling_bins_, f, this),
+  profiling_frequency_ (x.profiling_frequency_, f, this),
+  velocity_profile_path_ (x.velocity_profile_path_, f, this),
+  density_profile_path_ (x.density_profile_path_, f, this)
+{
+}
+
+profiler_type::
+profiler_type (const ::xercesc::DOMElement& e,
+               ::xml_schema::flags f,
+               ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  profiling_bins_ (this),
+  profiling_frequency_ (this),
+  velocity_profile_path_ (this),
+  density_profile_path_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void profiler_type::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // profiling_bins
+    //
+    if (n.name () == "profiling_bins" && n.namespace_ ().empty ())
+    {
+      if (!profiling_bins_.present ())
+      {
+        this->profiling_bins_.set (profiling_bins_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // profiling_frequency
+    //
+    if (n.name () == "profiling_frequency" && n.namespace_ ().empty ())
+    {
+      if (!profiling_frequency_.present ())
+      {
+        this->profiling_frequency_.set (profiling_frequency_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // velocity_profile_path
+    //
+    if (n.name () == "velocity_profile_path" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< velocity_profile_path_type > r (
+        velocity_profile_path_traits::create (i, f, this));
+
+      if (!velocity_profile_path_.present ())
+      {
+        this->velocity_profile_path_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // density_profile_path
+    //
+    if (n.name () == "density_profile_path" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< density_profile_path_type > r (
+        density_profile_path_traits::create (i, f, this));
+
+      if (!density_profile_path_.present ())
+      {
+        this->density_profile_path_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!profiling_bins_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling_bins",
+      "");
+  }
+
+  if (!profiling_frequency_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling_frequency",
+      "");
+  }
+
+  if (!velocity_profile_path_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "velocity_profile_path",
+      "");
+  }
+
+  if (!density_profile_path_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "density_profile_path",
+      "");
+  }
+}
+
+profiler_type* profiler_type::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class profiler_type (*this, f, c);
+}
+
+profiler_type& profiler_type::
+operator= (const profiler_type& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->profiling_bins_ = x.profiling_bins_;
+    this->profiling_frequency_ = x.profiling_frequency_;
+    this->velocity_profile_path_ = x.velocity_profile_path_;
+    this->density_profile_path_ = x.density_profile_path_;
+  }
+
+  return *this;
+}
+
+profiler_type::
+~profiler_type ()
 {
 }
 
@@ -4059,6 +4531,7 @@ molsimInput (const delta_t_type& delta_t,
              const linked_cell_type& linked_cell,
              const checkpoint_type& checkpoint,
              const domain_type& domain,
+             const profiling_type& profiling,
              const particle_data_type& particle_data,
              const extra_forces_type& extra_forces)
 : ::xml_schema::type (),
@@ -4070,6 +4543,8 @@ molsimInput (const delta_t_type& delta_t,
   checkpoint_ (checkpoint, this),
   domain_ (domain, this),
   thermostat_ (this),
+  profiling_ (profiling, this),
+  profiler_ (this),
   particle_data_ (particle_data, this),
   extra_forces_ (extra_forces, this)
 {
@@ -4081,6 +4556,7 @@ molsimInput (const delta_t_type& delta_t,
              const linked_cell_type& linked_cell,
              const checkpoint_type& checkpoint,
              ::std::unique_ptr< domain_type > domain,
+             const profiling_type& profiling,
              ::std::unique_ptr< particle_data_type > particle_data,
              ::std::unique_ptr< extra_forces_type > extra_forces)
 : ::xml_schema::type (),
@@ -4092,6 +4568,8 @@ molsimInput (const delta_t_type& delta_t,
   checkpoint_ (checkpoint, this),
   domain_ (std::move (domain), this),
   thermostat_ (this),
+  profiling_ (profiling, this),
+  profiler_ (this),
   particle_data_ (std::move (particle_data), this),
   extra_forces_ (std::move (extra_forces), this)
 {
@@ -4110,6 +4588,8 @@ molsimInput (const molsimInput& x,
   checkpoint_ (x.checkpoint_, f, this),
   domain_ (x.domain_, f, this),
   thermostat_ (x.thermostat_, f, this),
+  profiling_ (x.profiling_, f, this),
+  profiler_ (x.profiler_, f, this),
   particle_data_ (x.particle_data_, f, this),
   extra_forces_ (x.extra_forces_, f, this)
 {
@@ -4128,6 +4608,8 @@ molsimInput (const ::xercesc::DOMElement& e,
   checkpoint_ (this),
   domain_ (this),
   thermostat_ (this),
+  profiling_ (this),
+  profiler_ (this),
   particle_data_ (this),
   extra_forces_ (this)
 {
@@ -4245,6 +4727,31 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // profiling
+    //
+    if (n.name () == "profiling" && n.namespace_ ().empty ())
+    {
+      if (!profiling_.present ())
+      {
+        this->profiling_.set (profiling_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // profiler
+    //
+    if (n.name () == "profiler" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< profiler_type > r (
+        profiler_traits::create (i, f, this));
+
+      if (!this->profiler_)
+      {
+        this->profiler_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // particle_data
     //
     if (n.name () == "particle_data" && n.namespace_ ().empty ())
@@ -4311,6 +4818,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!profiling_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "profiling",
+      "");
+  }
+
   if (!particle_data_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -4347,6 +4861,8 @@ operator= (const molsimInput& x)
     this->checkpoint_ = x.checkpoint_;
     this->domain_ = x.domain_;
     this->thermostat_ = x.thermostat_;
+    this->profiling_ = x.profiling_;
+    this->profiler_ = x.profiler_;
     this->particle_data_ = x.particle_data_;
     this->extra_forces_ = x.extra_forces_;
   }
@@ -4873,6 +5389,17 @@ operator<< (::xercesc::DOMElement& e, const cuboid& i)
 
     s << ::xml_schema::as_double(i.k ());
   }
+
+  // fixed
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "fixed",
+        e));
+
+    s << i.fixed ();
+  }
 }
 
 void
@@ -5009,6 +5536,17 @@ operator<< (::xercesc::DOMElement& e, const particle& i)
 
     s << ::xml_schema::as_double(i.km ());
   }
+
+  // fixed
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "fixed",
+        e));
+
+    s << i.fixed ();
+  }
 }
 
 void
@@ -5111,6 +5649,17 @@ operator<< (::xercesc::DOMElement& e, const sphere& i)
         e));
 
     s << ::xml_schema::as_double(i.sigma ());
+  }
+
+  // fixed
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "fixed",
+        e));
+
+    s << i.fixed ();
   }
 }
 
@@ -5398,6 +5947,67 @@ operator<< (::xercesc::DOMElement& e, const domain_type& i)
 
     s << ::xml_schema::as_double(*i.gravity ());
   }
+
+  // useLocks
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "useLocks",
+        e));
+
+    s << i.useLocks ();
+  }
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const profiler_type& i)
+{
+  e << static_cast< const ::xml_schema::type& > (i);
+
+  // profiling_bins
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "profiling_bins",
+        e));
+
+    s << i.profiling_bins ();
+  }
+
+  // profiling_frequency
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "profiling_frequency",
+        e));
+
+    s << i.profiling_frequency ();
+  }
+
+  // velocity_profile_path
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "velocity_profile_path",
+        e));
+
+    s << i.velocity_profile_path ();
+  }
+
+  // density_profile_path
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "density_profile_path",
+        e));
+
+    s << i.density_profile_path ();
+  }
 }
 
 void
@@ -5494,6 +6104,29 @@ operator<< (::xercesc::DOMElement& e, const molsimInput& i)
         e));
 
     s << *i.thermostat ();
+  }
+
+  // profiling
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "profiling",
+        e));
+
+    s << i.profiling ();
+  }
+
+  // profiler
+  //
+  if (i.profiler ())
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "profiler",
+        e));
+
+    s << *i.profiler ();
   }
 
   // particle_data

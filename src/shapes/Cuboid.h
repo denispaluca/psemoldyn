@@ -34,8 +34,14 @@ private:
      */
     std::array<double, 3> initialV{};
 
+    /**
+     * Epsilon of the particles
+     */
     double epsilon;
 
+    /**
+     * Sigma of the particles
+     */
     double sigma;
 
     bool isMembrane;
@@ -43,6 +49,11 @@ private:
     double r0;
 
     double km;
+
+    /**
+     * Stores whether Cuboid particles are fixed
+     */
+    bool fixed;
 
 public:
     /**
@@ -61,10 +72,11 @@ public:
      * @param epsilon epsilon of the particles
      * @param sigma sigma of the particles
      * @param membrane if cuboid is a membrane
+     * @param fixed fixed particles do not move
      */
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
            double distance, double mass, std::array<double, 3> initalV,
-           double epsilon, double sigma, bool membrane, double r0, double k);
+           double epsilon, double sigma, bool membrane, double r0, double k, bool fixed);
 
         /**
      * Operator that compares all attributes of

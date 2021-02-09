@@ -9,6 +9,11 @@
 
 #include <array>
 #include <string>
+#include <vector>
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 /**
  * The particle class represents a particle and it's characteristics.
  */
@@ -52,6 +57,13 @@ private:
    */
   double dtsq_2m;
 
+#ifdef _OPENMP
+    /**
+     * Particle lock for parallelization.
+     */
+    omp_lock_t lock;
+    std::array<std::array<double,8>,28>* threadForces;
+#endif
 public:
   /**
    * Particle constructor which sets its type.
@@ -83,6 +95,21 @@ public:
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
       double m_arg, double epsilon, double sigma);
 
+    /**
+    * Particle constructor that takes all attributes
+    * of the particle as input.
+    * @param x_arg Position
+    * @param v_arg Velocity
+    * @param m_arg Mass
+    * @param type Type of particle
+    * @return
+    */
+    Particle(
+            // for visualization, we need always 3 coordinates
+            // -> in case of 2d, we use only the first and the second
+            std::array<double, 3> x_arg, std::array<double, 3> v_arg,
+            double m_arg, double epsilon, double sigma, bool fixed);
+
   /**
    * Particle constructor for full particles state.
    * @param x Position
@@ -99,7 +126,7 @@ public:
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma);
 
-    /**
+   /**
    * Particle constructor for full particles state.
    * @param x Position
    * @param v Velocity
@@ -109,14 +136,15 @@ public:
    * @param type Type
    * @param epsilon Epsilon
    * @param sigma Sigma
-     * @param r0 r0
-     * @param km km
+   * @param r0 r0
+   * @param km km
+   * @param fixed if particle is fixed
    */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             double r0, double km);
+             double r0, double km, bool fixed);
 
     Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,
-                       std::array<double, 3> old_f, int type, double epsilon, double sigma, double r0, double km);
+                       std::array<double, 3> old_f, int type, double epsilon, double sigma, double r0, double km, bool fixed);
 
   /*
    * Destructor of particle
@@ -191,9 +219,9 @@ public:
    * Adds force fn to current force.
    * @param fn Force to be added.
    * @return
+ */
+  void addF(std::array<double, 3> fn);
 
-  void addF(const std::array<double, 3> &fn);
-*/
 
   /**
    * Save f to old f and set f to 0.
@@ -292,6 +320,20 @@ public:
        * Debug Information
        */
       int debug;
+
+	/**
+     * Stores whether Particle position is fixed
+     */
+    bool fixed;
+
+#ifdef _OPENMP
+    void initLock();
+    void destroyLock();
+    void setLock();
+    void unlock();
+    void consolidateForces();
+#endif
+>>>>>>> dev
 };
 /*
 std::ostream &operator<<(std::ostream &stream, Particle &p);

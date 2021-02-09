@@ -38,10 +38,21 @@ public:
      */
     virtual std::size_t size() = 0;
 
-
+    /**
+     * Calculates the mixed LJ parameters for all particle type combinations in the Container
+     * and stores them in mixedEpsilon and mixedSigma respectively
+     */
     virtual void mixParameters() = 0;
 
+    /**
+     * Returns a map of epsilon pairs to the mixed epsilon
+     * @return the map
+     */
     virtual std::map<std::pair<double, double>, double> getMixedEpsilon();
 
+    /**
+     * Returns a map of sigma pairs to the mixed sigma
+     * @return the map
+     */
     virtual std::map<std::pair<double, double>, double> getMixedSigma();
 };

@@ -27,7 +27,8 @@ ParticleSphere mapParticleSphere(sphere& c){
             c.h(),
             c.m(),
             c.epsilon(),
-            c.sigma()
+            c.sigma(),
+            c.fixed()
     };
 }
 
@@ -42,7 +43,8 @@ Cuboid mapCuboid(cuboid& c){
         c.sigma(),
         c.membrane(),
         c.r0(),
-        c.k()
+        c.k(),
+		c.fixed()
     };
 }
 
@@ -58,6 +60,7 @@ Particle mapParticle(particle& p){
             p.sigma(),
             p.r0(),
             p.km()
+            p.fixed()
     };
 }
 
@@ -73,6 +76,7 @@ particle mapParticleToXML(Particle &p){
         p.sigma,
         p.r0,
         p.km
+        p.fixed
     };
 }
 

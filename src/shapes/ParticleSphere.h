@@ -35,9 +35,20 @@ private:
      */
     double mass;
 
+    /**
+     * Epsilon of the particles
+     */
     double epsilon;
 
+    /**
+     * Sigma of the particles
+     */
     double sigma;
+
+    /**
+     * Stores whether Cuboid particles are fixed
+     */
+    bool fixed;
 
 public:
     /**
@@ -61,7 +72,8 @@ public:
             double distance,
             double mass,
             double epsilon,
-            double sigma);
+            double sigma,
+            bool fixed);
 
     /**
  * Operator that compares all attributes of

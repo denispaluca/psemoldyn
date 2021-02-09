@@ -267,6 +267,7 @@ class particle_data;
 class boundary_type;
 class boundaries_type;
 class domain_type;
+class profiler_type;
 class molsimInput;
 
 #include <memory>    // ::std::unique_ptr
@@ -724,6 +725,20 @@ class cuboid: public ::xml_schema::type
   void
   k (const k_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   cuboid (const position_type&,
@@ -735,7 +750,8 @@ class cuboid: public ::xml_schema::type
           const sigma_type&,
           const membrane_type&,
           const r0_type&,
-          const k_type&);
+          const k_type&,
+          const fixed_type&);
 
   cuboid (::std::unique_ptr< position_type >,
           ::std::unique_ptr< size_type >,
@@ -746,7 +762,8 @@ class cuboid: public ::xml_schema::type
           const sigma_type&,
           const membrane_type&,
           const r0_type&,
-          const k_type&);
+          const k_type&,
+          const fixed_type&);
 
   cuboid (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -784,6 +801,7 @@ class cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< membrane_type > membrane_;
   ::xsd::cxx::tree::one< r0_type > r0_;
   ::xsd::cxx::tree::one< k_type > k_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class cuboid_cluster: public ::xml_schema::type
@@ -994,6 +1012,20 @@ class particle: public ::xml_schema::type
   void
   km (const km_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   particle (const x_type&,
@@ -1005,7 +1037,8 @@ class particle: public ::xml_schema::type
             const epsilon_type&,
             const sigma_type&,
             const r0_type&,
-            const km_type&);
+            const km_type&,
+            const fixed_type&);
 
   particle (::std::unique_ptr< x_type >,
             ::std::unique_ptr< v_type >,
@@ -1016,7 +1049,8 @@ class particle: public ::xml_schema::type
             const epsilon_type&,
             const sigma_type&,
             const r0_type&,
-            const km_type&);
+            const km_type&,
+            const fixed_type&);
 
   particle (const ::xercesc::DOMElement& e,
             ::xml_schema::flags f = 0,
@@ -1054,6 +1088,7 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< sigma_type > sigma_;
   ::xsd::cxx::tree::one< r0_type > r0_;
   ::xsd::cxx::tree::one< km_type > km_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class particle_cluster: public ::xml_schema::type
@@ -1216,6 +1251,20 @@ class sphere: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
+  // fixed
+  //
+  typedef ::xml_schema::boolean fixed_type;
+  typedef ::xsd::cxx::tree::traits< fixed_type, char > fixed_traits;
+
+  const fixed_type&
+  fixed () const;
+
+  fixed_type&
+  fixed ();
+
+  void
+  fixed (const fixed_type& x);
+
   // Constructors.
   //
   sphere (const center_type&,
@@ -1224,7 +1273,8 @@ class sphere: public ::xml_schema::type
           const m_type&,
           const r_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   sphere (::std::unique_ptr< center_type >,
           const h_type&,
@@ -1232,7 +1282,8 @@ class sphere: public ::xml_schema::type
           const m_type&,
           const r_type&,
           const epsilon_type&,
-          const sigma_type&);
+          const sigma_type&,
+          const fixed_type&);
 
   sphere (const ::xercesc::DOMElement& e,
           ::xml_schema::flags f = 0,
@@ -1267,6 +1318,7 @@ class sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< r_type > r_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
+  ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 
 class sphere_cluster: public ::xml_schema::type
@@ -1845,15 +1897,31 @@ class domain_type: public ::xml_schema::type
   void
   gravity (const gravity_optional& x);
 
+  // useLocks
+  //
+  typedef ::xml_schema::boolean useLocks_type;
+  typedef ::xsd::cxx::tree::traits< useLocks_type, char > useLocks_traits;
+
+  const useLocks_type&
+  useLocks () const;
+
+  useLocks_type&
+  useLocks ();
+
+  void
+  useLocks (const useLocks_type& x);
+
   // Constructors.
   //
   domain_type (const domain_size_type&,
                const cutoff_radius_type&,
-               const boundary_type&);
+               const boundary_type&,
+               const useLocks_type&);
 
   domain_type (::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
-               ::std::unique_ptr< boundary_type >);
+               ::std::unique_ptr< boundary_type >,
+               const useLocks_type&);
 
   domain_type (const ::xercesc::DOMElement& e,
                ::xml_schema::flags f = 0,
@@ -1885,6 +1953,111 @@ class domain_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< boundary_type > boundary_;
   gravity_optional gravity_;
+  ::xsd::cxx::tree::one< useLocks_type > useLocks_;
+};
+
+class profiler_type: public ::xml_schema::type
+{
+  public:
+  // profiling_bins
+  //
+  typedef ::xml_schema::int_ profiling_bins_type;
+  typedef ::xsd::cxx::tree::traits< profiling_bins_type, char > profiling_bins_traits;
+
+  const profiling_bins_type&
+  profiling_bins () const;
+
+  profiling_bins_type&
+  profiling_bins ();
+
+  void
+  profiling_bins (const profiling_bins_type& x);
+
+  // profiling_frequency
+  //
+  typedef ::xml_schema::int_ profiling_frequency_type;
+  typedef ::xsd::cxx::tree::traits< profiling_frequency_type, char > profiling_frequency_traits;
+
+  const profiling_frequency_type&
+  profiling_frequency () const;
+
+  profiling_frequency_type&
+  profiling_frequency ();
+
+  void
+  profiling_frequency (const profiling_frequency_type& x);
+
+  // velocity_profile_path
+  //
+  typedef ::xml_schema::string velocity_profile_path_type;
+  typedef ::xsd::cxx::tree::traits< velocity_profile_path_type, char > velocity_profile_path_traits;
+
+  const velocity_profile_path_type&
+  velocity_profile_path () const;
+
+  velocity_profile_path_type&
+  velocity_profile_path ();
+
+  void
+  velocity_profile_path (const velocity_profile_path_type& x);
+
+  void
+  velocity_profile_path (::std::unique_ptr< velocity_profile_path_type > p);
+
+  // density_profile_path
+  //
+  typedef ::xml_schema::string density_profile_path_type;
+  typedef ::xsd::cxx::tree::traits< density_profile_path_type, char > density_profile_path_traits;
+
+  const density_profile_path_type&
+  density_profile_path () const;
+
+  density_profile_path_type&
+  density_profile_path ();
+
+  void
+  density_profile_path (const density_profile_path_type& x);
+
+  void
+  density_profile_path (::std::unique_ptr< density_profile_path_type > p);
+
+  // Constructors.
+  //
+  profiler_type (const profiling_bins_type&,
+                 const profiling_frequency_type&,
+                 const velocity_profile_path_type&,
+                 const density_profile_path_type&);
+
+  profiler_type (const ::xercesc::DOMElement& e,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  profiler_type (const profiler_type& x,
+                 ::xml_schema::flags f = 0,
+                 ::xml_schema::container* c = 0);
+
+  virtual profiler_type*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  profiler_type&
+  operator= (const profiler_type& x);
+
+  virtual 
+  ~profiler_type ();
+
+  // Implementation.
+  //
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< profiling_bins_type > profiling_bins_;
+  ::xsd::cxx::tree::one< profiling_frequency_type > profiling_frequency_;
+  ::xsd::cxx::tree::one< velocity_profile_path_type > velocity_profile_path_;
+  ::xsd::cxx::tree::one< density_profile_path_type > density_profile_path_;
 };
 
 class molsimInput: public ::xml_schema::type
@@ -2023,6 +2196,41 @@ class molsimInput: public ::xml_schema::type
   void
   thermostat (::std::unique_ptr< thermostat_type > p);
 
+  // profiling
+  //
+  typedef ::xml_schema::boolean profiling_type;
+  typedef ::xsd::cxx::tree::traits< profiling_type, char > profiling_traits;
+
+  const profiling_type&
+  profiling () const;
+
+  profiling_type&
+  profiling ();
+
+  void
+  profiling (const profiling_type& x);
+
+  // profiler
+  //
+  typedef ::profiler_type profiler_type;
+  typedef ::xsd::cxx::tree::optional< profiler_type > profiler_optional;
+  typedef ::xsd::cxx::tree::traits< profiler_type, char > profiler_traits;
+
+  const profiler_optional&
+  profiler () const;
+
+  profiler_optional&
+  profiler ();
+
+  void
+  profiler (const profiler_type& x);
+
+  void
+  profiler (const profiler_optional& x);
+
+  void
+  profiler (::std::unique_ptr< profiler_type > p);
+
   // particle_data
   //
   typedef ::particle_data particle_data_type;
@@ -2064,6 +2272,7 @@ class molsimInput: public ::xml_schema::type
                const linked_cell_type&,
                const checkpoint_type&,
                const domain_type&,
+               const profiling_type&,
                const particle_data_type&,
                const extra_forces_type&);
 
@@ -2072,6 +2281,7 @@ class molsimInput: public ::xml_schema::type
                const linked_cell_type&,
                const checkpoint_type&,
                ::std::unique_ptr< domain_type >,
+               const profiling_type&,
                ::std::unique_ptr< particle_data_type >,
                ::std::unique_ptr< extra_forces_type >);
 
@@ -2109,6 +2319,8 @@ class molsimInput: public ::xml_schema::type
   ::xsd::cxx::tree::one< checkpoint_type > checkpoint_;
   ::xsd::cxx::tree::one< domain_type > domain_;
   thermostat_optional thermostat_;
+  ::xsd::cxx::tree::one< profiling_type > profiling_;
+  profiler_optional profiler_;
   ::xsd::cxx::tree::one< particle_data_type > particle_data_;
   ::xsd::cxx::tree::one< extra_forces_type > extra_forces_;
 };
@@ -2271,6 +2483,9 @@ operator<< (::xercesc::DOMElement&, const boundaries_type&);
 
 void
 operator<< (::xercesc::DOMElement&, const domain_type&);
+
+void
+operator<< (::xercesc::DOMElement&, const profiler_type&);
 
 void
 operator<< (::xercesc::DOMElement&, const molsimInput&);

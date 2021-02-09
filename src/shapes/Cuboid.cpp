@@ -32,6 +32,18 @@ Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumber
     this->km = k;
 }
 
+Cuboid::Cuboid(std::array<double, 3> position, std::array<int, 3> particleNumbers, double distance, double mass,
+               std::array<double, 3> initialV, double epsilon, double sigma, bool fixed) {
+    this->position = position;
+    this->size = particleNumbers;
+    this->distance = distance;
+    this->mass = mass;
+    this->initialV = initialV;
+    this->epsilon = epsilon;
+    this->sigma = sigma;
+    this->fixed = fixed;
+}
+
 void Cuboid::generate(ParticleContainer &particles) {
     std::array<double, 3> newPosition = {0., 0., 0.};
 
@@ -45,9 +57,14 @@ void Cuboid::generate(ParticleContainer &particles) {
             newPosition[1] = position[1] + j*distance; //ypos
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
+<<<<<<< HEAD
                 Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, r0, km);
                 newParticle.uid = uid++;
                 newParticle.debug = 0;
+=======
+                //Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma);
+                Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, fixed);
+>>>>>>> dev
 
                 particles.push(newParticle);
             }
