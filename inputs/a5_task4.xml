@@ -10,7 +10,7 @@
     <domain>
         <domain_size>
             <x>35</x>
-            <y>25</y>
+            <y>26</y>
             <z>10</z>
         </domain_size>
         <cutoff_radius>2.75</cutoff_radius>

@@ -4,7 +4,7 @@
 
 #pragma once
 #include <vector>
-
+#include <Container.h>
 #include <particle/Particle.h>
 
 /*
@@ -56,3 +56,5 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
 void cljParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool useLocks);
 void membraneParallel(Particle &p1, Particle &p2, double epsilon, double sigma, bool locks);
 #endif
+
+void applyExtraForces(std::vector<Particle> &particles, std::vector<extraForce> &extraForces, int iteration);

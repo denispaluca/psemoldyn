@@ -27,7 +27,8 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->domain_size = mapDoubleVec(domain.domain_size());
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
-    gravity = domain.gravity();
+    this->gravity = mapDoubleVec(domain.gravity());
+
 #ifdef _OPENMP
     useLocks = domain.useLocks();
 #endif
@@ -112,8 +113,7 @@ void LinkedCellContainer::calculateIteration(int d) {
     for(auto& c:cells) c.removeParticles();
     iterate([&](Particle &p) {
         assignParticle(p);
-        if(gravity.present())
-            p.applyGravity(gravity.get());
+        p.applyGravity(gravity);
     });
 
     // calculate new f
@@ -127,7 +127,6 @@ void LinkedCellContainer::calculateIteration(int d) {
             cljParallel(p1, p2, epsilon, sigma, useLocks);
         }
 #else
-        //TODO
         if (p1.r0 != -1 && p2.r0 != -1) {
             calculateMembrane(p1, p2, epsilon, sigma);
         } else {
@@ -135,6 +134,9 @@ void LinkedCellContainer::calculateIteration(int d) {
         }
 #endif
     });
+
+    applyExtraForces(particles.getParticles(), extraForces, d);
+
     boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];

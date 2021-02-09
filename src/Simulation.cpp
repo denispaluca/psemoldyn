@@ -25,6 +25,10 @@ Simulation::Simulation(molsimInput &data) : data(data) {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
 
+    for (auto f: data.extra_forces().extra_force()) {
+        container->extraForces.push_back(mapExtraForce(f));
+    }
+
     profiling = data.profiling() && data.linked_cell();
 
     if(profiling) {

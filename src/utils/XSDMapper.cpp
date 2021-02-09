@@ -80,16 +80,10 @@ particle mapParticleToXML(Particle &p){
     };
 }
 
-std::pair<int, std::array<double, 3>> mapExtraForce(extra_force& p) {
+extraForce mapExtraForce(extra_force& p) {
     return {
-            std::make_pair(p.index(), mapDoubleVec(p.f_vector()))
+            p.index(),
+            p.iteration(),
+            mapDoubleVec(p.f_vector())
     };
 }
-
-/*
-std::vector<std::pair<int, std::array<double, 3>>> mapExtraForces(extra_force& p) {
-    return {
-            std::make_vector(
-    }
-}
- */

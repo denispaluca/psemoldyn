@@ -29,7 +29,8 @@ private:
     /**
      * Optional gravity given over xml.
      */
-    domain_type::gravity_optional gravity;
+    //domain_type::gravity_optional gravity;
+    std::array<double, 3> gravity;
 
     /**
      * A vector containing all cells
@@ -156,8 +157,4 @@ public:
 
     void mixParameters();
 
-    /*
-     * Apply additional forces to specific particles by index
-     */
-    std::vector<std::pair<int, std::array<double, 3>>> extraForces;
 };

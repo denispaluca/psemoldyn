@@ -141,6 +141,24 @@ index (const index_type& x)
   this->index_.set (x);
 }
 
+const extra_force::iteration_type& extra_force::
+iteration () const
+{
+  return this->iteration_.get ();
+}
+
+extra_force::iteration_type& extra_force::
+iteration ()
+{
+  return this->iteration_.get ();
+}
+
+void extra_force::
+iteration (const iteration_type& x)
+{
+  this->iteration_.set (x);
+}
+
 const extra_force::f_vector_type& extra_force::
 f_vector () const
 {
@@ -1376,16 +1394,16 @@ boundary (::std::unique_ptr< boundary_type > x)
   this->boundary_.set (std::move (x));
 }
 
-const domain_type::gravity_optional& domain_type::
+const domain_type::gravity_type& domain_type::
 gravity () const
 {
-  return this->gravity_;
+  return this->gravity_.get ();
 }
 
-domain_type::gravity_optional& domain_type::
+domain_type::gravity_type& domain_type::
 gravity ()
 {
-  return this->gravity_;
+  return this->gravity_.get ();
 }
 
 void domain_type::
@@ -1395,9 +1413,9 @@ gravity (const gravity_type& x)
 }
 
 void domain_type::
-gravity (const gravity_optional& x)
+gravity (::std::unique_ptr< gravity_type > x)
 {
-  this->gravity_ = x;
+  this->gravity_.set (std::move (x));
 }
 
 const domain_type::useLocks_type& domain_type::
@@ -2011,18 +2029,22 @@ extra_forces::
 
 extra_force::
 extra_force (const index_type& index,
+             const iteration_type& iteration,
              const f_vector_type& f_vector)
 : ::xml_schema::type (),
   index_ (index, this),
+  iteration_ (iteration, this),
   f_vector_ (f_vector, this)
 {
 }
 
 extra_force::
 extra_force (const index_type& index,
+             const iteration_type& iteration,
              ::std::unique_ptr< f_vector_type > f_vector)
 : ::xml_schema::type (),
   index_ (index, this),
+  iteration_ (iteration, this),
   f_vector_ (std::move (f_vector), this)
 {
 }
@@ -2033,6 +2055,7 @@ extra_force (const extra_force& x,
              ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   index_ (x.index_, f, this),
+  iteration_ (x.iteration_, f, this),
   f_vector_ (x.f_vector_, f, this)
 {
 }
@@ -2043,6 +2066,7 @@ extra_force (const ::xercesc::DOMElement& e,
              ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   index_ (this),
+  iteration_ (this),
   f_vector_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -2073,6 +2097,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // iteration
+    //
+    if (n.name () == "iteration" && n.namespace_ ().empty ())
+    {
+      if (!iteration_.present ())
+      {
+        this->iteration_.set (iteration_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // f_vector
     //
     if (n.name () == "f_vector" && n.namespace_ ().empty ())
@@ -2094,6 +2129,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "index",
+      "");
+  }
+
+  if (!iteration_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "iteration",
       "");
   }
 
@@ -2119,6 +2161,7 @@ operator= (const extra_force& x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
     this->index_ = x.index_;
+    this->iteration_ = x.iteration_;
     this->f_vector_ = x.f_vector_;
   }
 
@@ -4172,12 +4215,13 @@ domain_type::
 domain_type (const domain_size_type& domain_size,
              const cutoff_radius_type& cutoff_radius,
              const boundary_type& boundary,
+             const gravity_type& gravity,
              const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (domain_size, this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (boundary, this),
-  gravity_ (this),
+  gravity_ (gravity, this),
   useLocks_ (useLocks, this)
 {
 }
@@ -4186,12 +4230,13 @@ domain_type::
 domain_type (::std::unique_ptr< domain_size_type > domain_size,
              const cutoff_radius_type& cutoff_radius,
              ::std::unique_ptr< boundary_type > boundary,
+             ::std::unique_ptr< gravity_type > gravity,
              const useLocks_type& useLocks)
 : ::xml_schema::type (),
   domain_size_ (std::move (domain_size), this),
   cutoff_radius_ (cutoff_radius, this),
   boundary_ (std::move (boundary), this),
-  gravity_ (this),
+  gravity_ (std::move (gravity), this),
   useLocks_ (useLocks, this)
 {
 }
@@ -4280,9 +4325,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "gravity" && n.namespace_ ().empty ())
     {
-      if (!this->gravity_)
+      ::std::unique_ptr< gravity_type > r (
+        gravity_traits::create (i, f, this));
+
+      if (!gravity_.present ())
       {
-        this->gravity_.set (gravity_traits::create (i, f, this));
+        this->gravity_.set (::std::move (r));
         continue;
       }
     }
@@ -4319,6 +4367,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
   {
     throw ::xsd::cxx::tree::expected_element< char > (
       "boundary",
+      "");
+  }
+
+  if (!gravity_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "gravity",
       "");
   }
 
@@ -5224,6 +5279,17 @@ operator<< (::xercesc::DOMElement& e, const extra_force& i)
     s << i.index ();
   }
 
+  // iteration
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "iteration",
+        e));
+
+    s << i.iteration ();
+  }
+
   // f_vector
   //
   {
@@ -5938,14 +6004,13 @@ operator<< (::xercesc::DOMElement& e, const domain_type& i)
 
   // gravity
   //
-  if (i.gravity ())
   {
     ::xercesc::DOMElement& s (
       ::xsd::cxx::xml::dom::create_element (
         "gravity",
         e));
 
-    s << ::xml_schema::as_double(*i.gravity ());
+    s << i.gravity ();
   }
 
   // useLocks

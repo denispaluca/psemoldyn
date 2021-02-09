@@ -2,16 +2,16 @@
 <input xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../src/xml/molsimInput.xsd">
     <name_output>A5_TASK1_GROSS</name_output>
-    <frequency_output>25</frequency_output>
+    <frequency_output>90</frequency_output>
     <delta_t>0.01</delta_t>
-    <t_end>5</t_end>
+    <t_end>600</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
-            <x>300</x>
-            <y>300</y>
-            <z>300</z>
+            <x>148</x>
+            <y>148</y>
+            <z>148</z>
         </domain_size>
         <cutoff_radius>4.0</cutoff_radius>
         <boundary>
@@ -22,7 +22,11 @@
             <left>outflow</left>
             <right>outflow</right>
         </boundary>
-        <gravity>-0.001</gravity>
+        <gravity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>-0.001</z>
+        </gravity>
         <useLocks>true</useLocks>
     </domain>
     <profiling>false</profiling>
@@ -34,7 +38,7 @@
                 <position>
                     <x>15</x>
                     <y>15</y>
-                    <z>1.5</z>
+                    <z>15</z>
                 </position>
                 <size>
                     <x>50</x>
@@ -61,7 +65,17 @@
     </particle_data>
     <extra_forces>
         <extra_force>
-            <index>824</index>
+            <index>0</index>
+            <iteration>15000</iteration>
+            <f_vector>
+                <x>0</x>
+                <y>0</y>
+                <z>1</z>
+            </f_vector>
+        </extra_force>
+        <extra_force>
+            <index>49</index>
+            <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
                 <y>0</y>
@@ -69,27 +83,21 @@
             </f_vector>
         </extra_force>
         <extra_force>
-            <index>825</index>
+            <index>2449</index>
+            <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
-                <y>0.8</y>
-                <z>0</z>
+                <y>0</y>
+                <z>0.8</z>
             </f_vector>
         </extra_force>
         <extra_force>
-            <index>874</index>
+            <index>2499</index>
+            <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
-                <y>0.8</y>
-                <z>0</z>
-            </f_vector>
-        </extra_force>
-        <extra_force>
-            <index>875</index>
-            <f_vector>
-                <x>0</x>
-                <y>0.8</y>
-                <z>0</z>
+                <y>0</y>
+                <z>0.8</z>
             </f_vector>
         </extra_force>
     </extra_forces>

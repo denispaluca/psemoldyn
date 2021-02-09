@@ -70,6 +70,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
   uid = (int) rand();
   dtsq_2m = 0;
   debug = -1;
+  r0 = -1;
 
 #ifdef _OPENMP
     threadForces = static_cast<std::array<std::array<double, 8>, 28> *>(aligned_alloc(64, 28 * sizeof(std::array<double, 8>)));
@@ -101,6 +102,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     uid = (int) rand();
     dtsq_2m = 0;
     debug = -1;
+    r0 = -1;
     this->fixed = fixed;
 
 #ifdef _OPENMP
@@ -133,7 +135,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     dt_2m = 0;
     dtsq_2m = 0;
     this->r0 = r0;
-    uid = (int) rand(); //std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    uid = (int) rand();
     this->km = km;
     debug = -1;
     this->fixed = fixed;
@@ -222,8 +224,12 @@ void Particle::setM(double mass) {
     this->m = mass;
 }
 
-void Particle::applyGravity(double g) {
-    if (!fixed) f[2] += m*g;
+void Particle::applyGravity(std::array<double, 3> g) {
+    if (!fixed) {
+        f[0] += m*g[0];
+        f[1] += m*g[1];
+        f[2] += m*g[2];
+    }
     //addF({0, m*g, 0});
 }
 

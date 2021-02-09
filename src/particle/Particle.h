@@ -268,7 +268,7 @@ public:
    * Apply gravitational force on the particle.
    * @param g Gravity to be applied.
    */
-  void applyGravity(double g);
+  void applyGravity(std::array<double, 3> g);
 
     /**
     * Epsilon of the particle

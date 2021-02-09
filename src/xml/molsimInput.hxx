@@ -436,6 +436,20 @@ class extra_force: public ::xml_schema::type
   void
   index (const index_type& x);
 
+  // iteration
+  //
+  typedef ::xml_schema::int_ iteration_type;
+  typedef ::xsd::cxx::tree::traits< iteration_type, char > iteration_traits;
+
+  const iteration_type&
+  iteration () const;
+
+  iteration_type&
+  iteration ();
+
+  void
+  iteration (const iteration_type& x);
+
   // f_vector
   //
   typedef ::double_vector f_vector_type;
@@ -456,9 +470,11 @@ class extra_force: public ::xml_schema::type
   // Constructors.
   //
   extra_force (const index_type&,
+               const iteration_type&,
                const f_vector_type&);
 
   extra_force (const index_type&,
+               const iteration_type&,
                ::std::unique_ptr< f_vector_type >);
 
   extra_force (const ::xercesc::DOMElement& e,
@@ -488,6 +504,7 @@ class extra_force: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< index_type > index_;
+  ::xsd::cxx::tree::one< iteration_type > iteration_;
   ::xsd::cxx::tree::one< f_vector_type > f_vector_;
 };
 
@@ -1881,21 +1898,20 @@ class domain_type: public ::xml_schema::type
 
   // gravity
   //
-  typedef ::xml_schema::double_ gravity_type;
-  typedef ::xsd::cxx::tree::optional< gravity_type > gravity_optional;
-  typedef ::xsd::cxx::tree::traits< gravity_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_traits;
+  typedef ::double_vector gravity_type;
+  typedef ::xsd::cxx::tree::traits< gravity_type, char > gravity_traits;
 
-  const gravity_optional&
+  const gravity_type&
   gravity () const;
 
-  gravity_optional&
+  gravity_type&
   gravity ();
 
   void
   gravity (const gravity_type& x);
 
   void
-  gravity (const gravity_optional& x);
+  gravity (::std::unique_ptr< gravity_type > p);
 
   // useLocks
   //
@@ -1916,11 +1932,13 @@ class domain_type: public ::xml_schema::type
   domain_type (const domain_size_type&,
                const cutoff_radius_type&,
                const boundary_type&,
+               const gravity_type&,
                const useLocks_type&);
 
   domain_type (::std::unique_ptr< domain_size_type >,
                const cutoff_radius_type&,
                ::std::unique_ptr< boundary_type >,
+               ::std::unique_ptr< gravity_type >,
                const useLocks_type&);
 
   domain_type (const ::xercesc::DOMElement& e,
@@ -1952,7 +1970,7 @@ class domain_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< domain_size_type > domain_size_;
   ::xsd::cxx::tree::one< cutoff_radius_type > cutoff_radius_;
   ::xsd::cxx::tree::one< boundary_type > boundary_;
-  gravity_optional gravity_;
+  ::xsd::cxx::tree::one< gravity_type > gravity_;
   ::xsd::cxx::tree::one< useLocks_type > useLocks_;
 };
 

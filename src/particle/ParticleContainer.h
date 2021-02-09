@@ -89,5 +89,5 @@ public:
 
     void calculateIteration(int d);
 
-    void setNeighbours(int pos, int length, int x);
+    //void setNeighbours(int pos, int length, int x);
 };

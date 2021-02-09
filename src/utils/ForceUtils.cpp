@@ -251,3 +251,13 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
     }
     return;
 }
+
+void applyExtraForces(std::vector<Particle> &particles, std::vector<extraForce> &extraForces, int iteration) {
+    for (auto e : extraForces) {
+        if (e.iteration >= iteration) {
+            particles.at(e.index).f[0] += e.force[0];
+            particles.at(e.index).f[1] += e.force[1];
+            particles.at(e.index).f[2] += e.force[2];
+        }
+    }
+}

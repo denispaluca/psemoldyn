@@ -19,6 +19,7 @@
   <xsd:complexType name="extra_force">
     <xsd:sequence>
       <xsd:element name="index" type="xsd:int"/>
+      <xsd:element name="iteration" type="xsd:int"/>
       <xsd:element name="f_vector" type="double_vector"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -160,7 +161,7 @@
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
       <xsd:element name="boundary" type="boundaries_type" />
-      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="gravity" type="double_vector"/>
       <!-- True for particle lock strategy and false for Thread force strategy -->
       <xsd:element name="useLocks" type="xsd:boolean" />
     </xsd:sequence>
@@ -193,6 +194,7 @@
       <xsd:element name="profiling" type="xsd:boolean"/>
       <xsd:element name="profiler" type="profiler_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
+      <!-- apply additional forces to specific particles -->
       <xsd:element name="extra_forces" type="extra_forces"/>
     </xsd:sequence>
   </xsd:complexType>
