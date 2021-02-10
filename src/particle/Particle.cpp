@@ -22,6 +22,9 @@
 #define is_aligned(POINTER, BYTE_COUNT) \
     (((uintptr_t)(const void *)(POINTER)) % (BYTE_COUNT) == 0)
 
+//TODO
+int idCounter = 0;
+
 Particle::Particle(const Particle &other) {
   x = other.x;
   v = other.v;
@@ -37,7 +40,7 @@ Particle::Particle(const Particle &other) {
   km = other.km;
   r0 = other.r0;
   laterMembraneParticles = other.laterMembraneParticles;
-  uid = other.uid;
+  id = other.id;
   debug = other.debug;
   fixed = other.fixed;
 
@@ -53,7 +56,6 @@ Particle::Particle(const Particle &other) {
 //#endif
 }
 
-
 // Todo: maybe use initializater list instead of copy?
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
                    double m_arg, double epsilon, double sigma) {
@@ -67,7 +69,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
   old_f = {0., 0., 0.};
   delta_t = 0;
   dt_2m = 0;
-  uid = (int) rand();
+  id = idCounter++;
   dtsq_2m = 0;
   debug = -1;
   r0 = -1;
@@ -99,7 +101,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     old_f = {0., 0., 0.};
     delta_t = 0;
     dt_2m = 0;
-    uid = (int) rand();
+    id = idCounter++;
     dtsq_2m = 0;
     debug = -1;
     r0 = -1;
@@ -135,10 +137,19 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     dt_2m = 0;
     dtsq_2m = 0;
     this->r0 = r0;
-    uid = (int) rand();
+    id = idCounter++;
     this->km = km;
     debug = -1;
     this->fixed = fixed;
+#ifdef _OPENMP
+    threadForces = static_cast<std::array<std::array<double, 8>, 28> *>(aligned_alloc(64, 28 * sizeof(std::array<double, 8>)));
+    //threadForces[i] = new PaddedForce;
+    for(auto &fn: *threadForces){
+        fn = {0};
+        if(!is_aligned(&fn, 64))
+            std::cout<<"Not aligned "<<&fn<<"\n";
+    }
+#endif
 #ifdef WITH_LOG4CXX
     LOG4CXX_INFO(particleLogger, "Particle generated!");
 #endif
@@ -209,7 +220,7 @@ void Particle::calculateX() {
 }
 
 bool Particle::operator==(Particle &other) {
-  return uid == other.uid;/*(&other != 0) and (x == other.x) and (v == other.v) and (f == other.f) and
+  return id == other.id;/*(&other != 0) and (x == other.x) and (v == other.v) and (f == other.f) and
          (type == other.type) and (m == other.m) and (old_f == other.old_f);*/
 }
 
@@ -240,6 +251,18 @@ Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, s
     delta_t = 0;
     dt_2m = 0;
     dtsq_2m = 0;
+#ifdef _OPENMP
+    threadForces = static_cast<std::array<std::array<double, 8>, 28> *>(aligned_alloc(64, 28 * sizeof(std::array<double, 8>)));
+    //threadForces[i] = new PaddedForce;
+    for(auto &fn: *threadForces){
+        fn = {0};
+        if(!is_aligned(&fn, 64))
+            std::cout<<"Not aligned "<<&fn<<"\n";
+    }
+#endif
+#ifdef WITH_LOG4CXX
+    LOG4CXX_INFO(particleLogger, "Particle generated!");
+#endif
 }
 
 #ifdef _OPENMP
@@ -288,4 +311,16 @@ Particle::Particle(std::array<double, 3> x, std::array<double, 3> v, double m, s
     delta_t = 0;
     dt_2m = 0;
     dtsq_2m = 0;
+#ifdef _OPENMP
+    threadForces = static_cast<std::array<std::array<double, 8>, 28> *>(aligned_alloc(64, 28 * sizeof(std::array<double, 8>)));
+    //threadForces[i] = new PaddedForce;
+    for(auto &fn: *threadForces){
+        fn = {0};
+        if(!is_aligned(&fn, 64))
+            std::cout<<"Not aligned "<<&fn<<"\n";
+    }
+#endif
+#ifdef WITH_LOG4CXX
+    LOG4CXX_INFO(particleLogger, "Particle generated!");
+#endif
 }

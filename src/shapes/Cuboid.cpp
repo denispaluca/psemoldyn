@@ -60,8 +60,6 @@ void Cuboid::generate(ParticleContainer &particles) {
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, r0, km, fixed);
-                newParticle.uid = uid++;
-                newParticle.debug = 0;
 
                 particles.push(newParticle);
             }

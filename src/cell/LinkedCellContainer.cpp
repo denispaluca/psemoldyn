@@ -135,13 +135,13 @@ void LinkedCellContainer::calculateIteration(int d) {
 #endif
     });
 
-    applyExtraForces(particles.getParticles(), extraForces, d);
-
     boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
         calculateLennardJones(p1, p2, epsilon, sigma);
     });
+
+    applyExtraForces(particles.getParticles(), extraForces, d);
 
     // calculate new v
 #ifdef _OPENMP

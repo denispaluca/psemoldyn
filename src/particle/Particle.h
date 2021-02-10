@@ -14,6 +14,7 @@
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+
 /**
  * The particle class represents a particle and it's characteristics.
  */
@@ -304,7 +305,7 @@ public:
     /**
      * Unique ID
      */
-     double uid;
+     double id;
 
     /**
      * k

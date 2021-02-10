@@ -5,7 +5,6 @@
 #include <cmath>
 #include <particle/ParticleContainer.h>
 #include "ForceUtils.h"
-#include "ArrayUtils.h"
 
 /**
  * Calculate second norm cubed of array with length 3.
@@ -101,12 +100,12 @@ void membraneParallel(Particle &p1, Particle &p2, double epsilon, double sigma, 
     std::array<double, 3> f12;
     bool neighbours = false;
 
-    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid
-        || p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
+    if (p1.laterMembraneParticles.at(0) == p2.id || p2.laterMembraneParticles.at(0) == p1.id
+        || p1.laterMembraneParticles.at(2) == p2.id || p2.laterMembraneParticles.at(2) == p1.id) {
         f12 = calculateMembraneForce(p1, p2, false, abstand);
         neighbours = true;
-    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid
-               || p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
+    } else if (p1.laterMembraneParticles.at(1) == p2.id || p2.laterMembraneParticles.at(1) == p1.id
+               || p1.laterMembraneParticles.at(3) == p2.id || p2.laterMembraneParticles.at(3) == p1.id) {
         neighbours = true;
         f12 = calculateMembraneForce(p1, p2, true, abstand);
     }
@@ -162,12 +161,12 @@ void calculateMembrane(Particle &p1, Particle &p2, double epsilon, double sigma)
     std::array<double, 3> f12;
     bool neighbours = false;
 
-    if (p1.laterMembraneParticles.at(0) == p2.uid || p2.laterMembraneParticles.at(0) == p1.uid
-        || p1.laterMembraneParticles.at(2) == p2.uid || p2.laterMembraneParticles.at(2) == p1.uid) {
+    if (p1.laterMembraneParticles.at(0) == p2.id || p2.laterMembraneParticles.at(0) == p1.id
+        || p1.laterMembraneParticles.at(2) == p2.id || p2.laterMembraneParticles.at(2) == p1.id) {
         f12 = calculateMembraneForce(p1, p2, false, abstand);
         neighbours = true;
-    } else if (p1.laterMembraneParticles.at(1) == p2.uid || p2.laterMembraneParticles.at(1) == p1.uid
-               || p1.laterMembraneParticles.at(3) == p2.uid || p2.laterMembraneParticles.at(3) == p1.uid) {
+    } else if (p1.laterMembraneParticles.at(1) == p2.id || p2.laterMembraneParticles.at(1) == p1.id
+               || p1.laterMembraneParticles.at(3) == p2.id || p2.laterMembraneParticles.at(3) == p1.id) {
         neighbours = true;
         f12 = calculateMembraneForce(p1, p2, true, abstand);
     } else if (abstand < 1.12246 * sigma) {
@@ -226,25 +225,25 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
     for (int i = pos; i<pos+length; i++) {
         if (((i-pos)+1)%x > 0 && i+1 < pos+length) {
             a = i+1;
-            particles.at(i).laterMembraneParticles.at(0) = particles.at(a).uid;
+            particles.at(i).laterMembraneParticles.at(0) = particles.at(a).id;
         } else {
             particles.at(i).laterMembraneParticles.at(0) = -1;
         }
         if ((i-pos)+x-1 < pos+length && (i-pos)%x -1 >= 0) {
             b = i+x-1;
-            particles.at(i).laterMembraneParticles.at(1) = particles.at(b).uid;
+            particles.at(i).laterMembraneParticles.at(1) = particles.at(b).id;
         } else {
             particles.at(i).laterMembraneParticles.at(1) = -1;
         }
         if ((i-pos)+x < pos+length) {
             c = i+x;
-            particles.at(i).laterMembraneParticles.at(2) = particles.at(c).uid;
+            particles.at(i).laterMembraneParticles.at(2) = particles.at(c).id;
         } else {
             particles.at(i).laterMembraneParticles.at(2) = -1;
         }
         if (((i-pos)+1)%x > 0 && i+x+1 < pos+length) {
             d = i+x+1;
-            particles.at(i).laterMembraneParticles.at(3) = particles.at(d).uid;
+            particles.at(i).laterMembraneParticles.at(3) = particles.at(d).id;
         } else {
             particles.at(i).laterMembraneParticles.at(3) = -1;
         }
@@ -254,10 +253,13 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
 
 void applyExtraForces(std::vector<Particle> &particles, std::vector<extraForce> &extraForces, int iteration) {
     for (auto e : extraForces) {
+
         if (e.iteration >= iteration) {
             particles.at(e.index).f[0] += e.force[0];
             particles.at(e.index).f[1] += e.force[1];
             particles.at(e.index).f[2] += e.force[2];
         }
+        //std::cout << e.index << "\t\t" << particles.at(e.index).f[2] << "\t" << std::endl;
+
     }
 }
