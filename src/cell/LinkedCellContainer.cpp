@@ -121,7 +121,7 @@ void LinkedCellContainer::calculateIteration(int d) {
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
 #ifdef _OPENMP
-        if (p1.r0 != -1 && p2.r0 != -1) {
+        if (p1.membrane == p2.membrane) {
             membraneParallel(p1, p2, epsilon, sigma, useLocks);
         } else {
             cljParallel(p1, p2, epsilon, sigma, useLocks);

@@ -22,7 +22,7 @@
 #define is_aligned(POINTER, BYTE_COUNT) \
     (((uintptr_t)(const void *)(POINTER)) % (BYTE_COUNT) == 0)
 
-//TODO
+//variable to count ids up
 int idCounter = 0;
 
 Particle::Particle(const Particle &other) {
@@ -43,6 +43,7 @@ Particle::Particle(const Particle &other) {
   id = other.id;
   debug = other.debug;
   fixed = other.fixed;
+  membrane = other.membrane;
 
 #ifdef _OPENMP
   threadForces = other.threadForces;

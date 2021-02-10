@@ -8,6 +8,9 @@
 #include "utils/ArrayUtils.h"
 #include <utils/ForceUtils.h>
 
+//counter of membranes
+int membraneCounter = 0;
+
 Cuboid::Cuboid() {
     this->position = {0.0,0.0,0.0};
     this->size = {10, 10, 10};
@@ -60,12 +63,13 @@ void Cuboid::generate(ParticleContainer &particles) {
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, r0, km, fixed);
-
+                newParticle.membrane = membraneCounter;
                 particles.push(newParticle);
             }
         }
     }
     if (isMembrane) {
+        membraneCounter++;
         setNeighbours(particles.getParticles(), length, size[0]*size[1], size[0]);
     }
     return;

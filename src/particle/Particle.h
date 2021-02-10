@@ -312,20 +312,29 @@ public:
      */
      double km;
 
+    /**
+    * Debug Information
+    */
+    int debug;
+
+    /**
+     * Stores whether Particle position is fixed
+     */
+    bool fixed;
+
+    /**
+    * Stores membrane information
+    * if membrane = -1 it is not a membrane
+    * otherwise this variable stores the id of the membrane it belongs to
+    */
+    int membrane = -1;
+
      /**
       * r0 of membrane
       */
       double r0 = -1;
 
-      /**
-       * Debug Information
-       */
-      int debug;
 
-	/**
-     * Stores whether Particle position is fixed
-     */
-    bool fixed;
 
 #ifdef _OPENMP
     void initLock();
