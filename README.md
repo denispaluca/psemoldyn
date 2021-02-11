@@ -84,6 +84,7 @@ see [XSD file](src/xml/molsimInput.xsd)
 * Additional Membrane Simulations:
 * [Membrane and cube](https://drive.google.com/file/d/1DG6d8Z7FFKXyN2JBhcVh5xnsQOFyBqCZ/view?usp=sharing)
 * [Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
+* [vertical membrane](https://drive.google.com/file/d/1EdzY_oYGDDtEbcd3CPsjcSW3rLVjdFyv/view?usp=sharing)
 
 # Performance measurements
 *The OS/hardware the measurements were made on Linux Cluster (COOL-MUC 2)
