@@ -22,7 +22,11 @@
             <left>periodic</left>
             <right>periodic</right>
         </boundary>
-        <gravity>-12.44</gravity>
+        <gravity>
+            <x>0</x>
+            <y>-12.44</y>
+            <z>0</z>
+        </gravity>
         <useLocks>false</useLocks>
     </domain>
     <thermostat>
@@ -89,4 +93,5 @@
         <particles></particles>
         <spheres></spheres>
     </particle_data>
+    <extra_forces></extra_forces>
 </input>

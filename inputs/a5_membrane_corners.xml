@@ -9,9 +9,9 @@
     <checkpoint>false</checkpoint>
     <domain>
         <domain_size>
-            <x>148</x>
-            <y>148</y>
-            <z>148</z>
+            <x>300</x>
+            <y>300</y>
+            <z>300</z>
         </domain_size>
         <cutoff_radius>4.0</cutoff_radius>
         <boundary>
@@ -65,7 +65,7 @@
     </particle_data>
     <extra_forces>
         <extra_force>
-            <index>874</index>
+            <index>0</index>
             <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
@@ -74,7 +74,7 @@
             </f_vector>
         </extra_force>
         <extra_force>
-            <index>875</index>
+            <index>49</index>
             <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
@@ -83,7 +83,7 @@
             </f_vector>
         </extra_force>
         <extra_force>
-            <index>924</index>
+            <index>775</index>
             <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
@@ -92,7 +92,7 @@
             </f_vector>
         </extra_force>
         <extra_force>
-            <index>925</index>
+            <index>2499</index>
             <iteration>15000</iteration>
             <f_vector>
                 <x>0</x>
