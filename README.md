@@ -76,20 +76,18 @@ see [XSD file](src/xml/molsimInput.xsd)
 
 
 # Media #
-[a5_task2_video.avi](https://drive.google.com/file/d/1T6ypf7Qek-owrdILxEOuj4Atf6zmvKLx/view?usp=sharing)
-[as5_t4_26.avi](https://drive.google.com/file/d/1HPVTg1iEnUOAUZofZR4p_xkNRUYAX_6l/view?usp=sharing)
-[Task 1 membrane](https://drive.google.com/file/d/1mTAT7tAO44DzkyHdFgzboZ6Rsxf0HxSx/view?usp=sharing)
+*[a5_task2_video.avi](https://drive.google.com/file/d/1T6ypf7Qek-owrdILxEOuj4Atf6zmvKLx/view?usp=sharing)
+*[Task 1 membrane](https://drive.google.com/file/d/1mTAT7tAO44DzkyHdFgzboZ6Rsxf0HxSx/view?usp=sharing)
+*[as5_t4_color_velocityY.avi](https://drive.google.com/file/d/1dh3LGs60MBhM-4gouMS8fhYU4z-Mmz1m/view?usp=sharing)
+*[as5_t4_gravity5](https://drive.google.com/file/d/1QUHPan1zcvtl_lE7EVCgMiQnjoSAm6Lb/view?usp=sharing)
 
-Additional Membrane Simulations:
-[Membrane and cube](https://drive.google.com/file/d/1DG6d8Z7FFKXyN2JBhcVh5xnsQOFyBqCZ/view?usp=sharing)
-[Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
+*Additional Membrane Simulations:
+*[Membrane and cube](https://drive.google.com/file/d/1DG6d8Z7FFKXyN2JBhcVh5xnsQOFyBqCZ/view?usp=sharing)
+*[Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
 
 # Performance measurements
-The OS/hardware the measurements were made on Linux Cluster (COOL-MUC 2)
-        Locks                   Thread Forces
-        A4_task2    A5_task2    A4_task2    A5_task2
-icpc    3.2         0.45        1.76        0.65
-gcc     4.1         0.75        2.03        0.709
+*The OS/hardware the measurements were made on Linux Cluster (COOL-MUC 2)
+*![Performance Comparison](./results/task5_performance.png)
 
 # Misc #
 * Compiler used: gcc 9.3.0
