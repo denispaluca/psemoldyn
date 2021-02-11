@@ -70,7 +70,7 @@ void Cuboid::generate(ParticleContainer &particles) {
     }
     if (isMembrane) {
         membraneCounter++;
-        setNeighbours(particles.getParticles(), length, size[0]*size[1], size[0]);
+        setNeighbours(particles.getParticles(), length, size[0]*size[1]*size[2], size[0] != 1 ? size[0] : size[1]);
     }
     return;
 }

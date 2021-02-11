@@ -81,7 +81,7 @@ see [XSD file](src/xml/molsimInput.xsd)
 * [as5_t4_color_velocityY.avi](https://drive.google.com/file/d/1dh3LGs60MBhM-4gouMS8fhYU4z-Mmz1m/view?usp=sharing)
 * [as5_t4_gravity5](https://drive.google.com/file/d/1QUHPan1zcvtl_lE7EVCgMiQnjoSAm6Lb/view?usp=sharing)
 
-#Additional Membrane Simulations: #
+* Additional Membrane Simulations:
 * [Membrane and cube](https://drive.google.com/file/d/1DG6d8Z7FFKXyN2JBhcVh5xnsQOFyBqCZ/view?usp=sharing)
 * [Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
 
