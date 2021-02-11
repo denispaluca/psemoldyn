@@ -58,8 +58,6 @@ Particle mapParticle(particle& p){
             p.type(),
             p.epsilon(),
             p.sigma(),
-            p.r0(),
-            p.km(),
             p.fixed()
     };
 }
@@ -74,8 +72,6 @@ particle mapParticleToXML(Particle &p){
         p.getType(),
         p.epsilon,
         p.sigma,
-        p.r0,
-        p.km,
         p.fixed
     };
 }

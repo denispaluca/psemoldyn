@@ -13,7 +13,7 @@ protected:
     void SetUp() override {
         auto r = boundary_type::value::reflective;
         auto reflectiveDomain = domain_type(double_vector(9, 9, 9), 3,
-                                            boundaries_type(r, r, r, r, r, r));
+                                            boundaries_type(r, r, r, r, r, r), double_vector(0,0,0), false);
         auto p = Particle({4.5,4.5,4.5},{0,0,0},1,5.0,1.0);
         auto pc = ParticleContainer();
         reflectiveContainer = LinkedCellContainer(reflectiveDomain, pc);
@@ -22,7 +22,8 @@ protected:
 
         auto q = boundary_type::value::periodic;
         auto periodicDomain = domain_type(double_vector(9, 9, 9), 3,
-                                          boundaries_type(q,q,q,q,q,q));
+                                          boundaries_type(q,q,q,q,q,q),
+                                          double_vector(0,0,0), false);
         periodicContainer = LinkedCellContainer(periodicDomain, pc);
         periodicContainer.getParticles().push(p);
     }

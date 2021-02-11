@@ -1001,34 +1001,6 @@ class particle: public ::xml_schema::type
   void
   sigma (const sigma_type& x);
 
-  // r0
-  //
-  typedef ::xml_schema::double_ r0_type;
-  typedef ::xsd::cxx::tree::traits< r0_type, char, ::xsd::cxx::tree::schema_type::double_ > r0_traits;
-
-  const r0_type&
-  r0 () const;
-
-  r0_type&
-  r0 ();
-
-  void
-  r0 (const r0_type& x);
-
-  // km
-  //
-  typedef ::xml_schema::double_ km_type;
-  typedef ::xsd::cxx::tree::traits< km_type, char, ::xsd::cxx::tree::schema_type::double_ > km_traits;
-
-  const km_type&
-  km () const;
-
-  km_type&
-  km ();
-
-  void
-  km (const km_type& x);
-
   // fixed
   //
   typedef ::xml_schema::boolean fixed_type;
@@ -1053,8 +1025,6 @@ class particle: public ::xml_schema::type
             const type_type&,
             const epsilon_type&,
             const sigma_type&,
-            const r0_type&,
-            const km_type&,
             const fixed_type&);
 
   particle (::std::unique_ptr< x_type >,
@@ -1065,8 +1035,6 @@ class particle: public ::xml_schema::type
             const type_type&,
             const epsilon_type&,
             const sigma_type&,
-            const r0_type&,
-            const km_type&,
             const fixed_type&);
 
   particle (const ::xercesc::DOMElement& e,
@@ -1103,8 +1071,6 @@ class particle: public ::xml_schema::type
   ::xsd::cxx::tree::one< type_type > type_;
   ::xsd::cxx::tree::one< epsilon_type > epsilon_;
   ::xsd::cxx::tree::one< sigma_type > sigma_;
-  ::xsd::cxx::tree::one< r0_type > r0_;
-  ::xsd::cxx::tree::one< km_type > km_;
   ::xsd::cxx::tree::one< fixed_type > fixed_;
 };
 

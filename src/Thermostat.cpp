@@ -41,7 +41,7 @@ void Thermostat::scale(Container &particles) {
         if(!p.fixed) {
             auto &v = p.getV();
             v[0] *= scalar;
-            //v[1] *= scalar;
+            v[1] *= scalar;
             v[2] *= scalar;
         }
     });

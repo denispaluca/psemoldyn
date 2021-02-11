@@ -22,13 +22,19 @@
             <left>outflow</left>
             <right>outflow</right>
         </boundary>
-        <gravity>-12.44</gravity>
+        <gravity>
+            <x>0</x>
+            <y>-12.44</y>
+            <z>0</z>
+        </gravity>
+        <useLocks>true</useLocks>
     </domain>
     <thermostat>
         <t_init>40</t_init>
         <change_brownian>true</change_brownian>
         <steps>1000</steps>
     </thermostat>
+    <profiling>false</profiling>
     <particle_data>
         <meanv>0.1</meanv>
         <is3D>false</is3D>
@@ -59,6 +65,7 @@
                 <type>0</type>
                 <epsilon>1</epsilon>
                 <sigma>1</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -85,6 +92,7 @@
                 <type>0</type>
                 <epsilon>2</epsilon>
                 <sigma>2</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -111,6 +119,7 @@
                 <type>0</type>
                 <epsilon>3</epsilon>
                 <sigma>3</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -137,6 +146,7 @@
                 <type>0</type>
                 <epsilon>4</epsilon>
                 <sigma>4</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -163,6 +173,7 @@
                 <type>0</type>
                 <epsilon>5</epsilon>
                 <sigma>5</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -189,6 +200,7 @@
                 <type>0</type>
                 <epsilon>6</epsilon>
                 <sigma>6</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -215,6 +227,7 @@
                 <type>0</type>
                 <epsilon>7</epsilon>
                 <sigma>7</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -241,6 +254,7 @@
                 <type>0</type>
                 <epsilon>8</epsilon>
                 <sigma>8</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -267,6 +281,7 @@
                 <type>0</type>
                 <epsilon>9</epsilon>
                 <sigma>9</sigma>
+                <fixed>false</fixed>
             </particle>
             <particle>
                 <x>
@@ -293,8 +308,10 @@
                 <type>0</type>
                 <epsilon>10</epsilon>
                 <sigma>10</sigma>
+                <fixed>false</fixed>
             </particle>
         </particles>
         <spheres></spheres>
     </particle_data>
+    <extra_forces></extra_forces>
 </input>

@@ -50,13 +50,13 @@ protected:
 TEST_F(ThermostatFixture, Scales){
     EXPECT_NEAR(t1->getCurrentTemp(lcc1), 0, 0.1); //Change from brownian motion
     for(int i = 0; i < 100; i++){
-        lcc1.calculateIteration();
+        lcc1.calculateIteration(i);
     }
     auto temp1 = t1->getCurrentTemp(lcc1);
     t1->scale(lcc1);
     auto t_init = t1->getCurrentTemp(lcc1);
     EXPECT_NE(temp1, t_init);
-    EXPECT_DOUBLE_EQ(t_init, 100);
+    EXPECT_NEAR(t_init, 100, 1);
 }
 
 /**
@@ -74,7 +74,7 @@ TEST_F(ThermostatFixture, InitTemp_SET){
 TEST_F(ThermostatFixture, Gradual_Scale){
     EXPECT_NEAR(t3->getCurrentTemp(lcc3), 0, 0.1); //Change from brownian motion
     for(int i = 0; i < 100; i++){
-        lcc3.calculateIteration();
+        lcc3.calculateIteration(i);
     }
     auto temp1 = t3->getCurrentTemp(lcc3);
     t3->scale(lcc3);

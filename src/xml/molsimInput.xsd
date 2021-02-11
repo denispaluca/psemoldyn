@@ -79,8 +79,6 @@
       <!-- lennard jones constants of particle -->
       <xsd:element name="epsilon" type="xsd:double"/>
       <xsd:element name="sigma" type="xsd:double"/>
-      <xsd:element name="r0" type="xsd:double"/>
-      <xsd:element name="km" type="xsd:double"/>
       <xsd:element name="fixed" type="xsd:boolean"/>
     </xsd:sequence>
   </xsd:complexType>

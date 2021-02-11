@@ -655,42 +655,6 @@ sigma (const sigma_type& x)
   this->sigma_.set (x);
 }
 
-const particle::r0_type& particle::
-r0 () const
-{
-  return this->r0_.get ();
-}
-
-particle::r0_type& particle::
-r0 ()
-{
-  return this->r0_.get ();
-}
-
-void particle::
-r0 (const r0_type& x)
-{
-  this->r0_.set (x);
-}
-
-const particle::km_type& particle::
-km () const
-{
-  return this->km_.get ();
-}
-
-particle::km_type& particle::
-km ()
-{
-  return this->km_.get ();
-}
-
-void particle::
-km (const km_type& x)
-{
-  this->km_.set (x);
-}
-
 const particle::fixed_type& particle::
 fixed () const
 {
@@ -2757,8 +2721,6 @@ particle (const x_type& x,
           const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma,
-          const r0_type& r0,
-          const km_type& km,
           const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (x, this),
@@ -2769,8 +2731,6 @@ particle (const x_type& x,
   type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this),
-  r0_ (r0, this),
-  km_ (km, this),
   fixed_ (fixed, this)
 {
 }
@@ -2784,8 +2744,6 @@ particle (::std::unique_ptr< x_type > x,
           const type_type& type,
           const epsilon_type& epsilon,
           const sigma_type& sigma,
-          const r0_type& r0,
-          const km_type& km,
           const fixed_type& fixed)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
@@ -2796,8 +2754,6 @@ particle (::std::unique_ptr< x_type > x,
   type_ (type, this),
   epsilon_ (epsilon, this),
   sigma_ (sigma, this),
-  r0_ (r0, this),
-  km_ (km, this),
   fixed_ (fixed, this)
 {
 }
@@ -2815,8 +2771,6 @@ particle (const particle& x,
   type_ (x.type_, f, this),
   epsilon_ (x.epsilon_, f, this),
   sigma_ (x.sigma_, f, this),
-  r0_ (x.r0_, f, this),
-  km_ (x.km_, f, this),
   fixed_ (x.fixed_, f, this)
 {
 }
@@ -2834,8 +2788,6 @@ particle (const ::xercesc::DOMElement& e,
   type_ (this),
   epsilon_ (this),
   sigma_ (this),
-  r0_ (this),
-  km_ (this),
   fixed_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -2955,28 +2907,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // r0
-    //
-    if (n.name () == "r0" && n.namespace_ ().empty ())
-    {
-      if (!r0_.present ())
-      {
-        this->r0_.set (r0_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // km
-    //
-    if (n.name () == "km" && n.namespace_ ().empty ())
-    {
-      if (!km_.present ())
-      {
-        this->km_.set (km_traits::create (i, f, this));
-        continue;
-      }
-    }
-
     // fixed
     //
     if (n.name () == "fixed" && n.namespace_ ().empty ())
@@ -3047,20 +2977,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
-  if (!r0_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "r0",
-      "");
-  }
-
-  if (!km_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "km",
-      "");
-  }
-
   if (!fixed_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -3090,8 +3006,6 @@ operator= (const particle& x)
     this->type_ = x.type_;
     this->epsilon_ = x.epsilon_;
     this->sigma_ = x.sigma_;
-    this->r0_ = x.r0_;
-    this->km_ = x.km_;
     this->fixed_ = x.fixed_;
   }
 
@@ -5579,28 +5493,6 @@ operator<< (::xercesc::DOMElement& e, const particle& i)
         e));
 
     s << ::xml_schema::as_double(i.sigma ());
-  }
-
-  // r0
-  //
-  {
-    ::xercesc::DOMElement& s (
-      ::xsd::cxx::xml::dom::create_element (
-        "r0",
-        e));
-
-    s << ::xml_schema::as_double(i.r0 ());
-  }
-
-  // km
-  //
-  {
-    ::xercesc::DOMElement& s (
-      ::xsd::cxx::xml::dom::create_element (
-        "km",
-        e));
-
-    s << ::xml_schema::as_double(i.km ());
   }
 
   // fixed
