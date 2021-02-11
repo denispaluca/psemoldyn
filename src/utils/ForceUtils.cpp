@@ -235,7 +235,7 @@ void setNeighbours(std::vector<Particle> &particles, int pos, int length, int x)
         } else {
             particles.at(i).laterMembraneParticles.at(1) = -1;
         }
-        if ((i-pos)+x < pos+length && i+x > pos+length && i+x < pos+length) {
+        if ((i-pos)+x < pos+length && i+x < pos+length) {
             c = i+x;
             particles.at(i).laterMembraneParticles.at(2) = particles.at(c).id;
         } else {

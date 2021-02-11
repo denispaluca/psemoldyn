@@ -54,8 +54,6 @@ void Cuboid::generate(ParticleContainer &particles) {
 
     int length = particles.size();
 
-    int uid = 0;
-
     for(int i = 0; i < size[0]; i++){
         newPosition[0] = position[0] + i*distance; //xpos
         for(int j = 0; j < size[1]; j++){
@@ -63,7 +61,9 @@ void Cuboid::generate(ParticleContainer &particles) {
             for(int k = 0; k < size[2]; k++){
                 newPosition[2] =  position[2] + k*distance; //zpos
                 Particle newParticle = Particle(newPosition, initialV, mass, epsilon, sigma, r0, km, fixed);
-                newParticle.membrane = membraneCounter;
+                if (isMembrane) {
+                    newParticle.membrane = membraneCounter;
+                }
                 particles.push(newParticle);
             }
         }
