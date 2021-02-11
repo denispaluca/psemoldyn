@@ -85,16 +85,11 @@ Additional Membrane Simulations:
 [Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
 
 # Performance measurements
-
-The OS/hardware the measurements were made on:
-
-* OS: Ubuntu 20.04.1 LTS x86_64
-* Kernel: 5.4.0-58-generic
-* CPU: Intel® Core™ i5-7200U CPU @ 2.50GHz × 4
-* GPU: Mesa Intel® HD Graphics 620 (KBL GT2)
-* Memory: 15,6 GiB
-
-check /results for the performance results + gprof
+The OS/hardware the measurements were made on Linux Cluster (COOL-MUC 2)
+        Locks                   Thread Forces
+        A4_task2    A5_task2    A4_task2    A5_task2
+icpc    3.2         0.45        1.76        0.65
+gcc     4.1         0.75        2.03        0.709
 
 # Misc #
 * Compiler used: gcc 9.3.0
