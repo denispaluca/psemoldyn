@@ -10,6 +10,20 @@
     </xsd:sequence>
   </xsd:complexType>
 
+  <xsd:complexType name="extra_forces">
+    <xsd:sequence>
+      <xsd:element name="extra_force" type="extra_force" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="extra_force">
+    <xsd:sequence>
+      <xsd:element name="index" type="xsd:int"/>
+      <xsd:element name="iteration" type="xsd:int"/>
+      <xsd:element name="f_vector" type="double_vector"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
   <!-- integer vector with length 3 -->
   <xsd:complexType name="integer_vector">
     <xsd:sequence>
@@ -32,9 +46,13 @@
       <xsd:element name="mass" type="xsd:double"/>
       <!-- initial velocity -->
       <xsd:element name="velocity" type="double_vector"/>
-      <!-- lennard jones contants of particles -->
+      <!-- lennard jones constants of particles -->
       <xsd:element name="epsilon" type="xsd:double"/>
       <xsd:element name="sigma" type="xsd:double"/>
+      <xsd:element name="membrane" type="xsd:boolean"/>
+      <xsd:element name="r0" type="xsd:double"/>
+      <xsd:element name="k" type="xsd:double"/>
+      <xsd:element name="fixed" type="xsd:boolean"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -61,6 +79,7 @@
       <!-- lennard jones constants of particle -->
       <xsd:element name="epsilon" type="xsd:double"/>
       <xsd:element name="sigma" type="xsd:double"/>
+      <xsd:element name="fixed" type="xsd:boolean"/>
     </xsd:sequence>
   </xsd:complexType>
   
@@ -82,9 +101,10 @@
       <xsd:element name="m" type="xsd:double" />
       <!-- radius: number of molecules along the radius -->
       <xsd:element name="r" type="xsd:int" />
-      <!-- lennard jones contants of particles -->
+      <!-- lennard jones constants of particles -->
       <xsd:element name="epsilon" type="xsd:double"/>
       <xsd:element name="sigma" type="xsd:double"/>
+      <xsd:element name="fixed" type="xsd:boolean"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -101,6 +121,7 @@
       <xsd:element name="steps" type="xsd:int"/>
       <xsd:element name="t_target" type="xsd:double" minOccurs="0"/>
       <xsd:element name="temp_delta" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="scaleY" type="xsd:boolean" />
     </xsd:sequence>
   </xsd:complexType>
 
@@ -115,7 +136,6 @@
     </xsd:sequence>
   </xsd:complexType>
 
-  
   <xsd:simpleType name="boundary_type">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="outflow"/>
@@ -140,7 +160,18 @@
       <xsd:element name="domain_size" type="double_vector"/>
       <xsd:element name="cutoff_radius" type="xsd:double" />
       <xsd:element name="boundary" type="boundaries_type" />
-      <xsd:element name="gravity" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="gravity" type="double_vector"/>
+      <!-- True for particle lock strategy and false for Thread force strategy -->
+      <xsd:element name="useLocks" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="profiler_type">
+    <xsd:sequence>
+      <xsd:element name="profiling_bins" type="xsd:int"/>
+      <xsd:element name="profiling_frequency" type="xsd:int"/>
+      <xsd:element name="velocity_profile_path" type="xsd:string"/>
+      <xsd:element name="density_profile_path" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -159,8 +190,12 @@
       <xsd:element name="checkpoint" type="xsd:boolean" />
       <xsd:element name="domain" type="domain_type" />
       <xsd:element name="thermostat" type="thermostat_type" minOccurs="0"/>
+      <xsd:element name="profiling" type="xsd:boolean"/>
+      <xsd:element name="profiler" type="profiler_type" minOccurs="0"/>
       <xsd:element name="particle_data" type="particle_data"/>
-    </xsd:sequence>    
+      <!-- apply additional forces to specific particles -->
+      <xsd:element name="extra_forces" type="extra_forces"/>
+    </xsd:sequence>
   </xsd:complexType>
 
   <xsd:element name="input" type="molsimInput"/>

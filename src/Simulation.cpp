@@ -25,6 +25,18 @@ Simulation::Simulation(molsimInput &data) : data(data) {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
 
+    for (auto f: data.extra_forces().extra_force()) {
+        container->extraForces.push_back(mapExtraForce(f));
+    }
+
+    profiling = data.profiling() && data.linked_cell();
+
+    if(profiling) {
+        profiler = Profiler::getInstance();
+        profiler->init(data, container);
+        profiling_freq = data.profiler().present() ? data.profiler()->profiling_frequency() : 1000;
+    }
+
     container->mixParameters();
 }
 
@@ -39,11 +51,16 @@ int Simulation::start(bool isPT) {
     if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
-        container->calculateIteration();
+        container->calculateIteration(iteration);
 
         iteration++;
         if (!isPT && iteration % freq == 0) {
+
             plotParticles(iteration);
+        }
+
+        if (profiling && iteration % profiling_freq == 0) {
+            profiler->createProfile();
         }
 
         if(thermostat != nullptr && iteration != 0 && iteration % thermostat->getSteps() == 0){

@@ -18,7 +18,8 @@ ParticleSphere::ParticleSphere(
         double distance,
         double mass,
         double epsilon,
-        double sigma) {
+        double sigma,
+        bool fixed) {
     this->position = position;
     this->initialV = initialV;
     this->radius = radius;
@@ -26,6 +27,7 @@ ParticleSphere::ParticleSphere(
     this->mass = mass;
     this->epsilon = epsilon;
     this->sigma = sigma;
+    this->fixed = fixed;
 }
 
 void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
@@ -35,7 +37,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
             initialV,
             mass,
             epsilon,
-            sigma);
+            sigma,
+            fixed);
     particles.push(newParticle);
 
     int zr = radius;
@@ -53,7 +56,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                             initialV,
                             mass,
                             epsilon,
-                            sigma);
+                            sigma,
+                            fixed);
                     particles.push(ap);
                     if (y!= 0) {
                         Particle cp = Particle(
@@ -61,7 +65,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 initialV,
                                 mass,
                                 epsilon,
-                                sigma);
+                                sigma,
+                                fixed);
                         particles.push(cp);
                     }
                     if (x!=0) {
@@ -70,7 +75,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 initialV,
                                 mass,
                                 epsilon,
-                                sigma);
+                                sigma,
+                                fixed);
                         particles.push(ep);
                     }
                     if (x!=0 && y!= 0) {
@@ -79,7 +85,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 initialV,
                                 mass,
                                 epsilon,
-                                sigma);
+                                sigma,
+                                fixed);
                         particles.push(gp);
                     }
 
@@ -90,7 +97,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                     initialV,
                                     mass,
                                     epsilon,
-                                    sigma);
+                                    sigma,
+                                    fixed);
                             particles.push(hp);
                         }
                         Particle bp = Particle(
@@ -98,7 +106,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                 initialV,
                                 mass,
                                 epsilon,
-                                sigma);
+                                sigma,
+                                fixed);
                         particles.push(bp);
                         if (y!=0) {
                             Particle dp = Particle(
@@ -106,7 +115,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                     initialV,
                                     mass,
                                     epsilon,
-                                    sigma);
+                                    sigma,
+                                    fixed);
                             particles.push(dp);
                         }
                         if(x!=0) {
@@ -115,7 +125,8 @@ void ParticleSphere::generate(ParticleContainer &particles, bool is3D) {
                                     initialV,
                                     mass,
                                     epsilon,
-                                    sigma);
+                                    sigma,
+                                    fixed);
                             particles.push(fp);
                         }
                     }

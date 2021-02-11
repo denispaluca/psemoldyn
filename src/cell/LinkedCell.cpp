@@ -19,7 +19,7 @@ LinkedCell::LinkedCell(int index) {
     neighbors = std::vector<LinkedCell*>();
 }
 
-std::vector<LinkedCell*> LinkedCell::getNeighbors() {
+std::vector<LinkedCell*> &LinkedCell::getNeighbors() {
     return neighbors;
 }
 

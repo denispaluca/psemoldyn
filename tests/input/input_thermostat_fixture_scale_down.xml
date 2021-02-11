@@ -23,13 +23,21 @@
             <left>outflow</left>
             <right>outflow</right>
         </boundary>
+        <gravity>
+            <x>0</x>
+            <y>0</y>
+            <z>0</z>
+        </gravity>
+        <useLocks>true</useLocks>
     </domain>
     <thermostat>
         <t_init>100</t_init>
         <change_brownian>true</change_brownian>
         <steps>100</steps>
         <t_target>5</t_target>
+        <scaleY>true</scaleY>
     </thermostat>
+    <profiling>false</profiling>
     <particle_data>
         <meanv>0.1</meanv>
         <is3D>false</is3D>
@@ -54,6 +62,10 @@
                 </velocity>
                 <epsilon>5</epsilon>
                 <sigma>1</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
             <cuboid>
                 <position>
@@ -75,9 +87,14 @@
                 </velocity>
                 <epsilon>5</epsilon>
                 <sigma>1</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
         </cuboids>
         <particles></particles>
         <spheres></spheres>
     </particle_data>
+    <extra_forces></extra_forces>
 </input>

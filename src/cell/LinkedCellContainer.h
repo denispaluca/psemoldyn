@@ -29,7 +29,8 @@ private:
     /**
      * Optional gravity given over xml.
      */
-    domain_type::gravity_optional gravity;
+    //domain_type::gravity_optional gravity;
+    std::array<double, 3> gravity;
 
     /**
      * A vector containing all cells
@@ -56,6 +57,10 @@ private:
      */
     void populateNeighbours();
 
+#ifdef _OPENMP
+    bool useLocks;
+#endif
+
 public:
     LinkedCellContainer();
     /**
@@ -70,7 +75,7 @@ public:
     /**
     * Does one iteration step with the particles
     */
-    void calculateIteration() override;
+    void calculateIteration(int d);
 
     /**
      * Adds goven Particle to correct LinkeCell.
@@ -151,4 +156,5 @@ public:
     BoundaryHandler* getBoundaryHandler();
 
     void mixParameters();
+
 };

@@ -4,7 +4,7 @@
     <name_output>A4_TASK2_BIG</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0005</delta_t>
-    <t_end>50</t_end>
+    <t_end>0.5</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
@@ -22,13 +22,20 @@
             <left>periodic</left>
             <right>periodic</right>
         </boundary>
-        <gravity>-12.44</gravity>
+        <gravity>
+            <x>0</x>
+            <y>-12.44</y>
+            <z>0</z>
+        </gravity>
+        <useLocks>false</useLocks>
     </domain>
     <thermostat>
         <t_init>40</t_init>
         <change_brownian>true</change_brownian>
         <steps>1000</steps>
+        <scaleY>true</scaleY>
     </thermostat>
+    <profiling>false</profiling>
     <particle_data>
         <meanv>0.1</meanv>
         <is3D>false</is3D>
@@ -53,6 +60,10 @@
                 </velocity>
                 <epsilon>1.0</epsilon>
                 <sigma>1.2</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
             <cuboid>
                 <position>
@@ -74,9 +85,14 @@
                 </velocity>
                 <epsilon>1.0</epsilon>
                 <sigma>1.1</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
+                <fixed>false</fixed>
             </cuboid>
         </cuboids>
         <particles></particles>
         <spheres></spheres>
     </particle_data>
+    <extra_forces></extra_forces>
 </input>

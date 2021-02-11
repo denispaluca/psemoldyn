@@ -78,7 +78,7 @@ void ParticleGenerator::applyBrownianMotion() {
         auto meanv = data.meanv();
         auto dim = data.is3D() ? 3 : 2;
         particles.iterate([meanv,dim](Particle &p) {
-            MaxwellBoltzmannDistribution(p, meanv, dim);
+            if (!p.fixed) MaxwellBoltzmannDistribution(p, meanv, dim);
         });
     } else
         thermostat->applyBrownian(particles);

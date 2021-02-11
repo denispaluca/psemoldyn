@@ -27,8 +27,11 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->domain_size = mapDoubleVec(domain.domain_size());
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
-    gravity = domain.gravity();
+    this->gravity = mapDoubleVec(domain.gravity());
 
+#ifdef _OPENMP
+    useLocks = domain.useLocks();
+#endif
     for(int i = 0; i < 3; i++)
         dimensions[i] = std::ceil(domain_size[i] / cutoff_radius);
 
@@ -41,6 +44,10 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
 
     this->particles.iterate([&](Particle& p){
         assignParticle(p);
+#ifdef _OPENMP
+        if(useLocks)
+            p.initLock();
+#endif
     });
 
     boundaryHandler = new BoundaryHandler(domain.boundary(), domain_size, dimensions);
@@ -62,25 +69,38 @@ void LinkedCellContainer::iterate(std::function<void(Particle &)> f) {
 }
 
 void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)> f) {
-    for (auto& cell : cells) {
+    //auto size = cells.size();
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+    for (int i = 0; i < cells.size(); i++) {
+        auto cell = cells[i];
+        auto &cellParticles = cell.getParticles();
+        if(cellParticles.empty()) continue;
         // calculate forces between particles of one cell
         cell.iteratePairs(f);
 
         // then calculate forces between particles of cell + neighbors
-        for (auto j : cell.getNeighbors()) {
-            if (cell.getIndex() >= j->getIndex())
+        for (auto & neighbour : cell.getNeighbors()) {
+            if (i >= neighbour->getIndex())
                 continue;
 
-            for(auto pi : cell.getParticles())
-                for(auto pj : j->getParticles())
-                    f(*pi,*pj);
+            auto &neighbourParticles = neighbour->getParticles();
+            if(neighbourParticles.empty()) continue;
+
+            for(auto & cellParticle : cellParticles) {
+                auto &p1 = *cellParticle;
+                for (auto &neighbourParticle : neighbourParticles)
+                    f(p1, *neighbourParticle);
+            }
         }
     }
 }
 
-void LinkedCellContainer::calculateIteration() {
+void LinkedCellContainer::calculateIteration(int d) {
     //calculate new positions
     iterate([](Particle &p) {
+            p.debug = 0;
             p.calculateX();
             p.saveOldF();
     });
@@ -93,22 +113,44 @@ void LinkedCellContainer::calculateIteration() {
     for(auto& c:cells) c.removeParticles();
     iterate([&](Particle &p) {
         assignParticle(p);
-        if(gravity.present())
-            p.applyGravity(gravity.get());
+        p.applyGravity(gravity);
     });
 
     // calculate new f
-    //iteratePairs(calculateLennardJones);
-    auto f = [&](Particle &p1, Particle &p2){
+    iteratePairs([&](Particle &p1, Particle &p2){
+        double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
+        double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
+#ifdef _OPENMP
+        if (p1.membrane != -1 && p1.membrane == p2.membrane) {
+            membraneParallel(p1, p2, epsilon, sigma, useLocks);
+        } else {
+            cljParallel(p1, p2, epsilon, sigma, useLocks);
+        }
+#else
+        if (p1.membrane != -1 && p1.membrane == p2.membrane) {
+            calculateMembrane(p1, p2, epsilon, sigma);
+        } else {
+            calculateLennardJones(p1, p2, epsilon, sigma);
+        }
+#endif
+    });
+
+    boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
         calculateLennardJones(p1, p2, epsilon, sigma);
-    };
-    iteratePairs(f);
-    boundaryHandler->iteratePeriodicParticles(&cells, f);
+    });
+
+    applyExtraForces(particles.getParticles(), extraForces, d);
 
     // calculate new v
+#ifdef _OPENMP
+    iterate([useLocks = useLocks](Particle &p) {
+        if(!useLocks)
+            p.consolidateForces();
+#else
     iterate([](Particle &p) {
+#endif
         p.calculateV();
     });
 }

@@ -7,6 +7,7 @@
 #include <shapes/ParticleSphere.h>
 #include <shapes/Cuboid.h>
 #include "xml/molsimInput.hxx"
+#include "Container.h"
 
 std::array<int, 3> mapIntVec(integer_vector& x);
 std::array<double, 3> mapDoubleVec(double_vector& x);
@@ -24,3 +25,5 @@ ParticleSphere mapParticleSphere(sphere& c);
 Particle mapParticle(particle& p);
 
 particle mapParticleToXML(Particle &p);
+
+extraForce mapExtraForce(extra_force& p);
