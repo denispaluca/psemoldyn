@@ -21,7 +21,7 @@ Members:
 
 * Compile with
 
-      cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug  -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
+      cmake -DDISABLE_DOXYGEN=ON -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       make MolSim -j <1.5 * number of cores>
 
 * run main program with parameters specified in assignment:
@@ -32,6 +32,11 @@ Members:
 
       cmake -DCMAKE_BUILD_TYPE=Release -DCLUSTER=ON -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       module load xerces-c
+      cmake --build . --target MolSim -- -j 20
+
+* Activate Parallelisation with -DOPENMP=ON
+
+      cmake -DCMAKE_BUILD_TYPE=Release -DOPENMP=ON -G "CodeBlocks - Unix Makefiles" {PATH_TO_PROJECT}
       cmake --build . --target MolSim -- -j 20
 
 ### General program call
@@ -71,9 +76,13 @@ see [XSD file](src/xml/molsimInput.xsd)
 
 
 # Media #
-[a4_task2_small](https://drive.google.com/file/d/1aw64mb15kDxaAv4R7cmE2Gn9NAlWmGjA/view?usp=sharing)
-[a4_task2_big](https://drive.google.com/file/d/1kqHamMl4Mp_a6qN0-M0tA9YjbzNBlqj3/view?usp=sharing)
-[a4_task3_liquid_drop](https://drive.google.com/file/d/1uae9d61mVhXXM8lZ0S2nF4SG7qpv-i0j/view?usp=sharing)
+[a5_task2_video.avi](https://drive.google.com/file/d/1T6ypf7Qek-owrdILxEOuj4Atf6zmvKLx/view?usp=sharing)
+[as5_t4_26.avi](https://drive.google.com/file/d/1HPVTg1iEnUOAUZofZR4p_xkNRUYAX_6l/view?usp=sharing)
+[Task 1 membrane](https://drive.google.com/file/d/1mTAT7tAO44DzkyHdFgzboZ6Rsxf0HxSx/view?usp=sharing)
+
+Additional Membrane Simulations:
+[Membrane and cube](https://drive.google.com/file/d/1DG6d8Z7FFKXyN2JBhcVh5xnsQOFyBqCZ/view?usp=sharing)
+[Membrane lifted on three corners](https://drive.google.com/file/d/1O89fWv2RaxQ0OOwP6AbDQTYlpC8QaymB/view?usp=sharing)
 
 # Performance measurements
 
