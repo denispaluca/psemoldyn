@@ -182,7 +182,7 @@ void FileReader::readCuboids(std::vector<Cuboid> &cuboids, const char *filename)
             for (auto &vj : v) {
                 datastream >> vj;
             }
-            cuboids.emplace_back(x, size, d, m, v, 5, 1);
+            cuboids.emplace_back(x, size, d, m, v, 5, 1, false, 0, 0, 0);
 
             getline(input_file, tmp_string);
 #ifdef WITH_LOG4CXX

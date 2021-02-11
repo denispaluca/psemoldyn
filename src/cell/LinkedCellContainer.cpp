@@ -27,7 +27,8 @@ LinkedCellContainer::LinkedCellContainer(domain_type domain,
     this->domain_size = mapDoubleVec(domain.domain_size());
     this->cutoff_radius = std::abs(domain.cutoff_radius());
     this->particles = particles;
-    gravity = domain.gravity();
+    this->gravity = mapDoubleVec(domain.gravity());
+
 #ifdef _OPENMP
     useLocks = domain.useLocks();
 #endif
@@ -96,9 +97,10 @@ void LinkedCellContainer::iteratePairs(std::function<void(Particle&, Particle&)>
     }
 }
 
-void LinkedCellContainer::calculateIteration() {
+void LinkedCellContainer::calculateIteration(int d) {
     //calculate new positions
     iterate([](Particle &p) {
+            p.debug = 0;
             p.calculateX();
             p.saveOldF();
     });
@@ -111,8 +113,7 @@ void LinkedCellContainer::calculateIteration() {
     for(auto& c:cells) c.removeParticles();
     iterate([&](Particle &p) {
         assignParticle(p);
-        if(gravity.present())
-            p.applyGravity(gravity.get());
+        p.applyGravity(gravity);
     });
 
     // calculate new f
@@ -120,17 +121,27 @@ void LinkedCellContainer::calculateIteration() {
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
 #ifdef _OPENMP
-        cljParallel(p1, p2, epsilon, sigma, useLocks);
+        if (p1.membrane != -1 && p1.membrane == p2.membrane) {
+            membraneParallel(p1, p2, epsilon, sigma, useLocks);
+        } else {
+            cljParallel(p1, p2, epsilon, sigma, useLocks);
+        }
 #else
-        calculateLennardJones(p1, p2, epsilon, sigma);
+        if (p1.membrane != -1 && p1.membrane == p2.membrane) {
+            calculateMembrane(p1, p2, epsilon, sigma);
+        } else {
+            calculateLennardJones(p1, p2, epsilon, sigma);
+        }
 #endif
     });
+
     boundaryHandler->iteratePeriodicParticles(&cells, [&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon[std::make_pair(p1.epsilon,p2.epsilon)];
         double sigma = mixedSigma[std::make_pair(p1.sigma,p2.sigma)];
         calculateLennardJones(p1, p2, epsilon, sigma);
     });
 
+    applyExtraForces(particles.getParticles(), extraForces, d);
 
     // calculate new v
 #ifdef _OPENMP

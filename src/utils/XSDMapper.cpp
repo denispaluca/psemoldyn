@@ -34,14 +34,17 @@ ParticleSphere mapParticleSphere(sphere& c){
 
 Cuboid mapCuboid(cuboid& c){
     return {
-            mapDoubleVec(c.position()),
-            mapIntVec(c.size()),
-            c.distance(),
-            c.mass(),
-            mapDoubleVec(c.velocity()),
-            c.epsilon(),
-            c.sigma(),
-            c.fixed()
+        mapDoubleVec(c.position()),
+        mapIntVec(c.size()),
+        c.distance(),
+        c.mass(),
+        mapDoubleVec(c.velocity()),
+        c.epsilon(),
+        c.sigma(),
+        c.membrane(),
+        c.r0(),
+        c.k(),
+		c.fixed()
     };
 }
 
@@ -55,6 +58,8 @@ Particle mapParticle(particle& p){
             p.type(),
             p.epsilon(),
             p.sigma(),
+            p.r0(),
+            p.km(),
             p.fixed()
     };
 }
@@ -69,6 +74,16 @@ particle mapParticleToXML(Particle &p){
         p.getType(),
         p.epsilon,
         p.sigma,
+        p.r0,
+        p.km,
         p.fixed
+    };
+}
+
+extraForce mapExtraForce(extra_force& p) {
+    return {
+            p.index(),
+            p.iteration(),
+            mapDoubleVec(p.f_vector())
     };
 }

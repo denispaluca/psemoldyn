@@ -44,6 +44,12 @@ private:
      */
     double sigma;
 
+    bool isMembrane;
+
+    double r0;
+
+    double km;
+
     /**
      * Stores whether Cuboid particles are fixed
      */
@@ -63,21 +69,14 @@ public:
      * @param distance distance between particles/mesh width
      * @param mass mass of one particle
      * @param initalV initial velocity of the particles
+     * @param epsilon epsilon of the particles
+     * @param sigma sigma of the particles
+     * @param membrane if cuboid is a membrane
+     * @param fixed fixed particles do not move
      */
     Cuboid(std::array<double, 3> position, std::array<int, 3> size,
            double distance, double mass, std::array<double, 3> initalV,
-           double epsilon, double sigma);
-    /**
-     * Constructs Cuboid with given parameters
-     * @param position coordinates of the lower left front-side corner
-     * @param size size of the Cuboid, given in number of particles per dimension
-     * @param distance distance between particles/mesh width
-     * @param mass mass of one particle
-     * @param initalV initial velocity of the particles
-     */
-    Cuboid(std::array<double, 3> position, std::array<int, 3> size,
-           double distance, double mass, std::array<double, 3> initalV,
-           double epsilon, double sigma, bool fixed);
+           double epsilon, double sigma, bool membrane, double r0, double k, bool fixed);
 
         /**
      * Operator that compares all attributes of
@@ -111,4 +110,9 @@ public:
      * @return Number of particles in cuboid
      */
     std::size_t getNrParticles();
+
+    /**
+     * Store a membrane in 2d vector
+     */
+    //std::vector<std::vector<Particle>> membrane;
 };

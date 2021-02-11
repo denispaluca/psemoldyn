@@ -14,13 +14,15 @@
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+
 /**
  * The particle class represents a particle and it's characteristics.
  */
 class Particle {
 
 private:
-  /**
+
+/**
    * Velocity of the particle
    */
   std::array<double, 3> v;
@@ -92,7 +94,7 @@ public:
       // for visualization, we need always 3 coordinates
       // -> in case of 2d, we use only the first and the second
       std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-      double m_arg, double epsilon, double sigma);
+      double m_arg, double epsilon, double sigma, bool fixed);
 
     /**
     * Particle constructor that takes all attributes
@@ -107,23 +109,7 @@ public:
             // for visualization, we need always 3 coordinates
             // -> in case of 2d, we use only the first and the second
             std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-            double m_arg, double epsilon, double sigma, bool fixed);
-
-  /**
-   * Particle constructor for full particles state.
-   * @param x Position
-   * @param v Velocity
-   * @param m Mass
-   * @param f Current force
-   * @param old_f Old force
-   * @param type Type
-   * @param epsilon Epsilon
-   * @param sigma Sigma
-   */
-  Particle(
-          std::array<double, 3> x, std::array<double, 3> v,
-          double m, std::array<double, 3> f, std::array<double, 3> old_f,
-          int type, double epsilon, double sigma);
+            double m_arg, double epsilon, double sigma);
 
   /**
    * Particle constructor for full particles state.
@@ -140,6 +126,26 @@ public:
           std::array<double, 3> x, std::array<double, 3> v,
           double m, std::array<double, 3> f, std::array<double, 3> old_f,
           int type, double epsilon, double sigma, bool fixed);
+
+   /**
+   * Particle constructor for full particles state.
+   * @param x Position
+   * @param v Velocity
+   * @param m Mass
+   * @param f Current force
+   * @param old_f Old force
+   * @param type Type
+   * @param epsilon Epsilon
+   * @param sigma Sigma
+   * @param r0 r0
+   * @param km km
+   * @param fixed if particle is fixed
+   */
+    Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
+             double r0, double km, bool fixed);
+
+    Particle(std::array<double, 3> x, std::array<double, 3> v, double m, std::array<double, 3> f,
+                       std::array<double, 3> old_f, int type, double epsilon, double sigma, double r0, double km, bool fixed);
 
   /*
    * Destructor of particle
@@ -263,7 +269,7 @@ public:
    * Apply gravitational force on the particle.
    * @param g Gravity to be applied.
    */
-  void applyGravity(double g);
+  void applyGravity(std::array<double, 3> g);
 
     /**
     * Epsilon of the particle
@@ -286,9 +292,49 @@ public:
     std::array<double, 3> f;
 
     /**
+    * Neighbours (if membrane)
+    */
+    std::array<int, 4> laterMembraneParticles;
+
+
+    /**
+    * Neighbours
+    */
+    //std::array<Particle*, 4> laterMembraneParticles;
+
+    /**
+     * Unique ID
+     */
+     double id;
+
+    /**
+     * k
+     */
+     double km;
+
+    /**
+    * Debug Information
+    */
+    int debug;
+
+    /**
      * Stores whether Particle position is fixed
      */
     bool fixed;
+
+    /**
+    * Stores membrane information
+    * if membrane = -1 it is not a membrane
+    * otherwise this variable stores the id of the membrane it belongs to
+    */
+    int membrane = -1;
+
+     /**
+      * r0 of membrane
+      */
+      double r0 = -1;
+
+
 
 #ifdef _OPENMP
     void initLock();

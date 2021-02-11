@@ -7,6 +7,12 @@
 #include <map>
 #include "particle/Particle.h"
 
+struct extraForce {
+    int index;
+    int iteration;
+    std::array<double, 3> force;
+};
+
 class Container{
 protected:
     std::map<std::pair<double, double>, double> mixedEpsilon;
@@ -31,7 +37,7 @@ public:
     /**
      * Does one iteration step with the particles.
      */
-    virtual void calculateIteration() = 0;
+    virtual void calculateIteration(int d) = 0;
 
     /**
      * Size of particles vector.
@@ -55,4 +61,11 @@ public:
      * @return the map
      */
     virtual std::map<std::pair<double, double>, double> getMixedSigma();
+
+    /*
+     * Apply additional forces to specific particles by index
+    */
+    std::vector<extraForce> extraForces;
+
+
 };

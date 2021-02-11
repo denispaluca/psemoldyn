@@ -9,8 +9,9 @@
 #ifdef WITH_LOG4CXX
     #include <log4cxx/logger.h>
     #include <log4cxx/propertyconfigurator.h>
+//#include <iostream>
 
-    using namespace log4cxx;
+using namespace log4cxx;
     using namespace log4cxx::helpers;
 
     //static logger variable molsimLogger
@@ -21,7 +22,7 @@ ParticleContainer::ParticleContainer() {
   particles = std::vector<Particle>();
 }
 
-ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
+ParticleContainer::ParticleContainer(std::vector<Particle> &particles) {
   this->particles = particles;
 }
 
@@ -48,23 +49,32 @@ void ParticleContainer::erase(int i) {
     particles.erase(particles.begin() + i);
 }
 
-void ParticleContainer::calculateIteration(){
+void ParticleContainer::calculateIteration(int d) {
     iterate([](Particle &p){
         p.calculateX();
         p.saveOldF();
     });
+
     // calculate new f
     //iteratePairs(calculateLennardJones);
     iteratePairs([&](Particle &p1, Particle &p2){
         double epsilon = mixedEpsilon.find({p1.epsilon, p2.epsilon})->second;
         double sigma = mixedSigma.find({p1.sigma, p2.sigma})->second;
-        calculateLennardJones(p1, p2, epsilon, sigma);
+        //calculateLennardJones(p1, p2, epsilon, sigma);
+
+        calculateMembrane(p1, p2, epsilon, sigma);
+
+
     });
     // calculate new v
     iterate([](Particle &p){
         p.calculateV();
     });
 }
+/*
+void ParticleContainer::calculateIteration() {
+}
+ */
 
 std::vector<Particle>& ParticleContainer::getParticles() {
     return particles;

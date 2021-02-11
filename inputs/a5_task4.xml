@@ -10,7 +10,7 @@
     <domain>
         <domain_size>
             <x>35</x>
-            <y>25</y>
+            <y>26</y>
             <z>10</z>
         </domain_size>
         <cutoff_radius>2.75</cutoff_radius>
@@ -22,7 +22,12 @@
             <left>outflow</left>
             <right>outflow</right>
         </boundary>
-        <gravity>-0.8</gravity>
+        <gravity>
+            <x>0</x>
+            <y>-0.8</y>
+            <z>0</z>
+        </gravity>
+        <useLocks>true</useLocks>
     </domain>
     <thermostat>
         <t_init>40</t_init>
@@ -61,6 +66,9 @@
                 </velocity>
                 <epsilon>2.0</epsilon>
                 <sigma>1.1</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
                 <fixed>true</fixed>
             </cuboid>
             <!-- right wall -->
@@ -84,6 +92,9 @@
                 </velocity>
                 <epsilon>2.0</epsilon>
                 <sigma>1.1</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
                 <fixed>true</fixed>
             </cuboid>
             <!-- fluid -->
@@ -107,10 +118,14 @@
                 </velocity>
                 <epsilon>1.0</epsilon>
                 <sigma>1.0</sigma>
+                <membrane>false</membrane>
+                <r0>-1</r0>
+                <k>-1</k>
                 <fixed>false</fixed>
             </cuboid>
         </cuboids>
         <particles></particles>
         <spheres></spheres>
     </particle_data>
+    <extra_forces></extra_forces>
 </input>

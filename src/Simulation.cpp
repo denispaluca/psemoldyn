@@ -25,6 +25,10 @@ Simulation::Simulation(molsimInput &data) : data(data) {
         container = new ParticleContainer(pg.getParticles().getParticles());
     }
 
+    for (auto f: data.extra_forces().extra_force()) {
+        container->extraForces.push_back(mapExtraForce(f));
+    }
+
     profiling = data.profiling() && data.linked_cell();
 
     if(profiling) {
@@ -47,10 +51,11 @@ int Simulation::start(bool isPT) {
     if(!isPT) plotParticles(0);
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < data.t_end()) {
-        container->calculateIteration();
+        container->calculateIteration(iteration);
 
         iteration++;
         if (!isPT && iteration % freq == 0) {
+
             plotParticles(iteration);
         }
 
