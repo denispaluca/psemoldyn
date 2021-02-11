@@ -983,6 +983,24 @@ temp_delta (const temp_delta_optional& x)
   this->temp_delta_ = x;
 }
 
+const thermostat_type::scaleY_type& thermostat_type::
+scaleY () const
+{
+  return this->scaleY_.get ();
+}
+
+thermostat_type::scaleY_type& thermostat_type::
+scaleY ()
+{
+  return this->scaleY_.get ();
+}
+
+void thermostat_type::
+scaleY (const scaleY_type& x)
+{
+  this->scaleY_.set (x);
+}
+
 
 // particle_data
 // 
@@ -3464,13 +3482,15 @@ sphere_cluster::
 thermostat_type::
 thermostat_type (const t_init_type& t_init,
                  const change_brownian_type& change_brownian,
-                 const steps_type& steps)
+                 const steps_type& steps,
+                 const scaleY_type& scaleY)
 : ::xml_schema::type (),
   t_init_ (t_init, this),
   change_brownian_ (change_brownian, this),
   steps_ (steps, this),
   t_target_ (this),
-  temp_delta_ (this)
+  temp_delta_ (this),
+  scaleY_ (scaleY, this)
 {
 }
 
@@ -3483,7 +3503,8 @@ thermostat_type (const thermostat_type& x,
   change_brownian_ (x.change_brownian_, f, this),
   steps_ (x.steps_, f, this),
   t_target_ (x.t_target_, f, this),
-  temp_delta_ (x.temp_delta_, f, this)
+  temp_delta_ (x.temp_delta_, f, this),
+  scaleY_ (x.scaleY_, f, this)
 {
 }
 
@@ -3496,7 +3517,8 @@ thermostat_type (const ::xercesc::DOMElement& e,
   change_brownian_ (this),
   steps_ (this),
   t_target_ (this),
-  temp_delta_ (this)
+  temp_delta_ (this),
+  scaleY_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3570,6 +3592,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // scaleY
+    //
+    if (n.name () == "scaleY" && n.namespace_ ().empty ())
+    {
+      if (!scaleY_.present ())
+      {
+        this->scaleY_.set (scaleY_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -3593,6 +3626,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "steps",
       "");
   }
+
+  if (!scaleY_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "scaleY",
+      "");
+  }
 }
 
 thermostat_type* thermostat_type::
@@ -3613,6 +3653,7 @@ operator= (const thermostat_type& x)
     this->steps_ = x.steps_;
     this->t_target_ = x.t_target_;
     this->temp_delta_ = x.temp_delta_;
+    this->scaleY_ = x.scaleY_;
   }
 
   return *this;
@@ -5701,6 +5742,17 @@ operator<< (::xercesc::DOMElement& e, const thermostat_type& i)
         e));
 
     s << ::xml_schema::as_double(*i.temp_delta ());
+  }
+
+  // scaleY
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "scaleY",
+        e));
+
+    s << i.scaleY ();
   }
 }
 

@@ -13,6 +13,7 @@ Thermostat::Thermostat(thermostat_type data, bool is3D) {
     t_init = data.t_init();
     t_target = data.t_target().present() ? data.t_target().get() : t_init;
     t_delta = data.temp_delta();
+    scaleY = data.scaleY();
 }
 
 void Thermostat::applyBrownian(ParticleContainer &particles) {
@@ -37,11 +38,12 @@ void Thermostat::scale(Container &particles) {
 
     double scalar = sqrt(t_new/t_current);
 
-    particles.iterate([scalar](Particle &p){
+    particles.iterate([scalar, scaleY = scaleY](Particle &p){
         if(!p.fixed) {
             auto &v = p.getV();
             v[0] *= scalar;
-            v[1] *= scalar;
+            if(scaleY)
+                v[1] *= scalar;
             v[2] *= scalar;
         }
     });
@@ -59,17 +61,24 @@ double Thermostat::getCurrentTemp(Container &particles) const {
     int nrParticles = particles.size();
     if(nrParticles == 0) return 0;
 
-    double meanYV = 0;
-    particles.iterate([&](Particle &p){
-        meanYV += p.getV()[1];
-    });
-    meanYV /= nrParticles;
 
     double sumMNormV = 0;
-    particles.iterate([&](Particle &p){
-        auto &v = p.getV();
-        sumMNormV += p.getM()*(v[0]*v[0] + (v[1] - meanYV)*(v[1] - meanYV) + v[2]*v[2]);
-    });
+    if(!scaleY) {
+        double meanYV = 0;
+        particles.iterate([&](Particle &p) {
+            meanYV += p.getV()[1];
+        });
+        meanYV /= nrParticles;
+        particles.iterate([&](Particle &p){
+            auto &v = p.getV();
+            sumMNormV += p.getM()*(v[0]*v[0] + (v[1] - meanYV)*(v[1] - meanYV) + v[2]*v[2]);
+        });
+    } else {
+        particles.iterate([&](Particle &p){
+            auto &v = p.getV();
+            sumMNormV += p.getM()*(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+        });
+    }
 
     auto t_current = sumMNormV/(dimensions * nrParticles);
     return t_current;

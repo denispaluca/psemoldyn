@@ -1438,11 +1438,26 @@ class thermostat_type: public ::xml_schema::type
   void
   temp_delta (const temp_delta_optional& x);
 
+  // scaleY
+  //
+  typedef ::xml_schema::boolean scaleY_type;
+  typedef ::xsd::cxx::tree::traits< scaleY_type, char > scaleY_traits;
+
+  const scaleY_type&
+  scaleY () const;
+
+  scaleY_type&
+  scaleY ();
+
+  void
+  scaleY (const scaleY_type& x);
+
   // Constructors.
   //
   thermostat_type (const t_init_type&,
                    const change_brownian_type&,
-                   const steps_type&);
+                   const steps_type&,
+                   const scaleY_type&);
 
   thermostat_type (const ::xercesc::DOMElement& e,
                    ::xml_schema::flags f = 0,
@@ -1475,6 +1490,7 @@ class thermostat_type: public ::xml_schema::type
   ::xsd::cxx::tree::one< steps_type > steps_;
   t_target_optional t_target_;
   temp_delta_optional temp_delta_;
+  ::xsd::cxx::tree::one< scaleY_type > scaleY_;
 };
 
 class particle_data: public ::xml_schema::type

@@ -33,6 +33,7 @@
         <t_init>40</t_init>
         <change_brownian>true</change_brownian>
         <steps>1000</steps>
+        <scaleY>true</scaleY>
     </thermostat>
     <profiling>false</profiling>
     <particle_data>

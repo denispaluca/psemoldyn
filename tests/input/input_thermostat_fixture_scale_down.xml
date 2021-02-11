@@ -35,6 +35,7 @@
         <change_brownian>true</change_brownian>
         <steps>100</steps>
         <t_target>5</t_target>
+        <scaleY>true</scaleY>
     </thermostat>
     <profiling>false</profiling>
     <particle_data>

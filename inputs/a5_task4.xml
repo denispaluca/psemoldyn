@@ -4,7 +4,7 @@
     <name_output>A5_TASK4</name_output>
     <frequency_output>10</frequency_output>
     <delta_t>0.0005</delta_t>
-    <t_end>1</t_end>
+    <t_end>500</t_end>
     <linked_cell>true</linked_cell>
     <checkpoint>false</checkpoint>
     <domain>
@@ -33,6 +33,7 @@
         <t_init>40</t_init>
         <change_brownian>true</change_brownian>
         <steps>10</steps>
+        <scaleY>false</scaleY>
     </thermostat>
     <profiling>true</profiling>
     <profiler>
@@ -54,8 +55,8 @@
                 </position>
                 <size>
                     <x>2</x>
-                    <y>2</y>
-                    <z>2</z>
+                    <y>23</y>
+                    <z>9</z>
                 </size>
                 <distance>1.12</distance>
                 <mass>1.0</mass>

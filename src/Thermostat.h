@@ -36,6 +36,11 @@ class Thermostat {
      * Will the brownian motion be changed initially.
      */
     bool change_brownian;
+
+    /**
+     * Will Y velocity be scaled.
+     */
+    bool scaleY;
 public:
     /**
      * Consturcutor for thermostat.

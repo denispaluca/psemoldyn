@@ -121,6 +121,7 @@
       <xsd:element name="steps" type="xsd:int"/>
       <xsd:element name="t_target" type="xsd:double" minOccurs="0"/>
       <xsd:element name="temp_delta" type="xsd:double" minOccurs="0"/>
+      <xsd:element name="scaleY" type="xsd:boolean" />
     </xsd:sequence>
   </xsd:complexType>
 
